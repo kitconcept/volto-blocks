@@ -1,0 +1,99 @@
+// Cards tile
+
+// Tile Edit only
+.ui.drag.tile.cards .card {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  .content {
+    cursor: text;
+
+    .tile.text {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.ui.tile.cards {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  .centered-text .public-DraftEditor-content {
+    text-align: center;
+  }
+
+  .ui.cards {
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    &.space-between {
+      justify-content: space-between;
+    }
+
+    .ui.card {
+      &.no-borders {
+        box-shadow: none;
+
+        .content {
+          border: 0;
+        }
+      }
+
+      img {
+        border-radius: 0 !important;
+      }
+    }
+
+    a {
+      color: @textColor;
+    }
+  }
+
+  .image-placeholder {
+    display: flex;
+    height: 100%;
+
+    .ui.message {
+      flex: 1 1 auto;
+
+      // To remove, transferred to Volto
+      .icon {
+        margin: 0;
+      }
+    }
+  }
+}
+
+// View
+.tile.cards {
+  &.centered-text .content {
+    text-align: center;
+  }
+
+  .ui.cards {
+    &.space-between {
+      justify-content: space-between;
+    }
+  }
+
+  .ui.card {
+    &.no-borders {
+      box-shadow: none;
+
+      .content {
+        border: 0;
+      }
+    }
+
+    img {
+      border-radius: 0 !important;
+    }
+  }
+  // Remove the cards constrainer for the card tiles
+  .ui.cards:after,
+  .ui.card:after {
+    display: none;
+  }
+}
