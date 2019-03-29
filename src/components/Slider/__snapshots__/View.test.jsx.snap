@@ -1,0 +1,315 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a view image component 1`] = `
+<div
+  className="slick-slider slick-initialized"
+  dir="ltr"
+>
+  <div
+    className="slick-list"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={null}
+    onMouseMove={null}
+    onMouseUp={[Function]}
+    onTouchCancel={null}
+    onTouchEnd={[Function]}
+    onTouchMove={null}
+    onTouchStart={[Function]}
+    style={Object {}}
+  >
+    <div
+      className="slick-track"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onMouseOver={[Function]}
+      style={
+        Object {
+          "WebkitTransform": "translate3d(0px, 0px, 0px)",
+          "WebkitTransition": "",
+          "msTransform": "translateX(0px)",
+          "opacity": 1,
+          "transform": "translate3d(0px, 0px, 0px)",
+          "transition": "",
+        }
+      }
+    >
+      <div
+        aria-hidden={true}
+        className="slick-slide slick-cloned"
+        data-index={-1}
+        onClick={[Function]}
+        style={
+          Object {
+            "width": 0,
+          }
+        }
+        tabIndex="-1"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "display": "inline-block",
+                "width": "100%",
+              }
+            }
+            tabIndex={-1}
+          >
+            <div
+              className="slide slide3"
+              style={
+                Object {
+                  "background": "linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(slider3.jpg) no-repeat",
+                  "backgroundSize": "cover",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden={false}
+        className="slick-slide slick-active slick-current"
+        data-index={0}
+        onClick={[Function]}
+        style={
+          Object {
+            "outline": "none",
+            "width": 0,
+          }
+        }
+        tabIndex="-1"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "display": "inline-block",
+                "width": "100%",
+              }
+            }
+            tabIndex={-1}
+          >
+            <div
+              className="slide slide1"
+              style={
+                Object {
+                  "background": "linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(slider1.jpg) no-repeat",
+                  "backgroundSize": "cover",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden={true}
+        className="slick-slide"
+        data-index={1}
+        onClick={[Function]}
+        style={
+          Object {
+            "outline": "none",
+            "width": 0,
+          }
+        }
+        tabIndex="-1"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "display": "inline-block",
+                "width": "100%",
+              }
+            }
+            tabIndex={-1}
+          >
+            <div
+              className="slide slide2"
+              style={
+                Object {
+                  "background": "linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(slider2.jpg) no-repeat",
+                  "backgroundSize": "cover",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden={true}
+        className="slick-slide"
+        data-index={2}
+        onClick={[Function]}
+        style={
+          Object {
+            "outline": "none",
+            "width": 0,
+          }
+        }
+        tabIndex="-1"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "display": "inline-block",
+                "width": "100%",
+              }
+            }
+            tabIndex={-1}
+          >
+            <div
+              className="slide slide3"
+              style={
+                Object {
+                  "background": "linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(slider3.jpg) no-repeat",
+                  "backgroundSize": "cover",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden={true}
+        className="slick-slide slick-cloned"
+        data-index={3}
+        onClick={[Function]}
+        style={
+          Object {
+            "width": 0,
+          }
+        }
+        tabIndex="-1"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "display": "inline-block",
+                "width": "100%",
+              }
+            }
+            tabIndex={-1}
+          >
+            <div
+              className="slide slide1"
+              style={
+                Object {
+                  "background": "linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(slider1.jpg) no-repeat",
+                  "backgroundSize": "cover",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden={true}
+        className="slick-slide slick-cloned"
+        data-index={4}
+        onClick={[Function]}
+        style={
+          Object {
+            "width": 0,
+          }
+        }
+        tabIndex="-1"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "display": "inline-block",
+                "width": "100%",
+              }
+            }
+            tabIndex={-1}
+          >
+            <div
+              className="slide slide2"
+              style={
+                Object {
+                  "background": "linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(slider2.jpg) no-repeat",
+                  "backgroundSize": "cover",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden={true}
+        className="slick-slide slick-cloned"
+        data-index={5}
+        onClick={[Function]}
+        style={
+          Object {
+            "width": 0,
+          }
+        }
+        tabIndex="-1"
+      >
+        <div>
+          <div
+            style={
+              Object {
+                "display": "inline-block",
+                "width": "100%",
+              }
+            }
+            tabIndex={-1}
+          >
+            <div
+              className="slide slide3"
+              style={
+                Object {
+                  "background": "linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(slider3.jpg) no-repeat",
+                  "backgroundSize": "cover",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul
+    className="slick-dots slick-thumb"
+    onMouseEnter={null}
+    onMouseLeave={null}
+    onMouseOver={null}
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+  >
+    <li
+      className="slick-active"
+    >
+      <div
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className=""
+    >
+      <div
+        onClick={[Function]}
+      />
+    </li>
+    <li
+      className=""
+    >
+      <div
+        onClick={[Function]}
+      />
+    </li>
+  </ul>
+</div>
+`;

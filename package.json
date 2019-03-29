@@ -1,14 +1,14 @@
 {
-  "name": "@kitconcept/volto-tile-slider",
+  "name": "@kitconcept/volto-tiles",
   "version": "1.0.0",
-  "description": "Volto Slider Tile",
+  "description": "kitconcept Volto Tiles",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kitconcept/volto-tile-slider.git"
+    "url": "git+https://github.com/kitconcept/volto-tiles.git"
   },
   "keywords": [
     "Volto",
@@ -19,7 +19,12 @@
   "author": "kitconcept, GmbH",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kitconcept/volto-tile-slider/issues"
+    "url": "https://github.com/kitconcept/volto-tiles/issues"
   },
-  "homepage": "https://github.com/kitconcept/volto-tile-slider#readme"
+  "homepage": "https://github.com/kitconcept/volto-tiles#readme",
+  "dependencies": {
+    "react-beautiful-dnd": "10.1.0",
+    "react-slick": "0.23.2",
+    "slick-carousel": "1.8.1"
+  }
 }
