@@ -437,52 +437,53 @@ export default class Edit extends Component {
           this.node = node;
         }}
       >
-        {this.props.selected && this.state.currentSelectedCard === null && (
-          <div className="toolbar">
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={() => this.onAlignTile('center')}
-                active={
-                  this.props.data.align === 'center' || !this.props.data.align
-                }
-              >
-                <Icon name={imageFitSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={() => this.onAlignTile('space-between')}
-                active={this.props.data.align === 'space-between'}
-              >
-                <Icon name={imageFullSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            <div className="separator" />
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={this.addNewCard}
-                disabled={this.props.data.cards.length >= 4}
-              >
-                <Icon name={addSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={() => this.setState({ modalOpened: true })}
-              >
-                <Icon name={configSVG} size="24px" />
-              </Button>
-            </Button.Group>
-          </div>
-        )}
+        {this.props.selected &&
+          this.state.currentSelectedCard === null && (
+            <div className="toolbar">
+              <Button.Group>
+                <Button
+                  icon
+                  basic
+                  onClick={() => this.onAlignTile('center')}
+                  active={
+                    this.props.data.align === 'center' || !this.props.data.align
+                  }
+                >
+                  <Icon name={imageFitSVG} size="24px" />
+                </Button>
+              </Button.Group>
+              <Button.Group>
+                <Button
+                  icon
+                  basic
+                  onClick={() => this.onAlignTile('space-between')}
+                  active={this.props.data.align === 'space-between'}
+                >
+                  <Icon name={imageFullSVG} size="24px" />
+                </Button>
+              </Button.Group>
+              <div className="separator" />
+              <Button.Group>
+                <Button
+                  icon
+                  basic
+                  onClick={this.addNewCard}
+                  disabled={this.props.data.cards.length >= 4}
+                >
+                  <Icon name={addSVG} size="24px" />
+                </Button>
+              </Button.Group>
+              <Button.Group>
+                <Button
+                  icon
+                  basic
+                  onClick={() => this.setState({ modalOpened: true })}
+                >
+                  <Icon name={configSVG} size="24px" />
+                </Button>
+              </Button.Group>
+            </div>
+          )}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId={uuid()} direction="horizontal">
             {provided => (
@@ -634,8 +635,9 @@ export default class Edit extends Component {
                                   <EditTextTile
                                     {...this.props}
                                     data={this.props.data.cards[index]}
-                                    index={item.id}
+                                    tile={item.id}
                                     detached
+                                    index={0}
                                     selected={false}
                                     onSelectTile={() => {}}
                                     onFocusPreviousTile={() => {}}

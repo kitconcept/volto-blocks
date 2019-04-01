@@ -6,9 +6,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'semantic-ui-react';
+import Slider from 'react-slick';
+import redraft from 'redraft';
 import cx from 'classnames';
 import { settings } from '~/config';
-import Slider from 'react-slick';
+import { flattenToAppURL } from '@plone/volto/helpers';
 
 import slider1 from '../../static/slider1.jpg';
 import slider2 from '../../static/slider2.jpg';
@@ -20,44 +22,49 @@ import slider3 from '../../static/slider3.jpg';
  * @extends Component
  */
 const View = ({ data }) => (
-  <Slider
-    customPaging={dot => <div />}
-    dots={true}
-    dotsClass="slick-dots slick-thumb"
-    infinite
-    speed={500}
-    slidesToShow={1}
-    slidesToScroll={1}
-    arrows={false}
+  <div
+    className={cx('tile slider', {
+      centered: data.align === 'center' || data.align === undefined,
+      full: data.align === 'full',
+      'centered-text': data.centeredText,
+    })}
   >
-    <div>
-      <div
-        className="slide slide1"
-        style={{
-          background: `linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(${slider1}) no-repeat`,
-          backgroundSize: 'cover',
-        }}
-      />
-    </div>
-    <div>
-      <div
-        className="slide slide2"
-        style={{
-          background: `linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(${slider2}) no-repeat`,
-          backgroundSize: 'cover',
-        }}
-      />
-    </div>
-    <div>
-      <div
-        className="slide slide3"
-        style={{
-          background: `linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(${slider3}) no-repeat`,
-          backgroundSize: 'cover',
-        }}
-      />
-    </div>
-  </Slider>
+    <Slider
+      customPaging={dot => <div />}
+      dots
+      dotsClass="slick-dots slick-thumb"
+      infinite
+      speed={500}
+      slidesToShow={1}
+      slidesToScroll={1}
+      arrows={false}
+    >
+      {data.cards.map((card, index) => (
+        <div key={card.id}>
+          <div
+            className={`slide slide-${index + 1}`}
+            style={{
+              background: `linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(${
+                card.url.startsWith(settings.apiPath)
+                  ? `${flattenToAppURL(card.url)}/@@images/image`
+                  : card.url
+              }) no-repeat`,
+              backgroundSize: 'cover',
+            }}
+          >
+            <div className="slide-body-text">
+              {card.text &&
+                redraft(
+                  card.text,
+                  settings.ToHTMLRenderers,
+                  settings.ToHTMLOptions,
+                )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </Slider>
+  </div>
 );
 
 /**
