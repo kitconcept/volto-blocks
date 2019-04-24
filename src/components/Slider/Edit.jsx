@@ -45,7 +45,7 @@ import imageSVG from '@plone/volto/icons/image.svg';
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
 
-import { CheckboxWidget, TileModal } from '@package/components';
+import { CheckboxWidget, TileModal } from '../../components';
 
 const messages = defineMessages({
   ImageTileInputPlaceholder: {
@@ -437,53 +437,52 @@ export default class Edit extends Component {
           this.node = node;
         }}
       >
-        {this.props.selected &&
-          this.state.currentSelectedCard === null && (
-            <div className="toolbar">
-              <Button.Group>
-                <Button
-                  icon
-                  basic
-                  onClick={() => this.onAlignTile('center')}
-                  active={
-                    this.props.data.align === 'center' || !this.props.data.align
-                  }
-                >
-                  <Icon name={imageFitSVG} size="24px" />
-                </Button>
-              </Button.Group>
-              <Button.Group>
-                <Button
-                  icon
-                  basic
-                  onClick={() => this.onAlignTile('full')}
-                  active={this.props.data.align === 'full'}
-                >
-                  <Icon name={imageFullSVG} size="24px" />
-                </Button>
-              </Button.Group>
-              <div className="separator" />
-              <Button.Group>
-                <Button
-                  icon
-                  basic
-                  onClick={this.addNewCard}
-                  disabled={this.props.data.cards.length >= 4}
-                >
-                  <Icon name={addSVG} size="24px" />
-                </Button>
-              </Button.Group>
-              <Button.Group>
-                <Button
-                  icon
-                  basic
-                  onClick={() => this.setState({ modalOpened: true })}
-                >
-                  <Icon name={configSVG} size="24px" />
-                </Button>
-              </Button.Group>
-            </div>
-          )}
+        {this.props.selected && this.state.currentSelectedCard === null && (
+          <div className="toolbar">
+            <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={() => this.onAlignTile('center')}
+                active={
+                  this.props.data.align === 'center' || !this.props.data.align
+                }
+              >
+                <Icon name={imageFitSVG} size="24px" />
+              </Button>
+            </Button.Group>
+            <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={() => this.onAlignTile('full')}
+                active={this.props.data.align === 'full'}
+              >
+                <Icon name={imageFullSVG} size="24px" />
+              </Button>
+            </Button.Group>
+            <div className="separator" />
+            <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={this.addNewCard}
+                disabled={this.props.data.cards.length >= 4}
+              >
+                <Icon name={addSVG} size="24px" />
+              </Button>
+            </Button.Group>
+            <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={() => this.setState({ modalOpened: true })}
+              >
+                <Icon name={configSVG} size="24px" />
+              </Button>
+            </Button.Group>
+          </div>
+        )}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId={uuid()} direction="horizontal">
             {provided => (
