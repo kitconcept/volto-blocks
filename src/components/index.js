@@ -6,11 +6,14 @@ import SliderViewTile from './Slider/View';
 import TileModal from './TileModal/TileModal';
 import CheckboxWidget from './Widgets/CheckboxWidget';
 
+import TileRenderer from './TileRenderer/TileRenderer';
+
 export {
   CardsEditTile,
   CardsViewTile,
   SliderEditTile,
   SliderViewTile,
+  TileRenderer,
   TileModal,
   CheckboxWidget,
 };

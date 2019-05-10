@@ -14,7 +14,7 @@ class TileRenderer extends Component {
    * @static
    */
   static propTypes = {
-    mode: PropTypes.oneOf(['view', 'edit']).isRequired,
+    edit: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     tile: PropTypes.string.isRequired,
@@ -42,10 +42,10 @@ class TileRenderer extends Component {
     const EditTile = tiles.defaultTilesEditMap[this.props.type];
     const ViewTile = tiles.defaultTilesViewMap[this.props.type];
 
-    if (this.props.mode === 'view') {
+    if (!this.props.edit) {
       return <ViewTile {...this.props} />;
     }
-    if (this.props.mode === 'edit') {
+    if (this.props.edit) {
       return (
         <EditTile
           {...this.props}
