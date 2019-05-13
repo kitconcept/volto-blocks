@@ -60,10 +60,14 @@
     a {
       color: @textColor;
     }
+  }
 
-    .x2 {
-      width: calc(50% - 1.5em);
-    }
+  .ui.three.cards > .card.x2 {
+    width: calc(@threeCard * 2);
+  }
+
+  .ui.four.cards > .card.x2 {
+    width: calc(@fourCard * 2);
   }
 
   .image-placeholder {
@@ -102,14 +106,19 @@
       }
     }
 
-    &.x2 {
-      width: calc(50% - 1.5em);
-    }
-
     img {
       border-radius: 0 !important;
     }
   }
+
+  .ui.three.cards > .card.x2 {
+    width: calc(@threeCard * 2);
+  }
+
+  .ui.four.cards > .card.x2 {
+    width: calc(@fourCard * 2);
+  }
+
   // Remove the cards constrainer for the card tiles
   .ui.cards:after,
   .ui.card:after {

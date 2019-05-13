@@ -417,6 +417,7 @@ export default class Edit extends Component {
       // TODO: Do something on ESC key
     }
   }
+  getCardsLenght = cards => cards.length + cards.filter(item => item.x2).length;
 
   /**
    * Render method.
@@ -508,7 +509,7 @@ export default class Edit extends Component {
                   {...provided.droppableProps}
                   itemsPerRow={
                     this.props.data.expandCards
-                      ? this.props.data.cards.length
+                      ? this.getCardsLenght(this.props.data.cards)
                       : 4
                   }
                 >
