@@ -118,7 +118,7 @@ export default class Edit extends Component {
     this.onUploadImage = this.onUploadImage.bind(this);
     this.onChangeRichText = this.onChangeRichText.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
-    this.onChangeModalSettings = this.onChangeModalSettings.bind(this);
+    this.onChangeTileSettings = this.onChangeTileSettings.bind(this);
     this.state = {
       uploading: false,
       modalOpened: false,
@@ -323,13 +323,13 @@ export default class Edit extends Component {
   }
 
   /**
-   * Change Modal settings Card handler
-   * @method onChangeModalSettings
+   * Change tile settings handler
+   * @method onChangeTileSettings
    * @param {string} id Editor state.
    * @param {*} value Editor card index
    * @returns {undefined}
    */
-  onChangeModalSettings(id, value) {
+  onChangeTileSettings(id, value) {
     this.props.onChangeTile(this.props.tile, {
       ...this.props.data,
       [id]: value || null,
@@ -376,6 +376,17 @@ export default class Edit extends Component {
       cards: setArrayImmutable(this.props.data.cards, index, {
         ...this.props.data.cards[index],
         url: '',
+      }),
+    });
+  };
+
+  onChangeCardSettings = (e, index, key, value) => {
+    e.stopPropagation();
+    this.props.onChangeTile(this.props.tile, {
+      ...this.props.data,
+      cards: setArrayImmutable(this.props.data.cards, index, {
+        ...this.props.data.cards[index],
+        [key]: value,
       }),
     });
   };
@@ -513,6 +524,7 @@ export default class Edit extends Component {
                             <Card
                               className={cx({
                                 'no-borders': this.props.data.noBorders,
+                                x2: this.props.data.cards[index]['x2'],
                               })}
                               key={item.id}
                               onClick={e => this.selectCard(e, index)}
@@ -575,6 +587,31 @@ export default class Edit extends Component {
                                         onClick={e => this.clearCard(e, index)}
                                       >
                                         <Icon name={clearSVG} size="24px" />
+                                      </Button>
+                                    </Button.Group>
+                                    <Button.Group>
+                                      <Button
+                                        icon
+                                        basic
+                                        className={cx('text-button', {
+                                          selected: this.props.data.cards[
+                                            index
+                                          ]['x2'],
+                                        })}
+                                        onClick={e =>
+                                          this.onChangeCardSettings(
+                                            e,
+                                            index,
+                                            'x2',
+                                            this.props.data.cards[index]['x2']
+                                              ? !this.props.data.cards[index][
+                                                  'x2'
+                                                ]
+                                              : true,
+                                          )
+                                        }
+                                      >
+                                        x2
                                       </Button>
                                     </Button.Group>
                                     <div className="separator" />
@@ -681,25 +718,25 @@ export default class Edit extends Component {
                     id="centeredText"
                     title="Center cards text"
                     value={this.props.data.centeredText}
-                    onChange={this.onChangeModalSettings}
+                    onChange={this.onChangeTileSettings}
                   />
                   <CheckboxWidget
                     id="hideText"
                     title="Hide card text"
                     value={this.props.data.hideText}
-                    onChange={this.onChangeModalSettings}
+                    onChange={this.onChangeTileSettings}
                   />
                   <CheckboxWidget
                     id="noBorders"
                     title="No card borders"
                     value={this.props.data.noBorders}
-                    onChange={this.onChangeModalSettings}
+                    onChange={this.onChangeTileSettings}
                   />
                   <CheckboxWidget
                     id="expandCards"
                     title="Use all the available card width"
                     value={this.props.data.expandCards}
-                    onChange={this.onChangeModalSettings}
+                    onChange={this.onChangeTileSettings}
                   />
                 </div>
               </Grid.Column>

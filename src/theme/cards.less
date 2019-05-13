@@ -1,5 +1,14 @@
 // Cards tile
 
+.toolbar button.text-button {
+  width: 32px;
+  height: 32px;
+}
+
+.tile .toolbar .ui.icon.button.selected {
+  background-color: #edf1f2 !important;
+}
+
 // Tile Edit only
 .ui.drag.tile.cards .card,
 .ui.drag.tile.slider .card {
@@ -51,6 +60,10 @@
     a {
       color: @textColor;
     }
+
+    .x2 {
+      width: calc(50% - 1.5em);
+    }
   }
 
   .image-placeholder {
@@ -87,6 +100,10 @@
       .content {
         border: 0;
       }
+    }
+
+    &.x2 {
+      width: calc(50% - 1.5em);
     }
 
     img {

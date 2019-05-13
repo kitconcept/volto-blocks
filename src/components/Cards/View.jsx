@@ -32,7 +32,13 @@ const View = ({ data }) => (
       itemsPerRow={data.expandCards ? data.cards.length : 4}
     >
       {data.cards.map(card => (
-        <Card key={card.id} className={cx({ 'no-borders': data.noBorders })}>
+        <Card
+          key={card.id}
+          className={cx({
+            'no-borders': data.noBorders,
+            x2: card['x2'],
+          })}
+        >
           <Image
             src={
               card.url.startsWith(settings.apiPath)
