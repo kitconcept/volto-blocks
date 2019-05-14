@@ -16,9 +16,8 @@ class TileRenderer extends Component {
   static propTypes = {
     edit: PropTypes.bool.isRequired,
     type: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
     tile: PropTypes.string.isRequired,
-    onChangeTile: PropTypes.func.isRequired,
+    onChangeTile: PropTypes.func,
     data: PropTypes.objectOf(PropTypes.any).isRequired,
   };
 
@@ -43,14 +42,13 @@ class TileRenderer extends Component {
     const ViewTile = tiles.defaultTilesViewMap[this.props.type];
 
     if (!this.props.edit) {
-      return <ViewTile {...this.props} />;
+      return <ViewTile {...this.props} onChangeTile={() => {}} />;
     }
     if (this.props.edit) {
       return (
         <EditTile
           {...this.props}
           detached
-          selected
           index={0}
           onSelectTile={() => {}}
           onFocusPreviousTile={() => {}}
