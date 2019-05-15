@@ -31,7 +31,7 @@ import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
 import { settings } from '~/config';
 
-import { Icon, EditTextTile } from '@plone/volto/components';
+import { Icon } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
 
@@ -115,7 +115,7 @@ export default class Edit extends Component {
     super(props);
 
     this.onUploadImage = this.onUploadImage.bind(this);
-    this.onChangeRichText = this.onChangeRichText.bind(this);
+    this.onChangeTile = this.onChangeTile.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
     this.onChangeTileSettings = this.onChangeTileSettings.bind(this);
     this.state = {
@@ -129,7 +129,7 @@ export default class Edit extends Component {
         columns: [
           {
             id: uuid(),
-            url: '',
+            '@type': 'text',
           },
         ],
       });
@@ -292,7 +292,7 @@ export default class Edit extends Component {
       return;
     }
 
-    const cards = reorder(
+    const columns = reorder(
       this.props.data.columns,
       source.index,
       destination.index,
@@ -300,23 +300,23 @@ export default class Edit extends Component {
 
     this.props.onChangeTile(this.props.tile, {
       ...this.props.data,
-      cards,
+      columns,
     });
   };
 
   /**
-   * Change RichText Card handler
-   * @method onChangeRichText
+   * Change inner tiles handler
+   * @method onChangeTile
    * @param {object} editorState Editor state.
    * @param {number} index Editor card index
    * @returns {undefined}
    */
-  onChangeRichText(text, index) {
+  onChangeTile(data, index) {
     this.props.onChangeTile(this.props.tile, {
       ...this.props.data,
       columns: setArrayImmutable(this.props.data.columns, index, {
         ...this.props.data.columns[index],
-        text,
+        ...data,
       }),
     });
   }
@@ -379,7 +379,7 @@ export default class Edit extends Component {
     });
   };
 
-  onChangeCardSettings = (e, index, key, value) => {
+  onChangeColumnSettings = (e, index, key, value) => {
     e.stopPropagation();
     this.props.onChangeTile(this.props.tile, {
       ...this.props.data,
@@ -424,6 +424,10 @@ export default class Edit extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
+    const isDoubleSized = this.props.data.columns
+      ? this.props.data.columns.filter(cols => cols.x2).length
+      : 0;
+
     return (
       <div
         role="presentation"
@@ -517,9 +521,7 @@ export default class Edit extends Component {
                   })}
                   {...provided.droppableProps}
                   columns={
-                    this.props.data.expandCards
-                      ? this.getCardsLenght(this.props.data.columns)
-                      : 4
+                    this.props.data.columns ? this.props.data.columns.length : 0
                   }
                 >
                   {this.props.data.columns &&
@@ -532,18 +534,55 @@ export default class Edit extends Component {
                         {provided => (
                           <Ref innerRef={provided.innerRef}>
                             <Grid.Column
-                              className={cx({
-                                'no-borders': this.props.data.noBorders,
-                                x2: this.props.data.columns[index]['x2'],
-                              })}
                               key={item.id}
                               onClick={e => this.selectCard(e, index)}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
+                              width={
+                                isDoubleSized
+                                  ? item.x2
+                                    ? (12 /
+                                        (this.props.data.columns.length +
+                                          isDoubleSized)) *
+                                      2
+                                    : 12 /
+                                      (this.props.data.columns.length +
+                                        isDoubleSized)
+                                  : null
+                              }
                             >
                               {this.state.currentSelectedCard === index &&
                                 !item.url && (
                                   <div className="toolbar">
+                                    <Button.Group>
+                                      <Button
+                                        icon
+                                        basic
+                                        className={cx('text-button', {
+                                          selected: this.props.data.columns[
+                                            index
+                                          ]['x2'],
+                                        })}
+                                        disabled={
+                                          this.props.data.columns.length < 2 ||
+                                          (!item.x2 && isDoubleSized)
+                                        }
+                                        onClick={e =>
+                                          this.onChangeColumnSettings(
+                                            e,
+                                            index,
+                                            'x2',
+                                            this.props.data.columns[index]['x2']
+                                              ? !this.props.data.columns[index][
+                                                  'x2'
+                                                ]
+                                              : true,
+                                          )
+                                        }
+                                      >
+                                        x2
+                                      </Button>
+                                    </Button.Group>
                                     <Button.Group>
                                       <Button
                                         icon
@@ -585,7 +624,7 @@ export default class Edit extends Component {
                                     this.state.currentSelectedCard === index
                                   }
                                   onChangeTile={(tile, data) =>
-                                    this.onChangeRichText(data.text, index)
+                                    this.onChangeTile(data, index)
                                   }
                                   data={this.props.data.columns[index]}
                                 />

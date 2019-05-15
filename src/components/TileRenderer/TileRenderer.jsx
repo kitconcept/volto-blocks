@@ -42,7 +42,7 @@ class TileRenderer extends Component {
     const ViewTile = tiles.defaultTilesViewMap[this.props.type];
 
     if (!this.props.edit) {
-      return <ViewTile {...this.props} onChangeTile={() => {}} />;
+      return <ViewTile {...this.props} detached onChangeTile={() => {}} />;
     }
     if (this.props.edit) {
       return (
@@ -56,6 +56,7 @@ class TileRenderer extends Component {
           onAddTile={() => {}}
           onDeleteTile={() => {}}
           onMutateTile={() => {}}
+          handleKeyDown={() => {}}
         />
       );
     }
