@@ -43,6 +43,7 @@ import folderSVG from '@plone/volto/icons/folder.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
+import textSVG from '@plone/volto/icons/text.svg';
 
 import { CheckboxWidget, TileModal, TileRenderer } from '../../components';
 
@@ -428,6 +429,45 @@ export default class Edit extends Component {
       ? this.props.data.columns.filter(cols => cols.x2).length
       : 0;
 
+    const innerToolbarActions = () => (
+      <>
+        <Button.Group>
+          <Button
+            icon
+            basic
+            className={cx('text-button', {
+              selected: this.props.data.columns[index]['x2'],
+            })}
+            disabled={
+              this.props.data.columns.length < 2 || (!item.x2 && isDoubleSized)
+            }
+            onClick={e =>
+              this.onChangeColumnSettings(
+                e,
+                index,
+                'x2',
+                this.props.data.columns[index]['x2']
+                  ? !this.props.data.columns[index]['x2']
+                  : true,
+              )
+            }
+          >
+            x2
+          </Button>
+        </Button.Group>
+        <Button.Group>
+          <Button icon basic onClick={e => this.clearColumn(e, index)}>
+            <Icon name={clearSVG} size="24px" />
+          </Button>
+        </Button.Group>
+        <div className="separator" />
+        <Button.Group>
+          <Button icon basic onClick={e => this.removeColumn(e, index)}>
+            <Icon name={trashSVG} size="24px" color="#e40166" />
+          </Button>
+        </Button.Group>
+      </>
+    );
     return (
       <div
         role="presentation"
@@ -458,33 +498,10 @@ export default class Edit extends Component {
               <Button
                 icon
                 basic
-                onClick={() => this.onAlignTile('center')}
-                active={
-                  this.props.data.align === 'center' || !this.props.data.align
-                }
-              >
-                <Icon name={imageFitSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={() => this.onAlignTile('space-between')}
-                active={this.props.data.align === 'space-between'}
-              >
-                <Icon name={imageFullSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            <div className="separator" />
-            <Button.Group>
-              <Button
-                icon
-                basic
                 onClick={e => this.addNewColumn(e, 'text')}
                 disabled={this.props.data.columns.length >= 4}
               >
-                <Icon name={addSVG} size="24px" />
+                <Icon name={textSVG} size="24px" />
               </Button>
             </Button.Group>
             <Button.Group>
@@ -497,7 +514,7 @@ export default class Edit extends Component {
                 <Icon name={imageSVG} size="24px" />
               </Button>
             </Button.Group>
-            <Button.Group>
+            {/* <Button.Group>
               <Button
                 icon
                 basic
@@ -505,7 +522,7 @@ export default class Edit extends Component {
               >
                 <Icon name={configSVG} size="24px" />
               </Button>
-            </Button.Group>
+            </Button.Group> */}
           </div>
         )}
         <DragDropContext onDragEnd={this.onDragEnd}>
@@ -551,9 +568,22 @@ export default class Edit extends Component {
                                   : null
                               }
                             >
-                              {this.state.currentSelectedCard === index &&
-                                !item.url && (
-                                  <div className="toolbar">
+                              <div
+                                // This prevents propagation of ENTER
+                                onKeyDown={e => e.stopPropagation()}
+                              >
+                                <TileRenderer
+                                  tile={item.id}
+                                  edit
+                                  type={item['@type']}
+                                  selected={
+                                    this.state.currentSelectedCard === index
+                                  }
+                                  onChangeTile={(tile, data) =>
+                                    this.onChangeTile(data, index)
+                                  }
+                                  data={this.props.data.columns[index]}
+                                  appendActions={
                                     <Button.Group>
                                       <Button
                                         icon
@@ -583,18 +613,8 @@ export default class Edit extends Component {
                                         x2
                                       </Button>
                                     </Button.Group>
-                                    <Button.Group>
-                                      <Button
-                                        icon
-                                        basic
-                                        onClick={e =>
-                                          this.clearColumn(e, index)
-                                        }
-                                      >
-                                        <Icon name={clearSVG} size="24px" />
-                                      </Button>
-                                    </Button.Group>
-                                    <div className="separator" />
+                                  }
+                                  appendSecondaryActions={
                                     <Button.Group>
                                       <Button
                                         icon
@@ -610,23 +630,7 @@ export default class Edit extends Component {
                                         />
                                       </Button>
                                     </Button.Group>
-                                  </div>
-                                )}
-                              <div
-                                // This prevents propagation of ENTER
-                                onKeyDown={e => e.stopPropagation()}
-                              >
-                                <TileRenderer
-                                  tile={item.id}
-                                  edit
-                                  type={item['@type']}
-                                  selected={
-                                    this.state.currentSelectedCard === index
                                   }
-                                  onChangeTile={(tile, data) =>
-                                    this.onChangeTile(data, index)
-                                  }
-                                  data={this.props.data.columns[index]}
                                 />
                               </div>
                             </Grid.Column>
