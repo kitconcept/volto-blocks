@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a view image component 1`] = `
+<div
+  className="tile __grid centered"
+>
+  <div
+    className="ui one column grid centered"
+  >
+    <div
+      className="column"
+    >
+      <div
+        className="thetile"
+      />
+    </div>
+  </div>
+</div>
+`;
