@@ -44,6 +44,7 @@ import folderSVG from '@plone/volto/icons/folder.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
+import constrainSVG from '@plone/volto/icons/back-down.svg';
 
 import { CheckboxWidget, TileModal } from '../../components';
 
@@ -435,6 +436,7 @@ export default class Edit extends Component {
         className={cx('tile cards', {
           selected: this.props.selected,
           'centered-text': this.props.data.centeredText,
+          shrinked: this.props.data['x.5'],
         })}
         tabIndex={0}
         onKeyDown={e => {
@@ -471,6 +473,22 @@ export default class Edit extends Component {
                 active={this.props.data.align === 'space-between'}
               >
                 <Icon name={imageFullSVG} size="24px" />
+              </Button>
+            </Button.Group>
+            <Button.Group>
+              <Button
+                icon
+                basic
+                className={cx('text-button', {})}
+                active={this.props.data['x.5']}
+                onClick={e =>
+                  this.onChangeTileSettings(
+                    'x.5',
+                    this.props.data['x.5'] ? !this.props.data['x.5'] : true,
+                  )
+                }
+              >
+                1/2
               </Button>
             </Button.Group>
             <div className="separator" />

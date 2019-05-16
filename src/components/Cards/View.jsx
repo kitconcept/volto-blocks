@@ -25,6 +25,7 @@ const View = ({ data }) => (
       centered: data.align === 'center' || data.align === undefined,
       'space-between': data.align === 'space-between',
       'centered-text': data.centeredText,
+      shrinked: data['x.5'],
     })}
   >
     <Card.Group
