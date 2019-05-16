@@ -429,45 +429,6 @@ export default class Edit extends Component {
       ? this.props.data.columns.filter(cols => cols.x2).length
       : 0;
 
-    const innerToolbarActions = () => (
-      <>
-        <Button.Group>
-          <Button
-            icon
-            basic
-            className={cx('text-button', {
-              selected: this.props.data.columns[index]['x2'],
-            })}
-            disabled={
-              this.props.data.columns.length < 2 || (!item.x2 && isDoubleSized)
-            }
-            onClick={e =>
-              this.onChangeColumnSettings(
-                e,
-                index,
-                'x2',
-                this.props.data.columns[index]['x2']
-                  ? !this.props.data.columns[index]['x2']
-                  : true,
-              )
-            }
-          >
-            x2
-          </Button>
-        </Button.Group>
-        <Button.Group>
-          <Button icon basic onClick={e => this.clearColumn(e, index)}>
-            <Icon name={clearSVG} size="24px" />
-          </Button>
-        </Button.Group>
-        <div className="separator" />
-        <Button.Group>
-          <Button icon basic onClick={e => this.removeColumn(e, index)}>
-            <Icon name={trashSVG} size="24px" color="#e40166" />
-          </Button>
-        </Button.Group>
-      </>
-    );
     return (
       <div
         role="presentation"
