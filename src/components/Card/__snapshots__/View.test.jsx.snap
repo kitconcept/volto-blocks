@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a view hero component 1`] = `
+<div
+  className="tile __card"
+>
+  <img
+    alt=""
+    className="card-image"
+    src="heroimage.jpg/@@images/image"
+  />
+  <div
+    className="card-title"
+  />
+</div>
+`;
