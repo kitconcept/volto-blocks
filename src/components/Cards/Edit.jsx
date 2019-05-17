@@ -124,6 +124,7 @@ export default class Edit extends Component {
       uploading: false,
       modalOpened: false,
       objectBrowserIsOpen: false,
+      lastOpenedCard: 0,
     };
 
     if (!this.props.data.cards) {
@@ -733,7 +734,11 @@ export default class Edit extends Component {
           closeBrowser={this.closeObjectBrowser}
           tile={this.props.tile}
           onChangeTile={this.onChangeTile}
-          data={this.props.data.cards[this.state.lastOpenedCard]}
+          data={
+            this.props.data.cards
+              ? this.props.data.cards[this.state.lastOpenedCard]
+              : []
+          }
         />
         <TileModal
           open={this.state.modalOpened}
