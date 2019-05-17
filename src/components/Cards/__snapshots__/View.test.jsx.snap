@@ -8,8 +8,10 @@ exports[`renders a view image component 1`] = `
     className="ui four cards centered"
   >
     <div
+      alt={null}
       className="ui card"
       onClick={[Function]}
+      to={null}
     >
       <img
         className="ui image"
