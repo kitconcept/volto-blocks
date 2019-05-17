@@ -4,6 +4,8 @@ import SliderEditTile from './Slider/Edit';
 import SliderViewTile from './Slider/View';
 import GridEditTile from './Grid/Edit';
 import GridViewTile from './Grid/View';
+import CardEditTile from './Card/Edit';
+import CardViewTile from './Card/View';
 
 import TileModal from './TileModal/TileModal';
 import CheckboxWidget from './Widgets/CheckboxWidget';
@@ -17,7 +19,9 @@ export {
   SliderViewTile,
   GridEditTile,
   GridViewTile,
+  CardEditTile,
   TileRenderer,
+  CardViewTile,
   TileModal,
   CheckboxWidget,
 };

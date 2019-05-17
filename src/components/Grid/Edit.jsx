@@ -7,17 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { readAsDataURL } from 'promise-file-reader';
-import {
-  Button,
-  Card,
-  Dimmer,
-  Image,
-  Input,
-  Grid,
-  Loader,
-  Message,
-  Ref,
-} from 'semantic-ui-react';
+import { Button, Grid, Ref } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import {
   defineMessages,
@@ -29,21 +19,16 @@ import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
-import { settings } from '~/config';
 
 import { Icon } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
-import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
+import { getBaseUrl } from '@plone/volto/helpers';
 
 import configSVG from '@plone/volto/icons/configuration.svg';
-import addSVG from '@plone/volto/icons/add.svg';
 import trashSVG from '@plone/volto/icons/delete.svg';
-import clearSVG from '@plone/volto/icons/clear.svg';
-import folderSVG from '@plone/volto/icons/folder.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
-import imageFitSVG from '@plone/volto/icons/image-fit.svg';
-import imageFullSVG from '@plone/volto/icons/image-full.svg';
 import textSVG from '@plone/volto/icons/text.svg';
+import imagesSVG from '@plone/volto/icons/images.svg';
 
 import { CheckboxWidget, TileModal, TileRenderer } from '../../components';
 
@@ -473,6 +458,16 @@ export default class Edit extends Component {
                 disabled={this.props.data.columns.length >= 4}
               >
                 <Icon name={imageSVG} size="24px" />
+              </Button>
+            </Button.Group>
+            <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={e => this.addNewColumn(e, '__card')}
+                disabled={this.props.data.columns.length >= 4}
+              >
+                <Icon name={imagesSVG} size="24px" />
               </Button>
             </Button.Group>
             {/* <Button.Group>
