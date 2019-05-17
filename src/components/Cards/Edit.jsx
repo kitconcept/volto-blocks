@@ -600,7 +600,9 @@ export default class Edit extends Component {
                                         <Icon name={uploadSVG} size="24px" />
                                         <input
                                           type="file"
-                                          onChange={this.onUploadImage}
+                                          onChange={e =>
+                                            this.onUploadImage(e, index)
+                                          }
                                           style={{ display: 'none' }}
                                         />
                                       </label>

@@ -52,6 +52,7 @@ const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(
   state => ({
     request: state.content.create,
     content: state.content.data,
+    pathname: state.router.location.pathname,
   }),
   dispatch => bindActionCreators({ createContent }, dispatch),
 )
