@@ -371,7 +371,11 @@ export default class Edit extends Component {
         url: '',
       },
     ];
-    if (this.props.data.cards.length < 4) {
+    if (
+      this.props.data['x.5']
+        ? this.props.data.cards.length < 5
+        : this.props.data.cards.length < 4
+    ) {
       this.props.onChangeTile(this.props.tile, {
         ...this.props.data,
         cards: newCardsState,
@@ -522,7 +526,11 @@ export default class Edit extends Component {
                 icon
                 basic
                 onClick={this.addNewCard}
-                disabled={this.props.data.cards.length >= 4}
+                disabled={
+                  this.props.data['x.5']
+                    ? this.props.data.cards.length >= 5
+                    : this.props.data.cards.length >= 4
+                }
               >
                 <Icon name={addSVG} size="24px" />
               </Button>

@@ -55,12 +55,7 @@ const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(
   }),
   dispatch => bindActionCreators({ createContent }, dispatch),
 )
-/**
- * Edit image tile class.
- * @class Edit
- * @extends Component
- */
-export default class EditHeroTile extends Component {
+export default class EditCardTile extends Component {
   /**
    * Property types.
    * @property {Object} propTypes Property types.
