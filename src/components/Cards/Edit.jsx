@@ -29,12 +29,12 @@ import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
-import { convertToRaw } from 'draft-js';
 import { settings } from '~/config';
 
 import { Icon, EditTextTile } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
+import ObjectBrowser from '@package/components/ObjectBrowser/ObjectBrowser';
 
 import configSVG from '@plone/volto/icons/configuration.svg';
 import addSVG from '@plone/volto/icons/add.svg';
@@ -44,7 +44,7 @@ import folderSVG from '@plone/volto/icons/folder.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
-import constrainSVG from '@plone/volto/icons/back-down.svg';
+import uploadSVG from '@plone/volto/icons/upload.svg';
 
 import { CheckboxWidget, TileModal } from '../../components';
 
@@ -123,6 +123,7 @@ export default class Edit extends Component {
     this.state = {
       uploading: false,
       modalOpened: false,
+      objectBrowserIsOpen: false,
     };
 
     if (!this.props.data.cards) {
@@ -194,6 +195,15 @@ export default class Edit extends Component {
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside, false);
   }
+
+  toggleObjectBrowser = index => {
+    this.setState({
+      objectBrowserIsOpen: !this.state.objectBrowserIsOpen,
+      lastOpenedCard: index,
+    });
+  };
+
+  closeObjectBrowser = () => this.setState({ objectBrowserIsOpen: false });
 
   /**
    * Upload image handler
@@ -323,6 +333,20 @@ export default class Edit extends Component {
     });
   }
 
+  onChangeTile = (tile, data) => {
+    this.props.onChangeTile(this.props.tile, {
+      ...this.props.data,
+      cards: setArrayImmutable(
+        this.props.data.cards,
+        this.state.lastOpenedCard,
+        {
+          ...this.props.data.cards[this.state.lastOpenedCard],
+          ...data,
+        },
+      ),
+    });
+  };
+
   /**
    * Change tile settings handler
    * @method onChangeTileSettings
@@ -356,7 +380,7 @@ export default class Edit extends Component {
 
   selectCard = (e, index) => {
     e.stopPropagation();
-    this.setState({ currentSelectedCard: index });
+    this.setState({ currentSelectedCard: index, lastOpenedCard: index });
   };
 
   removeCard = (e, index) => {
@@ -553,46 +577,24 @@ export default class Edit extends Component {
                               {this.state.currentSelectedCard === index &&
                                 !item.url && (
                                   <div className="toolbar">
-                                    <Icon name={imageSVG} size="24px" />
-                                    <form
-                                      onKeyDown={e =>
-                                        this.onKeyDownVariantMenuForm(e, index)
-                                      }
-                                    >
-                                      <Input
-                                        onChange={e =>
-                                          this.onChangeUrl(e, index)
-                                        }
-                                        placeholder={this.props.intl.formatMessage(
-                                          messages.ImageTileInputPlaceholder,
-                                        )}
-                                      />
-                                    </form>
                                     <Button.Group>
                                       <label className="ui button basic icon">
-                                        <Icon name={folderSVG} size="24px" />
+                                        <Icon
+                                          name={folderSVG}
+                                          size="24px"
+                                          onClick={() =>
+                                            this.toggleObjectBrowser(index)
+                                          }
+                                        />
+                                      </label>
+                                      <label className="ui button basic icon">
+                                        <Icon name={uploadSVG} size="24px" />
                                         <input
                                           type="file"
-                                          onChange={e =>
-                                            this.onUploadImage(e, index)
-                                          }
+                                          onChange={this.onUploadImage}
                                           style={{ display: 'none' }}
                                         />
                                       </label>
-                                    </Button.Group>
-                                    <div className="separator" />
-                                    <Button.Group>
-                                      <Button
-                                        icon
-                                        basic
-                                        onClick={e => this.removeCard(e, index)}
-                                      >
-                                        <Icon
-                                          name={trashSVG}
-                                          size="24px"
-                                          color="#e40166"
-                                        />
-                                      </Button>
                                     </Button.Group>
                                   </div>
                                 )}
@@ -631,6 +633,15 @@ export default class Edit extends Component {
                                         }
                                       >
                                         x2
+                                      </Button>
+                                    </Button.Group>
+                                    <Button.Group>
+                                      <Button
+                                        icon
+                                        basic
+                                        onClick={this.toggleObjectBrowser}
+                                      >
+                                        <Icon name={folderSVG} size="24px" />
                                       </Button>
                                     </Button.Group>
                                     <div className="separator" />
@@ -717,6 +728,13 @@ export default class Edit extends Component {
             )}
           </Droppable>
         </DragDropContext>
+        <ObjectBrowser
+          objectBrowserIsOpen={this.state.objectBrowserIsOpen}
+          closeBrowser={this.closeObjectBrowser}
+          tile={this.props.tile}
+          onChangeTile={this.onChangeTile}
+          data={this.props.data.cards[this.state.lastOpenedCard]}
+        />
         <TileModal
           open={this.state.modalOpened}
           data={this.props.data}
