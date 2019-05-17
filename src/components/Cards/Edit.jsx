@@ -12,7 +12,6 @@ import {
   Card,
   Dimmer,
   Image,
-  Input,
   Grid,
   Loader,
   Message,
@@ -34,7 +33,11 @@ import { settings } from '~/config';
 import { Icon, EditTextTile } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
-import ObjectBrowser from '@package/components/ObjectBrowser/ObjectBrowser';
+import {
+  CheckboxWidget,
+  ObjectBrowser,
+  TileModal,
+} from '@kitconcept/volto-tiles/components';
 
 import configSVG from '@plone/volto/icons/configuration.svg';
 import addSVG from '@plone/volto/icons/add.svg';
@@ -45,8 +48,6 @@ import imageSVG from '@plone/volto/icons/image.svg';
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
 import uploadSVG from '@plone/volto/icons/upload.svg';
-
-import { CheckboxWidget, TileModal } from '../../components';
 
 const messages = defineMessages({
   ImageTileInputPlaceholder: {

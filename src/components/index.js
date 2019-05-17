@@ -9,8 +9,8 @@ import CardViewTile from './Card/View';
 
 import TileModal from './TileModal/TileModal';
 import CheckboxWidget from './Widgets/CheckboxWidget';
-
 import TileRenderer from './TileRenderer/TileRenderer';
+import ObjectBrowser from './ObjectBrowser/ObjectBrowser';
 
 export {
   CardsEditTile,
@@ -24,4 +24,5 @@ export {
   CardViewTile,
   TileModal,
   CheckboxWidget,
+  ObjectBrowser,
 };
