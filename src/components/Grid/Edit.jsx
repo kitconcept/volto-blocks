@@ -115,7 +115,7 @@ export default class Edit extends Component {
         columns: [
           {
             id: uuid(),
-            '@type': 'text',
+            '@type': 'image',
           },
         ],
       });
