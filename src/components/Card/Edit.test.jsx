@@ -14,6 +14,11 @@ test('renders an edit hero tile component', () => {
       create: {},
       data: {},
     },
+    router: {
+      location: {
+        pathname: '/blah',
+      },
+    },
     intl: {
       locale: 'en',
       messages: {},
