@@ -5,6 +5,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Card, Image } from 'semantic-ui-react';
 import redraft from 'redraft';
 import cx from 'classnames';
@@ -38,10 +39,13 @@ const View = ({ data }) => (
       {data.cards.map(card => (
         <Card
           key={card.id}
+          as={card.href ? Link : null}
           className={cx({
             'no-borders': data.noBorders,
             x2: card['x2'],
           })}
+          to={card.href || null}
+          alt={card.alt || null}
         >
           <Image
             src={
