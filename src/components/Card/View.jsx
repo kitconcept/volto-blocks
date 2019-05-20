@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import cx from 'classnames';
+import redraft from 'redraft';
+import { settings } from '~/config';
 
 /**
  * View image tile class.
@@ -31,7 +33,15 @@ const View = ({ data, detached }) => (
             />
           )}
           <div className="card-title">
-            {data.title && <h2>{data.title}</h2>}
+            {data.text && (
+              <h2>
+                {redraft(
+                  data.text,
+                  settings.ToHTMLRenderers,
+                  settings.ToHTMLOptions,
+                )}
+              </h2>
+            )}
           </div>
         </>
       );

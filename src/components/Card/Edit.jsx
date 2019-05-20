@@ -10,10 +10,18 @@ import { Map } from 'immutable';
 import { readAsDataURL } from 'promise-file-reader';
 import { Button, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
-import { stateFromHTML } from 'draft-js-import-html';
-import { Editor, DefaultDraftBlockRenderMap, EditorState } from 'draft-js';
+
+import {
+  convertFromRaw,
+  convertToRaw,
+  Editor,
+  DefaultDraftBlockRenderMap,
+  EditorState,
+} from 'draft-js';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import cx from 'classnames';
+import { includes, isEqual } from 'lodash';
+
 import { settings } from '~/config';
 
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
@@ -92,26 +100,22 @@ export default class EditCardTile extends Component {
   constructor(props) {
     super(props);
 
-    this.onUploadImage = this.onUploadImage.bind(this);
-
     if (!__SERVER__) {
-      let titleEditorState;
-      if (props.data && props.data.title) {
-        titleEditorState = EditorState.createWithContent(
-          stateFromHTML(props.data.title),
+      let editorState;
+      if (props.data && props.data.text) {
+        editorState = EditorState.createWithContent(
+          convertFromRaw(props.data.text),
         );
       } else {
-        titleEditorState = EditorState.createEmpty();
+        editorState = EditorState.createEmpty();
       }
       this.state = {
         uploading: false,
-        titleEditorState,
+        editorState,
         currentFocused: 'title',
         objectBrowserIsOpen: false,
       };
     }
-
-    this.onChangeTitle = this.onChangeTitle.bind(this);
   }
 
   /**
@@ -146,29 +150,10 @@ export default class EditCardTile extends Component {
       });
     }
 
-    if (
-      nextProps.data.title &&
-      this.props.data.title !== nextProps.data.title &&
-      !this.props.selected
-    ) {
-      const contentState = stateFromHTML(nextProps.data.title);
+    if (!this.props.selected && nextProps.selected) {
+      this.node.focus();
       this.setState({
-        titleEditorState: nextProps.data.title
-          ? EditorState.createWithContent(contentState)
-          : EditorState.createEmpty(),
-      });
-    }
-
-    if (
-      nextProps.data.description &&
-      this.props.data.description !== nextProps.data.description &&
-      !this.props.selected
-    ) {
-      const contentState = stateFromHTML(nextProps.data.description);
-      this.setState({
-        descriptionEditorState: nextProps.data.description
-          ? EditorState.createWithContent(contentState)
-          : EditorState.createEmpty(),
+        editorState: EditorState.moveFocusToEnd(this.state.editorState),
       });
     }
 
@@ -190,26 +175,32 @@ export default class EditCardTile extends Component {
   closeObjectBrowser = () => this.setState({ objectBrowserIsOpen: false });
 
   /**
-   * Change Title handler
-   * @method onChangeTitle
-   * @param {object} titleEditorState Editor state.
+   * Change handler
+   * @method onChange
+   * @param {object} editorState Editor state.
    * @returns {undefined}
    */
-  onChangeTitle(titleEditorState) {
-    this.setState({ titleEditorState }, () => {
+  onChangeText = editorState => {
+    if (
+      !isEqual(
+        convertToRaw(editorState.getCurrentContent()),
+        convertToRaw(this.state.editorState.getCurrentContent()),
+      )
+    ) {
       this.props.onChangeTile(this.props.tile, {
         ...this.props.data,
-        title: titleEditorState.getCurrentContent().getPlainText(),
+        text: convertToRaw(editorState.getCurrentContent()),
       });
-    });
-  }
+    }
+    this.setState({ editorState });
+  };
 
   /**
    * Upload image handler
    * @method onUploadImage
    * @returns {undefined}
    */
-  onUploadImage({ target }) {
+  onUploadImage = ({ target }) => {
     const file = target.files[0];
     this.setState({
       uploading: true,
@@ -226,7 +217,7 @@ export default class EditCardTile extends Component {
         },
       });
     });
-  }
+  };
 
   /**
    * Render method.
@@ -345,10 +336,9 @@ export default class EditCardTile extends Component {
           ref={node => {
             this.titleEditor = node;
           }}
-          onChange={this.onChangeTitle}
-          editorState={this.state.titleEditorState}
+          onChange={this.onChangeText}
+          editorState={this.state.editorState}
           blockRenderMap={extendedBlockRenderMap}
-          handleReturn={() => true}
           placeholder={this.props.intl.formatMessage(messages.title)}
           blockStyleFn={() => 'title-editor'}
           onUpArrow={() => {
