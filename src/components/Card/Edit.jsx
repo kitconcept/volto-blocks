@@ -10,17 +10,12 @@ import { Map } from 'immutable';
 import { readAsDataURL } from 'promise-file-reader';
 import { Button, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
-
-import {
-  convertFromRaw,
-  convertToRaw,
-  Editor,
-  DefaultDraftBlockRenderMap,
-  EditorState,
-} from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
+import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import cx from 'classnames';
 import { includes, isEqual } from 'lodash';
+import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 
 import { settings } from '~/config';
 
@@ -35,25 +30,11 @@ import uploadSVG from '@plone/volto/icons/upload.svg';
 import folderSVG from '@plone/volto/icons/folder.svg';
 
 const messages = defineMessages({
-  title: {
-    id: 'Title',
-    defaultMessage: 'Title',
-  },
-  description: {
-    id: 'Description',
-    defaultMessage: 'Description',
+  text: {
+    id: 'Type text…',
+    defaultMessage: 'Type text…',
   },
 });
-
-const blockTitleRenderMap = Map({
-  unstyled: {
-    element: 'h2',
-  },
-});
-
-const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(
-  blockTitleRenderMap,
-);
 
 @injectIntl
 @connect(
@@ -109,10 +90,15 @@ export default class EditCardTile extends Component {
       } else {
         editorState = EditorState.createEmpty();
       }
+
+      const inlineToolbarPlugin = createInlineToolbarPlugin({
+        structure: settings.richTextEditorInlineToolbarButtons,
+      });
+
       this.state = {
-        uploading: false,
         editorState,
-        currentFocused: 'title',
+        inlineToolbarPlugin,
+        uploading: false,
         objectBrowserIsOpen: false,
       };
     }
@@ -125,7 +111,7 @@ export default class EditCardTile extends Component {
    */
   componentDidMount() {
     if (this.props.selected) {
-      this.titleEditor.focus();
+      this.editor.focus();
     }
   }
 
@@ -158,11 +144,7 @@ export default class EditCardTile extends Component {
     }
 
     if (nextProps.selected !== this.props.selected) {
-      if (this.state.currentFocused === 'title') {
-        this.titleEditor.focus();
-      } else {
-        this.descriptionEditor.focus();
-      }
+      this.editor.focus();
     }
   }
 
@@ -228,6 +210,9 @@ export default class EditCardTile extends Component {
     if (__SERVER__) {
       return <div />;
     }
+
+    const { InlineToolbar } = this.state.inlineToolbarPlugin;
+
     return (
       <div
         role="presentation"
@@ -334,41 +319,67 @@ export default class EditCardTile extends Component {
         )}
         <Editor
           ref={node => {
-            this.titleEditor = node;
+            this.editor = node;
           }}
           onChange={this.onChangeText}
           editorState={this.state.editorState}
-          blockRenderMap={extendedBlockRenderMap}
-          placeholder={this.props.intl.formatMessage(messages.title)}
-          blockStyleFn={() => 'title-editor'}
-          onUpArrow={() => {
-            const selectionState = this.state.titleEditorState.getSelection();
-            const { titleEditorState } = this.state;
+          plugins={[
+            this.state.inlineToolbarPlugin,
+            ...settings.richTextEditorPlugins,
+          ]}
+          blockRenderMap={settings.extendedBlockRenderMap}
+          blockStyleFn={settings.blockStyleFn}
+          placeholder={this.props.intl.formatMessage(messages.text)}
+          handleReturn={() => {
+            if (!this.props.detached) {
+              const selectionState = this.state.editorState.getSelection();
+              const anchorKey = selectionState.getAnchorKey();
+              const currentContent = this.state.editorState.getCurrentContent();
+              const currentContentBlock = currentContent.getBlockForKey(
+                anchorKey,
+              );
+              const blockType = currentContentBlock.getType();
+              if (!includes(settings.listBlockTypes, blockType)) {
+                this.props.onSelectTile(
+                  this.props.onAddTile('text', this.props.index + 1),
+                );
+                return 'handled';
+              }
+              return 'un-handled';
+            }
+            return {};
+          }}
+          handleKeyCommand={(command, editorState) => {
             if (
-              titleEditorState
-                .getCurrentContent()
-                .getBlockMap()
-                .first()
-                .getKey() === selectionState.getFocusKey()
+              command === 'backspace' &&
+              editorState.getCurrentContent().getPlainText().length === 0
             ) {
+              this.props.onDeleteTile(this.props.tile, true);
+            }
+          }}
+          onUpArrow={() => {
+            const selectionState = this.state.editorState.getSelection();
+            const currentCursorPosition = selectionState.getStartOffset();
+
+            if (currentCursorPosition === 0) {
               this.props.onFocusPreviousTile(this.props.tile, this.node);
             }
           }}
           onDownArrow={() => {
-            const selectionState = this.state.titleEditorState.getSelection();
-            const { titleEditorState } = this.state;
-            if (
-              titleEditorState
-                .getCurrentContent()
-                .getBlockMap()
-                .last()
-                .getKey() === selectionState.getFocusKey()
-            ) {
-              this.setState(() => ({ currentFocused: 'description' }));
-              this.descriptionEditor.focus();
+            const selectionState = this.state.editorState.getSelection();
+            const { editorState } = this.state;
+            const currentCursorPosition = selectionState.getStartOffset();
+            const blockLength = editorState
+              .getCurrentContent()
+              .getFirstBlock()
+              .getLength();
+
+            if (currentCursorPosition === blockLength) {
+              this.props.onFocusNextTile(this.props.tile, this.node);
             }
           }}
         />
+        <InlineToolbar />
         <ObjectBrowser
           objectBrowserIsOpen={this.state.objectBrowserIsOpen}
           closeBrowser={this.closeObjectBrowser}

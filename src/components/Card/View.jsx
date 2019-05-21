@@ -33,15 +33,12 @@ const View = ({ data, detached }) => (
             />
           )}
           <div className="card-title">
-            {data.text && (
-              <h2>
-                {redraft(
-                  data.text,
-                  settings.ToHTMLRenderers,
-                  settings.ToHTMLOptions,
-                )}
-              </h2>
-            )}
+            {data.text &&
+              redraft(
+                data.text,
+                settings.ToHTMLRenderers,
+                settings.ToHTMLOptions,
+              )}
           </div>
         </>
       );
