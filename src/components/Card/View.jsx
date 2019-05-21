@@ -45,7 +45,20 @@ const View = ({ data, detached }) => (
           </div>
         </>
       );
-      if (data.href) {
+      if (data.external) {
+        const isReallyExternal =
+          (data.external.startsWith('http') ||
+            data.external.startsWith('https')) &&
+          !data.external.includes(settings.apiPath);
+
+        if (isReallyExternal) {
+          return <a href={data.external}>{card}</a>;
+        } else {
+          return (
+            <Link to={data.external.replace(settings.apiPath, '')}>{card}</Link>
+          );
+        }
+      } else if (data.href) {
         return <Link to={data.href}>{card}</Link>;
       } else {
         return card;
