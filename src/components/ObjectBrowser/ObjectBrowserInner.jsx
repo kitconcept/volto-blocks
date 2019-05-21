@@ -279,7 +279,9 @@ class ObjectBrowser extends Component {
         this.onSelectItem(item['@id']);
       }
     } else {
-      this.onSelectItem(item['@id']);
+      if (!this.state.external) {
+        this.onSelectItem(item['@id']);
+      }
     }
   };
 
@@ -293,7 +295,7 @@ class ObjectBrowser extends Component {
         this.props.closeBrowser();
       }
     } else {
-      if (item.is_folderish) {
+      if (item.is_folderish && !this.state.external) {
         this.navigateTo(item['@id']);
       }
     }
@@ -369,6 +371,29 @@ class ObjectBrowser extends Component {
           </header>
           <Segment secondary>{this.state.currentFolder}</Segment>
 
+          <Segment className="tabbed-actions">
+            <Button.Group>
+              <Button
+                icon
+                basic
+                className={cx('', { active: this.state.mode === 'image' })}
+                onClick={() => this.toggleMode('image')}
+              >
+                <Icon name={imageSVG} size="24px" />
+              </Button>
+            </Button.Group>
+            <Button.Group>
+              <Button
+                icon
+                basic
+                className={cx('', { active: this.state.mode === 'link' })}
+                onClick={() => this.toggleMode('link')}
+              >
+                <Icon name={linkSVG} size="24px" />
+              </Button>
+            </Button.Group>
+          </Segment>
+
           <ObjectBrowserNav
             currentSearchResults={
               this.props.searchSubrequests[
@@ -383,19 +408,9 @@ class ObjectBrowser extends Component {
             getIcon={this.getIcon}
             handleClickOnItem={this.handleClickOnItem}
             handleDoubleClickOnItem={this.handleDoubleClickOnItem}
+            mode={this.state.mode}
+            isExternalSelected={this.state.external}
           />
-
-          <Segment className="actions">
-            <Button.Group>
-              <Button icon basic onClick={() => this.toggleMode('link')}>
-                {this.state.mode === 'image' ? (
-                  <Icon name={linkSVG} size="24px" />
-                ) : (
-                  <Icon name={imageSVG} size="24px" />
-                )}
-              </Button>
-            </Button.Group>
-          </Segment>
 
           <Segment className="form actions">
             <TextWidget
