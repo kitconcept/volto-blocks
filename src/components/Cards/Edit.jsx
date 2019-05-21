@@ -481,6 +481,7 @@ export default class Edit extends Component {
           this.node = node;
         }}
       >
+        <div className="tile-tooltip">Cards</div>
         {this.props.selected && this.state.currentSelectedCard === null && (
           <div className="toolbar">
             <Button.Group>
