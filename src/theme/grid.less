@@ -11,3 +11,45 @@
     z-index: 5;
   }
 }
+
+// This has to be backported to Volto core
+
+// Why? Appeared when I added the tooltip for tiles...
+.ui.basic.button.tile-add-button {
+  margin-top: -36px;
+}
+
+.tile .tile.detached:hover::after {
+  border: none;
+}
+
+.tile .tile.detached:not(.inner)::after {
+  display: none;
+}
+
+.tile.image.align.center img {
+  display: block;
+  width: 100%; // This has to be backported
+  max-width: 100%;
+  height: auto;
+}
+
+.tile .tile-tooltip {
+  position: absolute;
+  z-index: 5;
+  top: -22px;
+  display: none;
+  padding: 2px 7px;
+  background-color: #252525;
+  border-radius: 2px;
+  color: #f2f5f6;
+  font-family: Poppins, sans-serif;
+  text-transform: uppercase;
+}
+
+.tile.selected .tile-tooltip,
+.tile:hover .tile-tooltip {
+  display: block;
+}
+
+// End of This has to be backported to Volto core
