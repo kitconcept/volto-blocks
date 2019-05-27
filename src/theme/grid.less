@@ -14,9 +14,44 @@
 
 // This has to be backported to Volto core
 
-// Why? Appeared when I added the tooltip for tiles...
-.ui.basic.button.tile-add-button {
-  margin-top: -36px;
+// Tile Modal
+.ui.modal.tile {
+  top: initial;
+  left: initial;
+  margin-right: auto;
+  margin-left: auto;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    .icon {
+      cursor: pointer;
+    }
+  }
+
+  .content {
+    .wrapper {
+      border-bottom: 1px solid #edf1f2;
+
+      label {
+        font-weight: @bold;
+        text-transform: uppercase;
+      }
+    }
+
+    .ui.grid {
+      margin: 0;
+    }
+
+    .field {
+      margin-bottom: 10px;
+    }
+
+    .field-group-wrapper {
+      border-bottom: 1px solid #c7d5d8;
+    }
+  }
 }
 
 .tile .tile.detached:hover::after {
