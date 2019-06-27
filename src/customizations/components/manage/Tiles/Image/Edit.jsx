@@ -293,7 +293,7 @@ export default class Edit extends Component {
                     <Icon name={imageFitSVG} size="24px" />
                   </Button>
                 </Button.Group>
-                <Button.Group>
+                <Button.Group id="full-alignment-button">
                   <Button
                     icon
                     basic
