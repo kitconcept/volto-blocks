@@ -39,7 +39,6 @@ const messages = defineMessages({
   state => ({
     request: state.content.create,
     content: state.content.data,
-    pathname: state.router.location.pathname,
   }),
   dispatch => bindActionCreators({ createContent }, dispatch),
 )
@@ -147,6 +146,7 @@ export default class Edit extends Component {
     });
     readAsDataURL(file).then(data => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
+      console.log(this.props.pathname);
       this.props.createContent(getBaseUrl(this.props.pathname), {
         '@type': 'Image',
         image: {
