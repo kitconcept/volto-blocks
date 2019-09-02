@@ -146,7 +146,6 @@ export default class Edit extends Component {
     });
     readAsDataURL(file).then(data => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
-      console.log(this.props.pathname);
       this.props.createContent(getBaseUrl(this.props.pathname), {
         '@type': 'Image',
         image: {
