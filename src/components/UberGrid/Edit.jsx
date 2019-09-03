@@ -31,7 +31,6 @@ import trashSVG from '@plone/volto/icons/delete.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
 import textSVG from '@plone/volto/icons/text.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
-import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
 
 import { CheckboxWidget, TileModal, TileRenderer } from '../../components';
 
@@ -126,7 +125,7 @@ class Edit extends Component {
    */
   componentDidMount() {
     if (this.props.selected) {
-      this.node.current.focus();
+      this.node.focus();
     }
     document.addEventListener('mousedown', this.handleClickOutside, false);
   }
@@ -159,12 +158,12 @@ class Edit extends Component {
       });
 
       if (nextProps.selected) {
-        this.node.current.focus();
+        this.node.focus();
       }
     }
 
     if (nextProps.selected !== this.props.selected) {
-      this.node.current.focus();
+      this.node.focus();
     }
   }
 
@@ -376,7 +375,7 @@ class Edit extends Component {
   };
 
   handleClickOutside = e => {
-    if (this.node.current && doesNodeContainClick(this.node.current, e)) return;
+    if (this.node && doesNodeContainClick(this.node, e)) return;
     this.setState(() => ({
       currentSelectedCard: null,
     }));
@@ -403,14 +402,16 @@ class Edit extends Component {
   }
   getCardsLenght = cards => cards.length + cards.filter(item => item.x2).length;
 
-  node = React.createRef();
-
   /**
    * Render method.
    * @method render
    * @returns {string} Markup for the component.
    */
   render() {
+    const isDoubleSized = this.props.data.columns
+      ? this.props.data.columns.filter(cols => cols.x2).length
+      : 0;
+
     return (
       <div
         role="presentation"
@@ -428,10 +429,12 @@ class Edit extends Component {
             e,
             this.props.index,
             this.props.tile,
-            this.node.current,
+            this.node,
           );
         }}
-        ref={this.node}
+        ref={node => {
+          this.node = node;
+        }}
       >
         {this.props.selected &&
           this.state.currentSelectedCard === null &&
@@ -467,6 +470,15 @@ class Edit extends Component {
                   <Icon name={imagesSVG} size="24px" />
                 </Button>
               </Button.Group>
+              {/* <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={() => this.setState({ modalOpened: true })}
+              >
+                <Icon name={configSVG} size="24px" />
+              </Button>
+            </Button.Group> */}
             </div>
           )}
         {this.props.selected &&
@@ -490,6 +502,12 @@ class Edit extends Component {
             {provided => (
               <Ref innerRef={provided.innerRef}>
                 <Grid
+                  className={cx({
+                    centered:
+                      this.props.data.align === 'center' ||
+                      this.props.data.align === undefined,
+                    'space-between': this.props.data.align === 'space-between',
+                  })}
                   {...provided.droppableProps}
                   columns={
                     this.props.data.columns ? this.props.data.columns.length : 0
@@ -509,13 +527,95 @@ class Edit extends Component {
                               onClick={e => this.selectCard(e, index)}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
+                              width={
+                                isDoubleSized
+                                  ? item.x2
+                                    ? (12 /
+                                        (this.props.data.columns.length +
+                                          isDoubleSized)) *
+                                      2
+                                    : 12 /
+                                      (this.props.data.columns.length +
+                                        isDoubleSized)
+                                  : null
+                              }
                             >
                               <div
-                                role="presentation"
                                 // This prevents propagation of ENTER
                                 onKeyDown={e => e.stopPropagation()}
                               >
-                                <img src={imageTileSVG} alt="" />
+                                {/* <SidebarPortal selected={this.props.selected}>
+                                  <GridSidebar
+                                    {...this.props}
+                                    onChangeTile={(tile, data) => {
+                                      debugger;
+                                      this.onChangeTile(data, index);
+                                    }}
+                                  />
+                                </SidebarPortal> */}
+                                <TileRenderer
+                                  tile={item.id}
+                                  edit
+                                  type={item['@type']}
+                                  selected={
+                                    this.state.currentSelectedCard === index
+                                  }
+                                  onChangeTile={(tile, data) =>
+                                    this.onChangeTile(data, index)
+                                  }
+                                  data={this.props.data.columns[index]}
+                                  openObjectBrowser={
+                                    this.props.openObjectBrowser
+                                  }
+                                  appendActions={
+                                    <Button.Group>
+                                      <Button
+                                        icon
+                                        basic
+                                        className={cx('text-button', {
+                                          selected: this.props.data.columns[
+                                            index
+                                          ]['x2'],
+                                        })}
+                                        disabled={
+                                          this.props.data.columns.length < 2 ||
+                                          (!item.x2 && isDoubleSized)
+                                        }
+                                        onClick={e =>
+                                          this.onChangeColumnSettings(
+                                            e,
+                                            index,
+                                            'x2',
+                                            this.props.data.columns[index]['x2']
+                                              ? !this.props.data.columns[index][
+                                                  'x2'
+                                                ]
+                                              : true,
+                                          )
+                                        }
+                                      >
+                                        x2
+                                      </Button>
+                                    </Button.Group>
+                                  }
+                                  appendSecondaryActions={
+                                    <Button.Group>
+                                      <Button
+                                        icon
+                                        basic
+                                        onClick={e =>
+                                          this.removeColumn(e, index)
+                                        }
+                                      >
+                                        <Icon
+                                          name={trashSVG}
+                                          size="24px"
+                                          color="#e40166"
+                                        />
+                                      </Button>
+                                    </Button.Group>
+                                  }
+                                />
                               </div>
                             </Grid.Column>
                           </Ref>
@@ -528,20 +628,59 @@ class Edit extends Component {
             )}
           </Droppable>
         </DragDropContext>
-        <SidebarPortal selected={this.props.selected}>
-          <GridSidebar
-            {...this.props}
-            onChangeTile={(tile, data) => {
-              this.onChangeTile(data, data.index);
-            }}
-          />
-        </SidebarPortal>
+
+        <TileModal
+          open={this.state.modalOpened}
+          data={this.props.data}
+          onClose={this.onCloseModal}
+        >
+          <Grid>
+            <Grid.Row stretched>
+              <Grid.Column width="4">
+                <div className="wrapper">
+                  <label htmlFor="login">
+                    <FormattedMessage id="Options" defaultMessage="Options" />
+                  </label>
+                </div>
+              </Grid.Column>
+              <Grid.Column width="8">
+                <div className="field-group-wrapper">
+                  <CheckboxWidget
+                    id="centeredText"
+                    title="Center cards text"
+                    value={this.props.data.centeredText}
+                    onChange={this.onChangeTileSettings}
+                  />
+                  <CheckboxWidget
+                    id="hideText"
+                    title="Hide card text"
+                    value={this.props.data.hideText}
+                    onChange={this.onChangeTileSettings}
+                  />
+                  <CheckboxWidget
+                    id="noBorders"
+                    title="No card borders"
+                    value={this.props.data.noBorders}
+                    onChange={this.onChangeTileSettings}
+                  />
+                  <CheckboxWidget
+                    id="expandCards"
+                    title="Use all the available card width"
+                    value={this.props.data.expandCards}
+                    onChange={this.onChangeTileSettings}
+                  />
+                </div>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </TileModal>
       </div>
     );
   }
 }
 
 export default compose(
+  withObjectBrowser,
   injectIntl,
   connect(
     state => ({

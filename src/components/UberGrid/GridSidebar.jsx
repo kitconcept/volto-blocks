@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
+
 import { Accordion, Form, Grid, Segment } from 'semantic-ui-react';
 import {
   defineMessages,
@@ -73,9 +76,6 @@ const GridSidebar = props => {
           {gridType === 'images' && (
             <FormattedMessage id="Images Grid" defaultMessage="Images Grid" />
           )}
-          {gridType === 'proxy' && (
-            <FormattedMessage id="Proxy Grid" defaultMessage="Proxy Grid" />
-          )}
         </h2>
       </header>
 
@@ -88,18 +88,18 @@ const GridSidebar = props => {
                 index={index}
                 onClick={handleAccClick}
               >
-                {(!gridType || gridType === 'proxy') && (
+                {!gridType && (
                   <FormattedMessage
                     id="Grid Element"
                     defaultMessage="Grid Element {index}"
-                    values={{ index: index + 1 }}
+                    values={{ index: index }}
                   />
                 )}
                 {gridType === 'images' && (
                   <FormattedMessage
                     id="Grid Image"
                     defaultMessage="Grid Image {index}"
-                    values={{ index: index + 1 }}
+                    values={{ index: index }}
                   />
                 )}
 
@@ -110,7 +110,7 @@ const GridSidebar = props => {
                 )}
               </Accordion.Title>
               <Accordion.Content active={activeAccIndex === index}>
-                <ImageData {...props} data={{ ...column, index }} />
+                <ImageData {...props} data={column} />
               </Accordion.Content>
             </>
           ))}
@@ -127,4 +127,7 @@ GridSidebar.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(GridSidebar);
+export default compose(
+  withObjectBrowser,
+  injectIntl,
+)(GridSidebar);
