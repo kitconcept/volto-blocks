@@ -7,7 +7,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react';
 import cx from 'classnames';
-import { TileRenderer } from '../../components';
+
+import ProxyItem from './ProxyItem';
+
+const gridConfig = {
+  proxy: ProxyItem,
+};
 
 /**
  * View image tile class.
@@ -15,8 +20,6 @@ import { TileRenderer } from '../../components';
  * @extends Component
  */
 const View = ({ data }) => {
-  const isDoubleSized = data.columns.filter(cols => cols.x2).length;
-
   return (
     <div
       className={cx('tile __grid', {
@@ -25,30 +28,13 @@ const View = ({ data }) => {
         'centered-text': data.centeredText,
       })}
     >
-      <Grid
-        className={cx({
-          centered: data.align === 'center' || data.align === undefined,
-          'space-between': data.align === 'space-between',
-        })}
-        columns={data.columns.length}
-      >
+      <Grid columns={data.columns.length}>
         {data.columns.map(column => (
-          <Grid.Column
-            key={column.id}
-            width={
-              isDoubleSized
-                ? column.x2
-                  ? (12 / (data.columns.length + isDoubleSized)) * 2
-                  : 12 / (data.columns.length + isDoubleSized)
-                : null
-            }
-          >
-            <TileRenderer
-              tile={column.id}
-              edit={false}
-              type={column['@type']}
-              data={column}
-            />
+          <Grid.Column key={column.id}>
+            {(() => {
+              const GridTypeComponent = gridConfig[column['@type']];
+              return <GridTypeComponent data={column} />;
+            })()}
           </Grid.Column>
         ))}
       </Grid>

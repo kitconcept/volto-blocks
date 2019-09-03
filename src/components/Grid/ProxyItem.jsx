@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
 import { getContent } from '@plone/volto/actions';
 
-const Edit = ({ data }) => {
+const ProxyItem = ({ data }) => {
   const contentSubrequests = useSelector(state => state.content.subrequests);
   const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ const Edit = ({ data }) => {
       {!data.href && (
         <div className="grid-proxy-item">
           <img src={imageTileSVG} alt="" />
-          <h3>Please choose an item as proxy for this element</h3>
+          <h3>Please choose an existing content as source for this element</h3>
         </div>
       )}
       {data.href &&
@@ -25,11 +25,12 @@ const Edit = ({ data }) => {
         contentSubrequests[data.id].data && (
           <div className="grid-proxy-item">
             <img src={contentSubrequests[data.id].data.image.download} alt="" />
-            <h4>{contentSubrequests[data.id].data.title}</h4>
+            <h3>{contentSubrequests[data.id].data.title}</h3>
+            <p>{contentSubrequests[data.id].data.description}</p>
           </div>
         )}
     </>
   );
 };
 
-export default Edit;
+export default ProxyItem;

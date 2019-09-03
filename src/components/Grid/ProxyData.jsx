@@ -20,37 +20,9 @@ import downSVG from '@plone/volto/icons/down-key.svg';
 import navTreeSVG from '@plone/volto/icons/nav.svg';
 
 const messages = defineMessages({
-  Image: {
-    id: 'Image',
-    defaultMessage: 'Image',
-  },
-  Origin: {
-    id: 'Origin',
-    defaultMessage: 'Origin',
-  },
-  AltText: {
-    id: 'Alt text',
-    defaultMessage: 'Alt text',
-  },
-  Align: {
-    id: 'Alignment',
-    defaultMessage: 'Alignment',
-  },
-  LinkTo: {
-    id: 'Link to',
-    defaultMessage: 'Link to',
-  },
-  openLinkInNewTab: {
-    id: 'Open in a new tab',
-    defaultMessage: 'Open in a new tab',
-  },
-  NoImageSelected: {
-    id: 'No image selected',
-    defaultMessage: 'No image selected',
-  },
-  externalURL: {
-    id: 'External URL',
-    defaultMessage: 'External URL',
+  Source: {
+    id: 'Source',
+    defaultMessage: 'Source',
   },
 });
 
@@ -64,11 +36,10 @@ const ImageData = ({
 }) => {
   return (
     <>
-      <Segment className="sidebar-metadata-container" secondary />
       <Segment className="form sidebar-image-data">
         <TextWidget
-          id="link"
-          title={intl.formatMessage(messages.LinkTo)}
+          id="source"
+          title={intl.formatMessage(messages.Source)}
           required={false}
           value={data.href}
           icon={data.href ? clearSVG : navTreeSVG}

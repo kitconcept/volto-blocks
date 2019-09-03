@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Accordion, Form, Grid, Segment } from 'semantic-ui-react';
+import { Accordion, Button, Form, Grid, Segment } from 'semantic-ui-react';
 import {
   defineMessages,
   FormattedMessage,
@@ -19,6 +19,8 @@ import clearSVG from '@plone/volto/icons/clear.svg';
 import upSVG from '@plone/volto/icons/up-key.svg';
 import downSVG from '@plone/volto/icons/down-key.svg';
 import navTreeSVG from '@plone/volto/icons/nav.svg';
+import trashSVG from '@plone/volto/icons/delete.svg';
+import addSVG from '@plone/volto/icons/add.svg';
 
 const messages = defineMessages({
   Image: {
@@ -78,6 +80,16 @@ const GridSidebar = props => {
             <FormattedMessage id="Proxy Grid" defaultMessage="Proxy Grid" />
           )}
         </h2>
+        <Button.Group>
+          <Button
+            icon
+            basic
+            onClick={e => props.addNewColumn(e, gridType)}
+            disabled={data.columns && data.columns.length >= 4}
+          >
+            <Icon name={addSVG} size="24px" />
+          </Button>
+        </Button.Group>
       </header>
 
       <Accordion fluid styled className="form">
@@ -103,12 +115,22 @@ const GridSidebar = props => {
                     values={{ index: index + 1 }}
                   />
                 )}
-
-                {activeAccIndex === 0 ? (
-                  <Icon name={upSVG} size="20px" />
-                ) : (
-                  <Icon name={downSVG} size="20px" />
-                )}
+                <div className="accordion-tools">
+                  <Button.Group>
+                    <Button
+                      icon
+                      basic
+                      onClick={e => props.removeColumn(e, index)}
+                    >
+                      <Icon name={trashSVG} size="20px" color="#e40166" />
+                    </Button>
+                  </Button.Group>
+                  {activeAccIndex === 0 ? (
+                    <Icon name={upSVG} size="20px" />
+                  ) : (
+                    <Icon name={downSVG} size="20px" />
+                  )}
+                </div>
               </Accordion.Title>
               <Accordion.Content active={activeAccIndex === index}>
                 {gridType === 'images' && (

@@ -31,11 +31,12 @@ import trashSVG from '@plone/volto/icons/delete.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
 import textSVG from '@plone/volto/icons/text.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
+import addSVG from '@plone/volto/icons/add.svg';
 
 import { CheckboxWidget, TileModal, TileRenderer } from '../../components';
 
 import GridSidebar from './GridSidebar';
-import EditProxyItem from './ProxyItem/Edit';
+import ProxyItem from './ProxyItem';
 
 const messages = defineMessages({
   ImageTileInputPlaceholder: {
@@ -113,6 +114,7 @@ class Edit extends Component {
         columns: [
           {
             id: uuid(),
+            '@type': this.props.gridType || 'image',
           },
         ],
       });
@@ -476,10 +478,10 @@ class Edit extends Component {
                 <Button
                   icon
                   basic
-                  onClick={e => this.addNewColumn(e, 'image')}
+                  onClick={e => this.addNewColumn(e, this.props.gridType)}
                   disabled={this.props.data.columns.length >= 4}
                 >
-                  <Icon name={imageSVG} size="24px" />
+                  <Icon name={addSVG} size="24px" />
                 </Button>
               </Button.Group>
             </div>
@@ -505,7 +507,7 @@ class Edit extends Component {
                           <Ref innerRef={provided.innerRef}>
                             <Grid.Column
                               key={item.id}
-                              onClick={e => this.selectCard(e, index)}
+                              // onClick={e => this.selectCard(e, index)}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
@@ -514,7 +516,7 @@ class Edit extends Component {
                                 // This prevents propagation of ENTER
                                 onKeyDown={e => e.stopPropagation()}
                               >
-                                <EditProxyItem data={item} />
+                                <ProxyItem data={item} />
                               </div>
                             </Grid.Column>
                           </Ref>
@@ -533,6 +535,8 @@ class Edit extends Component {
             onChangeTile={(tile, data) => {
               this.onChangeTile(data, data.index);
             }}
+            removeColumn={this.removeColumn}
+            addNewColumn={this.addNewColumn}
           />
         </SidebarPortal>
       </div>
