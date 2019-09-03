@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { readAsDataURL } from 'promise-file-reader';
 import { Button, Grid, Ref } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
@@ -19,8 +20,9 @@ import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
+import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
-import { Icon } from '@plone/volto/components';
+import { Icon, SidebarPortal } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
 import { getBaseUrl } from '@plone/volto/helpers';
 
@@ -31,6 +33,8 @@ import textSVG from '@plone/volto/icons/text.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 
 import { CheckboxWidget, TileModal, TileRenderer } from '../../components';
+
+import GridSidebar from './GridSidebar';
 
 const messages = defineMessages({
   ImageTileInputPlaceholder: {
@@ -51,20 +55,12 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-@injectIntl
-@connect(
-  state => ({
-    request: state.content.create,
-    content: state.content.data,
-  }),
-  dispatch => bindActionCreators({ createContent }, dispatch),
-)
 /**
  * Edit image tile class.
  * @class Edit
  * @extends Component
  */
-export default class Edit extends Component {
+class Edit extends Component {
   /**
    * Property types.
    * @property {Object} propTypes Property types.
@@ -88,6 +84,7 @@ export default class Edit extends Component {
     onFocusNextTile: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
+    gridType: PropTypes.string,
     intl: intlShape.isRequired,
   };
 
@@ -341,6 +338,7 @@ export default class Edit extends Component {
   selectCard = (e, index) => {
     e.stopPropagation();
     this.setState({ currentSelectedCard: index });
+    this.props.onSelectTile(this.props.tile);
   };
 
   removeColumn = (e, index) => {
@@ -419,7 +417,7 @@ export default class Edit extends Component {
         role="presentation"
         onClick={() => {
           this.props.onSelectTile(this.props.tile);
-          this.setState({ currentSelectedCard: null });
+          // this.setState({ currentSelectedCard: null });
         }}
         className={cx('tile grid', {
           selected: this.props.selected,
@@ -438,40 +436,41 @@ export default class Edit extends Component {
           this.node = node;
         }}
       >
-        <div className="tile-tooltip">Grid</div>
-        {this.props.selected && this.state.currentSelectedCard === null && (
-          <div className="toolbar">
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={e => this.addNewColumn(e, 'text')}
-                disabled={this.props.data.columns.length >= 4}
-              >
-                <Icon name={textSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={e => this.addNewColumn(e, 'image')}
-                disabled={this.props.data.columns.length >= 4}
-              >
-                <Icon name={imageSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={e => this.addNewColumn(e, '__card')}
-                disabled={this.props.data.columns.length >= 4}
-              >
-                <Icon name={imagesSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            {/* <Button.Group>
+        {this.props.selected &&
+          this.state.currentSelectedCard === null &&
+          !this.props.gridType && (
+            <div className="toolbar">
+              <Button.Group>
+                <Button
+                  icon
+                  basic
+                  onClick={e => this.addNewColumn(e, 'text')}
+                  disabled={this.props.data.columns.length >= 4}
+                >
+                  <Icon name={textSVG} size="24px" />
+                </Button>
+              </Button.Group>
+              <Button.Group>
+                <Button
+                  icon
+                  basic
+                  onClick={e => this.addNewColumn(e, 'image')}
+                  disabled={this.props.data.columns.length >= 4}
+                >
+                  <Icon name={imageSVG} size="24px" />
+                </Button>
+              </Button.Group>
+              <Button.Group>
+                <Button
+                  icon
+                  basic
+                  onClick={e => this.addNewColumn(e, '__card')}
+                  disabled={this.props.data.columns.length >= 4}
+                >
+                  <Icon name={imagesSVG} size="24px" />
+                </Button>
+              </Button.Group>
+              {/* <Button.Group>
               <Button
                 icon
                 basic
@@ -480,8 +479,24 @@ export default class Edit extends Component {
                 <Icon name={configSVG} size="24px" />
               </Button>
             </Button.Group> */}
-          </div>
-        )}
+            </div>
+          )}
+        {this.props.selected &&
+          this.state.currentSelectedCard === null &&
+          this.props.gridType && (
+            <div className="toolbar">
+              <Button.Group>
+                <Button
+                  icon
+                  basic
+                  onClick={e => this.addNewColumn(e, 'image')}
+                  disabled={this.props.data.columns.length >= 4}
+                >
+                  <Icon name={imageSVG} size="24px" />
+                </Button>
+              </Button.Group>
+            </div>
+          )}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId={uuid()} direction="horizontal">
             {provided => (
@@ -529,6 +544,15 @@ export default class Edit extends Component {
                                 // This prevents propagation of ENTER
                                 onKeyDown={e => e.stopPropagation()}
                               >
+                                {/* <SidebarPortal selected={this.props.selected}>
+                                  <GridSidebar
+                                    {...this.props}
+                                    onChangeTile={(tile, data) => {
+                                      debugger;
+                                      this.onChangeTile(data, index);
+                                    }}
+                                  />
+                                </SidebarPortal> */}
                                 <TileRenderer
                                   tile={item.id}
                                   edit
@@ -540,6 +564,9 @@ export default class Edit extends Component {
                                     this.onChangeTile(data, index)
                                   }
                                   data={this.props.data.columns[index]}
+                                  openObjectBrowser={
+                                    this.props.openObjectBrowser
+                                  }
                                   appendActions={
                                     <Button.Group>
                                       <Button
@@ -601,6 +628,7 @@ export default class Edit extends Component {
             )}
           </Droppable>
         </DragDropContext>
+
         <TileModal
           open={this.state.modalOpened}
           data={this.props.data}
@@ -650,3 +678,15 @@ export default class Edit extends Component {
     );
   }
 }
+
+export default compose(
+  withObjectBrowser,
+  injectIntl,
+  connect(
+    state => ({
+      request: state.content.create,
+      content: state.content.data,
+    }),
+    { createContent },
+  ),
+)(Edit);

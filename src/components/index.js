@@ -4,6 +4,8 @@ import SliderEditTile from './Slider/Edit';
 import SliderViewTile from './Slider/View';
 import GridEditTile from './Grid/Edit';
 import GridViewTile from './Grid/View';
+import ImagesGridEditTile from './ImagesGrid/Edit';
+import ImagesGridViewTile from './ImagesGrid/View';
 import CardEditTile from './Card/Edit';
 import CardViewTile from './Card/View';
 
@@ -19,6 +21,8 @@ export {
   SliderViewTile,
   GridEditTile,
   GridViewTile,
+  ImagesGridEditTile,
+  ImagesGridViewTile,
   CardEditTile,
   TileRenderer,
   CardViewTile,
