@@ -31,11 +31,11 @@ import trashSVG from '@plone/volto/icons/delete.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
 import textSVG from '@plone/volto/icons/text.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
-import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
 
 import { CheckboxWidget, TileModal, TileRenderer } from '../../components';
 
 import GridSidebar from './GridSidebar';
+import EditProxyItem from './ProxyItem/Edit';
 
 const messages = defineMessages({
   ImageTileInputPlaceholder: {
@@ -113,7 +113,6 @@ class Edit extends Component {
         columns: [
           {
             id: uuid(),
-            '@type': 'image',
           },
         ],
       });
@@ -515,7 +514,7 @@ class Edit extends Component {
                                 // This prevents propagation of ENTER
                                 onKeyDown={e => e.stopPropagation()}
                               >
-                                <img src={imageTileSVG} alt="" />
+                                <EditProxyItem data={item} />
                               </div>
                             </Grid.Column>
                           </Ref>

@@ -12,6 +12,7 @@ import { AlignTile, flattenToAppURL } from '@plone/volto/helpers';
 import { settings } from '~/config';
 
 import ImageData from './ImageData';
+import ProxyData from './ProxyData';
 
 import imageSVG from '@plone/volto/icons/image.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
@@ -110,7 +111,12 @@ const GridSidebar = props => {
                 )}
               </Accordion.Title>
               <Accordion.Content active={activeAccIndex === index}>
-                <ImageData {...props} data={{ ...column, index }} />
+                {gridType === 'images' && (
+                  <ImageData {...props} data={{ ...column, index }} />
+                )}
+                {gridType === 'proxy' && (
+                  <ProxyData {...props} data={{ ...column, index }} />
+                )}
               </Accordion.Content>
             </>
           ))}
