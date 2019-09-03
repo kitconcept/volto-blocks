@@ -9,31 +9,20 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { readAsDataURL } from 'promise-file-reader';
 import { Button, Grid, Ref } from 'semantic-ui-react';
-import { bindActionCreators } from 'redux';
-import {
-  defineMessages,
-  injectIntl,
-  intlShape,
-  FormattedMessage,
-} from 'react-intl';
+import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
-import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
 import { Icon, SidebarPortal } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
 import { getBaseUrl } from '@plone/volto/helpers';
 
-import configSVG from '@plone/volto/icons/configuration.svg';
-import trashSVG from '@plone/volto/icons/delete.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
 import textSVG from '@plone/volto/icons/text.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
-
-import { CheckboxWidget, TileModal, TileRenderer } from '../../components';
 
 import GridSidebar from './GridSidebar';
 import ProxyItem from './ProxyItem';

@@ -1,24 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Accordion, Button, Form, Grid, Segment } from 'semantic-ui-react';
+import { Accordion, Button, Segment } from 'semantic-ui-react';
 import {
   defineMessages,
   FormattedMessage,
   injectIntl,
   intlShape,
 } from 'react-intl';
-import { CheckboxWidget, Icon, TextWidget } from '@plone/volto/components';
-import { AlignTile, flattenToAppURL } from '@plone/volto/helpers';
-import { settings } from '~/config';
+import { Icon } from '@plone/volto/components';
 
 import ImageData from './ImageData';
 import ProxyData from './ProxyData';
 
-import imageSVG from '@plone/volto/icons/image.svg';
-import clearSVG from '@plone/volto/icons/clear.svg';
 import upSVG from '@plone/volto/icons/up-key.svg';
 import downSVG from '@plone/volto/icons/down-key.svg';
-import navTreeSVG from '@plone/volto/icons/nav.svg';
 import trashSVG from '@plone/volto/icons/delete.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 

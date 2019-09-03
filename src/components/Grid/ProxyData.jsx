@@ -1,22 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Accordion, Form, Grid, Segment } from 'semantic-ui-react';
-import {
-  defineMessages,
-  FormattedMessage,
-  injectIntl,
-  intlShape,
-} from 'react-intl';
-import { CheckboxWidget, Icon, TextWidget } from '@plone/volto/components';
-import { settings } from '~/config';
-import { AlignTile, flattenToAppURL } from '@plone/volto/helpers';
+import { Segment } from 'semantic-ui-react';
+import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { TextWidget } from '@plone/volto/components';
 import { compose } from 'redux';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
-import imageSVG from '@plone/volto/icons/image.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
-import upSVG from '@plone/volto/icons/up-key.svg';
-import downSVG from '@plone/volto/icons/down-key.svg';
 import navTreeSVG from '@plone/volto/icons/nav.svg';
 
 const messages = defineMessages({
