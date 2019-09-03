@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a Proxy Data Sidebar component 1`] = `
+<div
+  className="ui segment form sidebar-image-data"
+>
+  <div
+    className="inline field"
+    id="field-source"
+  >
+    <div
+      className="ui grid"
+    >
+      <div
+        className="stretched row"
+      >
+        <div
+          className="four wide column"
+        >
+          <div
+            className="wrapper"
+          >
+            <label
+              htmlFor="field-source"
+            >
+              Source
+            </label>
+          </div>
+        </div>
+        <div
+          className="eight wide column"
+        >
+          <div
+            className="ui icon input"
+          >
+            <input
+              disabled={false}
+              id="field-source"
+              name="source"
+              onChange={[Function]}
+              type="text"
+              value="/news/a-news-item-that-tells-things"
+            />
+            <i
+              aria-hidden="true"
+              attributes={
+                Object {
+                  "viewBox": "",
+                  "xmlns": "",
+                }
+              }
+              className="icon"
+            />
+          </div>
+          <button
+            onClick={[Function]}
+          >
+            <svg
+              className="icon"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+              onClick={null}
+              style={
+                Object {
+                  "fill": "currentColor",
+                  "height": "18px",
+                  "width": "auto",
+                }
+              }
+              viewBox=""
+              xmlns=""
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

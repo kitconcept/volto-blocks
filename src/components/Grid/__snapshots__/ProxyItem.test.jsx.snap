@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a Grid Tile Proxy Item component 1`] = `
+<div
+  className="grid-proxy-item"
+>
+  <img
+    alt=""
+    src="http://image"
+  />
+  <h3>
+    the title
+  </h3>
+  <p>
+    the description
+  </p>
+</div>
+`;

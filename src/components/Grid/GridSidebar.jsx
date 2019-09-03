@@ -90,7 +90,7 @@ const GridSidebar = props => {
       <Accordion fluid styled className="form">
         {data.columns &&
           data.columns.map((column, index) => (
-            <>
+            <React.Fragment key={column.id}>
               <Accordion.Title
                 active={activeAccIndex === index}
                 index={index}
@@ -135,7 +135,7 @@ const GridSidebar = props => {
                   <ProxyData {...props} data={{ ...column, index }} />
                 )}
               </Accordion.Content>
-            </>
+            </React.Fragment>
           ))}
       </Accordion>
     </Segment.Group>

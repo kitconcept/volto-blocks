@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a Grid Tile Sidebar component 1`] = `
+<div
+  className="ui raised segments"
+>
+  <header
+    className="header pulled"
+  >
+    <h2>
+      <span>
+        Grid
+      </span>
+    </h2>
+    <div
+      className="ui buttons"
+    >
+      <button
+        className="ui basic icon disabled button"
+        disabled={true}
+        onClick={[Function]}
+        tabIndex={-1}
+      >
+        <svg
+          className="icon"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": undefined,
+            }
+          }
+          onClick={null}
+          style={
+            Object {
+              "fill": "currentColor",
+              "height": "24px",
+              "width": "auto",
+            }
+          }
+          viewBox=""
+          xmlns=""
+        />
+      </button>
+    </div>
+  </header>
+  <div
+    className="accordion ui fluid styled form"
+  >
+    <div
+      className="active title"
+      onClick={[Function]}
+    >
+      <span>
+        Grid Element 1
+      </span>
+      <div
+        className="accordion-tools"
+      >
+        <div
+          className="ui buttons"
+        >
+          <button
+            className="ui basic icon button"
+            onClick={[Function]}
+          >
+            <svg
+              className="icon"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+              onClick={null}
+              style={
+                Object {
+                  "fill": "#e40166",
+                  "height": "20px",
+                  "width": "auto",
+                }
+              }
+              viewBox=""
+              xmlns=""
+            />
+          </button>
+        </div>
+        <svg
+          className="icon"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": undefined,
+            }
+          }
+          onClick={null}
+          style={
+            Object {
+              "fill": "currentColor",
+              "height": "20px",
+              "width": "auto",
+            }
+          }
+          viewBox=""
+          xmlns=""
+        />
+      </div>
+    </div>
+    <div
+      className="content active"
+    />
+    <div
+      className="title"
+      onClick={[Function]}
+    >
+      <span>
+        Grid Element 2
+      </span>
+      <div
+        className="accordion-tools"
+      >
+        <div
+          className="ui buttons"
+        >
+          <button
+            className="ui basic icon button"
+            onClick={[Function]}
+          >
+            <svg
+              className="icon"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+              onClick={null}
+              style={
+                Object {
+                  "fill": "#e40166",
+                  "height": "20px",
+                  "width": "auto",
+                }
+              }
+              viewBox=""
+              xmlns=""
+            />
+          </button>
+        </div>
+        <svg
+          className="icon"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": undefined,
+            }
+          }
+          onClick={null}
+          style={
+            Object {
+              "fill": "currentColor",
+              "height": "20px",
+              "width": "auto",
+            }
+          }
+          viewBox=""
+          xmlns=""
+        />
+      </div>
+    </div>
+    <div
+      className="content"
+    />
+    <div
+      className="title"
+      onClick={[Function]}
+    >
+      <span>
+        Grid Element 3
+      </span>
+      <div
+        className="accordion-tools"
+      >
+        <div
+          className="ui buttons"
+        >
+          <button
+            className="ui basic icon button"
+            onClick={[Function]}
+          >
+            <svg
+              className="icon"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+              onClick={null}
+              style={
+                Object {
+                  "fill": "#e40166",
+                  "height": "20px",
+                  "width": "auto",
+                }
+              }
+              viewBox=""
+              xmlns=""
+            />
+          </button>
+        </div>
+        <svg
+          className="icon"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": undefined,
+            }
+          }
+          onClick={null}
+          style={
+            Object {
+              "fill": "currentColor",
+              "height": "20px",
+              "width": "auto",
+            }
+          }
+          viewBox=""
+          xmlns=""
+        />
+      </div>
+    </div>
+    <div
+      className="content"
+    />
+    <div
+      className="title"
+      onClick={[Function]}
+    >
+      <span>
+        Grid Element 4
+      </span>
+      <div
+        className="accordion-tools"
+      >
+        <div
+          className="ui buttons"
+        >
+          <button
+            className="ui basic icon button"
+            onClick={[Function]}
+          >
+            <svg
+              className="icon"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+              onClick={null}
+              style={
+                Object {
+                  "fill": "#e40166",
+                  "height": "20px",
+                  "width": "auto",
+                }
+              }
+              viewBox=""
+              xmlns=""
+            />
+          </button>
+        </div>
+        <svg
+          className="icon"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": undefined,
+            }
+          }
+          onClick={null}
+          style={
+            Object {
+              "fill": "currentColor",
+              "height": "20px",
+              "width": "auto",
+            }
+          }
+          viewBox=""
+          xmlns=""
+        />
+      </div>
+    </div>
+    <div
+      className="content"
+    />
+  </div>
+</div>
+`;

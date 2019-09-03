@@ -5,8 +5,29 @@ exports[`renders a view image component 1`] = `
   className="tile __grid centered"
 >
   <div
-    className="ui one column grid centered"
+    className="ui four column grid"
   >
+    <div
+      className="column"
+    >
+      <div
+        className="thetile"
+      />
+    </div>
+    <div
+      className="column"
+    >
+      <div
+        className="thetile"
+      />
+    </div>
+    <div
+      className="column"
+    >
+      <div
+        className="thetile"
+      />
+    </div>
     <div
       className="column"
     >
