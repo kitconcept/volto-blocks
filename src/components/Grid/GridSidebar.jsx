@@ -68,7 +68,7 @@ const GridSidebar = props => {
       <header className="header pulled">
         <h2>
           {!gridType && <FormattedMessage id="Grid" defaultMessage="Grid" />}
-          {gridType === 'images' && (
+          {gridType === 'image' && (
             <FormattedMessage id="Images Grid" defaultMessage="Images Grid" />
           )}
           {gridType === 'proxy' && (
@@ -103,7 +103,7 @@ const GridSidebar = props => {
                     values={{ index: index + 1 }}
                   />
                 )}
-                {gridType === 'images' && (
+                {gridType === 'image' && (
                   <FormattedMessage
                     id="Grid Image"
                     defaultMessage="Grid Image {index}"
@@ -128,7 +128,7 @@ const GridSidebar = props => {
                 </div>
               </Accordion.Title>
               <Accordion.Content active={activeAccIndex === index}>
-                {gridType === 'images' && (
+                {gridType === 'image' && (
                   <ImageData {...props} data={{ ...column, index }} />
                 )}
                 {gridType === 'proxy' && (

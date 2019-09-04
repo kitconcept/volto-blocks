@@ -2,7 +2,7 @@ import React from 'react';
 import EditGrid from '../Grid/Edit';
 
 const Edit = props => {
-  return <EditGrid {...props} gridType="images" />;
+  return <EditGrid {...props} gridType="image" />;
 };
 
 export default Edit;

@@ -9,9 +9,11 @@ import { Grid } from 'semantic-ui-react';
 import cx from 'classnames';
 
 import ProxyItem from './ProxyItem';
+import ImageItem from './ImageItem';
 
-const gridConfig = {
+export const gridConfig = {
   proxy: ProxyItem,
+  image: ImageItem,
 };
 
 /**

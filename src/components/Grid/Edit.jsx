@@ -26,6 +26,7 @@ import addSVG from '@plone/volto/icons/add.svg';
 
 import GridSidebar from './GridSidebar';
 import ProxyItem from './ProxyItem';
+import { gridConfig } from './View';
 
 const messages = defineMessages({
   ImageTileInputPlaceholder: {
@@ -505,7 +506,13 @@ class Edit extends Component {
                                 // This prevents propagation of ENTER
                                 onKeyDown={e => e.stopPropagation()}
                               >
-                                <ProxyItem data={item} />
+                                {(() => {
+                                  const GridTypeComponent =
+                                    gridConfig[item['@type']];
+                                  return (
+                                    <GridTypeComponent data={item} isEditMode />
+                                  );
+                                })()}
                               </div>
                             </Grid.Column>
                           </Ref>

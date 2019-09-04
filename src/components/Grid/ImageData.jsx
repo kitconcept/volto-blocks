@@ -20,6 +20,10 @@ import downSVG from '@plone/volto/icons/down-key.svg';
 import navTreeSVG from '@plone/volto/icons/nav.svg';
 
 const messages = defineMessages({
+  Source: {
+    id: 'Source',
+    defaultMessage: 'Source',
+  },
   Image: {
     id: 'Image',
     defaultMessage: 'Image',
@@ -72,9 +76,9 @@ const ImageData = ({
     setActiveAccIndex(newIndex);
   }
 
-  if (data.url) {
-    return (
-      <>
+  return (
+    <>
+      {data.url && (
         <Segment className="sidebar-metadata-container" secondary>
           {data.url.split('/').slice(-1)[0]}
           {data.url.includes(settings.apiPath) && (
@@ -87,127 +91,83 @@ const ImageData = ({
             <img src={data.url} alt={alt} style={{ width: '50%' }} />
           )}
         </Segment>
-        <Segment className="form sidebar-image-data">
-          {data.url.includes(settings.apiPath) && (
-            <TextWidget
-              id="Origin"
-              title={intl.formatMessage(messages.Origin)}
-              required={false}
-              value={data.url.split('/').slice(-1)[0]}
-              icon={navTreeSVG}
-              iconAction={() => openObjectBrowser()}
-              onChange={() => {}}
-            />
-          )}
-          {!data.url.includes(settings.apiPath) && (
-            <TextWidget
-              id="external"
-              title={intl.formatMessage(messages.externalURL)}
-              required={false}
-              value={data.url}
-              icon={clearSVG}
-              iconAction={() =>
-                onChangeTile(tile, {
-                  ...data,
-                  url: '',
-                })
-              }
-              onChange={() => {}}
-            />
-          )}
-          <TextWidget
-            id="alt"
-            title={intl.formatMessage(messages.AltText)}
-            required={false}
-            value={alt}
-            onChange={(name, value) => {
-              onChangeTile(tile, {
-                ...data,
-                alt: value,
-              });
-              setAlt(value);
-            }}
-          />
-          <Form.Field inline required={required}>
-            <Grid>
-              <Grid.Row>
-                <Grid.Column width="4">
-                  <div className="wrapper">
-                    <label htmlFor="field-align">
-                      <FormattedMessage
-                        id="Alignment"
-                        defaultMessage="Alignment"
-                      />
-                    </label>
-                  </div>
-                </Grid.Column>
-                <Grid.Column width="8" className="align-tools">
-                  <AlignTile
-                    align={data.align}
-                    onChangeTile={onChangeTile}
-                    data={data}
-                    tile={tile}
-                  />
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </Form.Field>
-        </Segment>
-        <Accordion fluid styled className="form">
-          <Accordion.Title
-            active={activeAccIndex === 0}
-            index={0}
-            onClick={handleAccClick}
-          >
-            Link Settings
-            {activeAccIndex === 0 ? (
-              <Icon name={upSVG} size="20px" />
-            ) : (
-              <Icon name={downSVG} size="20px" />
-            )}
-          </Accordion.Title>
-          <Accordion.Content active={activeAccIndex === 0}>
-            <TextWidget
-              id="link"
-              title={intl.formatMessage(messages.LinkTo)}
-              required={false}
-              value={data.href}
-              icon={data.href ? clearSVG : navTreeSVG}
-              iconAction={
-                data.href
-                  ? () => {
-                      onChangeTile(tile, {
-                        ...data,
-                        href: '',
-                      });
-                    }
-                  : () => openObjectBrowser('link')
-              }
-              onChange={(name, value) => {
-                onChangeTile(tile, {
-                  ...data,
-                  href: value,
-                });
-              }}
-            />
-            <CheckboxWidget
-              id="openLinkInNewTab"
-              title={intl.formatMessage(messages.openLinkInNewTab)}
-              value={data.openLinkInNewTab ? data.openLinkInNewTab : false}
-              onChange={(name, value) => {
-                onChangeTile(tile, {
-                  ...data,
-                  openLinkInNewTab: value,
-                });
-              }}
-            />
-          </Accordion.Content>
-        </Accordion>
-      </>
-    );
-  } else {
-    return '';
-  }
+      )}
+      <Segment className="form sidebar-image-data">
+        <TextWidget
+          id="source"
+          title={intl.formatMessage(messages.Source)}
+          required={false}
+          value={data.url ? flattenToAppURL(data.url) : ''}
+          icon={data.url ? clearSVG : navTreeSVG}
+          iconAction={
+            data.url
+              ? () => {
+                  onChangeTile(tile, {
+                    ...data,
+                    url: '',
+                  });
+                }
+              : () => openObjectBrowser()
+          }
+          onChange={(name, value) => {
+            onChangeTile(tile, {
+              ...data,
+              url: value,
+            });
+          }}
+        />
+
+        <TextWidget
+          id="alt"
+          title={intl.formatMessage(messages.AltText)}
+          required={false}
+          value={alt}
+          onChange={(name, value) => {
+            onChangeTile(tile, {
+              ...data,
+              alt: value,
+            });
+            setAlt(value);
+          }}
+        />
+
+        <TextWidget
+          id="link"
+          title={intl.formatMessage(messages.LinkTo)}
+          required={false}
+          value={data.href}
+          icon={data.href ? clearSVG : navTreeSVG}
+          iconAction={
+            data.href
+              ? () => {
+                  onChangeTile(tile, {
+                    ...data,
+                    href: '',
+                  });
+                }
+              : () => openObjectBrowser('link')
+          }
+          onChange={(name, value) => {
+            onChangeTile(tile, {
+              ...data,
+              href: value,
+            });
+          }}
+        />
+        <CheckboxWidget
+          id="openLinkInNewTab"
+          title={intl.formatMessage(messages.openLinkInNewTab)}
+          value={data.openLinkInNewTab ? data.openLinkInNewTab : false}
+          onChange={(name, value) => {
+            onChangeTile(tile, {
+              ...data,
+              openLinkInNewTab: value,
+            });
+          }}
+        />
+      </Segment>
+    </>
+  );
 };
 
 ImageData.propTypes = {
