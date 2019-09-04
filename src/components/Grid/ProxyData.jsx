@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment } from 'semantic-ui-react';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
-import { TextWidget } from '@plone/volto/components';
+import { CheckboxWidget, TextWidget } from '@plone/volto/components';
 import { compose } from 'redux';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
@@ -13,6 +13,10 @@ const messages = defineMessages({
   Source: {
     id: 'Source',
     defaultMessage: 'Source',
+  },
+  openLinkInNewTab: {
+    id: 'Open in a new tab',
+    defaultMessage: 'Open in a new tab',
   },
 });
 
@@ -47,6 +51,17 @@ const ImageData = ({
             onChangeTile(tile, {
               ...data,
               href: value,
+            });
+          }}
+        />
+        <CheckboxWidget
+          id="openLinkInNewTab"
+          title={intl.formatMessage(messages.openLinkInNewTab)}
+          value={data.openLinkInNewTab ? data.openLinkInNewTab : false}
+          onChange={(name, value) => {
+            onChangeTile(tile, {
+              ...data,
+              openLinkInNewTab: value,
             });
           }}
         />
