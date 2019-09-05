@@ -8,6 +8,8 @@ import ProxyGridEditTile from './ProxyGrid/Edit';
 import ProxyGridViewTile from './ProxyGrid/View';
 import ImagesGridEditTile from './ImagesGrid/Edit';
 import ImagesGridViewTile from './ImagesGrid/View';
+import ListingEditTile from './Listing/Edit';
+import ListingViewTile from './Listing/View';
 import CardEditTile from './Card/Edit';
 import CardViewTile from './Card/View';
 
@@ -27,6 +29,8 @@ export {
   ProxyGridViewTile,
   ImagesGridEditTile,
   ImagesGridViewTile,
+  ListingEditTile,
+  ListingViewTile,
   CardEditTile,
   TileRenderer,
   CardViewTile,

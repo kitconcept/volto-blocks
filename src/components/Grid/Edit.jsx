@@ -1,8 +1,3 @@
-/**
- * Edit image tile.
- * @module components/manage/Tiles/Image/Edit
- */
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -25,7 +20,7 @@ import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
 import GridSidebar from './GridSidebar';
-import ProxyItem from './ProxyItem';
+
 import { gridConfig } from './View';
 
 const messages = defineMessages({
