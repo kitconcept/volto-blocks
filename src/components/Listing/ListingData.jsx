@@ -6,6 +6,8 @@ import { CheckboxWidget, TextWidget } from '@plone/volto/components';
 import { compose } from 'redux';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
+import QuerystringWidget from './QuerystringWidget';
+
 import clearSVG from '@plone/volto/icons/clear.svg';
 import navTreeSVG from '@plone/volto/icons/nav.svg';
 
@@ -30,38 +32,16 @@ const ListingData = ({
 }) => {
   return (
     <>
-      <Segment className="form sidebar-image-data">
-        <TextWidget
+      <Segment className="form sidebar-listing-data">
+        <QuerystringWidget
           id="source"
           title={intl.formatMessage(messages.Source)}
           required={false}
-          value={data.href}
-          icon={data.href ? clearSVG : navTreeSVG}
-          iconAction={
-            data.href
-              ? () => {
-                  onChangeTile(tile, {
-                    ...data,
-                    href: '',
-                  });
-                }
-              : () => openObjectBrowser('link')
-          }
+          value={data.query || ''}
           onChange={(name, value) => {
             onChangeTile(tile, {
               ...data,
-              href: value,
-            });
-          }}
-        />
-        <CheckboxWidget
-          id="openLinkInNewTab"
-          title={intl.formatMessage(messages.openLinkInNewTab)}
-          value={data.openLinkInNewTab ? data.openLinkInNewTab : false}
-          onChange={(name, value) => {
-            onChangeTile(tile, {
-              ...data,
-              openLinkInNewTab: value,
+              query: value,
             });
           }}
         />

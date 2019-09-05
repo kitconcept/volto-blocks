@@ -20,7 +20,6 @@ class Edit extends Component {
     selected: PropTypes.bool.isRequired,
     tile: PropTypes.string.isRequired,
     onSelectTile: PropTypes.func.isRequired,
-    getQueryStringResults: PropTypes.func.isRequired,
     items: PropTypes.arrayOf(PropTypes.any),
     properties: PropTypes.objectOf(PropTypes.any).isRequired,
   };
@@ -31,12 +30,8 @@ class Edit extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    const { data, getQueryStringResults, selected, tile } = this.props;
-    if (selected) {
+    if (this.props.selected) {
       this.node.current.focus();
-    }
-    if (data.query) {
-      getQueryStringResults(data.query, tile);
     }
   }
 
@@ -47,14 +42,8 @@ class Edit extends Component {
    * @returns {undefined}
    */
   componentDidUpdate(prevProps) {
-    const { data, getQueryStringResults, selected, tile } = this.props;
-    if (!prevProps.selected && selected) {
+    if (!prevProps.selected && this.props.selected) {
       this.node.current.focus();
-    }
-    if (prevProps.data.query !== data.query) {
-      if (data.query) {
-        // getQueryStringResults(data.query, tile);
-      }
     }
   }
 

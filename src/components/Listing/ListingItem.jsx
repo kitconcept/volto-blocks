@@ -34,7 +34,12 @@ const ListingItem = ({ data, properties, tile, intl }) => {
   }, [dispatch, data, tile]);
 
   const folderItems = properties.is_folderish ? properties.items : [];
-  const listingItems = data.query ? querystringResults.items : folderItems;
+  const listingItems = data.query
+    ? (querystringResults &&
+        querystringResults[tile] &&
+        querystringResults[tile].items) ||
+      []
+    : folderItems;
 
   return (
     <>
