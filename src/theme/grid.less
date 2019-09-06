@@ -138,6 +138,25 @@
 .sidebar-listing-data {
   .fields {
     flex-wrap: wrap;
+    padding-bottom: 30px;
+    border-bottom: 1px dotted @borderColor;
+  }
+
+  .fields:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .main-fields-wrapper {
+    display: flex;
+    width: 100%;
+    flex: 1 0 auto;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+  }
+
+  .button .icon {
+    margin: 0 !important;
   }
 }
 // End of This has to be backported to Volto core

@@ -222,14 +222,14 @@ class QuerystringWidget extends Component {
         return <span />;
       case 'DateWidget':
         return (
-          <Form.Field width={6}>
+          <Form.Field style={{ flex: '1 0 auto' }}>
             <Input type="date" {...props} />
           </Form.Field>
         );
       case 'DateRangeWidget': // 2 date inputs
         return (
           <React.Fragment>
-            <Form.Field width={6}>
+            <Form.Field style={{ flex: '1 0 auto' }}>
               <Input
                 type="date"
                 {...props}
@@ -239,7 +239,7 @@ class QuerystringWidget extends Component {
                 }
               />
             </Form.Field>
-            <Form.Field width={2}>
+            <Form.Field style={{ flex: '1 0 auto' }}>
               <Input
                 type="date"
                 {...props}
@@ -253,13 +253,13 @@ class QuerystringWidget extends Component {
         );
       case 'RelativeDateWidget':
         return (
-          <Form.Field width={4}>
+          <Form.Field style={{ flex: '1 0 auto' }}>
             <Input step={1} type="number" {...props} />
           </Form.Field>
         );
       case 'MultipleSelectionWidget':
         return (
-          <Form.Field width={10}>
+          <Form.Field style={{ flex: '1 0 auto' }}>
             <Select
               {...props}
               className="react-select-container"
@@ -289,7 +289,7 @@ class QuerystringWidget extends Component {
       case 'ReferenceWidget':
       default:
         return (
-          <Form.Field width={4}>
+          <Form.Field style={{ flex: '1 0 auto' }}>
             <Input {...props} />
           </Form.Field>
         );
@@ -334,6 +334,7 @@ class QuerystringWidget extends Component {
       onEdit,
       onDelete,
       indexes,
+      fieldSet,
       intl,
     } = this.props;
 
@@ -374,6 +375,7 @@ class QuerystringWidget extends Component {
         required={required}
         error={error.length > 0}
         className={description ? 'help' : ''}
+        id={`${fieldSet || 'field'}-${id}`}
       >
         <Grid>
           <Grid.Row stretched>
@@ -392,103 +394,129 @@ class QuerystringWidget extends Component {
                 !isEmpty(indexes) &&
                 map(value, (row, index) => (
                   <Form.Group>
-                    <Form.Field width={6}>
-                      <Select
-                        id={`field-${id}`}
-                        name={id}
-                        disabled={onEdit !== null}
-                        className="react-select-container"
-                        classNamePrefix="react-select"
-                        options={map(
-                          toPairs(
-                            groupBy(toPairs(indexes), item => item[1].group),
-                          ),
-                          group => ({
-                            label: group[0],
-                            options: map(
-                              filter(group[1], item => item[1].enabled),
-                              field => ({
-                                label: field[1].title,
-                                value: field[0],
-                              }),
+                    <div className="main-fields-wrapper">
+                      <Form.Field
+                        style={{ flex: '1 0 auto', marginRight: '10px' }}
+                      >
+                        <Select
+                          id={`field-${id}`}
+                          name={id}
+                          disabled={onEdit !== null}
+                          className="react-select-container"
+                          classNamePrefix="react-select"
+                          options={map(
+                            toPairs(
+                              groupBy(toPairs(indexes), item => item[1].group),
                             ),
-                          }),
-                        )}
-                        styles={customSelectStyles}
-                        theme={selectTheme}
-                        components={{ DropdownIndicator, Option }}
-                        value={{
-                          value: row.i,
-                          label: indexes[row.i].title,
-                        }}
-                        onChange={data =>
-                          onChange(
-                            id,
-                            map(value, (curRow, curIndex) =>
-                              curIndex === index
-                                ? {
-                                    i: data.value,
-                                    o: indexes[data.value].operations[0],
-                                    v: '',
-                                  }
-                                : curRow,
-                            ),
-                          )
-                        }
-                      />
-                    </Form.Field>
-                    <Form.Field width="6">
-                      <Select
-                        id={`field-${id}`}
-                        name={id}
-                        disabled={onEdit !== null}
-                        className="react-select-container"
-                        classNamePrefix="react-select"
-                        options={map(indexes[row.i].operations, operation => ({
-                          value: operation,
-                          label: indexes[row.i].operators[operation].title,
-                        }))}
-                        styles={customSelectStyles}
-                        theme={selectTheme}
-                        components={{ DropdownIndicator, Option }}
-                        value={{
-                          value: row.o,
-                          label: indexes[row.i].operators[row.o].title,
-                        }}
-                        onChange={data =>
-                          onChange(
-                            id,
-                            map(value, (curRow, curIndex) =>
-                              curIndex === index
-                                ? {
-                                    i: row.i,
-                                    o: data.value,
-                                    v: '',
-                                  }
-                                : curRow,
-                            ),
-                          )
-                        }
-                      />
-                    </Form.Field>
+                            group => ({
+                              label: group[0],
+                              options: map(
+                                filter(group[1], item => item[1].enabled),
+                                field => ({
+                                  label: field[1].title,
+                                  value: field[0],
+                                }),
+                              ),
+                            }),
+                          )}
+                          styles={customSelectStyles}
+                          theme={selectTheme}
+                          components={{ DropdownIndicator, Option }}
+                          value={{
+                            value: row.i,
+                            label: indexes[row.i].title,
+                          }}
+                          onChange={data =>
+                            onChange(
+                              id,
+                              map(value, (curRow, curIndex) =>
+                                curIndex === index
+                                  ? {
+                                      i: data.value,
+                                      o: indexes[data.value].operations[0],
+                                      v: '',
+                                    }
+                                  : curRow,
+                              ),
+                            )
+                          }
+                        />
+                      </Form.Field>
+                      <Form.Field style={{ flex: '1 0 auto' }}>
+                        <Select
+                          id={`field-${id}`}
+                          name={id}
+                          disabled={onEdit !== null}
+                          className="react-select-container"
+                          classNamePrefix="react-select"
+                          options={map(
+                            indexes[row.i].operations,
+                            operation => ({
+                              value: operation,
+                              label: indexes[row.i].operators[operation].title,
+                            }),
+                          )}
+                          styles={customSelectStyles}
+                          theme={selectTheme}
+                          components={{ DropdownIndicator, Option }}
+                          value={{
+                            value: row.o,
+                            label: indexes[row.i].operators[row.o].title,
+                          }}
+                          onChange={data =>
+                            onChange(
+                              id,
+                              map(value, (curRow, curIndex) =>
+                                curIndex === index
+                                  ? {
+                                      i: row.i,
+                                      o: data.value,
+                                      v: '',
+                                    }
+                                  : curRow,
+                              ),
+                            )
+                          }
+                        />
+                      </Form.Field>
+                      {!this.props.indexes[row.i].operators[row.o].widget && (
+                        <Button
+                          onClick={event => {
+                            onChange(id, remove(value, (v, i) => i !== index));
+                            event.preventDefault();
+                          }}
+                          style={{
+                            background: 'none',
+                            paddingRight: 0,
+                            paddingLeft: 0,
+                            margin: 0,
+                          }}
+                        >
+                          <Icon name={clearSVG} size="24px" className="close" />
+                        </Button>
+                      )}
+                    </div>
                     {this.getWidget(row, index)}
-                    <Button
-                      onClick={event => {
-                        onChange(id, remove(value, (v, i) => i !== index));
-                        event.preventDefault();
-                      }}
-                      style={{
-                        background: 'none',
-                        paddingRight: 0,
-                        paddingLeft: 0,
-                      }}
-                    >
-                      <Icon name={clearSVG} size="24px" className="close" />
-                    </Button>
+                    {this.props.indexes[row.i].operators[row.o].widget && (
+                      <Button
+                        onClick={event => {
+                          onChange(id, remove(value, (v, i) => i !== index));
+                          event.preventDefault();
+                        }}
+                        style={{
+                          background: 'none',
+                          paddingRight: 0,
+                          paddingLeft: 0,
+                          margin: 0,
+                        }}
+                      >
+                        <Icon name={clearSVG} size="24px" className="close" />
+                      </Button>
+                    )}
                   </Form.Group>
                 ))}
               <Form.Group>
-                <Form.Field width={6}>
+                <Form.Field style={{ flex: '1 0 auto' }}>
                   <Select
                     id={`field-${id}`}
                     name={id}
