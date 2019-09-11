@@ -53,7 +53,7 @@ const messages = defineMessages({
   },
 });
 
-const Option = props => {
+export const Option = props => {
   return (
     <components.Option {...props}>
       <div>{props.label}</div>
@@ -65,7 +65,7 @@ const Option = props => {
   );
 };
 
-const DropdownIndicator = props => {
+export const DropdownIndicator = props => {
   return (
     <components.DropdownIndicator {...props}>
       {props.selectProps.menuIsOpen ? (
@@ -77,7 +77,7 @@ const DropdownIndicator = props => {
   );
 };
 
-const selectTheme = theme => ({
+export const selectTheme = theme => ({
   ...theme,
   borderRadius: 0,
   colors: {
@@ -87,7 +87,7 @@ const selectTheme = theme => ({
   },
 });
 
-const customSelectStyles = {
+export const customSelectStyles = {
   control: (styles, state) => ({
     ...styles,
     border: 'none',
@@ -523,7 +523,7 @@ class QuerystringWidget extends Component {
                     disabled={onEdit !== null}
                     className="react-select-container"
                     classNamePrefix="react-select"
-                    placeholder="Select criteria"
+                    placeholder="Add criteria"
                     options={map(
                       toPairs(groupBy(toPairs(indexes), item => item[1].group)),
                       group => ({

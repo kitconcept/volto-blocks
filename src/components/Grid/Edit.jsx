@@ -20,6 +20,7 @@ import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
 import GridSidebar from './GridSidebar';
+import TemplateChooser from '../TemplateChooser/TemplateChooser';
 
 import { gridConfig } from './View';
 
@@ -86,22 +87,14 @@ class Edit extends Component {
 
     this.onUploadImage = this.onUploadImage.bind(this);
     this.onChangeTile = this.onChangeTile.bind(this);
-    this.onCloseModal = this.onCloseModal.bind(this);
-    this.onChangeTileSettings = this.onChangeTileSettings.bind(this);
     this.state = {
       uploading: false,
-      modalOpened: false,
     };
 
     if (!this.props.data.columns) {
       this.props.onChangeTile(this.props.tile, {
         ...this.props.data,
-        columns: [
-          {
-            id: uuid(),
-            '@type': this.props.gridType || 'image',
-          },
-        ],
+        columns: [],
       });
     }
   }
@@ -175,7 +168,6 @@ class Edit extends Component {
     this.setState({
       uploading: true,
       uploadedImageCardIndex: index,
-      // currentSelectedCard: null,
     });
     readAsDataURL(file).then(data => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
@@ -214,19 +206,6 @@ class Edit extends Component {
   onChangeUrl = ({ target }, index) => {
     this.setState({
       url: target.value,
-    });
-  };
-
-  /**
-   * Change url handler
-   * @method onCloseModal
-   * @param {Object} target Target object
-   * @param {number} index Card index
-   * @returns {undefined}
-   */
-  onCloseModal = () => {
-    this.setState({
-      modalOpened: false,
     });
   };
 
@@ -288,20 +267,6 @@ class Edit extends Component {
         ...this.props.data.columns[index],
         ...data,
       }),
-    });
-  }
-
-  /**
-   * Change tile settings handler
-   * @method onChangeTileSettings
-   * @param {string} id Editor state.
-   * @param {*} value Editor card index
-   * @returns {undefined}
-   */
-  onChangeTileSettings(id, value) {
-    this.props.onChangeTile(this.props.tile, {
-      ...this.props.data,
-      [id]: value || null,
     });
   }
 
@@ -419,6 +384,8 @@ class Edit extends Component {
         }}
         ref={this.node}
       >
+        {!this.props.data.columns?.length && <TemplateChooser />}
+        {/* Remaining code from the Uber Grid, useful when we implement the multi-item use case */}
         {this.props.selected &&
           this.state.currentSelectedCard === null &&
           !this.props.gridType && (

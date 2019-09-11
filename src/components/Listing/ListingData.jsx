@@ -1,12 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Segment } from 'semantic-ui-react';
+import { Grid, Form, Segment } from 'semantic-ui-react';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import Select, { components } from 'react-select';
+import { filter, toPairs, groupBy, map } from 'lodash';
 import { CheckboxWidget, TextWidget } from '@plone/volto/components';
 import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
-import QuerystringWidget from './QuerystringWidget';
+import QuerystringWidget, {
+  customSelectStyles,
+  selectTheme,
+  DropdownIndicator,
+  Option,
+} from './QuerystringWidget';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import navTreeSVG from '@plone/volto/icons/nav.svg';
@@ -16,9 +24,17 @@ const messages = defineMessages({
     id: 'Source',
     defaultMessage: 'Source',
   },
-  openLinkInNewTab: {
-    id: 'Open in a new tab',
-    defaultMessage: 'Open in a new tab',
+  reversedOrder: {
+    id: 'Reversed order',
+    defaultMessage: 'Reversed order',
+  },
+  limit: {
+    id: 'Results limit',
+    defaultMessage: 'Results limit',
+  },
+  itemBatchSize: {
+    id: 'Item batch size',
+    defaultMessage: 'Item batch size',
   },
 });
 
@@ -30,6 +46,12 @@ const ListingData = ({
   required = false,
   intl,
 }) => {
+  const sortable_indexes = useSelector(
+    state => state.querystring.sortable_indexes,
+  );
+  const [limit, setLimit] = React.useState(data.limit || '');
+  const [itemBatchSize, setItemBatchSize] = React.useState(data.b_size || '');
+
   return (
     <>
       <Segment className="form sidebar-listing-data">
@@ -43,6 +65,98 @@ const ListingData = ({
               ...data,
               query: value,
             });
+          }}
+        />
+
+        <Form.Field inline id="field-listingtile-sort-on">
+          <Grid>
+            <Grid.Row stretched>
+              <Grid.Column width="4">
+                <div className="wrapper">
+                  <label htmlFor="select-listingtile-sort-on">Sort On</label>
+                </div>
+              </Grid.Column>
+              <Grid.Column width="8">
+                <Select
+                  id="select-listingtile-sort-on"
+                  name="select-listingtile-sort-on"
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                  placeholder="Select criteria"
+                  options={map(
+                    toPairs(
+                      groupBy(toPairs(sortable_indexes), item => item[1].group),
+                    ),
+                    group => ({
+                      label: group[0],
+                      options: map(
+                        filter(group[1], item => item[1].enabled),
+                        field => ({
+                          label: field[1].title,
+                          value: field[0],
+                        }),
+                      ),
+                    }),
+                  )}
+                  styles={customSelectStyles}
+                  theme={selectTheme}
+                  components={{ DropdownIndicator, Option }}
+                  value={{
+                    value: data.sort_on || '',
+                    label:
+                      data.sort_on && sortable_indexes
+                        ? sortable_indexes[data.sort_on].title
+                        : data.sort_on || '',
+                  }}
+                  onChange={field => {
+                    onChangeTile(tile, {
+                      ...data,
+                      sort_on: field.value,
+                    });
+                  }}
+                />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Form.Field>
+
+        <CheckboxWidget
+          id="listingtile-sort-on-reverse"
+          title={intl.formatMessage(messages.reversedOrder)}
+          value={data.sort_order ? data.sort_order : false}
+          onChange={(name, value) => {
+            onChangeTile(tile, {
+              ...data,
+              sort_order: value,
+            });
+          }}
+        />
+
+        <TextWidget
+          id="limit"
+          title={intl.formatMessage(messages.limit)}
+          required={false}
+          value={limit}
+          onChange={(name, value) => {
+            onChangeTile(tile, {
+              ...data,
+              limit: value,
+            });
+            setLimit(value);
+          }}
+        />
+
+        <TextWidget
+          id="itembatchsize"
+          title={intl.formatMessage(messages.itemBatchSize)}
+          required={false}
+          value={itemBatchSize}
+          onChange={(name, value) => {
+            onChangeTile(tile, {
+              ...data,
+              b_size: value,
+            });
+            setItemBatchSize(value);
           }}
         />
       </Segment>
