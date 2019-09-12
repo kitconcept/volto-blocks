@@ -15,7 +15,9 @@ const ListingItem = ({ data, properties, intl }) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getQueryStringResults(data, data.tile));
+    if (data?.query?.length > 0) {
+      dispatch(getQueryStringResults(data, data.tile));
+    }
   }, [dispatch, data, data.tile]);
 
   const folderItems = properties.is_folderish ? properties.items : [];
