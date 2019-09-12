@@ -27,29 +27,13 @@ import checkSVG from '@plone/volto/icons/check.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 
 const messages = defineMessages({
-  default: {
-    id: 'Default',
-    defaultMessage: 'Default',
+  Criteria: {
+    id: 'Criteria',
+    defaultMessage: 'Criteria',
   },
-  idTitle: {
-    id: 'Short Name',
-    defaultMessage: 'Short Name',
-  },
-  idDescription: {
-    id: 'Used for programmatic access to the fieldset.',
-    defaultMessage: 'Used for programmatic access to the fieldset.',
-  },
-  title: {
-    id: 'Title',
-    defaultMessage: 'Title',
-  },
-  description: {
-    id: 'Description',
-    defaultMessage: 'Description',
-  },
-  required: {
-    id: 'Required',
-    defaultMessage: 'Required',
+  AddCriteria: {
+    id: 'Add criteria',
+    defaultMessage: 'Add criteria',
   },
 });
 
@@ -325,49 +309,16 @@ class QuerystringWidget extends Component {
   render() {
     const {
       id,
-      title,
       required,
       description,
       error,
       value,
       onChange,
       onEdit,
-      onDelete,
       indexes,
       fieldSet,
       intl,
     } = this.props;
-
-    const schema = {
-      fieldsets: [
-        {
-          id: 'default',
-          title: intl.formatMessage(messages.default),
-          fields: ['title', 'id', 'description', 'required'],
-        },
-      ],
-      properties: {
-        id: {
-          type: 'string',
-          title: intl.formatMessage(messages.idTitle),
-          description: intl.formatMessage(messages.idDescription),
-        },
-        title: {
-          type: 'string',
-          title: intl.formatMessage(messages.title),
-        },
-        description: {
-          type: 'string',
-          widget: 'textarea',
-          title: intl.formatMessage(messages.description),
-        },
-        required: {
-          type: 'boolean',
-          title: intl.formatMessage(messages.required),
-        },
-      },
-      required: ['id', 'title'],
-    };
 
     return (
       <Form.Field
@@ -380,16 +331,13 @@ class QuerystringWidget extends Component {
         <Grid>
           <Grid.Row stretched>
             <Grid.Column width="12">
-              {onEdit && (
-                <div className="toolbar">
-                  <button className="item" onClick={() => onEdit(id, schema)}>
-                    <OldIcon name="write square" size="large" color="blue" />
-                  </button>
-                  <button className="item" onClick={() => onDelete(id)}>
-                    <Icon name={clearSVG} size="24px" className="close" />
-                  </button>
-                </div>
-              )}
+              <div className="simple-field-name">
+                {intl.formatMessage(messages.Criteria)}
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row stretched>
+            <Grid.Column width="12">
               {indexes &&
                 !isEmpty(indexes) &&
                 map(value, (row, index) => (
@@ -410,13 +358,10 @@ class QuerystringWidget extends Component {
                             ),
                             group => ({
                               label: group[0],
-                              options: map(
-                                filter(group[1], item => item[1].enabled),
-                                field => ({
-                                  label: field[1].title,
-                                  value: field[0],
-                                }),
-                              ),
+                              options: map(group[1], field => ({
+                                label: field[1].title,
+                                value: field[0],
+                              })),
                             }),
                           )}
                           styles={customSelectStyles}
@@ -523,7 +468,7 @@ class QuerystringWidget extends Component {
                     disabled={onEdit !== null}
                     className="react-select-container"
                     classNamePrefix="react-select"
-                    placeholder="Add criteria"
+                    placeholder={intl.formatMessage(messages.AddCriteria)}
                     options={map(
                       toPairs(groupBy(toPairs(indexes), item => item[1].group)),
                       group => ({

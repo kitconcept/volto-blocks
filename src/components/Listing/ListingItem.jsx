@@ -5,41 +5,28 @@ import { List } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import get from 'lodash/get';
 
-import {
-  FormattedMessage,
-  defineMessages,
-  injectIntl,
-  intlShape,
-} from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { getQueryStringResults } from '@package/actions';
 
-import { flattenToAppURL } from '@plone/volto/helpers';
-import { settings } from '~/config';
-
-const messages = defineMessages({
-  NoResults: {
-    id: 'No results found.',
-    defaultMessage: 'No results found.',
-  },
-});
-
-const ListingItem = ({ data, properties, tile, intl }) => {
+const ListingItem = ({ data, properties, intl }) => {
   const querystringResults = useSelector(
-    state => state.equerystring.subrequests,
+    state => state.querystringsearch.subrequests,
   );
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getQueryStringResults(data, tile));
-  }, [dispatch, data, tile]);
+    dispatch(getQueryStringResults(data, data.tile));
+  }, [dispatch, data, data.tile]);
 
   const folderItems = properties.is_folderish ? properties.items : [];
-  const listingItems = data.query
-    ? (querystringResults &&
-        querystringResults[tile] &&
-        querystringResults[tile].items) ||
-      []
-    : folderItems;
+
+  const listingItems =
+    data?.query?.length > 0
+      ? (querystringResults &&
+          querystringResults[data.tile] &&
+          querystringResults[data.tile].items) ||
+        []
+      : folderItems;
 
   return (
     <>
@@ -66,10 +53,18 @@ const ListingItem = ({ data, properties, tile, intl }) => {
         </List>
       ) : (
         <div className="listing">
-          <FormattedMessage
-            id="No results found."
-            defaultMessage="No results found."
-          />
+          {data?.query?.length === 0 && (
+            <FormattedMessage
+              id="No items found in this container."
+              defaultMessage="No items found in this container."
+            />
+          )}
+          {data?.query?.length > 0 && (
+            <FormattedMessage
+              id="No results found."
+              defaultMessage="No results found."
+            />
+          )}
         </div>
       )}
     </>

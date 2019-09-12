@@ -24,6 +24,18 @@ class Edit extends Component {
     properties: PropTypes.objectOf(PropTypes.any).isRequired,
   };
 
+  constructor(props) {
+    super(props);
+
+    if (!this.props.data.query) {
+      this.props.onChangeTile(this.props.tile, {
+        ...this.props.data,
+        query: [],
+        tile: this.props.tile,
+      });
+    }
+  }
+
   /**
    * Component did mount. Search items if the query is set.
    * @method componentDidMount
@@ -91,9 +103,22 @@ class Edit extends Component {
         }
         ref={this.node}
       >
-        <FormattedMessage id="Results preview" defaultMessage="Results preview">
-          {message => <p className="items-preview">{message}</p>}
-        </FormattedMessage>
+        {data?.query?.length === 0 && (
+          <FormattedMessage
+            id="Contained items"
+            defaultMessage="Contained items"
+          >
+            {message => <p className="items-preview">{message}</p>}
+          </FormattedMessage>
+        )}
+        {data?.query?.length > 0 && (
+          <FormattedMessage
+            id="Results preview"
+            defaultMessage="Results preview"
+          >
+            {message => <p className="items-preview">{message}</p>}
+          </FormattedMessage>
+        )}
         <ListingItem data={data} properties={properties} tile={tile} />
         <SidebarPortal selected={selected}>
           <ListingSidebar data={data} tile={tile} onChangeTile={onChangeTile} />

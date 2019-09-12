@@ -4,15 +4,21 @@ exports[`renders a Grid Tile Proxy Item component 1`] = `
 <div
   className="grid-proxy-item"
 >
-  <img
-    alt=""
-    src="http://image"
-  />
-  <h3>
-    the title
-  </h3>
-  <p>
-    the description
-  </p>
+  <a
+    href="/http://theitem"
+    onClick={[Function]}
+    target={null}
+  >
+    <img
+      alt=""
+      src="http://image"
+    />
+    <h3>
+      the title
+    </h3>
+    <p>
+      the description
+    </p>
+  </a>
 </div>
 `;

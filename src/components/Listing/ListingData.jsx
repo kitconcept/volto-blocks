@@ -16,13 +16,14 @@ import QuerystringWidget, {
   Option,
 } from './QuerystringWidget';
 
-import clearSVG from '@plone/volto/icons/clear.svg';
-import navTreeSVG from '@plone/volto/icons/nav.svg';
-
 const messages = defineMessages({
   Source: {
     id: 'Source',
     defaultMessage: 'Source',
+  },
+  SortOn: {
+    id: 'Sort on',
+    defaultMessage: 'Sort on',
   },
   reversedOrder: {
     id: 'Reversed order',
@@ -35,6 +36,10 @@ const messages = defineMessages({
   itemBatchSize: {
     id: 'Item batch size',
     defaultMessage: 'Item batch size',
+  },
+  NoSelection: {
+    id: 'No selection',
+    defaultMessage: 'No selection',
   },
 });
 
@@ -59,7 +64,7 @@ const ListingData = ({
           id="source"
           title={intl.formatMessage(messages.Source)}
           required={false}
-          value={data.query || ''}
+          value={data.query || []}
           onChange={(name, value) => {
             onChangeTile(tile, {
               ...data,
@@ -73,7 +78,9 @@ const ListingData = ({
             <Grid.Row stretched>
               <Grid.Column width="4">
                 <div className="wrapper">
-                  <label htmlFor="select-listingtile-sort-on">Sort On</label>
+                  <label htmlFor="select-listingtile-sort-on">
+                    {intl.formatMessage(messages.SortOn)}
+                  </label>
                 </div>
               </Grid.Column>
               <Grid.Column width="8">
@@ -82,22 +89,28 @@ const ListingData = ({
                   name="select-listingtile-sort-on"
                   className="react-select-container"
                   classNamePrefix="react-select"
-                  placeholder="Select criteria"
-                  options={map(
-                    toPairs(
-                      groupBy(toPairs(sortable_indexes), item => item[1].group),
-                    ),
-                    group => ({
-                      label: group[0],
-                      options: map(
-                        filter(group[1], item => item[1].enabled),
-                        field => ({
+                  // placeholder="Select criteria"
+                  options={[
+                    {
+                      label: intl.formatMessage(messages.NoSelection),
+                      value: '',
+                    },
+                    ...map(
+                      toPairs(
+                        groupBy(
+                          toPairs(sortable_indexes),
+                          item => item[1].group,
+                        ),
+                      ),
+                      group => ({
+                        label: group[0],
+                        options: map(group[1], field => ({
                           label: field[1].title,
                           value: field[0],
-                        }),
-                      ),
-                    }),
-                  )}
+                        })),
+                      }),
+                    ),
+                  ]}
                   styles={customSelectStyles}
                   theme={selectTheme}
                   components={{ DropdownIndicator, Option }}
@@ -105,8 +118,9 @@ const ListingData = ({
                     value: data.sort_on || '',
                     label:
                       data.sort_on && sortable_indexes
-                        ? sortable_indexes[data.sort_on].title
-                        : data.sort_on || '',
+                        ? sortable_indexes[data.sort_on]?.title
+                        : data.sort_on ||
+                          intl.formatMessage(messages.NoSelection),
                   }}
                   onChange={field => {
                     onChangeTile(tile, {

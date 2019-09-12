@@ -2,6 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-intl-redux';
+import { MemoryRouter } from 'react-router-dom';
 
 import ProxyItem from './ProxyItem';
 
@@ -16,6 +17,7 @@ test('renders a Grid Tile Proxy Item component', () => {
             title: 'the title',
             description: 'the description',
             image: { download: 'http://image' },
+            '@id': 'http://theitem',
           },
         },
       },
@@ -27,18 +29,20 @@ test('renders a Grid Tile Proxy Item component', () => {
   });
   const component = renderer.create(
     <Provider store={store}>
-      <ProxyItem
-        id="dcdf1f42-645d-48f6-9531-357bdc2e1881"
-        data={{
-          '@type': 'proxy',
-          href: '/news/a-news-item-that-tells-things',
-          id: '2110a241-1389-4cda-8811-77031a540efa',
-          index: 0,
-        }}
-        tile="1234"
-        onChangeTile={() => {}}
-        openObjectBrowser={() => {}}
-      />
+      <MemoryRouter>
+        <ProxyItem
+          id="dcdf1f42-645d-48f6-9531-357bdc2e1881"
+          data={{
+            '@type': 'proxy',
+            href: '/news/a-news-item-that-tells-things',
+            id: '2110a241-1389-4cda-8811-77031a540efa',
+            index: 0,
+          }}
+          tile="1234"
+          onChangeTile={() => {}}
+          openObjectBrowser={() => {}}
+        />
+      </MemoryRouter>
     </Provider>,
   );
   const json = component.toJSON();
