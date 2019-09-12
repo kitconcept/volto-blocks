@@ -69,7 +69,6 @@ GridSidebar.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   tile: PropTypes.string.isRequired,
   onChangeTile: PropTypes.func.isRequired,
-  openObjectBrowser: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
 };
 

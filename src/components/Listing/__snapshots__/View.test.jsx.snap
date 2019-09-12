@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a view image component for the listing tile 1`] = `
+<div
+  className="tile listing"
+>
+  <div
+    className="thetile"
+  />
+</div>
+`;
