@@ -333,6 +333,71 @@ class Edit extends Component {
     }));
   };
 
+  onSelectTemplate = templateIndex => {
+    const templates = [
+      {
+        columns: [
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+        ],
+      },
+      {
+        columns: [
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+          {
+            id: uuid(),
+            '@type': this.props.gridType,
+          },
+        ],
+      },
+    ];
+    this.props.onChangeTile(this.props.tile, {
+      ...this.props.data,
+      columns: templates[templateIndex].columns,
+    });
+  };
+
   /**
    * Keydown handler on Variant Menu Form
    * This is required since the ENTER key is already mapped to a onKeyDown
@@ -352,7 +417,6 @@ class Edit extends Component {
       // TODO: Do something on ESC key
     }
   }
-  getCardsLenght = cards => cards.length + cards.filter(item => item.x2).length;
 
   node = React.createRef();
 
@@ -384,7 +448,9 @@ class Edit extends Component {
         }}
         ref={this.node}
       >
-        {!this.props.data.columns?.length && <TemplateChooser />}
+        {!this.props.data.columns?.length && (
+          <TemplateChooser onSelectTemplate={this.onSelectTemplate} />
+        )}
         {/* Remaining code from the Uber Grid, useful when we implement the multi-item use case */}
         {this.props.selected &&
           this.state.currentSelectedCard === null &&

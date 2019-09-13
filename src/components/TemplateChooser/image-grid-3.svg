@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <g fill="none" fill-rule="evenodd">
+    <rect width="96" height="96" fill="#9FD1E5" fill-opacity=".5" rx="3"/>
+    <g transform="translate(6 36)">
+      <rect width="25" height="25" fill="#93ACC8" rx="3"/>
+      <polygon fill="#FFF" points="4 19 21 19 16.082 11.781 12.986 15.743 9.318 9"/>
+      <circle cx="19" cy="8" r="2" fill="#FFF"/>
+      <g transform="translate(29)">
+        <rect width="25" height="25" fill="#93ACC8" rx="3"/>
+        <polygon fill="#FFF" points="4 19 21 19 16.082 11.781 12.986 15.743 9.318 9"/>
+        <circle cx="19" cy="8" r="2" fill="#FFF"/>
+      </g>
+      <g transform="translate(58)">
+        <rect width="25" height="25" fill="#93ACC8" rx="3"/>
+        <polygon fill="#FFF" points="4 19 21 19 16.082 11.781 12.986 15.743 9.318 9"/>
+        <circle cx="19" cy="8" r="2" fill="#FFF"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -42,10 +42,12 @@ const ProxyItem = ({ data, isEditMode, intl }) => {
             {(() => {
               const item = (
                 <>
-                  <img
-                    src={contentSubrequests[data.id].data.image.download}
-                    alt=""
-                  />
+                  {contentSubrequests[data.id]?.data?.image && (
+                    <img
+                      src={contentSubrequests[data.id].data.image.download}
+                      alt=""
+                    />
+                  )}
                   <h3>{contentSubrequests[data.id].data.title}</h3>
                   <p>{contentSubrequests[data.id].data.description}</p>
                 </>
