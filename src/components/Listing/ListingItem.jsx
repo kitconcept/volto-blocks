@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import get from 'lodash/get';
 
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { getQueryStringResults } from '@package/actions';
+import { getQueryStringResults } from '@kitconcept/volto-tiles/actions';
+import { flattenToAppURL } from '@plone/volto/helpers';
 
 const ListingItem = ({ data, properties, intl }) => {
   const querystringResults = useSelector(
@@ -45,7 +46,9 @@ const ListingItem = ({ data, properties, intl }) => {
                 {/* {image && <Image avatar src={image} alt={item.title} />} */}
                 <List.Content>
                   <List.Header>
-                    <Link to={item['@id']}>{item.title}</Link>
+                    <Link to={flattenToAppURL(item['@id'])}>
+                      {item.title ? item.title : item.id}
+                    </Link>
                   </List.Header>
                   <List.Description>{item.description}</List.Description>
                 </List.Content>
