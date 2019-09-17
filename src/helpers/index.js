@@ -7,10 +7,14 @@
 
 import useDimensions from './useDimensions/useDimensions';
 import useTraceUpdate from './useTraceUpdate/useTraceUpdate';
-import { insertToArray, removeFromArray, reorderArray } from './Utils/Utils';
+import {
+  replaceItemOfArray,
+  removeFromArray,
+  reorderArray,
+} from './Utils/Utils';
 
 export {
-  insertToArray,
+  replaceItemOfArray,
   removeFromArray,
   reorderArray,
   useDimensions,
