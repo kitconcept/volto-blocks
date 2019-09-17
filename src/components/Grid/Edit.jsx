@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { readAsDataURL } from 'promise-file-reader';
 import { Button, Grid, Ref } from 'semantic-ui-react';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
@@ -23,13 +23,6 @@ import GridSidebar from './GridSidebar';
 import TemplateChooser from '../TemplateChooser/TemplateChooser';
 
 import { gridConfig } from './View';
-
-const messages = defineMessages({
-  ImageTileInputPlaceholder: {
-    id: 'Browse or type URL',
-    defaultMessage: 'Browse or type URL',
-  },
-});
 
 const setArrayImmutable = (arr, i, value) =>
   Object.assign([...arr], { [i]: value });
@@ -73,6 +66,7 @@ class Edit extends Component {
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
     gridType: PropTypes.string,
+    templates: PropTypes.array.isRequired,
     intl: intlShape.isRequired,
   };
 
@@ -334,67 +328,9 @@ class Edit extends Component {
   };
 
   onSelectTemplate = templateIndex => {
-    const templates = [
-      {
-        columns: [
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-        ],
-      },
-      {
-        columns: [
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-        ],
-      },
-      {
-        columns: [
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-        ],
-      },
-      {
-        columns: [
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-          {
-            id: uuid(),
-            '@type': this.props.gridType,
-          },
-        ],
-      },
-    ];
     this.props.onChangeTile(this.props.tile, {
       ...this.props.data,
-      columns: templates[templateIndex].columns,
+      columns: this.props.templates[templateIndex].columns,
     });
   };
 
@@ -437,7 +373,6 @@ class Edit extends Component {
           selected: this.props.selected,
           'centered-text': this.props.data.centeredText,
         })}
-        tabIndex={0}
         onKeyDown={e => {
           this.props.handleKeyDown(
             e,
@@ -449,7 +384,10 @@ class Edit extends Component {
         ref={this.node}
       >
         {!this.props.data.columns?.length && (
-          <TemplateChooser onSelectTemplate={this.onSelectTemplate} />
+          <TemplateChooser
+            templates={this.props.templates}
+            onSelectTemplate={this.onSelectTemplate}
+          />
         )}
         {/* Remaining code from the Uber Grid, useful when we implement the multi-item use case */}
         {this.props.selected &&
