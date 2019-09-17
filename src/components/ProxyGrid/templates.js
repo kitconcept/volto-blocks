@@ -8,7 +8,7 @@ import proxyGridTemplate4 from './proxy-grid-4.svg';
 const templates = [
   {
     image: proxyGridTemplate1,
-    text: '1 image',
+    text: '1 column',
     columns: [
       {
         id: uuid(),
@@ -18,7 +18,7 @@ const templates = [
   },
   {
     image: proxyGridTemplate2,
-    text: '2 images',
+    text: '2 columns',
     columns: [
       {
         id: uuid(),
@@ -32,7 +32,7 @@ const templates = [
   },
   {
     image: proxyGridTemplate3,
-    text: '3 images',
+    text: '3 columns',
     columns: [
       {
         id: uuid(),
@@ -50,7 +50,7 @@ const templates = [
   },
   {
     image: proxyGridTemplate4,
-    text: '4 images',
+    text: '4 columns',
     columns: [
       {
         id: uuid(),
