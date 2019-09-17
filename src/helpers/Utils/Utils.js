@@ -1,4 +1,4 @@
-export const replaceItemFromArray = (array, index, value) =>
+export const replaceItemOfArray = (array, index, value) =>
   Object.assign([...array], { [index]: value });
 
 export const removeFromArray = (array, index) => {

@@ -1,11 +1,11 @@
-import { replaceItemFromArray, removeFromArray, reorderArray } from './Utils';
+import { replaceItemOfArray, removeFromArray, reorderArray } from './Utils';
 import deepFreeze from 'deep-freeze';
 
 describe('Utils', () => {
   it('replaces the position of an element into an array immutable-ish', () => {
     const array = ['a', 'b', 'c'];
     deepFreeze(array);
-    const result = replaceItemFromArray(array, 2, 'v');
+    const result = replaceItemOfArray(array, 2, 'v');
     expect(result).toEqual(['a', 'b', 'v']);
   });
 
