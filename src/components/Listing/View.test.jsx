@@ -17,6 +17,8 @@ test('renders a view image component for the listing tile', () => {
           },
         ],
       }}
+      properties={{ is_folderish: true }}
+      tile="123u12u3"
     />,
   );
   const json = component.toJSON();

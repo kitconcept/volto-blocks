@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { readAsDataURL } from 'promise-file-reader';
 import { Button, Grid, Ref } from 'semantic-ui-react';
 import { injectIntl, intlShape } from 'react-intl';
 import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
@@ -12,7 +11,6 @@ import cx from 'classnames';
 
 import { Icon, SidebarPortal } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
-import { getBaseUrl } from '@plone/volto/helpers';
 
 import imageSVG from '@plone/volto/icons/image.svg';
 import textSVG from '@plone/volto/icons/text.svg';
@@ -21,20 +19,12 @@ import addSVG from '@plone/volto/icons/add.svg';
 
 import GridSidebar from './GridSidebar';
 import TemplateChooser from '../TemplateChooser/TemplateChooser';
+import {
+  reorderArray,
+  replaceItemOfArray,
+} from '@kitconcept/volto-tiles/helpers';
 
 import { gridConfig } from './View';
-
-const setArrayImmutable = (arr, i, value) =>
-  Object.assign([...arr], { [i]: value });
-
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
 
 /**
  * Edit image tile class.
@@ -79,12 +69,12 @@ class Edit extends Component {
   constructor(props) {
     super(props);
 
-    this.onUploadImage = this.onUploadImage.bind(this);
     this.onChangeTile = this.onChangeTile.bind(this);
     this.state = {
       uploading: false,
     };
 
+    // sets defaults
     if (!this.props.data.columns) {
       this.props.onChangeTile(this.props.tile, {
         ...this.props.data,
@@ -111,21 +101,15 @@ class Edit extends Component {
    * @returns {undefined}
    */
   componentWillReceiveProps(nextProps) {
-    if (
-      this.props.request.loading &&
-      nextProps.request.loaded &&
-      this.state.uploading
-    ) {
-      this.setState({
-        uploading: false,
-      });
+    // This is required on upload images, sets the info on data of the new uploaded image.
+    if (this.props.request.loading && nextProps.request.loaded) {
       this.props.onChangeTile(this.props.tile, {
         ...this.props.data,
-        columns: setArrayImmutable(
+        columns: replaceItemOfArray(
           this.props.data.columns,
-          this.state.uploadedImageCardIndex,
+          this.state.uploadedImageIndex,
           {
-            ...this.props.data.columns[this.state.uploadedImageCardIndex],
+            ...this.props.data.columns[this.state.uploadedImageIndex],
             url: nextProps.content['@id'],
           },
         ),
@@ -150,32 +134,10 @@ class Edit extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside, false);
   }
 
-  /**
-   * Upload image handler
-   * @method onUploadImage
-   * @param {Object} target Target object
-   * @param {number} index Card index
-   * @returns {undefined}
-   */
-  onUploadImage({ target }, index) {
-    const file = target.files[0];
+  updateUploadedImageIndex = index =>
     this.setState({
-      uploading: true,
-      uploadedImageCardIndex: index,
+      uploadedImageIndex: index,
     });
-    readAsDataURL(file).then(data => {
-      const fields = data.match(/^data:(.*);(.*),(.*)$/);
-      this.props.createContent(getBaseUrl(this.props.pathname), {
-        '@type': 'Image',
-        image: {
-          data: fields[3],
-          encoding: fields[2],
-          'content-type': fields[1],
-          filename: file.name,
-        },
-      });
-    });
-  }
 
   /**
    * Align tile handler
@@ -189,37 +151,6 @@ class Edit extends Component {
       align,
     });
   }
-
-  /**
-   * Change url handler
-   * @method onChangeUrl
-   * @param {Object} target Target object
-   * @param {number} index Card index
-   * @returns {undefined}
-   */
-  onChangeUrl = ({ target }, index) => {
-    this.setState({
-      url: target.value,
-    });
-  };
-
-  /**
-   * Submit url handler
-   * @method onSubmitUrl
-   * @param {Object} e Event object
-   * @param {number} index Card index
-   * @returns {undefined}
-   */
-  onSubmitUrl = (e, index) => {
-    e.preventDefault();
-    this.props.onChangeTile(this.props.tile, {
-      ...this.props.data,
-      columns: setArrayImmutable(this.props.data.columns, index, {
-        ...this.props.data.columns[index],
-        url: this.state.url,
-      }),
-    });
-  };
 
   onDragEnd = result => {
     const { source, destination } = result;
@@ -235,7 +166,7 @@ class Edit extends Component {
       return;
     }
 
-    const columns = reorder(
+    const columns = reorderArray(
       this.props.data.columns,
       source.index,
       destination.index,
@@ -257,7 +188,7 @@ class Edit extends Component {
   onChangeTile(data, index) {
     this.props.onChangeTile(this.props.tile, {
       ...this.props.data,
-      columns: setArrayImmutable(this.props.data.columns, index, {
+      columns: replaceItemOfArray(this.props.data.columns, index, {
         ...this.props.data.columns[index],
         ...data,
       }),
@@ -302,7 +233,7 @@ class Edit extends Component {
     e.stopPropagation();
     this.props.onChangeTile(this.props.tile, {
       ...this.props.data,
-      columns: setArrayImmutable(this.props.data.columns, index, {
+      columns: replaceItemOfArray(this.props.data.columns, index, {
         ...this.props.data.columns[index],
         url: '',
       }),
@@ -313,7 +244,7 @@ class Edit extends Component {
     e.stopPropagation();
     this.props.onChangeTile(this.props.tile, {
       ...this.props.data,
-      columns: setArrayImmutable(this.props.data.columns, index, {
+      columns: replaceItemOfArray(this.props.data.columns, index, {
         ...this.props.data.columns[index],
         [key]: value,
       }),
@@ -333,26 +264,6 @@ class Edit extends Component {
       columns: this.props.templates[templateIndex].columns,
     });
   };
-
-  /**
-   * Keydown handler on Variant Menu Form
-   * This is required since the ENTER key is already mapped to a onKeyDown
-   * event and needs to be overriden with a child onKeyDown.
-   * @method onKeyDownVariantMenuForm
-   * @param {Object} e Event object
-   * @returns {undefined}
-   */
-  onKeyDownVariantMenuForm(e, index) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      e.stopPropagation();
-      this.onSubmitUrl(e, index);
-    } else if (e.key === 'Escape') {
-      e.preventDefault();
-      e.stopPropagation();
-      // TODO: Do something on ESC key
-    }
-  }
 
   node = React.createRef();
 
@@ -476,7 +387,14 @@ class Edit extends Component {
                                   const GridTypeComponent =
                                     gridConfig[item['@type']];
                                   return (
-                                    <GridTypeComponent data={item} isEditMode />
+                                    <GridTypeComponent
+                                      data={item}
+                                      isEditMode
+                                      index={index}
+                                      updateUploadedImageIndex={
+                                        this.updateUploadedImageIndex
+                                      } // Only for images
+                                    />
                                   );
                                 })()}
                               </div>
