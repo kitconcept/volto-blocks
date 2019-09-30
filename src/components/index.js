@@ -12,11 +12,13 @@ import ListingEditTile from './Listing/Edit';
 import ListingViewTile from './Listing/View';
 import CardEditTile from './Card/Edit';
 import CardViewTile from './Card/View';
+import TeaserHeroEditBlock from './TeaserHero/Edit';
+import TeaserHeroViewBlock from './TeaserHero/View';
 
 import TileModal from './TileModal/TileModal';
 import CheckboxWidget from './Widgets/CheckboxWidget';
 import TileRenderer from './TileRenderer/TileRenderer';
-import ObjectBrowser from './ObjectBrowser/ObjectBrowser';
+import ObjectBrowser from '../Freezer/ObjectBrowser/ObjectBrowser';
 
 export {
   CardsEditTile,
@@ -32,6 +34,8 @@ export {
   ListingEditTile,
   ListingViewTile,
   CardEditTile,
+  TeaserHeroEditBlock,
+  TeaserHeroViewBlock,
   TileRenderer,
   CardViewTile,
   TileModal,

@@ -1,3 +1,9 @@
+export const insertInArray = (array, element, index) => [
+  ...array.slice(0, index),
+  element,
+  ...array.slice(index),
+];
+
 export const replaceItemOfArray = (array, index, value) =>
   Object.assign([...array], { [index]: value });
 
