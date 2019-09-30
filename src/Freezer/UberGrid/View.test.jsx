@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import View from './View';
 
-jest.mock('../TileRenderer/TileRenderer', () =>
+jest.mock('../../components/TileRenderer/TileRenderer', () =>
   jest.fn(() => <div className="thetile" />),
 );
 

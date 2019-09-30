@@ -8,8 +8,8 @@ import { tiles } from '~/config';
  * @extends Component
  */
 function TileRenderer(props) {
-  const EditTile = tiles.defaultTilesEditMap[props.type];
-  const ViewTile = tiles.defaultTilesViewMap[props.type];
+  const EditTile = tiles.tilesConfig[props.type].edit;
+  const ViewTile = tiles.tilesConfig[props.type].view;
 
   if (!props.edit) {
     return <ViewTile {...props} detached onChangeTile={() => {}} />;
