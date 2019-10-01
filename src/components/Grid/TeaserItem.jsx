@@ -16,7 +16,7 @@ const messages = defineMessages({
   },
 });
 
-const ProxyItem = ({ data, isEditMode, intl }) => {
+const TeaserItem = ({ data, isEditMode, intl }) => {
   const contentSubrequests = useSelector(state => state.content.subrequests);
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const ProxyItem = ({ data, isEditMode, intl }) => {
     <>
       {!data.href && (
         <Message>
-          <div className="grid-proxy-item default">
+          <div className="grid-teaser-item default">
             <img src={imageTileSVG} alt="" />
             <p>{intl.formatMessage(messages.PleaseChooseContent)}</p>
           </div>
@@ -38,7 +38,7 @@ const ProxyItem = ({ data, isEditMode, intl }) => {
         contentSubrequests &&
         contentSubrequests[data.id] &&
         contentSubrequests[data.id].data && (
-          <div className="grid-proxy-item">
+          <div className="grid-teaser-item">
             {(() => {
               const item = (
                 <>
@@ -73,10 +73,10 @@ const ProxyItem = ({ data, isEditMode, intl }) => {
   );
 };
 
-ProxyItem.propTypes = {
+TeaserItem.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   isEditMode: PropTypes.bool,
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(ProxyItem);
+export default injectIntl(TeaserItem);

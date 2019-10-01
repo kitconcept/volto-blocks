@@ -4,8 +4,8 @@ import SliderEditTile from './Slider/Edit';
 import SliderViewTile from './Slider/View';
 import GridEditTile from './Grid/Edit';
 import GridViewTile from './Grid/View';
-import ProxyGridEditTile from './ProxyGrid/Edit';
-import ProxyGridViewTile from './ProxyGrid/View';
+import TeaserGridEditBlock from './TeaserGrid/Edit';
+import TeaserGridViewBlock from './TeaserGrid/View';
 import ImagesGridEditTile from './ImagesGrid/Edit';
 import ImagesGridViewTile from './ImagesGrid/View';
 import ListingEditTile from './Listing/Edit';
@@ -27,8 +27,8 @@ export {
   SliderViewTile,
   GridEditTile,
   GridViewTile,
-  ProxyGridEditTile,
-  ProxyGridViewTile,
+  TeaserGridEditBlock,
+  TeaserGridViewBlock,
   ImagesGridEditTile,
   ImagesGridViewTile,
   ListingEditTile,

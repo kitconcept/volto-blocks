@@ -1,72 +1,72 @@
 import { v4 as uuid } from 'uuid';
 
-import proxyGridTemplate1 from './proxy-grid-1.svg';
-import proxyGridTemplate2 from './proxy-grid-2.svg';
-import proxyGridTemplate3 from './proxy-grid-3.svg';
-import proxyGridTemplate4 from './proxy-grid-4.svg';
+import teaserGridTemplate1 from './teaser-grid-1.svg';
+import teaserGridTemplate2 from './teaser-grid-2.svg';
+import teaserGridTemplate3 from './teaser-grid-3.svg';
+import teaserGridTemplate4 from './teaser-grid-4.svg';
 
 const templates = [
   {
-    image: proxyGridTemplate1,
+    image: teaserGridTemplate1,
     text: '1 column',
     columns: [
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
     ],
   },
   {
-    image: proxyGridTemplate2,
+    image: teaserGridTemplate2,
     text: '2 columns',
     columns: [
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
     ],
   },
   {
-    image: proxyGridTemplate3,
+    image: teaserGridTemplate3,
     text: '3 columns',
     columns: [
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
     ],
   },
   {
-    image: proxyGridTemplate4,
+    image: teaserGridTemplate4,
     text: '4 columns',
     columns: [
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
       {
         id: uuid(),
-        '@type': 'proxy',
+        '@type': 'teaser',
       },
     ],
   },

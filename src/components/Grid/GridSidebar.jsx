@@ -10,7 +10,7 @@ import {
 import { Icon } from '@plone/volto/components';
 
 import ImageData from './ImageData';
-import ProxyData from './ProxyData';
+import TeaserData from './TeaserData';
 
 import upSVG from '@plone/volto/icons/up-key.svg';
 import downSVG from '@plone/volto/icons/down-key.svg';
@@ -71,8 +71,8 @@ const GridSidebar = props => {
           {gridType === 'image' && (
             <FormattedMessage id="Images Grid" defaultMessage="Images Grid" />
           )}
-          {gridType === 'proxy' && (
-            <FormattedMessage id="Proxy Grid" defaultMessage="Proxy Grid" />
+          {gridType === 'teaser' && (
+            <FormattedMessage id="Teaser Grid" defaultMessage="Teaser Grid" />
           )}
         </h2>
         <Button.Group>
@@ -96,18 +96,20 @@ const GridSidebar = props => {
                 index={index}
                 onClick={handleAccClick}
               >
-                {(!gridType || gridType === 'proxy') && (
-                  <FormattedMessage
-                    id="Grid Element"
-                    defaultMessage="Grid Element {index}"
-                    values={{ index: index + 1 }}
-                  />
+                {(!gridType || gridType === 'teaser') && (
+                  <>
+                    <FormattedMessage
+                      id="Grid Element"
+                      defaultMessage="Grid Element {index}"
+                      values={{ index: (index + 1).toString() }}
+                    />
+                  </>
                 )}
                 {gridType === 'image' && (
                   <FormattedMessage
                     id="Grid Image"
                     defaultMessage="Grid Image {index}"
-                    values={{ index: index + 1 }}
+                    values={{ index: (index + 1).toString() }}
                   />
                 )}
                 <div className="accordion-tools">
@@ -131,8 +133,8 @@ const GridSidebar = props => {
                 {gridType === 'image' && (
                   <ImageData {...props} data={{ ...column, index }} />
                 )}
-                {gridType === 'proxy' && (
-                  <ProxyData {...props} data={{ ...column, index }} />
+                {gridType === 'teaser' && (
+                  <TeaserData {...props} data={{ ...column, index }} />
                 )}
               </Accordion.Content>
             </React.Fragment>

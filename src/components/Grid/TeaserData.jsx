@@ -20,7 +20,7 @@ const messages = defineMessages({
   },
 });
 
-const ImageData = ({
+const TeaserData = ({
   data,
   tile,
   onChangeTile,
@@ -70,7 +70,7 @@ const ImageData = ({
   );
 };
 
-ImageData.propTypes = {
+TeaserData.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   tile: PropTypes.string.isRequired,
   onChangeTile: PropTypes.func.isRequired,
@@ -81,4 +81,4 @@ ImageData.propTypes = {
 export default compose(
   withObjectBrowser,
   injectIntl,
-)(ImageData);
+)(TeaserData);

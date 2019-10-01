@@ -8,11 +8,11 @@ import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react';
 import cx from 'classnames';
 
-import ProxyItem from './ProxyItem';
+import TeaserItem from './TeaserItem';
 import ImageItem from './ImageItem';
 
 export const gridConfig = {
-  proxy: ProxyItem,
+  teaser: TeaserItem,
   image: ImageItem,
 };
 
