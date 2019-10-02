@@ -1,17 +1,17 @@
-import CardsEditTile from './Cards/Edit';
-import CardsViewTile from './Cards/View';
-import SliderEditTile from './Slider/Edit';
-import SliderViewTile from './Slider/View';
-import GridEditTile from './Grid/Edit';
-import GridViewTile from './Grid/View';
+import CardsEditBlock from './Cards/Edit';
+import CardsViewBlock from './Cards/View';
+import SliderEditBlock from './Slider/Edit';
+import SliderViewBlock from './Slider/View';
+import GridEditBlock from './Grid/Edit';
+import GridViewBlock from './Grid/View';
 import TeaserGridEditBlock from './TeaserGrid/Edit';
 import TeaserGridViewBlock from './TeaserGrid/View';
-import ImagesGridEditTile from './ImagesGrid/Edit';
-import ImagesGridViewTile from './ImagesGrid/View';
-import ListingEditTile from './Listing/Edit';
-import ListingViewTile from './Listing/View';
-import CardEditTile from './Card/Edit';
-import CardViewTile from './Card/View';
+import ImagesGridEditBlock from './ImagesGrid/Edit';
+import ImagesGridViewBlock from './ImagesGrid/View';
+import ListingEditBlock from './Listing/Edit';
+import ListingViewBlock from './Listing/View';
+import CardEditBlock from './Card/Edit';
+import CardViewBlock from './Card/View';
 import TeaserHeroEditBlock from './TeaserHero/Edit';
 import TeaserHeroViewBlock from './TeaserHero/View';
 
@@ -21,23 +21,23 @@ import TileRenderer from './TileRenderer/TileRenderer';
 import ObjectBrowser from '../Freezer/ObjectBrowser/ObjectBrowser';
 
 export {
-  CardsEditTile,
-  CardsViewTile,
-  SliderEditTile,
-  SliderViewTile,
-  GridEditTile,
-  GridViewTile,
+  CardsEditBlock,
+  CardsViewBlock,
+  SliderEditBlock,
+  SliderViewBlock,
+  GridEditBlock,
+  GridViewBlock,
   TeaserGridEditBlock,
   TeaserGridViewBlock,
-  ImagesGridEditTile,
-  ImagesGridViewTile,
-  ListingEditTile,
-  ListingViewTile,
-  CardEditTile,
+  ImagesGridEditBlock,
+  ImagesGridViewBlock,
+  ListingEditBlock,
+  ListingViewBlock,
+  CardEditBlock,
+  CardViewBlock,
   TeaserHeroEditBlock,
   TeaserHeroViewBlock,
   TileRenderer,
-  CardViewTile,
   TileModal,
   CheckboxWidget,
   ObjectBrowser,
