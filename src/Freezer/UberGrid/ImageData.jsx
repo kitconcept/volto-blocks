@@ -11,7 +11,6 @@ import { CheckboxWidget, Icon, TextWidget } from '@plone/volto/components';
 import { settings } from '~/config';
 import { AlignTile, flattenToAppURL } from '@plone/volto/helpers';
 
-import imageSVG from '@plone/volto/icons/image.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import upSVG from '@plone/volto/icons/up-key.svg';
 import downSVG from '@plone/volto/icons/down-key.svg';

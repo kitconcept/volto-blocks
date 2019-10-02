@@ -93,12 +93,20 @@ const CheckboxWidget = ({
     >
       {onEdit && (
         <div className="toolbar">
-          <a className="item" onClick={() => onEdit(id, schema)}>
+          <button
+            aria-label="Edit"
+            className="item"
+            onClick={() => onEdit(id, schema)}
+          >
             <Icon name="write square" size="large" color="blue" />
-          </a>
-          <a className="item" onClick={() => onDelete(id)}>
+          </button>
+          <button
+            aria-label="Delete"
+            className="item"
+            onClick={() => onDelete(id)}
+          >
             <Icon name="close" size="large" color="red" />
-          </a>
+          </button>
         </div>
       )}
       {onEdit && (

@@ -374,7 +374,6 @@ class Edit extends Component {
                           <Ref innerRef={provided.innerRef}>
                             <Grid.Column
                               key={item.id}
-                              // onClick={e => this.selectCard(e, index)}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >

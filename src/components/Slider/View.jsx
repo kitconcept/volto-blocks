@@ -5,16 +5,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import redraft from 'redraft';
 import cx from 'classnames';
 import { settings } from '~/config';
 import { flattenToAppURL } from '@plone/volto/helpers';
-
-import slider1 from '../../static/slider1.jpg';
-import slider2 from '../../static/slider2.jpg';
-import slider3 from '../../static/slider3.jpg';
 
 /**
  * View image tile class.

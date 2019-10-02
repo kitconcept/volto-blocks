@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * Edit image tile.
  * @module components/manage/Tiles/Image/Edit
@@ -9,7 +11,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { readAsDataURL } from 'promise-file-reader';
 import { Button, Grid, Ref } from 'semantic-ui-react';
-import { bindActionCreators } from 'redux';
 import {
   defineMessages,
   injectIntl,
@@ -22,7 +23,7 @@ import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
-import { Icon, SidebarPortal } from '@plone/volto/components';
+import { Icon } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
 import { getBaseUrl } from '@plone/volto/helpers';
 

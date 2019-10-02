@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * Edit text tile.
  * @module components/manage/Tiles/Title/Edit

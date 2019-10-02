@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import cx from 'classnames';
 
-import { Icon, SidebarPortal } from '@plone/volto/components';
+import { SidebarPortal } from '@plone/volto/components';
 
 import ListingSidebar from './ListingSidebar';
 import ListingItem from './ListingItem';
@@ -92,7 +92,6 @@ class Edit extends Component {
         className={cx('tile listing', {
           selected,
         })}
-        tabIndex={0}
         onKeyDown={e =>
           this.props.handleKeyDown(
             e,

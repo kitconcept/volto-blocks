@@ -1,3 +1,17 @@
+/**
+ * Add your config changes here.
+ * @module config
+ * @example
+ * export const settings = {
+ *   ...defaultSettings,
+ *   port: 4300,
+ *   listBlockTypes: {
+ *     ...defaultSettings.listBlockTypes,
+ *     'my-list-item',
+ *   }
+ * }
+ */
+
 import {
   settings as defaultSettings,
   views as defaultViews,
@@ -6,29 +20,40 @@ import {
 } from '@plone/volto/config';
 
 import {
-  SliderEditTile,
-  SliderViewTile,
-  GridEditTile,
-  GridViewTile,
+  SliderEditBlock,
+  SliderViewBlock,
   TeaserGridEditBlock,
   TeaserGridViewBlock,
-  ImagesGridEditTile,
-  ImagesGridViewTile,
-  ListingEditTile,
-  ListingViewTile,
-  CardEditTile,
-  CardViewTile,
+  ImagesGridEditBlock,
+  ImagesGridViewBlock,
+  ListingEditBlock,
+  ListingViewBlock,
   TeaserHeroViewBlock,
   TeaserHeroEditBlock,
+  // GridEditBlock,
+  // GridViewBlock,
+  // CardEditBlock,
+  // CardViewBlock,
 } from '@kitconcept/volto-tiles/components';
 
 import { insertInArray } from '@kitconcept/volto-tiles/helpers';
 
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
-import gridSVG from '@plone/volto/icons/row.svg';
 import listBulletSVG from '@plone/volto/icons/list-bullet.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
+
+export const settings = {
+  ...defaultSettings,
+};
+
+export const views = {
+  ...defaultViews,
+};
+
+export const widgets = {
+  ...defaultWidgets,
+};
 
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
 const customGroupTilesOrder = insertInArray(
@@ -57,8 +82,8 @@ const customTiles = {
     title: 'Images grid',
     icon: imagesSVG,
     group: 'common',
-    view: ImagesGridViewTile,
-    edit: ImagesGridEditTile,
+    view: ImagesGridViewBlock,
+    edit: ImagesGridEditBlock,
     restricted: false,
     mostUsed: true,
     security: {
@@ -71,8 +96,8 @@ const customTiles = {
     title: 'Listing',
     icon: listBulletSVG,
     group: 'common',
-    view: ListingViewTile,
-    edit: ListingEditTile,
+    view: ListingViewBlock,
+    edit: ListingEditBlock,
     restricted: false,
     mostUsed: true,
     security: {
@@ -85,8 +110,8 @@ const customTiles = {
     title: 'Slider',
     icon: sliderSVG,
     group: 'common',
-    view: SliderViewTile,
-    edit: SliderEditTile,
+    view: SliderViewBlock,
+    edit: SliderEditBlock,
     restricted: true,
     mostUsed: false,
     security: {

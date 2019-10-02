@@ -7,14 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import {
-  Button,
-  Form,
-  Grid,
-  Icon as OldIcon,
-  Input,
-  Label,
-} from 'semantic-ui-react';
+import { Button, Form, Grid, Input, Label } from 'semantic-ui-react';
 import { filter, remove, toPairs, groupBy, isEmpty, map } from 'lodash';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import { getQuerystring } from '@plone/volto/actions';

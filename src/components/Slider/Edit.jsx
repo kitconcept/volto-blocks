@@ -29,7 +29,6 @@ import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
-import { convertToRaw } from 'draft-js';
 import { settings } from '~/config';
 
 import { Icon, EditTextTile } from '@plone/volto/components';
@@ -424,7 +423,6 @@ export default class Edit extends Component {
           selected: this.props.selected,
           'centered-text': this.props.data.centeredText,
         })}
-        tabIndex={0}
         onKeyDown={e => {
           this.props.handleKeyDown(
             e,
@@ -519,9 +517,10 @@ export default class Edit extends Component {
                                   <div className="toolbar">
                                     <Icon name={imageSVG} size="24px" />
                                     <form
-                                      onKeyDown={e =>
-                                        this.onKeyDownVariantMenuForm(e, index)
-                                      }
+                                    // TODO: refactor
+                                    // onKeyDown={e =>
+                                    //   this.onKeyDownVariantMenuForm(e, index)
+                                    // }
                                     >
                                       <Input
                                         onChange={e =>

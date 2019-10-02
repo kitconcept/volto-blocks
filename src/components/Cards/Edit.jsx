@@ -18,12 +18,7 @@ import {
   Ref,
 } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
-import {
-  defineMessages,
-  injectIntl,
-  intlShape,
-  FormattedMessage,
-} from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
@@ -48,13 +43,6 @@ import imageSVG from '@plone/volto/icons/image.svg';
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
 import uploadSVG from '@plone/volto/icons/upload.svg';
-
-const messages = defineMessages({
-  ImageTileInputPlaceholder: {
-    id: 'Browse or type URL',
-    defaultMessage: 'Browse or type URL',
-  },
-});
 
 const setArrayImmutable = (arr, i, value) =>
   Object.assign([...arr], { [i]: value });
@@ -468,7 +456,6 @@ export default class Edit extends Component {
           'centered-text': this.props.data.centeredText,
           shrinked: this.props.data['x.5'],
         })}
-        tabIndex={0}
         onKeyDown={e => {
           this.props.handleKeyDown(
             e,
@@ -589,15 +576,15 @@ export default class Edit extends Component {
                                 !item.url && (
                                   <div className="toolbar">
                                     <Button.Group>
-                                      <label className="ui button basic icon">
-                                        <Icon
-                                          name={folderSVG}
-                                          size="24px"
-                                          onClick={() =>
-                                            this.toggleObjectBrowser(index)
-                                          }
-                                        />
-                                      </label>
+                                      <Button
+                                        basic
+                                        icon
+                                        onClick={() =>
+                                          this.toggleObjectBrowser(index)
+                                        }
+                                      >
+                                        <Icon name={folderSVG} size="24px" />
+                                      </Button>
                                       <label className="ui button basic icon">
                                         <Icon name={uploadSVG} size="24px" />
                                         <input

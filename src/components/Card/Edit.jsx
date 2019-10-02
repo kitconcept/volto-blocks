@@ -6,7 +6,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Map } from 'immutable';
 import { readAsDataURL } from 'promise-file-reader';
 import { Button, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
@@ -220,7 +219,6 @@ export default class EditCardTile extends Component {
         className={cx('tile __card', {
           selected: this.props.selected,
         })}
-        tabIndex={0}
         onKeyDown={e =>
           this.props.handleKeyDown(
             e,
@@ -267,13 +265,9 @@ export default class EditCardTile extends Component {
         {this.props.selected && !this.props.data.url && (
           <div className="toolbar">
             <Button.Group>
-              <label className="ui button basic icon">
-                <Icon
-                  name={folderSVG}
-                  size="24px"
-                  onClick={this.toggleObjectBrowser}
-                />
-              </label>
+              <Button basic icon onClick={this.toggleObjectBrowser}>
+                <Icon name={folderSVG} size="24px" />
+              </Button>
               <label className="ui button basic icon">
                 <Icon name={uploadSVG} size="24px" />
                 <input

@@ -16,16 +16,15 @@ const messages = defineMessages({
   },
 });
 
-const TeaserItem = ({ data, tile, isEditMode, intl }) => {
+const TeaserHeroBody = ({ data, blockID, isEditMode, intl }) => {
   const contentSubrequests = useSelector(state => state.content.subrequests);
   const dispatch = useDispatch();
-  const tileID = data.id || tile;
 
   React.useEffect(() => {
     if (data.href) {
-      dispatch(getContent(data.href, null, tileID));
+      dispatch(getContent(data.href, null, blockID));
     }
-  }, [dispatch, data, tileID]);
+  }, [dispatch, data, blockID]);
 
   return (
     <>
@@ -39,26 +38,28 @@ const TeaserItem = ({ data, tile, isEditMode, intl }) => {
       )}
       {data.href &&
         contentSubrequests &&
-        contentSubrequests[tileID] &&
-        contentSubrequests[tileID].data && (
+        contentSubrequests[blockID] &&
+        contentSubrequests[blockID].data && (
           <div className="grid-teaser-item">
             {(() => {
               const item = (
                 <>
-                  {contentSubrequests[tileID]?.data?.image && (
+                  {contentSubrequests[blockID]?.data?.image && (
                     <img
-                      src={contentSubrequests[tileID].data.image.download}
+                      src={contentSubrequests[blockID].data.image.download}
                       alt=""
                     />
                   )}
-                  <h3>{contentSubrequests[tileID].data.title}</h3>
-                  <p>{contentSubrequests[tileID].data.description}</p>
+                  <h3>{contentSubrequests[blockID].data.title}</h3>
+                  <p>{contentSubrequests[blockID].data.description}</p>
                 </>
               );
               if (!isEditMode) {
                 return (
                   <Link
-                    to={flattenToAppURL(contentSubrequests[tileID].data['@id'])}
+                    to={flattenToAppURL(
+                      contentSubrequests[blockID].data['@id'],
+                    )}
                     target={data.openLinkInNewTab ? '_blank' : null}
                   >
                     {item}
@@ -74,10 +75,10 @@ const TeaserItem = ({ data, tile, isEditMode, intl }) => {
   );
 };
 
-TeaserItem.propTypes = {
+TeaserHeroBody.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   isEditMode: PropTypes.bool,
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(TeaserItem);
+export default injectIntl(TeaserHeroBody);

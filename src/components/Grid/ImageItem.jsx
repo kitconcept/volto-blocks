@@ -13,9 +13,8 @@ import { settings } from '~/config';
 
 const messages = defineMessages({
   PleaseChooseImage: {
-    id: 'Please choose an existing content as source for this image',
-    defaultMessage:
-      'Please choose an existing content as source for this image',
+    id: 'Drop a file, click for upload or browse the site',
+    defaultMessage: 'Drop a file, click for upload or browse the site',
   },
   UploadingImage: {
     id: 'Uploading image',

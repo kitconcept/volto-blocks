@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { List } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
-import get from 'lodash/get';
+// import get from 'lodash/get';
 
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { getQueryStringResults } from '@kitconcept/volto-tiles/actions';

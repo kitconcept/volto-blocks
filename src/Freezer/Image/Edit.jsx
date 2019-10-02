@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * Edit image tile.
  * @module components/manage/Tiles/Image/Edit
