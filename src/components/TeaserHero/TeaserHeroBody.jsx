@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
-import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
+import cx from 'classnames';
 import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
 
 const messages = defineMessages({
   PleaseChooseContent: {
@@ -40,7 +41,11 @@ const TeaserHeroBody = ({ data, blockID, isEditMode, intl }) => {
         contentSubrequests &&
         contentSubrequests[blockID] &&
         contentSubrequests[blockID].data && (
-          <div className="grid-teaser-item">
+          <div
+            className={cx('grid-teaser-item', data.variation, {
+              padded: data.isPadded,
+            })}
+          >
             {(() => {
               const item = (
                 <>
@@ -50,8 +55,10 @@ const TeaserHeroBody = ({ data, blockID, isEditMode, intl }) => {
                       alt=""
                     />
                   )}
-                  <h3>{contentSubrequests[blockID].data.title}</h3>
-                  <p>{contentSubrequests[blockID].data.description}</p>
+                  <div>
+                    <h3>{contentSubrequests[blockID].data.title}</h3>
+                    <p>{contentSubrequests[blockID].data.description}</p>
+                  </div>
                 </>
               );
               if (!isEditMode) {

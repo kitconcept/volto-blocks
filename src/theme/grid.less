@@ -1,3 +1,5 @@
+@teaserHeroWidth: 80%;
+
 .ui.tile.__grid {
 }
 
@@ -103,8 +105,12 @@
 
 .grid-teaser-item,
 .grid-image-item {
+  display: flex;
+  flex-direction: column;
+
   img {
     width: 100%;
+    margin-bottom: 20px;
   }
 
   a {
@@ -123,6 +129,34 @@
 
     img {
       max-width: 300px;
+    }
+  }
+
+  &.left {
+    flex-direction: row;
+
+    img {
+      width: 50%;
+      margin-right: 20px;
+    }
+  }
+
+  &.right {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    img {
+      width: 50%;
+      margin-right: 20px;
+    }
+  }
+
+  &.padded {
+    width: @teaserHeroWidth;
+    margin: 0 auto;
+
+    @media only screen and (max-width: @tabletBreakpoint) {
+      width: 100%;
     }
   }
 }
