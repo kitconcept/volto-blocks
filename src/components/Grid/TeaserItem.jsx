@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Message } from 'semantic-ui-react';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
 import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
@@ -77,7 +77,6 @@ const TeaserItem = ({ data, tile, isEditMode, intl }) => {
 TeaserItem.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   isEditMode: PropTypes.bool,
-  intl: intlShape.isRequired,
 };
 
 export default injectIntl(TeaserItem);

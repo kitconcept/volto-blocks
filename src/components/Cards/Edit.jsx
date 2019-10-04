@@ -18,7 +18,7 @@ import {
   Ref,
 } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
@@ -93,7 +93,6 @@ export default class Edit extends Component {
     onFocusNextTile: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
   };
 
   /**

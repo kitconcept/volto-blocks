@@ -5,7 +5,7 @@ import { List } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 // import get from 'lodash/get';
 
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { getQueryStringResults } from '@kitconcept/volto-tiles/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
@@ -78,7 +78,6 @@ const ListingItem = ({ data, properties, intl }) => {
 
 ListingItem.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
-  intl: intlShape.isRequired,
 };
 
 export default injectIntl(ListingItem);

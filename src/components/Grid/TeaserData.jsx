@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment } from 'semantic-ui-react';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import { CheckboxWidget, TextWidget } from '@plone/volto/components';
 import { compose } from 'redux';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
@@ -75,7 +75,6 @@ TeaserData.propTypes = {
   tile: PropTypes.string.isRequired,
   onChangeTile: PropTypes.func.isRequired,
   openObjectBrowser: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
 };
 
 export default compose(

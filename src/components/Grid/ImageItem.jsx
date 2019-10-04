@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Dimmer, Loader, Message } from 'semantic-ui-react';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import Dropzone from 'react-dropzone';
 import { readAsDataURL } from 'promise-file-reader';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
@@ -110,7 +110,6 @@ const ImageItem = ({
 ImageItem.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   isEditMode: PropTypes.bool,
-  intl: intlShape.isRequired,
 };
 
 export default injectIntl(ImageItem);

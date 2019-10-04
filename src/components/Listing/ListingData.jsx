@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Form, Segment } from 'semantic-ui-react';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import Select from 'react-select';
 import { toPairs, groupBy, map } from 'lodash';
 import { CheckboxWidget, TextWidget } from '@plone/volto/components';
@@ -183,7 +183,6 @@ ListingData.propTypes = {
   tile: PropTypes.string.isRequired,
   onChangeTile: PropTypes.func.isRequired,
   openObjectBrowser: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
 };
 
 export default compose(

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 
@@ -75,7 +75,6 @@ TileModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   onSubmit: PropTypes.func,
   submitLabel: PropTypes.string,
-  intl: intlShape.isRequired,
 };
 
 TileModal.defaultProps = {

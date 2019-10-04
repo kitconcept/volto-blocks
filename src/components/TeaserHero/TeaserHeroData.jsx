@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  defineMessages,
-  FormattedMessage,
-  injectIntl,
-  intlShape,
-} from 'react-intl';
+import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import { Form, Grid, Segment } from 'semantic-ui-react';
 import { CheckboxWidget } from '@plone/volto/components';
 import TeaserData from '../Grid/TeaserData';
@@ -74,7 +69,6 @@ TeaserHeroData.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   tile: PropTypes.string.isRequired,
   onChangeTile: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
 };
 
 export default injectIntl(TeaserHeroData);

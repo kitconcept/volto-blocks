@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Accordion, Button, Segment } from 'semantic-ui-react';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Icon } from '@plone/volto/components';
 
 import ImageData from './ImageData';
@@ -109,7 +109,6 @@ GridSidebar.propTypes = {
   tile: PropTypes.string.isRequired,
   onChangeTile: PropTypes.func.isRequired,
   openObjectBrowser: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
 };
 
 export default injectIntl(GridSidebar);

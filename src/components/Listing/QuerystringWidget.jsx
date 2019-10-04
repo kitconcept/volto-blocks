@@ -9,7 +9,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Button, Form, Grid, Input, Label } from 'semantic-ui-react';
 import { filter, remove, toPairs, groupBy, isEmpty, map } from 'lodash';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import { getQuerystring } from '@plone/volto/actions';
 import Select, { components } from 'react-select';
 import { Icon } from '@plone/volto/components';
@@ -133,7 +133,6 @@ class QuerystringWidget extends Component {
     onEdit: PropTypes.func,
     onDelete: PropTypes.func,
     getQuerystring: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
   };
 
   /**

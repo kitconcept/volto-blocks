@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Message } from 'semantic-ui-react';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import cx from 'classnames';
 import find from 'lodash/find';
 import { getContent } from '@plone/volto/actions';
@@ -93,7 +93,6 @@ const TeaserHeroBody = ({ data, blockID, isEditMode, intl }) => {
 TeaserHeroBody.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   isEditMode: PropTypes.bool,
-  intl: intlShape.isRequired,
 };
 
 export default injectIntl(TeaserHeroBody);

@@ -11,7 +11,7 @@ import { Button, Dimmer, Loader, Message } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
 import Editor from 'draft-js-plugins-editor';
 import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import cx from 'classnames';
 import { includes, isEqual } from 'lodash';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
@@ -68,7 +68,6 @@ export default class EditCardTile extends Component {
     onFocusNextTile: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
   };
 
   /**

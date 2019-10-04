@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid, Message } from 'semantic-ui-react';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl } from 'react-intl';
 
 const TemplateChooser = ({ templates, onSelectTemplate, intl }) => {
   return (
@@ -33,7 +33,6 @@ const TemplateChooser = ({ templates, onSelectTemplate, intl }) => {
 TemplateChooser.propTypes = {
   templates: PropTypes.array.isRequired,
   onSelectTemplate: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
 };
 
 export default injectIntl(TemplateChooser);
