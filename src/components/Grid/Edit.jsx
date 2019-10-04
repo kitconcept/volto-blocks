@@ -81,17 +81,6 @@ class Edit extends Component {
       });
     }
   }
-  /**
-   * Component will receive props
-   * @method componentDidMount
-   * @returns {undefined}
-   */
-  componentDidMount() {
-    if (this.props.selected) {
-      this.node.current.focus();
-    }
-    document.addEventListener('mousedown', this.handleClickOutside, false);
-  }
 
   /**
    * Component will receive props
@@ -113,24 +102,7 @@ class Edit extends Component {
           },
         ),
       });
-
-      if (nextProps.selected) {
-        this.node.current.focus();
-      }
     }
-
-    if (nextProps.selected !== this.props.selected) {
-      this.node.current.focus();
-    }
-  }
-
-  /**
-   * Component will receive props
-   * @method componentWillUnmount
-   * @returns {undefined}
-   */
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside, false);
   }
 
   updateUploadedImageIndex = index =>
@@ -273,26 +245,7 @@ class Edit extends Component {
    */
   render() {
     return (
-      <div
-        role="presentation"
-        onClick={() => {
-          this.props.onSelectTile(this.props.tile);
-          // this.setState({ currentSelectedCard: null });
-        }}
-        className={cx('tile grid', {
-          selected: this.props.selected,
-          'centered-text': this.props.data.centeredText,
-        })}
-        onKeyDown={e => {
-          this.props.handleKeyDown(
-            e,
-            this.props.index,
-            this.props.tile,
-            this.node.current,
-          );
-        }}
-        ref={this.node}
-      >
+      <>
         {!this.props.data.columns?.length && (
           <TemplateChooser
             templates={this.props.templates}
@@ -417,7 +370,7 @@ class Edit extends Component {
             addNewColumn={this.addNewColumn}
           />
         </SidebarPortal>
-      </div>
+      </>
     );
   }
 }
