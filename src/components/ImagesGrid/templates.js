@@ -8,7 +8,8 @@ import imageGridTemplate4 from './image-grid-4.svg';
 const templates = [
   {
     image: imageGridTemplate1,
-    text: '1 image',
+    id: 'imagegridtemplateone',
+    title: '1 image',
     columns: [
       {
         id: uuid(),
@@ -18,7 +19,8 @@ const templates = [
   },
   {
     image: imageGridTemplate2,
-    text: '2 images',
+    id: 'imagegridtemplatetwo',
+    title: '2 images',
     columns: [
       {
         id: uuid(),
@@ -32,7 +34,8 @@ const templates = [
   },
   {
     image: imageGridTemplate3,
-    text: '3 images',
+    id: 'imagegridtemplatethree',
+    title: '3 images',
     columns: [
       {
         id: uuid(),
@@ -50,7 +53,8 @@ const templates = [
   },
   {
     image: imageGridTemplate4,
-    text: '4 images',
+    id: 'imagegridtemplatefour',
+    title: '4 images',
     columns: [
       {
         id: uuid(),

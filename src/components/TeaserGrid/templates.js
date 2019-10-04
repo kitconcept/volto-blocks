@@ -8,7 +8,8 @@ import teaserGridTemplate4 from './teaser-grid-4.svg';
 const templates = [
   {
     image: teaserGridTemplate1,
-    text: '1 column',
+    id: 'teasergridtemplateone',
+    title: '1 column',
     columns: [
       {
         id: uuid(),
@@ -18,7 +19,8 @@ const templates = [
   },
   {
     image: teaserGridTemplate2,
-    text: '2 columns',
+    id: 'teasergridtemplatetwo',
+    title: '2 columns',
     columns: [
       {
         id: uuid(),
@@ -32,7 +34,8 @@ const templates = [
   },
   {
     image: teaserGridTemplate3,
-    text: '3 columns',
+    id: 'teasergridtemplatethree',
+    title: '3 columns',
     columns: [
       {
         id: uuid(),
@@ -50,7 +53,8 @@ const templates = [
   },
   {
     image: teaserGridTemplate4,
-    text: '4 columns',
+    id: 'teasergridtemplatefour',
+    title: '4 columns',
     columns: [
       {
         id: uuid(),

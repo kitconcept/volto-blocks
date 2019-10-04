@@ -103,6 +103,8 @@
   box-shadow: none;
 }
 
+// teasers view/edit
+.teaser-item,
 .grid-teaser-item,
 .grid-image-item {
   display: flex;
@@ -132,6 +134,41 @@
     }
   }
 
+  a {
+    display: flex;
+  }
+
+  &.left a {
+    flex-direction: row;
+
+    img {
+      width: 50%;
+      margin-right: 20px;
+    }
+  }
+
+  &.right a {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    img {
+      width: 50%;
+      margin-right: 20px;
+    }
+  }
+
+  &.padded {
+    width: @teaserHeroWidth;
+    margin: 0 auto;
+
+    @media only screen and (max-width: @tabletBreakpoint) {
+      width: 100%;
+    }
+  }
+}
+
+// teaserHero edit/view fix for variations
+.tile.inner.teaserHero .teaser-item {
   &.left {
     flex-direction: row;
 
@@ -148,15 +185,6 @@
     img {
       width: 50%;
       margin-right: 20px;
-    }
-  }
-
-  &.padded {
-    width: @teaserHeroWidth;
-    margin: 0 auto;
-
-    @media only screen and (max-width: @tabletBreakpoint) {
-      width: 100%;
     }
   }
 }

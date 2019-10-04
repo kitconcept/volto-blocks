@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { defineMessages, injectIntl, intlShape } from 'react-intl';
 import cx from 'classnames';
+import find from 'lodash/find';
 import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
+import templates from './templates';
 
 const messages = defineMessages({
   PleaseChooseContent: {
@@ -31,8 +33,14 @@ const TeaserHeroBody = ({ data, blockID, isEditMode, intl }) => {
     <>
       {!data.href && (
         <Message>
-          <div className="grid-teaser-item default">
-            <img src={imageTileSVG} alt="" />
+          <div className="teaser-item default">
+            <img
+              src={
+                find(templates, item => item.variation === data.variation)
+                  ?.image
+              }
+              alt=""
+            />
             <p>{intl.formatMessage(messages.PleaseChooseContent)}</p>
           </div>
         </Message>
@@ -42,7 +50,7 @@ const TeaserHeroBody = ({ data, blockID, isEditMode, intl }) => {
         contentSubrequests[blockID] &&
         contentSubrequests[blockID].data && (
           <div
-            className={cx('grid-teaser-item', data.variation, {
+            className={cx('teaser-item', data.variation, {
               padded: data.isPadded,
             })}
           >
