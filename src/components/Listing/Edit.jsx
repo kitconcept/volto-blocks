@@ -36,38 +36,6 @@ class Edit extends Component {
     }
   }
 
-  /**
-   * Component did mount. Search items if the query is set.
-   * @method componentDidMount
-   * @returns {undefined}
-   */
-  componentDidMount() {
-    if (this.props.selected) {
-      this.node.current.focus();
-    }
-  }
-
-  /**
-   * Component did update. Here we fetch new content if needed.
-   * @method componentDidUpdate
-   * @param {Object} prevProps Props before update
-   * @returns {undefined}
-   */
-  componentDidUpdate(prevProps) {
-    if (!prevProps.selected && this.props.selected) {
-      this.node.current.focus();
-    }
-  }
-
-  /**
-   * Component will unmount. Reset loaded content.
-   * @method componentWillUnmount
-   * @returns {undefined}
-   */
-  componentWillUnmount() {
-    // this.props.resetSearchContent(this.props.tile);
-  }
-
   node = React.createRef();
 
   /**
@@ -76,32 +44,10 @@ class Edit extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    const {
-      data,
-      onChangeTile,
-      onSelectTile,
-      properties,
-      selected,
-      tile,
-    } = this.props;
+    const { data, onChangeTile, properties, selected, tile } = this.props;
 
     return (
-      <div
-        role="presentation"
-        onClick={() => onSelectTile(tile)}
-        className={cx('tile listing', {
-          selected,
-        })}
-        onKeyDown={e =>
-          this.props.handleKeyDown(
-            e,
-            this.props.index,
-            this.props.tile,
-            this.node.current,
-          )
-        }
-        ref={this.node}
-      >
+      <>
         {data?.query?.length === 0 && (
           <FormattedMessage
             id="Contained items"
@@ -122,7 +68,7 @@ class Edit extends Component {
         <SidebarPortal selected={selected}>
           <ListingSidebar data={data} tile={tile} onChangeTile={onChangeTile} />
         </SidebarPortal>
-      </div>
+      </>
     );
   }
 }
