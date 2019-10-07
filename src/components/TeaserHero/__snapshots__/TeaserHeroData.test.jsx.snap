@@ -147,9 +147,7 @@ Array [
               <label
                 htmlFor="field-align"
               >
-                <span>
-                  Variation
-                </span>
+                Variation
               </label>
             </div>
           </div>

@@ -4,8 +4,6 @@ exports[`renders a Grid Tile Proxy Item component 1`] = `
 <div
   className="listing"
 >
-  <span>
-    No results found.
-  </span>
+  No results found.
 </div>
 `;

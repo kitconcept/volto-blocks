@@ -8,9 +8,7 @@ exports[`renders a Teaser Hero Sidebar component 1`] = `
     className="header pulled"
   >
     <h2>
-      <span>
-        Teaser Hero
-      </span>
+      Teaser Hero
     </h2>
   </header>
   <div
@@ -158,9 +156,7 @@ exports[`renders a Teaser Hero Sidebar component 1`] = `
               <label
                 htmlFor="field-align"
               >
-                <span>
-                  Variation
-                </span>
+                Variation
               </label>
             </div>
           </div>

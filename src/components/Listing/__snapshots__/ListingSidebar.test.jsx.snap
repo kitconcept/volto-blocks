@@ -8,9 +8,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
     className="header pulled"
   >
     <h2>
-      <span>
-        Listing
-      </span>
+      Listing
     </h2>
   </header>
   <div
