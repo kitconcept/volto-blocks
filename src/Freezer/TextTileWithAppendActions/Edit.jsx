@@ -12,7 +12,7 @@ import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import Editor from 'draft-js-plugins-editor';
 import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import { includes, isEqual } from 'lodash';
 import cx from 'classnames';
 
@@ -57,7 +57,6 @@ class Edit extends Component {
     onSelectTile: PropTypes.func.isRequired,
     appendActions: PropTypes.node,
     appendSecondaryActions: PropTypes.node,
-    intl: intlShape.isRequired,
   };
 
   /**

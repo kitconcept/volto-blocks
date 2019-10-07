@@ -8,7 +8,6 @@ import cx from 'classnames';
 import find from 'lodash/find';
 import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
 import templates from './templates';
 
 const messages = defineMessages({

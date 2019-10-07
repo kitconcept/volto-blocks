@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Accordion, Form, Grid, Segment } from 'semantic-ui-react';
-import {
-  defineMessages,
-  FormattedMessage,
-  injectIntl,
-  intlShape,
-} from 'react-intl';
+import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import { CheckboxWidget, Icon, TextWidget } from '@plone/volto/components';
 import { settings } from '~/config';
 import { AlignTile, flattenToAppURL } from '@plone/volto/helpers';
@@ -208,8 +203,7 @@ ImageData.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   tile: PropTypes.string.isRequired,
   onChangeTile: PropTypes.func.isRequired,
-  openObjectBrowser: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
+  openObjectBrowser: PropTypes.func.isRequired,,
 };
 
 export default injectIntl(ImageData);

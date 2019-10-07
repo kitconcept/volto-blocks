@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
 import { Accordion, Segment } from 'semantic-ui-react';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Icon } from '@plone/volto/components';
 
 import ImageData from './ImageData';
@@ -78,8 +78,7 @@ GridSidebar.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   tile: PropTypes.string.isRequired,
   onChangeTile: PropTypes.func.isRequired,
-  openObjectBrowser: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
+  openObjectBrowser: PropTypes.func.isRequired,,
 };
 
 export default compose(

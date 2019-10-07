@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { defineMessages, injectIntl, intlShape } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import { Button, Input, Segment } from 'semantic-ui-react';
 import { join } from 'lodash';
 import { searchContent } from '@plone/volto/actions';
@@ -62,7 +62,6 @@ class ObjectBrowser extends Component {
     searchContent: PropTypes.func.isRequired,
     closeBrowser: PropTypes.func.isRequired,
     onChangeTile: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
   };
 
   /**
