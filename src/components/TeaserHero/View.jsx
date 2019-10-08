@@ -4,7 +4,7 @@ import TeaserHeroBody from './TeaserHeroBody';
 
 const View = ({ data, properties, blockID }) => {
   return (
-    <div className="tile listing">
+    <div className="tile teaserHero">
       <TeaserHeroBody data={data} properties={properties} blockID={blockID} />
     </div>
   );
