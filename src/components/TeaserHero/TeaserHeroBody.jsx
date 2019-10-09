@@ -18,15 +18,15 @@ const messages = defineMessages({
   },
 });
 
-const TeaserHeroBody = ({ data, blockID, isEditMode, intl }) => {
+const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
   const contentSubrequests = useSelector(state => state.content.subrequests);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (data.href) {
-      dispatch(getContent(data.href, null, blockID));
+      dispatch(getContent(data.href, null, id));
     }
-  }, [dispatch, data, blockID]);
+  }, [dispatch, data, id]);
 
   return (
     <>
@@ -46,8 +46,8 @@ const TeaserHeroBody = ({ data, blockID, isEditMode, intl }) => {
       )}
       {data.href &&
         contentSubrequests &&
-        contentSubrequests[blockID] &&
-        contentSubrequests[blockID].data && (
+        contentSubrequests[id] &&
+        contentSubrequests[id].data && (
           <div
             className={cx('teaser-item', data.variation, {
               padded: data.isPadded,
@@ -56,24 +56,22 @@ const TeaserHeroBody = ({ data, blockID, isEditMode, intl }) => {
             {(() => {
               const item = (
                 <>
-                  {contentSubrequests[blockID]?.data?.image && (
+                  {contentSubrequests[id]?.data?.image && (
                     <img
-                      src={contentSubrequests[blockID].data.image.download}
+                      src={contentSubrequests[id].data.image.download}
                       alt=""
                     />
                   )}
                   <div>
-                    <h3>{contentSubrequests[blockID].data.title}</h3>
-                    <p>{contentSubrequests[blockID].data.description}</p>
+                    <h3>{contentSubrequests[id].data.title}</h3>
+                    <p>{contentSubrequests[id].data.description}</p>
                   </div>
                 </>
               );
               if (!isEditMode) {
                 return (
                   <Link
-                    to={flattenToAppURL(
-                      contentSubrequests[blockID].data['@id'],
-                    )}
+                    to={flattenToAppURL(contentSubrequests[id].data['@id'])}
                     target={data.openLinkInNewTab ? '_blank' : null}
                   >
                     {item}

@@ -23,7 +23,7 @@ const Edit = ({ data, onChangeTile, tile, selected, properties }) => {
         <TeaserHeroBody
           data={data}
           properties={properties}
-          blockID={tile}
+          id={tile}
           isEditMode
         />
       )}

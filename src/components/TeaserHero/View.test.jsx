@@ -15,7 +15,7 @@ test('renders a view teaser hero block', () => {
         variation: 'left',
         padded: true,
       }}
-      blockID="1c58b5a2-26fb-4112-832b-fad88af1ae0e"
+      id="1c58b5a2-26fb-4112-832b-fad88af1ae0e"
     />,
   );
   const json = component.toJSON();

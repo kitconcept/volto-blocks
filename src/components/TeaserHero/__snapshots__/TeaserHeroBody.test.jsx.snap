@@ -1,3 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a Grid Tile Proxy Item component 1`] = `null`;
+exports[`renders a Grid Tile Proxy Item component 1`] = `
+<div
+  className="teaser-item left"
+>
+  <a
+    href="/http://theitem"
+    onClick={[Function]}
+    target={null}
+  >
+    <img
+      alt=""
+      src="http://image"
+    />
+    <div>
+      <h3>
+        the title
+      </h3>
+      <p>
+        the description
+      </p>
+    </div>
+  </a>
+</div>
+`;
