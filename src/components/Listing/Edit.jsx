@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import cx from 'classnames';
 
 import { SidebarPortal } from '@plone/volto/components';
 
