@@ -9,7 +9,6 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 
 import { Icon, SidebarPortal } from '@plone/volto/components';
-import { createContent } from '@plone/volto/actions';
 
 import imageSVG from '@plone/volto/icons/image.svg';
 import textSVG from '@plone/volto/icons/text.svg';
@@ -22,8 +21,6 @@ import {
   reorderArray,
   replaceItemOfArray,
 } from '@kitconcept/volto-tiles/helpers';
-
-import { gridConfig } from './View';
 
 /**
  * Edit image tile class.
@@ -56,6 +53,7 @@ class Edit extends Component {
     createContent: PropTypes.func.isRequired,
     gridType: PropTypes.string,
     templates: PropTypes.array.isRequired,
+    sidebarData: PropTypes.func.isRequired,
   };
 
   /**
@@ -68,9 +66,6 @@ class Edit extends Component {
     super(props);
 
     this.onChangeTile = this.onChangeTile.bind(this);
-    this.state = {
-      uploading: false,
-    };
 
     // sets defaults
     if (!this.props.data.columns) {
@@ -81,33 +76,15 @@ class Edit extends Component {
     }
   }
 
-  /**
-   * Component will receive props
-   * @method componentWillReceiveProps
-   * @param {Object} nextProps Next properties
-   * @returns {undefined}
-   */
-  componentWillReceiveProps(nextProps) {
-    // This is required on upload images, sets the info on data of the new uploaded image.
-    if (this.props.request.loading && nextProps.request.loaded) {
-      this.props.onChangeTile(this.props.tile, {
-        ...this.props.data,
-        columns: replaceItemOfArray(
-          this.props.data.columns,
-          this.state.uploadedImageIndex,
-          {
-            ...this.props.data.columns[this.state.uploadedImageIndex],
-            url: nextProps.content['@id'],
-          },
-        ),
-      });
-    }
-  }
-
-  updateUploadedImageIndex = index =>
-    this.setState({
-      uploadedImageIndex: index,
+  onChangeGridItem = (index, gridItemData) => {
+    this.props.onChangeTile(this.props.tile, {
+      ...this.props.data,
+      columns: replaceItemOfArray(this.props.data.columns, index, {
+        ...this.props.data.columns[index],
+        ...gridItemData,
+      }),
     });
+  };
 
   /**
    * Align tile handler
@@ -182,12 +159,6 @@ class Edit extends Component {
     }
   };
 
-  selectCard = (e, index) => {
-    e.stopPropagation();
-    this.setState({ currentSelectedCard: index });
-    this.props.onSelectTile(this.props.tile);
-  };
-
   removeColumn = (e, index) => {
     e.stopPropagation();
     const newColumnsState = this.props.data.columns.filter(
@@ -221,13 +192,6 @@ class Edit extends Component {
     });
   };
 
-  handleClickOutside = e => {
-    if (this.node.current && doesNodeContainClick(this.node.current, e)) return;
-    this.setState(() => ({
-      currentSelectedCard: null,
-    }));
-  };
-
   onSelectTemplate = templateIndex => {
     this.props.onChangeTile(this.props.tile, {
       ...this.props.data,
@@ -252,58 +216,54 @@ class Edit extends Component {
           />
         )}
         {/* Remaining code from the Uber Grid, useful when we implement the multi-item use case */}
-        {this.props.selected &&
-          this.state.currentSelectedCard === null &&
-          !this.props.gridType && (
-            <div className="toolbar">
-              <Button.Group>
-                <Button
-                  icon
-                  basic
-                  onClick={e => this.addNewColumn(e, 'text')}
-                  disabled={this.props.data.columns.length >= 4}
-                >
-                  <Icon name={textSVG} size="24px" />
-                </Button>
-              </Button.Group>
-              <Button.Group>
-                <Button
-                  icon
-                  basic
-                  onClick={e => this.addNewColumn(e, 'image')}
-                  disabled={this.props.data.columns.length >= 4}
-                >
-                  <Icon name={imageSVG} size="24px" />
-                </Button>
-              </Button.Group>
-              <Button.Group>
-                <Button
-                  icon
-                  basic
-                  onClick={e => this.addNewColumn(e, '__card')}
-                  disabled={this.props.data.columns.length >= 4}
-                >
-                  <Icon name={imagesSVG} size="24px" />
-                </Button>
-              </Button.Group>
-            </div>
-          )}
-        {this.props.selected &&
-          this.state.currentSelectedCard === null &&
-          this.props.gridType && (
-            <div className="toolbar">
-              <Button.Group>
-                <Button
-                  icon
-                  basic
-                  onClick={e => this.addNewColumn(e, this.props.gridType)}
-                  disabled={this.props.data.columns.length >= 4}
-                >
-                  <Icon name={addSVG} size="24px" />
-                </Button>
-              </Button.Group>
-            </div>
-          )}
+        {this.props.selected && !this.props.gridType && (
+          <div className="toolbar">
+            <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={e => this.addNewColumn(e, 'text')}
+                disabled={this.props.data.columns.length >= 4}
+              >
+                <Icon name={textSVG} size="24px" />
+              </Button>
+            </Button.Group>
+            <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={e => this.addNewColumn(e, 'image')}
+                disabled={this.props.data.columns.length >= 4}
+              >
+                <Icon name={imageSVG} size="24px" />
+              </Button>
+            </Button.Group>
+            <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={e => this.addNewColumn(e, '__card')}
+                disabled={this.props.data.columns.length >= 4}
+              >
+                <Icon name={imagesSVG} size="24px" />
+              </Button>
+            </Button.Group>
+          </div>
+        )}
+        {this.props.selected && this.props.gridType && (
+          <div className="toolbar">
+            <Button.Group>
+              <Button
+                icon
+                basic
+                onClick={e => this.addNewColumn(e, this.props.gridType)}
+                disabled={this.props.data.columns.length >= 4}
+              >
+                <Icon name={addSVG} size="24px" />
+              </Button>
+            </Button.Group>
+          </div>
+        )}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId={uuid()} direction="horizontal">
             {provided => (
@@ -333,20 +293,11 @@ class Edit extends Component {
                                 // This prevents propagation of ENTER
                                 onKeyDown={e => e.stopPropagation()}
                               >
-                                {(() => {
-                                  const GridTypeComponent =
-                                    gridConfig[item['@type']];
-                                  return (
-                                    <GridTypeComponent
-                                      data={item}
-                                      isEditMode
-                                      index={index}
-                                      updateUploadedImageIndex={
-                                        this.updateUploadedImageIndex
-                                      } // Only for images
-                                    />
-                                  );
-                                })()}
+                                {this.props.render(
+                                  item,
+                                  index,
+                                  this.onChangeGridItem,
+                                )}
                               </div>
                             </Grid.Column>
                           </Ref>
@@ -367,6 +318,7 @@ class Edit extends Component {
             }}
             removeColumn={this.removeColumn}
             addNewColumn={this.addNewColumn}
+            sidebarData={this.props.sidebarData}
           />
         </SidebarPortal>
       </>
@@ -381,6 +333,6 @@ export default compose(
       request: state.content.create,
       content: state.content.data,
     }),
-    { createContent },
+    {},
   ),
 )(Edit);

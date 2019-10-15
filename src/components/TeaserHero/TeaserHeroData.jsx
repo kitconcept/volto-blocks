@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Form, Grid, Segment } from 'semantic-ui-react';
-import TeaserData from '../Grid/TeaserData';
+import TeaserData from '../TeaserGrid/TeaserData';
 import TeaserHeroVariations from './TeaserHeroVariations';
 
 const TeaserHeroData = ({

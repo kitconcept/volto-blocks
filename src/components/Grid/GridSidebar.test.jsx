@@ -52,6 +52,7 @@ test('renders a Grid Tile Sidebar component', () => {
         pathname="/news"
         onChangeTile={() => {}}
         openObjectBrowser={() => {}}
+        sidebarData={() => <div />}
       />
     </Provider>,
   );

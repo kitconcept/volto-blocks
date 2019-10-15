@@ -22,20 +22,17 @@ const messages = defineMessages({
   },
 });
 
-const ImageItem = ({
-  data,
-  isEditMode,
-  updateUploadedImageIndex,
-  index,
-  intl,
-}) => {
-  const [uploading, setUploading] = React.useState(false);
+const ImageItem = ({ data, isEditMode, onChangeGridItem, index, intl }) => {
+  const [uploadedImageIndex, setUploadedImageIndex] = React.useState(null);
   const dispatch = useDispatch();
   const pathname = useSelector(state => state.router.location.pathname);
+  const request = useSelector(state => state.content.create);
+  const content = useSelector(state => state.content.data);
+  const uploading = React.useRef(false);
 
   const onDropImage = file => {
-    setUploading(true);
-    updateUploadedImageIndex(index);
+    uploading.current = true;
+    setUploadedImageIndex(index);
 
     readAsDataURL(file[0]).then(data => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
@@ -54,14 +51,20 @@ const ImageItem = ({
     });
   };
 
-  React.useEffect(() => setUploading(false), [data]);
+  React.useEffect(() => {
+    if (request.loaded && uploading.current) {
+      uploading.current = false;
+      onChangeGridItem(uploadedImageIndex, { url: content['@id'] });
+    }
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [request.loading]);
 
   return (
     <>
       {!data.url && (
         <Dropzone onDrop={onDropImage} className="dropzone">
           <Message>
-            {uploading && (
+            {uploading.current && (
               <Dimmer active>
                 <Loader indeterminate>
                   {intl.formatMessage(messages.UploadingImage)}
@@ -109,6 +112,7 @@ const ImageItem = ({
 
 ImageItem.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
+  onChangeGridItem: PropTypes.func,
   isEditMode: PropTypes.bool,
 };
 

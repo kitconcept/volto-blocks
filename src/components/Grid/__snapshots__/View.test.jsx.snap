@@ -11,28 +11,28 @@ exports[`renders a grid view component 1`] = `
       className="column"
     >
       <div
-        className="thetile"
+        className="the item"
       />
     </div>
     <div
       className="column"
     >
       <div
-        className="thetile"
+        className="the item"
       />
     </div>
     <div
       className="column"
     >
       <div
-        className="thetile"
+        className="the item"
       />
     </div>
     <div
       className="column"
     >
       <div
-        className="thetile"
+        className="the item"
       />
     </div>
   </div>

@@ -8,20 +8,12 @@ import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react';
 import cx from 'classnames';
 
-import TeaserItem from './TeaserItem';
-import ImageItem from './ImageItem';
-
-export const gridConfig = {
-  teaser: TeaserItem,
-  image: ImageItem,
-};
-
 /**
  * View image tile class.
  * @class View
  * @extends Component
  */
-const View = ({ data }) => {
+const View = ({ data, render }) => {
   return (
     <div
       className={cx('tile __grid', {
@@ -32,12 +24,7 @@ const View = ({ data }) => {
     >
       <Grid columns={data.columns.length}>
         {data.columns.map(column => (
-          <Grid.Column key={column.id}>
-            {(() => {
-              const GridTypeComponent = gridConfig[column['@type']];
-              return <GridTypeComponent data={column} />;
-            })()}
-          </Grid.Column>
+          <Grid.Column key={column.id}>{render(column)}</Grid.Column>
         ))}
       </Grid>
     </div>
@@ -51,6 +38,7 @@ const View = ({ data }) => {
  */
 View.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
+  render: PropTypes.func.isRequired,
 };
 
 export default View;

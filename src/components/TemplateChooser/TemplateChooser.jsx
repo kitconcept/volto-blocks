@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 
 const TemplateChooser = ({ templates, onSelectTemplate, intl }) => {
   return (
-    <div classaName="template-chooser">
+    <div className="template-chooser">
       <Message>
         <Grid columns={templates.length}>
           {templates.map((template, index) => (

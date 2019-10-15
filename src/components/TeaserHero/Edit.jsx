@@ -5,7 +5,21 @@ import TeaserHeroBody from './TeaserHeroBody';
 import TemplateChooser from '../TemplateChooser/TemplateChooser';
 import templates from './templates';
 
-const Edit = ({ data, onChangeTile, tile, selected, properties }) => {
+const Edit = ({
+  data,
+  onChangeTile,
+  tile,
+  id,
+  selected,
+  properties,
+  render,
+}) => {
+  const teaserHeroBodyRender = render ? (
+    <>{render(data, id)}</>
+  ) : (
+    <TeaserHeroBody data={data} id={id} isEditMode />
+  );
+
   return (
     <>
       {!data.variation && (
@@ -19,14 +33,7 @@ const Edit = ({ data, onChangeTile, tile, selected, properties }) => {
           }
         />
       )}
-      {data.variation && (
-        <TeaserHeroBody
-          data={data}
-          properties={properties}
-          id={tile}
-          isEditMode
-        />
-      )}
+      {data.variation && teaserHeroBodyRender}
       <SidebarPortal selected={selected}>
         <TeaserHeroSidebar
           data={data}

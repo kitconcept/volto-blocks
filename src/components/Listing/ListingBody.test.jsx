@@ -4,11 +4,11 @@ import configureStore from 'redux-mock-store';
 import { Provider } from 'react-intl-redux';
 import { MemoryRouter } from 'react-router-dom';
 
-import ListingItem from './ListingItem';
+import ListingBody from './ListingBody';
 
 const mockStore = configureStore();
 
-test('renders a Grid Tile Proxy Item component', () => {
+test('renders a ListingBody component', () => {
   const store = mockStore({
     querystringsearch: {
       subrequests: {
@@ -41,7 +41,7 @@ test('renders a Grid Tile Proxy Item component', () => {
   const component = renderer.create(
     <Provider store={store}>
       <MemoryRouter>
-        <ListingItem
+        <ListingBody
           id="dcdf1f42-645d-48f6-9531-357bdc2e1881"
           data={{
             '@type': 'listing',

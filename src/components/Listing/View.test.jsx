@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import View from './View';
 
-jest.mock('./ListingItem', () => jest.fn(() => <div className="thetile" />));
+jest.mock('./ListingBody', () => jest.fn(() => <div className="thetile" />));
 
 test('renders a view image component for the listing tile', () => {
   const component = renderer.create(

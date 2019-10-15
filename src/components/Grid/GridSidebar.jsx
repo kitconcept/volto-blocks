@@ -4,16 +4,13 @@ import { Accordion, Button, Segment } from 'semantic-ui-react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Icon } from '@plone/volto/components';
 
-import ImageData from './ImageData';
-import TeaserData from './TeaserData';
-
 import upSVG from '@plone/volto/icons/up-key.svg';
 import downSVG from '@plone/volto/icons/down-key.svg';
 import trashSVG from '@plone/volto/icons/delete.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
 const GridSidebar = props => {
-  const { data, gridType } = props;
+  const { data, gridType, sidebarData } = props;
   const [activeAccIndex, setActiveAccIndex] = React.useState(0);
 
   function handleAccClick(e, titleProps) {
@@ -90,12 +87,7 @@ const GridSidebar = props => {
                 </div>
               </Accordion.Title>
               <Accordion.Content active={activeAccIndex === index}>
-                {gridType === 'image' && (
-                  <ImageData {...props} data={{ ...column, index }} />
-                )}
-                {gridType === 'teaser' && (
-                  <TeaserData {...props} data={{ ...column, index }} />
-                )}
+                {sidebarData(props, column, index)}
               </Accordion.Content>
             </React.Fragment>
           ))}
@@ -108,6 +100,7 @@ GridSidebar.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   tile: PropTypes.string.isRequired,
   onChangeTile: PropTypes.func.isRequired,
+  sidebarData: PropTypes.func.isRequired,
 };
 
 export default injectIntl(GridSidebar);
