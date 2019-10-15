@@ -41,7 +41,7 @@ const TeaserItem = ({ data, tile, isEditMode, intl }) => {
         contentSubrequests &&
         contentSubrequests[tileID] &&
         contentSubrequests[tileID].data && (
-          <div className="grid-teaser-item">
+          <div className="grid-teaser-item top">
             {(() => {
               const item = (
                 <>

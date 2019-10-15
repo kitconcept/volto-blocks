@@ -1,17 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Form, Grid, Segment } from 'semantic-ui-react';
-import { CheckboxWidget } from '@plone/volto/components';
 import TeaserData from '../Grid/TeaserData';
 import TeaserHeroVariations from './TeaserHeroVariations';
-
-const messages = defineMessages({
-  isPadded: {
-    id: 'ispadded',
-    defaultMessage: 'Add padding',
-  },
-});
 
 const TeaserHeroData = ({
   data,
@@ -48,18 +40,6 @@ const TeaserHeroData = ({
             </Grid.Row>
           </Grid>
         </Form.Field>
-
-        <CheckboxWidget
-          id="isPadded"
-          title={intl.formatMessage(messages.isPadded)}
-          value={data.isPadded ? data.isPadded : false}
-          onChange={(name, value) => {
-            onChangeTile(tile, {
-              ...data,
-              isPadded: value,
-            });
-          }}
-        />
       </Segment>
     </>
   );

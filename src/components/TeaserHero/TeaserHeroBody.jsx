@@ -48,11 +48,7 @@ const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
         contentSubrequests &&
         contentSubrequests[id] &&
         contentSubrequests[id].data && (
-          <div
-            className={cx('teaser-item', data.variation, {
-              padded: data.isPadded,
-            })}
-          >
+          <div className={cx('teaser-item', data.variation, {})}>
             {(() => {
               const item = (
                 <>
