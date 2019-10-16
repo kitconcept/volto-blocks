@@ -20,6 +20,7 @@ const TeaserItem = ({ data, tile, isEditMode, intl }) => {
   const contentSubrequests = useSelector(state => state.content.subrequests);
   const dispatch = useDispatch();
   const tileID = data.id || tile;
+  const result = contentSubrequests?.[tileID]?.data;
 
   React.useEffect(() => {
     if (data.href) {
@@ -37,39 +38,31 @@ const TeaserItem = ({ data, tile, isEditMode, intl }) => {
           </div>
         </Message>
       )}
-      {data.href &&
-        contentSubrequests &&
-        contentSubrequests[tileID] &&
-        contentSubrequests[tileID].data && (
-          <div className="grid-teaser-item top">
-            {(() => {
-              const item = (
-                <>
-                  {contentSubrequests[tileID]?.data?.image && (
-                    <img
-                      src={contentSubrequests[tileID].data.image.download}
-                      alt=""
-                    />
-                  )}
-                  <h3>{contentSubrequests[tileID].data.title}</h3>
-                  <p>{contentSubrequests[tileID].data.description}</p>
-                </>
+      {data.href && result && (
+        <div className="grid-teaser-item top">
+          {(() => {
+            const item = (
+              <>
+                {result?.image && <img src={result.image.download} alt="" />}
+                <h3>{result.title}</h3>
+                <p>{result.description}</p>
+              </>
+            );
+            if (!isEditMode) {
+              return (
+                <Link
+                  to={flattenToAppURL(result['@id'])}
+                  target={data.openLinkInNewTab ? '_blank' : null}
+                >
+                  {item}
+                </Link>
               );
-              if (!isEditMode) {
-                return (
-                  <Link
-                    to={flattenToAppURL(contentSubrequests[tileID].data['@id'])}
-                    target={data.openLinkInNewTab ? '_blank' : null}
-                  >
-                    {item}
-                  </Link>
-                );
-              } else {
-                return item;
-              }
-            })()}
-          </div>
-        )}
+            } else {
+              return item;
+            }
+          })()}
+        </div>
+      )}
     </>
   );
 };

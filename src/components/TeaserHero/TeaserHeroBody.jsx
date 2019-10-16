@@ -21,6 +21,7 @@ const messages = defineMessages({
 const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
   const contentSubrequests = useSelector(state => state.content.subrequests);
   const dispatch = useDispatch();
+  const result = contentSubrequests?.[id]?.data;
 
   React.useEffect(() => {
     if (data.href) {
@@ -44,41 +45,33 @@ const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
           </div>
         </Message>
       )}
-      {data.href &&
-        contentSubrequests &&
-        contentSubrequests[id] &&
-        contentSubrequests[id].data && (
-          <div className={cx('teaser-item', data.variation, {})}>
-            {(() => {
-              const item = (
-                <>
-                  {contentSubrequests[id]?.data?.image && (
-                    <img
-                      src={contentSubrequests[id].data.image.download}
-                      alt=""
-                    />
-                  )}
-                  <div>
-                    <h3>{contentSubrequests[id].data.title}</h3>
-                    <p>{contentSubrequests[id].data.description}</p>
-                  </div>
-                </>
+      {data.href && result && (
+        <div className={cx('teaser-item', data.variation, {})}>
+          {(() => {
+            const item = (
+              <>
+                {result?.image && <img src={result.image.download} alt="" />}
+                <div>
+                  <h3>{result.title}</h3>
+                  <p>{result.description}</p>
+                </div>
+              </>
+            );
+            if (!isEditMode) {
+              return (
+                <Link
+                  to={flattenToAppURL(result['@id'])}
+                  target={data.openLinkInNewTab ? '_blank' : null}
+                >
+                  {item}
+                </Link>
               );
-              if (!isEditMode) {
-                return (
-                  <Link
-                    to={flattenToAppURL(contentSubrequests[id].data['@id'])}
-                    target={data.openLinkInNewTab ? '_blank' : null}
-                  >
-                    {item}
-                  </Link>
-                );
-              } else {
-                return item;
-              }
-            })()}
-          </div>
-        )}
+            } else {
+              return item;
+            }
+          })()}
+        </div>
+      )}
     </>
   );
 };
