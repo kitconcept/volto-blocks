@@ -256,7 +256,6 @@ class Edit extends Component {
                 icon
                 basic
                 onClick={e => this.addNewColumn(e, this.props.gridType)}
-                disabled={this.props.data.columns.length >= 4}
               >
                 <Icon name={addSVG} size="24px" />
               </Button>
