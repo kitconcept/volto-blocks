@@ -43,7 +43,9 @@ const TeaserItem = ({ data, tile, isEditMode, intl }) => {
           {(() => {
             const item = (
               <>
-                {result?.image && <img src={result.image.download} alt="" />}
+                {result?.image && (
+                  <img src={flattenToAppURL(result.image.download)} alt="" />
+                )}
                 <h3>{result.title}</h3>
                 <p>{result.description}</p>
               </>
