@@ -1,8 +1,3 @@
-/**
- * Edit text block.
- * @module components/manage/Blocks/Title/Edit
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import Editor from 'draft-js-plugins-editor';
@@ -20,7 +15,7 @@ const messages = defineMessages({
   },
 });
 
-const Textbody = props => {
+const TextBody = props => {
   const { data, block, onChangeBlock } = props;
 
   let initialEditorState, initialInlineToolbarPlugin;
@@ -45,31 +40,24 @@ const Textbody = props => {
   const intl = useIntl();
 
   // React.useEffect(() => {
-  //   if (editorRef.current) {
-  //     editorRef.current.focus();
-  //   }
-  // }, [props.data.text]);
-
-  React.useEffect(() => {
-    onChangeBlock: block,
-      {
-        ...data,
-        text: convertToRaw(editorState.getCurrentContent()),
-      };
-  }, [editorState]);
+  //   onChangeBlock(block, {
+  //     ...data,
+  //     text: convertToRaw(editorState.getCurrentContent()),
+  //   });
+  // }, [editorState]);
 
   function onChange(currentEditorState) {
-    // if (
-    //   !isEqual(
-    //     convertToRaw(currentEditorState.getCurrentContent()),
-    //     convertToRaw(editorState.getCurrentContent()),
-    //   )
-    // ) {
-    //   onChangeBlock:(block, {
-    //     ...data,
-    //     text: convertToRaw(currentEditorState.getCurrentContent()),
-    //   });
-    // }
+    if (
+      !isEqual(
+        convertToRaw(currentEditorState.getCurrentContent()),
+        convertToRaw(editorState.getCurrentContent()),
+      )
+    ) {
+      onChangeBlock(block, {
+        ...data,
+        text: convertToRaw(currentEditorState.getCurrentContent()),
+      });
+    }
     setEditorState(currentEditorState);
   }
 
@@ -137,7 +125,7 @@ const Textbody = props => {
   }
 };
 
-Textbody.propTypes = {
+TextBody.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   selected: PropTypes.bool.isRequired,
   block: PropTypes.string.isRequired,
@@ -150,4 +138,4 @@ Textbody.propTypes = {
   onSelectBlock: PropTypes.func.isRequired,
 };
 
-export default Textbody;
+export default TextBody;

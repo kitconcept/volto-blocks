@@ -4,7 +4,7 @@ import { Accordion, Form, Grid, Segment } from 'semantic-ui-react';
 import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import { CheckboxWidget, Icon, TextWidget } from '@plone/volto/components';
 import { settings } from '~/config';
-import { Alignblock, flattenToAppURL } from '@plone/volto/helpers';
+import { AlignBlock, flattenToAppURL } from '@plone/volto/helpers';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import upSVG from '@plone/volto/icons/up-key.svg';
