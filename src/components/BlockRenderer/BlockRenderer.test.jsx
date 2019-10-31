@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import TileRenderer from './TileRenderer';
+import BlockRenderer from './BlockRenderer';
 import { Provider } from 'react-intl-redux';
 import configureStore from 'redux-mock-store';
 
@@ -8,7 +8,7 @@ const mockStore = configureStore();
 
 global.__SERVER__ = true; // eslint-disable-line no-underscore-dangle
 
-test('renders a text tile component using the tile renderer', () => {
+test('renders a text block component using the block renderer', () => {
   const store = mockStore({
     intl: {
       locale: 'en',
@@ -17,13 +17,13 @@ test('renders a text tile component using the tile renderer', () => {
   });
   const component = renderer.create(
     <Provider store={store}>
-      <TileRenderer
+      <BlockRenderer
         data={{ url: 'heroimage.jpg' }}
-        tile="thetileid"
+        block="theblockid"
         edit
         type="text"
         selected={false}
-        onChangeTile={() => {}}
+        onChangeBlock={() => {}}
       />
     </Provider>,
   );

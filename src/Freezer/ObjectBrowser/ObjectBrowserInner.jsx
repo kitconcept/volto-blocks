@@ -24,7 +24,7 @@ import imageSVG from '@plone/volto/icons/image.svg';
 import ObjectBrowserNav from './ObjectBrowserNav';
 
 const messages = defineMessages({
-  ImageTileInputPlaceholder: {
+  ImageBlockInputPlaceholder: {
     id: 'Browse or type URL',
     defaultMessage: 'Browse or type URL',
   },
@@ -56,12 +56,12 @@ class ObjectBrowser extends Component {
    * @static
    */
   static propTypes = {
-    tile: PropTypes.string.isRequired,
+    block: PropTypes.string.isRequired,
     data: PropTypes.objectOf(PropTypes.any).isRequired,
     searchSubrequests: PropTypes.objectOf(PropTypes.any).isRequired,
     searchContent: PropTypes.func.isRequired,
     closeBrowser: PropTypes.func.isRequired,
-    onChangeTile: PropTypes.func.isRequired,
+    onChangeBlock: PropTypes.func.isRequired,
   };
 
   /**
@@ -137,7 +137,7 @@ class ObjectBrowser extends Component {
           sort_on: 'getObjPositionInParent',
           metadata_fields: '_all',
         },
-        `${this.props.tile}-${mode}`,
+        `${this.props.block}-${mode}`,
       );
     } else {
       this.props.searchContent(
@@ -147,14 +147,14 @@ class ObjectBrowser extends Component {
           sort_on: 'getObjPositionInParent',
           metadata_fields: '_all',
         },
-        `${this.props.tile}-${mode}`,
+        `${this.props.block}-${mode}`,
       );
     }
   };
 
   onChangeField = (name, value) => {
     this.setState({ [name]: value });
-    this.onChangeTileData(name, value);
+    this.onChangeBlockData(name, value);
   };
 
   getIcon = icon => {
@@ -191,7 +191,7 @@ class ObjectBrowser extends Component {
         sort_on: 'getObjPositionInParent',
         metadata_fields: '_all',
       },
-      `${this.props.tile}-${this.state.mode}`,
+      `${this.props.block}-${this.state.mode}`,
     );
     const parent = `${join(id.split('/').slice(0, -1), '/')}` || '/';
     this.setState(() => ({
@@ -229,7 +229,7 @@ class ObjectBrowser extends Component {
             SearchableText: `${text}*`,
             metadata_fields: '_all',
           },
-          `${this.props.tile}-${this.state.mode}`,
+          `${this.props.block}-${this.state.mode}`,
         )
       : this.props.searchContent(
           '/',
@@ -238,13 +238,13 @@ class ObjectBrowser extends Component {
             sort_on: 'getObjPositionInParent',
             metadata_fields: '_all',
           },
-          `${this.props.tile}-${this.state.mode}`,
+          `${this.props.block}-${this.state.mode}`,
         );
   };
 
   onSelectItem = url => {
     if (this.state.mode === 'image') {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         url: `${settings.apiPath}${url}`,
       });
@@ -253,7 +253,7 @@ class ObjectBrowser extends Component {
         currentImageFolder: getParentURL(url),
       });
     } else {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         href: url,
       });
@@ -264,8 +264,8 @@ class ObjectBrowser extends Component {
     }
   };
 
-  onChangeTileData = (key, value) => {
-    this.props.onChangeTile(this.props.tile, {
+  onChangeBlockData = (key, value) => {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       [key]: value,
     });
@@ -353,7 +353,7 @@ class ObjectBrowser extends Component {
                   className="search"
                   onChange={this.onSearch}
                   placeholder={this.props.intl.formatMessage(
-                    messages.ImageTileInputPlaceholder,
+                    messages.ImageBlockInputPlaceholder,
                   )}
                 />
               </form>
@@ -398,7 +398,7 @@ class ObjectBrowser extends Component {
           <ObjectBrowserNav
             currentSearchResults={
               this.props.searchSubrequests[
-                `${this.props.tile}-${this.state.mode}`
+                `${this.props.block}-${this.state.mode}`
               ]
             }
             selected={

@@ -1,5 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Text tile renders an edit text tile component 1`] = `<div />`;
+exports[`Text block renders an edit text block component 1`] = `<div />`;
 
-exports[`Text tile renders an edit text tile component in detached mode 1`] = `<div />`;
+exports[`Text block renders an edit text block component in detached mode 1`] = `<div />`;

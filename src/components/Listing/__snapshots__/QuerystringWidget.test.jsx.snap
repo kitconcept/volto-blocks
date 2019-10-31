@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a listing tile querystring widget component 1`] = `
+exports[`renders a listing block querystring widget component 1`] = `
 <div
   className="inline field"
   id="field-my-field"

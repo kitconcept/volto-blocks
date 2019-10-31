@@ -1,8 +1,8 @@
 @teaserHeroWidth: 80%;
 
-.tile.imagesGrid,
-.tile.teaserGrid,
-.tile.grid {
+.block.imagesGrid,
+.block.teaserGrid,
+.block.grid {
   .ui.grid {
     margin-top: 0;
     margin-bottom: 0;
@@ -15,8 +15,8 @@
 
 // This has to be backported to Volto core
 
-// Tile Modal
-.ui.modal.tile {
+// Block Modal
+.ui.modal.block {
   top: initial;
   left: initial;
   margin-right: auto;
@@ -55,22 +55,22 @@
   }
 }
 
-.tile .tile.detached:hover::after {
+.block .block.detached:hover::after {
   border: none;
 }
 
-.tile .tile.detached:not(.inner)::after {
+.block .block.detached:not(.inner)::after {
   display: none;
 }
 
-// .tile.image.align.center img {
+// .block.image.align.center img {
 //   display: block;
 //   width: 100%; // This has to be backported
 //   max-width: 100%;
 //   height: auto;
 // }
 
-.tile .tile-tooltip {
+.block .block-tooltip {
   position: absolute;
   z-index: 5;
   top: -22px;
@@ -83,8 +83,8 @@
   text-transform: uppercase;
 }
 
-.tile.selected .tile-tooltip,
-.tile:hover .tile-tooltip {
+.block.selected .block-tooltip,
+.block:hover .block-tooltip {
   display: block;
 }
 
@@ -180,7 +180,7 @@
 }
 
 // teaserHero edit/view fix for variations
-.tile.inner.teaserHero .teaser-item {
+.block.inner.teaserHero .teaser-item {
   &.left {
     flex-direction: row;
 
@@ -266,7 +266,7 @@
   }
 }
 
-.tiles-chooser .ui.basic.button {
+.blocks-chooser .ui.basic.button {
   text-align: center;
 }
 // End of This has to be backported to Volto core

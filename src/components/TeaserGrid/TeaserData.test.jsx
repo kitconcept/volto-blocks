@@ -24,8 +24,8 @@ test('renders a Proxy Data Sidebar component', () => {
           id: '2110a241-1389-4cda-8811-77031a540efa',
           index: 0,
         }}
-        tile="1234"
-        onChangeTile={() => {}}
+        block="1234"
+        onChangeBlock={() => {}}
         openObjectBrowser={() => {}}
       />
     </Provider>,

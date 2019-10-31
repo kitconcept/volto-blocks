@@ -1,27 +1,27 @@
 {
-  "name": "@kitconcept/volto-tiles",
+  "name": "@kitconcept/volto-blocks",
   "version": "1.0.0",
-  "description": "kitconcept Volto Tiles",
+  "description": "kitconcept Volto Blocks",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kitconcept/volto-tiles.git"
+    "url": "git+https://github.com/kitconcept/volto-blocks.git"
   },
   "keywords": [
     "Volto",
-    "Tile",
+    "Block",
     "ReactJS",
     "Plone"
   ],
   "author": "kitconcept, GmbH",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kitconcept/volto-tiles/issues"
+    "url": "https://github.com/kitconcept/volto-blocks/issues"
   },
-  "homepage": "https://github.com/kitconcept/volto-tiles#readme",
+  "homepage": "https://github.com/kitconcept/volto-blocks#readme",
   "dependencies": {
     "deep-freeze": "0.0.1",
     "react-beautiful-dnd": "10.1.0",

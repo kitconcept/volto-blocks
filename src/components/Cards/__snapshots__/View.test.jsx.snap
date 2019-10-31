@@ -2,7 +2,7 @@
 
 exports[`renders a view image component 1`] = `
 <div
-  className="tile cards centered"
+  className="block cards centered"
 >
   <div
     className="ui four cards centered"

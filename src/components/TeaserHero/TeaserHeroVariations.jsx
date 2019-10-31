@@ -5,9 +5,9 @@ import heroTopSVG from '@plone/volto/icons/hero.svg';
 import heroLeftSVG from '../../icons/hero-left.svg';
 import heroRightSVG from '../../icons/hero-right.svg';
 
-const TeaserHeroVariations = ({ variation, onChangeTile, data, tile }) => {
+const TeaserHeroVariations = ({ variation, onChangeBlock, data, block }) => {
   function onSetVariation(variation) {
-    onChangeTile(tile, {
+    onChangeBlock(block, {
       ...data,
       variation,
     });

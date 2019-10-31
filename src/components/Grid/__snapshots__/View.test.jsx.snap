@@ -2,7 +2,7 @@
 
 exports[`renders a grid view component 1`] = `
 <div
-  className="tile __grid centered"
+  className="block __grid centered"
 >
   <div
     className="ui four column grid"

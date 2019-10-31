@@ -16,7 +16,7 @@ import {
   settings as defaultSettings,
   views as defaultViews,
   widgets as defaultWidgets,
-  tiles as defaultTiles,
+  blocks as defaultBlocks,
 } from '@plone/volto/config';
 
 import {
@@ -34,9 +34,9 @@ import {
   // GridViewBlock,
   // CardEditBlock,
   // CardViewBlock,
-} from '@kitconcept/volto-tiles/components';
+} from '@kitconcept/volto-blocks/components';
 
-import { insertInArray } from '@kitconcept/volto-tiles/helpers';
+import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
@@ -56,13 +56,13 @@ export const widgets = {
 };
 
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
-const customGroupTilesOrder = insertInArray(
-  defaultTiles.groupTilesOrder,
+const customGroupBlocksOrder = insertInArray(
+  defaultBlocks.groupBlocksOrder,
   newTeasersGroup,
   2,
 );
 
-const customTiles = {
+const customBlocks = {
   teaserGrid: {
     id: 'teaserGrid',
     title: 'Teaser grid',
@@ -135,8 +135,8 @@ const customTiles = {
   },
 };
 
-export const tiles = {
-  ...defaultTiles,
-  tilesConfig: { ...defaultTiles.tilesConfig, ...customTiles },
-  groupTilesOrder: customGroupTilesOrder,
+export const blocks = {
+  ...defaultBlocks,
+  blocksConfig: { ...defaultBlocks.blocksConfig, ...customBlocks },
+  groupBlocksOrder: customGroupBlocksOrder,
 };

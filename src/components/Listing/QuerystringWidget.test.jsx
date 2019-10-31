@@ -7,7 +7,7 @@ import QuerystringWidget from './QuerystringWidget';
 
 const mockStore = configureStore();
 
-test('renders a listing tile querystring widget component', () => {
+test('renders a listing block querystring widget component', () => {
   const store = mockStore({
     querystring: { indexes: {} },
     intl: {

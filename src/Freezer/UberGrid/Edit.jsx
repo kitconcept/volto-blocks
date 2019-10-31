@@ -1,8 +1,8 @@
 /* eslint-disable */
 
 /**
- * Edit image tile.
- * @module components/manage/Tiles/Image/Edit
+ * Edit image block.
+ * @module components/manage/Blocks/Image/Edit
  */
 
 import React, { Component } from 'react';
@@ -28,12 +28,12 @@ import imageSVG from '@plone/volto/icons/image.svg';
 import textSVG from '@plone/volto/icons/text.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 
-import { CheckboxWidget, TileModal, TileRenderer } from '../../components';
+import { CheckboxWidget, BlockModal, BlockRenderer } from '../../components';
 
 import GridSidebar from './GridSidebar';
 
 const messages = defineMessages({
-  ImageTileInputPlaceholder: {
+  ImageBlockInputPlaceholder: {
     id: 'Browse or type URL',
     defaultMessage: 'Browse or type URL',
   },
@@ -52,7 +52,7 @@ const reorder = (list, startIndex, endIndex) => {
 };
 
 /**
- * Edit image tile class.
+ * Edit image block class.
  * @class Edit
  * @extends Component
  */
@@ -64,7 +64,7 @@ class Edit extends Component {
    */
   static propTypes = {
     selected: PropTypes.bool.isRequired,
-    tile: PropTypes.string.isRequired,
+    block: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     data: PropTypes.objectOf(PropTypes.any).isRequired,
     content: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -73,11 +73,11 @@ class Edit extends Component {
       loaded: PropTypes.bool,
     }).isRequired,
     pathname: PropTypes.string.isRequired,
-    onChangeTile: PropTypes.func.isRequired,
-    onSelectTile: PropTypes.func.isRequired,
-    onDeleteTile: PropTypes.func.isRequired,
-    onFocusPreviousTile: PropTypes.func.isRequired,
-    onFocusNextTile: PropTypes.func.isRequired,
+    onChangeBlock: PropTypes.func.isRequired,
+    onSelectBlock: PropTypes.func.isRequired,
+    onDeleteBlock: PropTypes.func.isRequired,
+    onFocusPreviousBlock: PropTypes.func.isRequired,
+    onFocusNextBlock: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
     gridType: PropTypes.string,
@@ -93,16 +93,16 @@ class Edit extends Component {
     super(props);
 
     this.onUploadImage = this.onUploadImage.bind(this);
-    this.onChangeTile = this.onChangeTile.bind(this);
+    this.onChangeBlock = this.onChangeBlock.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
-    this.onChangeTileSettings = this.onChangeTileSettings.bind(this);
+    this.onChangeBlockSettings = this.onChangeBlockSettings.bind(this);
     this.state = {
       uploading: false,
       modalOpened: false,
     };
 
     if (!this.props.data.columns) {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         columns: [
           {
@@ -140,7 +140,7 @@ class Edit extends Component {
       this.setState({
         uploading: false,
       });
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         columns: setArrayImmutable(
           this.props.data.columns,
@@ -200,13 +200,13 @@ class Edit extends Component {
   }
 
   /**
-   * Align tile handler
-   * @method onAlignTile
+   * Align block handler
+   * @method onAlignBlock
    * @param {string} align Alignment option
    * @returns {undefined}
    */
-  onAlignTile(align) {
-    this.props.onChangeTile(this.props.tile, {
+  onAlignBlock(align) {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       align,
     });
@@ -247,7 +247,7 @@ class Edit extends Component {
    */
   onSubmitUrl = (e, index) => {
     e.preventDefault();
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: setArrayImmutable(this.props.data.columns, index, {
         ...this.props.data.columns[index],
@@ -276,21 +276,21 @@ class Edit extends Component {
       destination.index,
     );
 
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns,
     });
   };
 
   /**
-   * Change inner tiles handler
-   * @method onChangeTile
+   * Change inner blocks handler
+   * @method onChangeBlock
    * @param {object} editorState Editor state.
    * @param {number} index Editor card index
    * @returns {undefined}
    */
-  onChangeTile(data, index) {
-    this.props.onChangeTile(this.props.tile, {
+  onChangeBlock(data, index) {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: setArrayImmutable(this.props.data.columns, index, {
         ...this.props.data.columns[index],
@@ -300,14 +300,14 @@ class Edit extends Component {
   }
 
   /**
-   * Change tile settings handler
-   * @method onChangeTileSettings
+   * Change block settings handler
+   * @method onChangeBlockSettings
    * @param {string} id Editor state.
    * @param {*} value Editor card index
    * @returns {undefined}
    */
-  onChangeTileSettings(id, value) {
-    this.props.onChangeTile(this.props.tile, {
+  onChangeBlockSettings(id, value) {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       [id]: value || null,
     });
@@ -323,7 +323,7 @@ class Edit extends Component {
       },
     ];
     if (this.props.data.columns.length < 4) {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         columns: newColumnsState,
       });
@@ -333,7 +333,7 @@ class Edit extends Component {
   selectCard = (e, index) => {
     e.stopPropagation();
     this.setState({ currentSelectedCard: index });
-    this.props.onSelectTile(this.props.tile);
+    this.props.onSelectBlock(this.props.block);
   };
 
   removeColumn = (e, index) => {
@@ -341,7 +341,7 @@ class Edit extends Component {
     const newColumnsState = this.props.data.columns.filter(
       (item, i) => i !== index,
     );
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: newColumnsState,
     });
@@ -349,7 +349,7 @@ class Edit extends Component {
 
   clearColumn = (e, index) => {
     e.stopPropagation();
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: setArrayImmutable(this.props.data.columns, index, {
         ...this.props.data.columns[index],
@@ -360,7 +360,7 @@ class Edit extends Component {
 
   onChangeColumnSettings = (e, index, key, value) => {
     e.stopPropagation();
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: setArrayImmutable(this.props.data.columns, index, {
         ...this.props.data.columns[index],
@@ -411,10 +411,10 @@ class Edit extends Component {
       <div
         role="presentation"
         onClick={() => {
-          this.props.onSelectTile(this.props.tile);
+          this.props.onSelectBlock(this.props.block);
           // this.setState({ currentSelectedCard: null });
         }}
-        className={cx('tile grid', {
+        className={cx('block grid', {
           selected: this.props.selected,
           'centered-text': this.props.data.centeredText,
         })}
@@ -423,7 +423,7 @@ class Edit extends Component {
           this.props.handleKeyDown(
             e,
             this.props.index,
-            this.props.tile,
+            this.props.block,
             this.node,
           );
         }}
@@ -542,21 +542,21 @@ class Edit extends Component {
                                 {/* <SidebarPortal selected={this.props.selected}>
                                   <GridSidebar
                                     {...this.props}
-                                    onChangeTile={(tile, data) => {
+                                    onChangeBlock={(block, data) => {
                                       debugger;
-                                      this.onChangeTile(data, index);
+                                      this.onChangeBlock(data, index);
                                     }}
                                   />
                                 </SidebarPortal> */}
-                                <TileRenderer
-                                  tile={item.id}
+                                <BlockRenderer
+                                  block={item.id}
                                   edit
                                   type={item['@type']}
                                   selected={
                                     this.state.currentSelectedCard === index
                                   }
-                                  onChangeTile={(tile, data) =>
-                                    this.onChangeTile(data, index)
+                                  onChangeBlock={(block, data) =>
+                                    this.onChangeBlock(data, index)
                                   }
                                   data={this.props.data.columns[index]}
                                   openObjectBrowser={
@@ -624,7 +624,7 @@ class Edit extends Component {
           </Droppable>
         </DragDropContext>
 
-        <TileModal
+        <BlockModal
           open={this.state.modalOpened}
           data={this.props.data}
           onClose={this.onCloseModal}
@@ -644,31 +644,31 @@ class Edit extends Component {
                     id="centeredText"
                     title="Center cards text"
                     value={this.props.data.centeredText}
-                    onChange={this.onChangeTileSettings}
+                    onChange={this.onChangeBlockSettings}
                   />
                   <CheckboxWidget
                     id="hideText"
                     title="Hide card text"
                     value={this.props.data.hideText}
-                    onChange={this.onChangeTileSettings}
+                    onChange={this.onChangeBlockSettings}
                   />
                   <CheckboxWidget
                     id="noBorders"
                     title="No card borders"
                     value={this.props.data.noBorders}
-                    onChange={this.onChangeTileSettings}
+                    onChange={this.onChangeBlockSettings}
                   />
                   <CheckboxWidget
                     id="expandCards"
                     title="Use all the available card width"
                     value={this.props.data.expandCards}
-                    onChange={this.onChangeTileSettings}
+                    onChange={this.onChangeBlockSettings}
                   />
                 </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </TileModal>
+        </BlockModal>
       </div>
     );
   }

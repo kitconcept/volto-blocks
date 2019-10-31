@@ -45,8 +45,8 @@ const messages = defineMessages({
 
 const ListingData = ({
   data,
-  tile,
-  onChangeTile,
+  block,
+  onChangeBlock,
   openObjectBrowser,
   required = false,
   intl,
@@ -66,27 +66,27 @@ const ListingData = ({
           required={false}
           value={data.query || []}
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               query: value,
             });
           }}
         />
 
-        <Form.Field inline id="field-listingtile-sort-on">
+        <Form.Field inline id="field-listingblock-sort-on">
           <Grid>
             <Grid.Row stretched>
               <Grid.Column width="4">
                 <div className="wrapper">
-                  <label htmlFor="select-listingtile-sort-on">
+                  <label htmlFor="select-listingblock-sort-on">
                     {intl.formatMessage(messages.SortOn)}
                   </label>
                 </div>
               </Grid.Column>
               <Grid.Column width="8">
                 <Select
-                  id="select-listingtile-sort-on"
-                  name="select-listingtile-sort-on"
+                  id="select-listingblock-sort-on"
+                  name="select-listingblock-sort-on"
                   className="react-select-container"
                   classNamePrefix="react-select"
                   // placeholder="Select criteria"
@@ -123,7 +123,7 @@ const ListingData = ({
                           intl.formatMessage(messages.NoSelection),
                   }}
                   onChange={field => {
-                    onChangeTile(tile, {
+                    onChangeBlock(block, {
                       ...data,
                       sort_on: field.value,
                     });
@@ -135,11 +135,11 @@ const ListingData = ({
         </Form.Field>
 
         <CheckboxWidget
-          id="listingtile-sort-on-reverse"
+          id="listingblock-sort-on-reverse"
           title={intl.formatMessage(messages.reversedOrder)}
           value={data.sort_order ? data.sort_order : false}
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               sort_order: value,
             });
@@ -152,7 +152,7 @@ const ListingData = ({
           required={false}
           value={limit}
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               limit: value,
             });
@@ -166,7 +166,7 @@ const ListingData = ({
           required={false}
           value={itemBatchSize}
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               b_size: value,
             });
@@ -180,8 +180,8 @@ const ListingData = ({
 
 ListingData.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
-  tile: PropTypes.string.isRequired,
-  onChangeTile: PropTypes.func.isRequired,
+  block: PropTypes.string.isRequired,
+  onChangeBlock: PropTypes.func.isRequired,
   openObjectBrowser: PropTypes.func.isRequired,
 };
 

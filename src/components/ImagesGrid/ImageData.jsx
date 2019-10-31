@@ -52,8 +52,8 @@ const messages = defineMessages({
 
 const ImageData = ({
   data,
-  tile,
-  onChangeTile,
+  block,
+  onChangeBlock,
   openObjectBrowser,
   required = false,
   intl,
@@ -86,7 +86,7 @@ const ImageData = ({
           iconAction={
             data.url
               ? () => {
-                  onChangeTile(tile, {
+                  onChangeBlock(block, {
                     ...data,
                     url: '',
                   });
@@ -94,7 +94,7 @@ const ImageData = ({
               : () => openObjectBrowser()
           }
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               url: value,
             });
@@ -107,7 +107,7 @@ const ImageData = ({
           required={false}
           value={alt}
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               alt: value,
             });
@@ -124,7 +124,7 @@ const ImageData = ({
           iconAction={
             data.href
               ? () => {
-                  onChangeTile(tile, {
+                  onChangeBlock(block, {
                     ...data,
                     href: '',
                   });
@@ -132,7 +132,7 @@ const ImageData = ({
               : () => openObjectBrowser('link')
           }
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               href: value,
             });
@@ -143,7 +143,7 @@ const ImageData = ({
           title={intl.formatMessage(messages.openLinkInNewTab)}
           value={data.openLinkInNewTab ? data.openLinkInNewTab : false}
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               openLinkInNewTab: value,
             });
@@ -156,8 +156,8 @@ const ImageData = ({
 
 ImageData.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
-  tile: PropTypes.string.isRequired,
-  onChangeTile: PropTypes.func.isRequired,
+  block: PropTypes.string.isRequired,
+  onChangeBlock: PropTypes.func.isRequired,
   openObjectBrowser: PropTypes.func.isRequired,
 };
 

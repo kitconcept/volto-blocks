@@ -2,7 +2,7 @@
 
 exports[`renders a view image component 1`] = `
 <div
-  className="tile __grid centered"
+  className="block __grid centered"
 >
   <div
     className="ui one column grid centered"
@@ -11,7 +11,7 @@ exports[`renders a view image component 1`] = `
       className="column"
     >
       <div
-        className="thetile"
+        className="theblock"
       />
     </div>
   </div>

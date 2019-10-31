@@ -44,9 +44,9 @@ test('renders an Image Data Sidebar component', () => {
           ],
         }}
         type="imagesGrid"
-        tile="1234"
+        block="1234"
         pathname="/news"
-        onChangeTile={() => {}}
+        onChangeBlock={() => {}}
         openObjectBrowser={() => {}}
       />
     </Provider>,

@@ -6,7 +6,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import Dropzone from 'react-dropzone';
 import { readAsDataURL } from 'promise-file-reader';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
-import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
+import imageBlockSVG from '@plone/volto/components/manage/Blocks/Image/block-image.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { createContent } from '@plone/volto/actions';
 import { settings } from '~/config';
@@ -72,7 +72,7 @@ const ImageItem = ({ data, isEditMode, onChangeGridItem, index, intl }) => {
               </Dimmer>
             )}
             <div className="grid-image-item default">
-              <img src={imageTileSVG} alt="" />
+              <img src={imageBlockSVG} alt="" />
               <p>{intl.formatMessage(messages.PleaseChooseImage)}</p>
             </div>
           </Message>

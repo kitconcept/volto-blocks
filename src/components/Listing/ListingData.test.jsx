@@ -29,9 +29,9 @@ test('renders an Listing Data Sidebar component', () => {
             },
           ],
         }}
-        tile="1234"
+        block="1234"
         pathname="/news"
-        onChangeTile={() => {}}
+        onChangeBlock={() => {}}
       />
     </Provider>,
   );

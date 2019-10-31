@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
-import imageTileSVG from '@plone/volto/components/manage/Tiles/Image/tile-image.svg';
+import imageBlockSVG from '@plone/volto/components/manage/Blocks/Image/block-image.svg';
 import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
@@ -16,24 +16,24 @@ const messages = defineMessages({
   },
 });
 
-const TeaserItem = ({ data, tile, isEditMode, intl }) => {
+const TeaserItem = ({ data, block, isEditMode, intl }) => {
   const contentSubrequests = useSelector(state => state.content.subrequests);
   const dispatch = useDispatch();
-  const tileID = data.id || tile;
-  const result = contentSubrequests?.[tileID]?.data;
+  const blockID = data.id || block;
+  const result = contentSubrequests?.[blockID]?.data;
 
   React.useEffect(() => {
     if (data.href) {
-      dispatch(getContent(data.href, null, tileID));
+      dispatch(getContent(data.href, null, blockID));
     }
-  }, [dispatch, data, tileID]);
+  }, [dispatch, data, blockID]);
 
   return (
     <>
       {!data.href && (
         <Message>
           <div className="grid-teaser-item default">
-            <img src={imageTileSVG} alt="" />
+            <img src={imageBlockSVG} alt="" />
             <p>{intl.formatMessage(messages.PleaseChooseContent)}</p>
           </div>
         </Message>

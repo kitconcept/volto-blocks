@@ -1,8 +1,8 @@
 /* eslint-disable */
 
 /**
- * Edit text tile.
- * @module components/manage/Tiles/Title/Edit
+ * Edit text block.
+ * @module components/manage/Blocks/Title/Edit
  */
 
 import React, { Component } from 'react';
@@ -16,13 +16,13 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { includes, isEqual } from 'lodash';
 import cx from 'classnames';
 
-import { settings, tiles } from '~/config';
+import { settings, blocks } from '~/config';
 
 import { Icon } from '@plone/volto/components';
 import addSVG from '@plone/volto/icons/circle-plus.svg';
 import cameraSVG from '@plone/volto/icons/camera.svg';
 import videoSVG from '@plone/volto/icons/videocamera.svg';
-import MoreTilesSVG from '@plone/volto/icons/more.svg';
+import MoreBlocksSVG from '@plone/volto/icons/more.svg';
 
 const messages = defineMessages({
   text: {
@@ -32,7 +32,7 @@ const messages = defineMessages({
 });
 
 /**
- * Edit text tile class.
+ * Edit text block class.
  * @class Edit
  * @extends Component
  */
@@ -47,14 +47,14 @@ class Edit extends Component {
     detached: PropTypes.bool,
     index: PropTypes.number.isRequired,
     selected: PropTypes.bool.isRequired,
-    tile: PropTypes.string.isRequired,
-    onAddTile: PropTypes.func.isRequired,
-    onChangeTile: PropTypes.func.isRequired,
-    onDeleteTile: PropTypes.func.isRequired,
-    onMutateTile: PropTypes.func.isRequired,
-    onFocusPreviousTile: PropTypes.func.isRequired,
-    onFocusNextTile: PropTypes.func.isRequired,
-    onSelectTile: PropTypes.func.isRequired,
+    block: PropTypes.string.isRequired,
+    onAddBlock: PropTypes.func.isRequired,
+    onChangeBlock: PropTypes.func.isRequired,
+    onDeleteBlock: PropTypes.func.isRequired,
+    onMutateBlock: PropTypes.func.isRequired,
+    onFocusPreviousBlock: PropTypes.func.isRequired,
+    onFocusNextBlock: PropTypes.func.isRequired,
+    onSelectBlock: PropTypes.func.isRequired,
     appendActions: PropTypes.node,
     appendSecondaryActions: PropTypes.node,
   };
@@ -94,8 +94,8 @@ class Edit extends Component {
       this.state = {
         editorState,
         inlineToolbarPlugin,
-        addNewTileOpened: false,
-        customTilesOpened: false,
+        addNewBlockOpened: false,
+        customBlocksOpened: false,
       };
     }
 
@@ -154,7 +154,7 @@ class Edit extends Component {
         convertToRaw(this.state.editorState.getCurrentContent()),
       )
     ) {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         text: convertToRaw(editorState.getCurrentContent()),
       });
@@ -162,18 +162,18 @@ class Edit extends Component {
     this.setState({ editorState });
   }
 
-  toggleAddNewTile = () =>
-    this.setState(state => ({ addNewTileOpened: !state.addNewTileOpened }));
+  toggleAddNewBlock = () =>
+    this.setState(state => ({ addNewBlockOpened: !state.addNewBlockOpened }));
 
   handleClickOutside = e => {
     if (this.ref && doesNodeContainClick(this.ref, e)) return;
     this.setState(() => ({
-      addNewTileOpened: false,
-      customTilesOpened: false,
+      addNewBlockOpened: false,
+      customBlocksOpened: false,
     }));
   };
 
-  openCustomTileMenu = () => this.setState(() => ({ customTilesOpened: true }));
+  openCustomBlockMenu = () => this.setState(() => ({ customBlocksOpened: true }));
 
   /**
    * Render method.
@@ -190,8 +190,8 @@ class Edit extends Component {
     return (
       <div
         role="presentation"
-        onClick={() => this.props.onSelectTile(this.props.tile)}
-        className={cx('tile text', { selected: this.props.selected })}
+        onClick={() => this.props.onSelectBlock(this.props.block)}
+        className={cx('block text', { selected: this.props.selected })}
         ref={node => (this.ref = node)}
       >
         {this.props.selected &&
@@ -226,8 +226,8 @@ class Edit extends Component {
               );
               const blockType = currentContentBlock.getType();
               if (!includes(settings.listBlockTypes, blockType)) {
-                this.props.onSelectTile(
-                  this.props.onAddTile('text', this.props.index + 1),
+                this.props.onSelectBlock(
+                  this.props.onAddBlock('text', this.props.index + 1),
                 );
                 return 'handled';
               }
@@ -240,7 +240,7 @@ class Edit extends Component {
               command === 'backspace' &&
               editorState.getCurrentContent().getPlainText().length === 0
             ) {
-              this.props.onDeleteTile(this.props.tile, true);
+              this.props.onDeleteBlock(this.props.block, true);
             }
           }}
           onUpArrow={() => {
@@ -248,7 +248,7 @@ class Edit extends Component {
             const currentCursorPosition = selectionState.getStartOffset();
 
             if (currentCursorPosition === 0) {
-              this.props.onFocusPreviousTile(this.props.tile, this.node);
+              this.props.onFocusPreviousBlock(this.props.block, this.node);
             }
           }}
           onDownArrow={() => {
@@ -261,7 +261,7 @@ class Edit extends Component {
               .getLength();
 
             if (currentCursorPosition === blockLength) {
-              this.props.onFocusNextTile(this.props.tile, this.node);
+              this.props.onFocusNextBlock(this.props.block, this.node);
             }
           }}
           ref={node => {
@@ -278,20 +278,20 @@ class Edit extends Component {
             <Button
               basic
               icon
-              onClick={this.toggleAddNewTile}
-              className="tile-add-button"
+              onClick={this.toggleAddNewBlock}
+              className="block-add-button"
             >
-              <Icon name={addSVG} className="tile-add-button" size="24px" />
+              <Icon name={addSVG} className="block-add-button" size="24px" />
             </Button>
           )}
-        {this.state.addNewTileOpened && !this.state.customTilesOpened && (
-          <div className="add-tile toolbar">
+        {this.state.addNewBlockOpened && !this.state.customBlocksOpened && (
+          <div className="add-block toolbar">
             <Button.Group>
               <Button
                 icon
                 basic
                 onClick={() =>
-                  this.props.onMutateTile(this.props.tile, {
+                  this.props.onMutateBlock(this.props.block, {
                     '@type': 'image',
                   })
                 }
@@ -304,7 +304,7 @@ class Edit extends Component {
                 icon
                 basic
                 onClick={() =>
-                  this.props.onMutateTile(this.props.tile, {
+                  this.props.onMutateBlock(this.props.block, {
                     '@type': 'video',
                   })
                 }
@@ -312,32 +312,32 @@ class Edit extends Component {
                 <Icon name={videoSVG} size="24px" />
               </Button>
             </Button.Group>
-            {tiles.customTiles.length !== 0 && (
+            {blocks.customBlocks.length !== 0 && (
               <React.Fragment>
                 <div className="separator" />
                 <Button.Group>
-                  <Button icon basic onClick={this.openCustomTileMenu}>
-                    <Icon name={MoreTilesSVG} size="24px" />
+                  <Button icon basic onClick={this.openCustomBlockMenu}>
+                    <Icon name={MoreBlocksSVG} size="24px" />
                   </Button>
                 </Button.Group>
               </React.Fragment>
             )}
           </div>
         )}
-        {this.state.addNewTileOpened && this.state.customTilesOpened && (
-          <div className="add-tile toolbar">
-            {tiles.customTiles.map(tile => (
-              <Button.Group key={tile.title}>
+        {this.state.addNewBlockOpened && this.state.customBlocksOpened && (
+          <div className="add-block toolbar">
+            {blocks.customBlocks.map(block => (
+              <Button.Group key={block.title}>
                 <Button
                   icon
                   basic
                   onClick={() =>
-                    this.props.onMutateTile(this.props.tile, {
-                      '@type': tile.title,
+                    this.props.onMutateBlock(this.props.block, {
+                      '@type': block.title,
                     })
                   }
                 >
-                  <Icon name={tile.icon} size="24px" />
+                  <Icon name={block.icon} size="24px" />
                 </Button>
               </Button.Group>
             ))}

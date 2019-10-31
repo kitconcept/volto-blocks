@@ -7,8 +7,8 @@ import templates from './templates';
 
 const Edit = ({
   data,
-  onChangeTile,
-  tile,
+  onChangeBlock,
+  block,
   id,
   selected,
   properties,
@@ -26,7 +26,7 @@ const Edit = ({
         <TemplateChooser
           templates={templates}
           onSelectTemplate={index =>
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               variation: templates[index].variation,
             })
@@ -37,8 +37,8 @@ const Edit = ({
       <SidebarPortal selected={selected}>
         <TeaserHeroSidebar
           data={data}
-          tile={tile}
-          onChangeTile={onChangeTile}
+          block={block}
+          onChangeBlock={onChangeBlock}
         />
       </SidebarPortal>
     </>

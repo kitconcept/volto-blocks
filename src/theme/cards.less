@@ -1,4 +1,4 @@
-// Cards tile
+// Cards block
 
 @fourCard: calc(25% - 1.5em);
 @threeCard: calc(33.33333333% - 2em);
@@ -8,27 +8,27 @@
   height: 32px;
 }
 
-.tile .toolbar .ui.icon.button.selected {
+.block .toolbar .ui.icon.button.selected {
   background-color: #edf1f2 !important;
 }
 
-// Tile Edit only
-.ui.drag.tile.cards .card,
-.ui.drag.tile.slider .card {
+// Block Edit only
+.ui.drag.block.cards .card,
+.ui.drag.block.slider .card {
   margin-top: 0;
   margin-bottom: 0;
 
   .content {
     cursor: text;
 
-    .tile.text {
+    .block.text {
       margin-bottom: 0;
     }
   }
 }
 
-.ui.tile.cards,
-.ui.tile.slider {
+.ui.block.cards,
+.ui.block.slider {
   margin-top: 0;
   margin-bottom: 0;
 
@@ -95,7 +95,7 @@
 }
 
 // View
-.tile.cards {
+.block.cards {
   &.centered-text .content {
     text-align: center;
   }
@@ -134,15 +134,15 @@
     width: calc(@fourCard * 2);
   }
 
-  // Remove the cards constrainer for the card tiles
+  // Remove the cards constrainer for the card blocks
   .ui.cards:after,
   .ui.card:after {
     display: none;
   }
 }
 
-// Card tile
-.tile.__card {
+// Card block
+.block.__card {
   .DraftEditor-root {
     cursor: text;
   }

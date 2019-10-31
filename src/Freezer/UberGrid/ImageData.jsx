@@ -4,7 +4,7 @@ import { Accordion, Form, Grid, Segment } from 'semantic-ui-react';
 import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import { CheckboxWidget, Icon, TextWidget } from '@plone/volto/components';
 import { settings } from '~/config';
-import { AlignTile, flattenToAppURL } from '@plone/volto/helpers';
+import { Alignblock, flattenToAppURL } from '@plone/volto/helpers';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import upSVG from '@plone/volto/icons/up-key.svg';
@@ -48,8 +48,8 @@ const messages = defineMessages({
 
 const ImageData = ({
   data,
-  tile,
-  onChangeTile,
+  block,
+  onChangeBlock,
   openObjectBrowser,
   required = false,
   intl,
@@ -97,7 +97,7 @@ const ImageData = ({
             value={data.url}
             icon={clearSVG}
             iconAction={() =>
-              onChangeTile(tile, {
+              onChangeBlock(block, {
                 ...data,
                 url: '',
               })
@@ -111,7 +111,7 @@ const ImageData = ({
           required={false}
           value={alt}
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               alt: value,
             });
@@ -132,11 +132,11 @@ const ImageData = ({
                 </div>
               </Grid.Column>
               <Grid.Column width="8" className="align-tools">
-                <AlignTile
+                <AlignBlock
                   align={data.align}
-                  onChangeTile={onChangeTile}
+                  onChangeBlock={onChangeBlock}
                   data={data}
-                  tile={tile}
+                  block={block}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -166,7 +166,7 @@ const ImageData = ({
             iconAction={
               data.href
                 ? () => {
-                    onChangeTile(tile, {
+                    onChangeBlock(block, {
                       ...data,
                       href: '',
                     });
@@ -174,7 +174,7 @@ const ImageData = ({
                 : () => openObjectBrowser('link')
             }
             onChange={(name, value) => {
-              onChangeTile(tile, {
+              onChangeBlock(block, {
                 ...data,
                 href: value,
               });
@@ -185,7 +185,7 @@ const ImageData = ({
             title={intl.formatMessage(messages.openLinkInNewTab)}
             value={data.openLinkInNewTab ? data.openLinkInNewTab : false}
             onChange={(name, value) => {
-              onChangeTile(tile, {
+              onChangeBlock(block, {
                 ...data,
                 openLinkInNewTab: value,
               });
@@ -201,8 +201,8 @@ const ImageData = ({
 
 ImageData.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
-  tile: PropTypes.string.isRequired,
-  onChangeTile: PropTypes.func.isRequired,
+  block: PropTypes.string.isRequired,
+  onChangeBlock: PropTypes.func.isRequired,
   openObjectBrowser: PropTypes.func.isRequired,
 };
 

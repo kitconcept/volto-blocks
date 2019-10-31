@@ -1,6 +1,6 @@
 /**
- * View image tile.
- * @module components/manage/Tiles/Slider/View
+ * View image block.
+ * @module components/manage/Blocks/Slider/View
  */
 
 import React from 'react';
@@ -12,13 +12,13 @@ import { settings } from '~/config';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
 /**
- * View image tile class.
+ * View image block class.
  * @class View
  * @extends Component
  */
 const View = ({ data }) => (
   <div
-    className={cx('tile slider', {
+    className={cx('block slider', {
       centered: data.align === 'center' || data.align === undefined,
       full: data.align === 'full',
       'centered-text': data.centeredText,

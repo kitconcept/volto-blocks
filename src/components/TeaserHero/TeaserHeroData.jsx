@@ -7,14 +7,14 @@ import TeaserHeroVariations from './TeaserHeroVariations';
 
 const TeaserHeroData = ({
   data,
-  tile,
-  onChangeTile,
+  block,
+  onChangeBlock,
   required = false,
   intl,
 }) => {
   return (
     <>
-      <TeaserData data={data} tile={tile} onChangeTile={onChangeTile} />
+      <TeaserData data={data} block={block} onChangeBlock={onChangeBlock} />
       <Segment className="form sidebar-image-data">
         <Form.Field inline>
           <Grid>
@@ -32,9 +32,9 @@ const TeaserHeroData = ({
               <Grid.Column width="8" className="align-tools">
                 <TeaserHeroVariations
                   variation={data.variation}
-                  onChangeTile={onChangeTile}
+                  onChangeBlock={onChangeBlock}
                   data={data}
-                  tile={tile}
+                  block={block}
                 />
               </Grid.Column>
             </Grid.Row>
@@ -47,8 +47,8 @@ const TeaserHeroData = ({
 
 TeaserHeroData.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
-  tile: PropTypes.string.isRequired,
-  onChangeTile: PropTypes.func.isRequired,
+  block: PropTypes.string.isRequired,
+  onChangeBlock: PropTypes.func.isRequired,
 };
 
 export default injectIntl(TeaserHeroData);

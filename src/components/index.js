@@ -15,9 +15,9 @@ import CardViewBlock from './Card/View';
 import TeaserHeroEditBlock from './TeaserHero/Edit';
 import TeaserHeroViewBlock from './TeaserHero/View';
 
-import TileModal from './TileModal/TileModal';
+import BlockModal from './BlockModal/BlockModal';
 import CheckboxWidget from './Widgets/CheckboxWidget';
-import TileRenderer from './TileRenderer/TileRenderer';
+import BlockRenderer from './BlockRenderer/BlockRenderer';
 import ObjectBrowser from '../Freezer/ObjectBrowser/ObjectBrowser';
 
 export {
@@ -37,8 +37,8 @@ export {
   CardViewBlock,
   TeaserHeroEditBlock,
   TeaserHeroViewBlock,
-  TileRenderer,
-  TileModal,
+  BlockRenderer,
+  BlockModal,
   CheckboxWidget,
   ObjectBrowser,
 };

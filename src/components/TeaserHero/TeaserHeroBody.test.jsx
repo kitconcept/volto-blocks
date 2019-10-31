@@ -8,7 +8,7 @@ import TeaserHeroBody from './TeaserHeroBody';
 
 const mockStore = configureStore();
 
-test('renders a Grid Tile Proxy Item component', () => {
+test('renders a Grid Block Proxy Item component', () => {
   const store = mockStore({
     content: {
       subrequests: {
@@ -38,8 +38,8 @@ test('renders a Grid Tile Proxy Item component', () => {
             variation: 'left',
             padded: true,
           }}
-          tile="1c58b5a2-26fb-4112-832b-fad88af1ae0e"
-          onChangeTile={() => {}}
+          block="1c58b5a2-26fb-4112-832b-fad88af1ae0e"
+          onChangeBlock={() => {}}
         />
       </MemoryRouter>
     </Provider>,

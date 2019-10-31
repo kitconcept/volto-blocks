@@ -1,8 +1,3 @@
-/**
- * View image tile.
- * @module components/manage/Tiles/Hero/View
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -12,13 +7,13 @@ import redraft from 'redraft';
 import { settings } from '~/config';
 
 /**
- * View image tile class.
+ * View image block class.
  * @class View
  * @extends Component
  */
 const View = ({ data, detached }) => (
   <div
-    className={cx('tile __card', {
+    className={cx('block __card', {
       detached,
     })}
   >

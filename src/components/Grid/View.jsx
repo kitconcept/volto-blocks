@@ -1,22 +1,12 @@
-/**
- * View image tile.
- * @module components/manage/Tiles/Slider/View
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react';
 import cx from 'classnames';
 
-/**
- * View image tile class.
- * @class View
- * @extends Component
- */
 const View = ({ data, render }) => {
   return (
     <div
-      className={cx('tile __grid', {
+      className={cx('block __grid', {
         centered: data.align === 'center' || data.align === undefined,
         'space-between': data.align === 'space-between',
         'centered-text': data.centeredText,

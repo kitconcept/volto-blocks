@@ -7,7 +7,7 @@ import ListingSidebar from './ListingSidebar';
 
 const mockStore = configureStore();
 
-test('renders a Grid Tile Sidebar component', () => {
+test('renders a Grid Block Sidebar component', () => {
   const store = mockStore({
     querystring: { sortable_indexes: {} },
     intl: {
@@ -29,9 +29,9 @@ test('renders a Grid Tile Sidebar component', () => {
             },
           ],
         }}
-        tile="1234"
+        block="1234"
         pathname="/news"
-        onChangeTile={() => {}}
+        onChangeBlock={() => {}}
       />
     </Provider>,
   );

@@ -24,8 +24,8 @@ test('renders a Teaser Hero Sidebar component', () => {
           variation: 'left',
           padded: true,
         }}
-        tile="1c58b5a2-26fb-4112-832b-fad88af1ae0e"
-        onChangeTile={() => {}}
+        block="1c58b5a2-26fb-4112-832b-fad88af1ae0e"
+        onChangeBlock={() => {}}
       />
     </Provider>,
   );

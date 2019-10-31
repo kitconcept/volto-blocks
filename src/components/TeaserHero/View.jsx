@@ -7,7 +7,7 @@ const View = ({ data, id, render }) => {
   ) : (
     <TeaserHeroBody data={data} id={id} />
   );
-  return <div className="tile teaserHero">{teaserHeroBodyRender}</div>;
+  return <div className="block teaserHero">{teaserHeroBodyRender}</div>;
 };
 
 export default View;

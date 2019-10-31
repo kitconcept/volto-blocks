@@ -1,6 +1,6 @@
 /**
- * Edit image tile.
- * @module components/manage/Tiles/Image/Edit
+ * Edit image block.
+ * @module components/manage/Blocks/Image/Edit
  */
 
 import React, { Component } from 'react';
@@ -26,7 +26,7 @@ import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
 import { settings } from '~/config';
 
-import { Icon, EditTextTile } from '@plone/volto/components';
+import { Icon, EditTextBlock } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
 
@@ -39,10 +39,10 @@ import imageSVG from '@plone/volto/icons/image.svg';
 import imageFitSVG from '@plone/volto/icons/image-fit.svg';
 import imageFullSVG from '@plone/volto/icons/image-full.svg';
 
-import { CheckboxWidget, TileModal } from '../../components';
+import { CheckboxWidget, BlockModal } from '../../components';
 
 const messages = defineMessages({
-  ImageTileInputPlaceholder: {
+  ImageBlockInputPlaceholder: {
     id: 'Browse or type URL',
     defaultMessage: 'Browse or type URL',
   },
@@ -69,7 +69,7 @@ const reorder = (list, startIndex, endIndex) => {
   dispatch => bindActionCreators({ createContent }, dispatch),
 )
 /**
- * Edit image tile class.
+ * Edit image block class.
  * @class Edit
  * @extends Component
  */
@@ -81,7 +81,7 @@ export default class Edit extends Component {
    */
   static propTypes = {
     selected: PropTypes.bool.isRequired,
-    tile: PropTypes.string.isRequired,
+    block: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     data: PropTypes.objectOf(PropTypes.any).isRequired,
     content: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -90,11 +90,11 @@ export default class Edit extends Component {
       loaded: PropTypes.bool,
     }).isRequired,
     pathname: PropTypes.string.isRequired,
-    onChangeTile: PropTypes.func.isRequired,
-    onSelectTile: PropTypes.func.isRequired,
-    onDeleteTile: PropTypes.func.isRequired,
-    onFocusPreviousTile: PropTypes.func.isRequired,
-    onFocusNextTile: PropTypes.func.isRequired,
+    onChangeBlock: PropTypes.func.isRequired,
+    onSelectBlock: PropTypes.func.isRequired,
+    onDeleteBlock: PropTypes.func.isRequired,
+    onFocusPreviousBlock: PropTypes.func.isRequired,
+    onFocusNextBlock: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
   };
@@ -118,7 +118,7 @@ export default class Edit extends Component {
     };
 
     if (!this.props.data.cards) {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         cards: [
           {
@@ -156,7 +156,7 @@ export default class Edit extends Component {
       this.setState({
         uploading: false,
       });
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         cards: setArrayImmutable(
           this.props.data.cards,
@@ -216,13 +216,13 @@ export default class Edit extends Component {
   }
 
   /**
-   * Align tile handler
-   * @method onAlignTile
+   * Align block handler
+   * @method onAlignBlock
    * @param {string} align Alignment option
    * @returns {undefined}
    */
-  onAlignTile(align) {
-    this.props.onChangeTile(this.props.tile, {
+  onAlignBlock(align) {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       align,
     });
@@ -263,7 +263,7 @@ export default class Edit extends Component {
    */
   onSubmitUrl = (e, index) => {
     e.preventDefault();
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       cards: setArrayImmutable(this.props.data.cards, index, {
         ...this.props.data.cards[index],
@@ -292,7 +292,7 @@ export default class Edit extends Component {
       destination.index,
     );
 
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       cards,
     });
@@ -306,7 +306,7 @@ export default class Edit extends Component {
    * @returns {undefined}
    */
   onChangeRichText(text, index) {
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       cards: setArrayImmutable(this.props.data.cards, index, {
         ...this.props.data.cards[index],
@@ -323,7 +323,7 @@ export default class Edit extends Component {
    * @returns {undefined}
    */
   onChangeModalSettings(id, value) {
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       [id]: value || null,
     });
@@ -339,7 +339,7 @@ export default class Edit extends Component {
       },
     ];
     if (this.props.data.cards.length < 4) {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         cards: newCardsState,
       });
@@ -356,7 +356,7 @@ export default class Edit extends Component {
     const newCardsState = this.props.data.cards.filter(
       (item, i) => i !== index,
     );
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       cards: newCardsState,
     });
@@ -364,7 +364,7 @@ export default class Edit extends Component {
 
   clearCard = (e, index) => {
     e.stopPropagation();
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       cards: setArrayImmutable(this.props.data.cards, index, {
         ...this.props.data.cards[index],
@@ -410,10 +410,10 @@ export default class Edit extends Component {
       <div
         role="presentation"
         onClick={() => {
-          this.props.onSelectTile(this.props.tile);
+          this.props.onSelectBlock(this.props.block);
           this.setState({ currentSelectedCard: null });
         }}
-        className={cx('tile cards', {
+        className={cx('block cards', {
           selected: this.props.selected,
           'centered-text': this.props.data.centeredText,
         })}
@@ -421,7 +421,7 @@ export default class Edit extends Component {
           this.props.handleKeyDown(
             e,
             this.props.index,
-            this.props.tile,
+            this.props.block,
             this.node,
           );
         }}
@@ -435,7 +435,7 @@ export default class Edit extends Component {
               <Button
                 icon
                 basic
-                onClick={() => this.onAlignTile('center')}
+                onClick={() => this.onAlignBlock('center')}
                 active={
                   this.props.data.align === 'center' || !this.props.data.align
                 }
@@ -447,7 +447,7 @@ export default class Edit extends Component {
               <Button
                 icon
                 basic
-                onClick={() => this.onAlignTile('full')}
+                onClick={() => this.onAlignBlock('full')}
                 active={this.props.data.align === 'full'}
               >
                 <Icon name={imageFullSVG} size="24px" />
@@ -521,7 +521,7 @@ export default class Edit extends Component {
                                           this.onChangeUrl(e, index)
                                         }
                                         placeholder={this.props.intl.formatMessage(
-                                          messages.ImageTileInputPlaceholder,
+                                          messages.ImageBlockInputPlaceholder,
                                         )}
                                       />
                                     </form>
@@ -619,20 +619,20 @@ export default class Edit extends Component {
                                   // This prevents propagation of ENTER
                                   onKeyDown={e => e.stopPropagation()}
                                 >
-                                  <EditTextTile
+                                  <EditTextBlock
                                     {...this.props}
                                     data={this.props.data.cards[index]}
-                                    tile={item.id}
+                                    block={item.id}
                                     detached
                                     index={0}
                                     selected={false}
-                                    onSelectTile={() => {}}
-                                    onFocusPreviousTile={() => {}}
-                                    onFocusNextTile={() => {}}
-                                    onAddTile={() => {}}
-                                    onDeleteTile={() => {}}
-                                    onMutateTile={() => {}}
-                                    onChangeTile={(tile, data) =>
+                                    onSelectBlock={() => {}}
+                                    onFocusPreviousBlock={() => {}}
+                                    onFocusNextBlock={() => {}}
+                                    onAddBlock={() => {}}
+                                    onDeleteBlock={() => {}}
+                                    onMutateBlock={() => {}}
+                                    onChangeBlock={(block, data) =>
                                       this.onChangeRichText(data.text, index)
                                     }
                                   />
@@ -649,7 +649,7 @@ export default class Edit extends Component {
             )}
           </Droppable>
         </DragDropContext>
-        <TileModal
+        <BlockModal
           open={this.state.modalOpened}
           data={this.props.data}
           onClose={this.onCloseModal}
@@ -681,7 +681,7 @@ export default class Edit extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </TileModal>
+        </BlockModal>
       </div>
     );
   }

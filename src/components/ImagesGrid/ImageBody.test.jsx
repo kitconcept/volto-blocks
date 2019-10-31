@@ -8,7 +8,7 @@ import ImageBody from './ImageBody';
 
 const mockStore = configureStore();
 
-test('renders a Grid Tile Proxy Item component', () => {
+test('renders a Grid Block Proxy Item component', () => {
   const store = mockStore({
     router: {
       location: {
@@ -43,8 +43,8 @@ test('renders a Grid Tile Proxy Item component', () => {
             id: '2110a241-1389-4cda-8811-77031a540efa',
             index: 0,
           }}
-          tile="1234"
-          onChangeTile={() => {}}
+          block="1234"
+          onChangeBlock={() => {}}
           openObjectBrowser={() => {}}
         />
       </MemoryRouter>

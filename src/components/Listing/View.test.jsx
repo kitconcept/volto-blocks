@@ -2,9 +2,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import View from './View';
 
-jest.mock('./ListingBody', () => jest.fn(() => <div className="thetile" />));
+jest.mock('./ListingBody', () => jest.fn(() => <div className="theblock" />));
 
-test('renders a view image component for the listing tile', () => {
+test('renders a view image component for the listing block', () => {
   const component = renderer.create(
     <View
       data={{
@@ -18,7 +18,7 @@ test('renders a view image component for the listing tile', () => {
         ],
       }}
       properties={{ is_folderish: true }}
-      tile="123u12u3"
+      block="123u12u3"
     />,
   );
   const json = component.toJSON();

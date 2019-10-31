@@ -7,13 +7,13 @@ import { SidebarPortal } from '@plone/volto/components';
 import ListingSidebar from './ListingSidebar';
 import ListingBody from './ListingBody';
 
-const Edit = ({ data, onChangeTile, tile, selected, properties }) => {
+const Edit = ({ data, onChangeBlock, block, selected, properties }) => {
   React.useEffect(() => {
     if (!data.query) {
-      onChangeTile(tile, {
+      onChangeBlock(block, {
         ...data,
         query: [],
-        tile: tile,
+        block: block,
       });
     }
     /* eslint-disable react-hooks/exhaustive-deps */
@@ -31,9 +31,13 @@ const Edit = ({ data, onChangeTile, tile, selected, properties }) => {
           {message => <p className="items-preview">{message}</p>}
         </FormattedMessage>
       )}
-      <ListingBody data={data} properties={properties} tile={tile} />
+      <ListingBody data={data} properties={properties} block={block} />
       <SidebarPortal selected={selected}>
-        <ListingSidebar data={data} tile={tile} onChangeTile={onChangeTile} />
+        <ListingSidebar
+          data={data}
+          block={block}
+          onChangeBlock={onChangeBlock}
+        />
       </SidebarPortal>
     </>
   );
@@ -43,8 +47,8 @@ Edit.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   index: PropTypes.number.isRequired,
   selected: PropTypes.bool.isRequired,
-  tile: PropTypes.string.isRequired,
-  onSelectTile: PropTypes.func.isRequired,
+  block: PropTypes.string.isRequired,
+  onSelectBlock: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(PropTypes.any),
   properties: PropTypes.objectOf(PropTypes.any).isRequired,
 };

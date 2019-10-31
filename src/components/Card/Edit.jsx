@@ -1,8 +1,3 @@
-/**
- * Edit Hero tile.
- * @module components/manage/Tiles/Image/Edit
- */
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -21,7 +16,7 @@ import { settings } from '~/config';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
 import { createContent } from '@plone/volto/actions';
 import { Icon } from '@plone/volto/components';
-import { ObjectBrowser } from '@kitconcept/volto-tiles/components';
+import { ObjectBrowser } from '@kitconcept/volto-blocks/components';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
@@ -44,7 +39,7 @@ const messages = defineMessages({
   }),
   dispatch => bindActionCreators({ createContent }, dispatch),
 )
-export default class EditCardTile extends Component {
+export default class EditCardBlock extends Component {
   /**
    * Property types.
    * @property {Object} propTypes Property types.
@@ -52,7 +47,7 @@ export default class EditCardTile extends Component {
    */
   static propTypes = {
     selected: PropTypes.bool.isRequired,
-    tile: PropTypes.string.isRequired,
+    block: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     data: PropTypes.objectOf(PropTypes.any).isRequired,
     content: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -61,11 +56,11 @@ export default class EditCardTile extends Component {
       loaded: PropTypes.bool,
     }).isRequired,
     pathname: PropTypes.string.isRequired,
-    onChangeTile: PropTypes.func.isRequired,
-    onSelectTile: PropTypes.func.isRequired,
-    onDeleteTile: PropTypes.func.isRequired,
-    onFocusPreviousTile: PropTypes.func.isRequired,
-    onFocusNextTile: PropTypes.func.isRequired,
+    onChangeBlock: PropTypes.func.isRequired,
+    onSelectBlock: PropTypes.func.isRequired,
+    onDeleteBlock: PropTypes.func.isRequired,
+    onFocusPreviousBlock: PropTypes.func.isRequired,
+    onFocusNextBlock: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
   };
@@ -128,7 +123,7 @@ export default class EditCardTile extends Component {
       this.setState({
         uploading: false,
       });
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         url: nextProps.content['@id'],
       });
@@ -167,7 +162,7 @@ export default class EditCardTile extends Component {
         convertToRaw(this.state.editorState.getCurrentContent()),
       )
     ) {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         text: convertToRaw(editorState.getCurrentContent()),
       });
@@ -214,15 +209,15 @@ export default class EditCardTile extends Component {
     return (
       <div
         role="presentation"
-        onClick={() => this.props.onSelectTile(this.props.tile)}
-        className={cx('tile __card', {
+        onClick={() => this.props.onSelectBlock(this.props.block)}
+        className={cx('block __card', {
           selected: this.props.selected,
         })}
         onKeyDown={e =>
           this.props.handleKeyDown(
             e,
             this.props.index,
-            this.props.tile,
+            this.props.block,
             this.node,
             { disableArrowUp: true, disableArrowDown: true },
           )
@@ -247,7 +242,7 @@ export default class EditCardTile extends Component {
                 icon
                 basic
                 onClick={() =>
-                  this.props.onChangeTile(this.props.tile, {
+                  this.props.onChangeBlock(this.props.block, {
                     ...this.props.data,
                     url: '',
                   })
@@ -333,8 +328,8 @@ export default class EditCardTile extends Component {
               );
               const blockType = currentContentBlock.getType();
               if (!includes(settings.listBlockTypes, blockType)) {
-                this.props.onSelectTile(
-                  this.props.onAddTile('text', this.props.index + 1),
+                this.props.onSelectBlock(
+                  this.props.onAddBlock('text', this.props.index + 1),
                 );
                 return 'handled';
               }
@@ -347,7 +342,7 @@ export default class EditCardTile extends Component {
               command === 'backspace' &&
               editorState.getCurrentContent().getPlainText().length === 0
             ) {
-              this.props.onDeleteTile(this.props.tile, true);
+              this.props.onDeleteBlock(this.props.block, true);
             }
           }}
           onUpArrow={() => {
@@ -355,7 +350,7 @@ export default class EditCardTile extends Component {
             const currentCursorPosition = selectionState.getStartOffset();
 
             if (currentCursorPosition === 0) {
-              this.props.onFocusPreviousTile(this.props.tile, this.node);
+              this.props.onFocusPreviousBlock(this.props.block, this.node);
             }
           }}
           onDownArrow={() => {
@@ -368,7 +363,7 @@ export default class EditCardTile extends Component {
               .getLength();
 
             if (currentCursorPosition === blockLength) {
-              this.props.onFocusNextTile(this.props.tile, this.node);
+              this.props.onFocusNextBlock(this.props.block, this.node);
             }
           }}
         />
@@ -376,8 +371,8 @@ export default class EditCardTile extends Component {
         <ObjectBrowser
           objectBrowserIsOpen={this.state.objectBrowserIsOpen}
           closeBrowser={this.closeObjectBrowser}
-          tile={this.props.tile}
-          onChangeTile={this.props.onChangeTile}
+          block={this.props.block}
+          onChangeBlock={this.props.onChangeBlock}
           data={this.props.data}
         />
       </div>

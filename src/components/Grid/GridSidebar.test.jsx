@@ -7,7 +7,7 @@ import GridSidebar from './GridSidebar';
 
 const mockStore = configureStore();
 
-test('renders a Grid Tile Sidebar component', () => {
+test('renders a Grid Block Sidebar component', () => {
   const store = mockStore({
     content: {
       create: {},
@@ -48,9 +48,9 @@ test('renders a Grid Tile Sidebar component', () => {
           ],
         }}
         type="teaserGrid"
-        tile="1234"
+        block="1234"
         pathname="/news"
-        onChangeTile={() => {}}
+        onChangeBlock={() => {}}
         openObjectBrowser={() => {}}
         sidebarData={() => <div />}
       />

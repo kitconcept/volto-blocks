@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a Grid Tile Proxy Item component 1`] = `
+exports[`renders a Grid Block Proxy Item component 1`] = `
 <div
   aria-disabled={false}
   className="dropzone"
@@ -24,7 +24,7 @@ exports[`renders a Grid Tile Proxy Item component 1`] = `
     >
       <img
         alt=""
-        src="tile-image.svg"
+        src="block-image.svg"
       />
       <p>
         Drop a file, click for upload or browse the site

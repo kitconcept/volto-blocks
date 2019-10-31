@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import View from './View';
 
-// jest.mock('./TeaserItem', () => jest.fn(() => <div className="thetile" />));
+// jest.mock('./TeaserItem', () => jest.fn(() => <div className="theblock" />));
 
 test('renders a grid view component', () => {
   const component = renderer.create(

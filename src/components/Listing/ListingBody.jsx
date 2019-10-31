@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import get from 'lodash/get';
 
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { getQueryStringResults } from '@kitconcept/volto-tiles/actions';
+import { getQueryStringResults } from '@kitconcept/volto-blocks/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
 const ListingItem = ({ data, properties, intl }) => {
@@ -17,17 +17,17 @@ const ListingItem = ({ data, properties, intl }) => {
 
   React.useEffect(() => {
     if (data?.query?.length > 0) {
-      dispatch(getQueryStringResults(data, data.tile));
+      dispatch(getQueryStringResults(data, data.block));
     }
-  }, [dispatch, data, data.tile]);
+  }, [dispatch, data, data.block]);
 
   const folderItems = properties.is_folderish ? properties.items : [];
 
   const listingItems =
     data?.query?.length > 0
       ? (querystringResults &&
-          querystringResults[data.tile] &&
-          querystringResults[data.tile].items) ||
+          querystringResults[data.block] &&
+          querystringResults[data.block].items) ||
         []
       : folderItems;
 

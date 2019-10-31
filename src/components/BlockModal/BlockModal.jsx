@@ -22,22 +22,22 @@ const messages = defineMessages({
 });
 
 /**
- * This is the settings modal for tiles
- * @function TileModal
+ * This is the settings modal for blocks
+ * @function BlockModal
  * @returns {node} Component node
  */
-function TileModal({ children, open, submitLabel, onSubmit, onClose, intl }) {
+function BlockModal({ children, open, submitLabel, onSubmit, onClose, intl }) {
   return (
     <Modal
       size="mini"
       dimmer="inverted"
       closeOnDocumentClick
-      className="tile"
+      className="block"
       open={open}
       onClose={onClose}
     >
       <Modal.Header>
-        Card Tile Configuration{' '}
+        Card Block Configuration{' '}
         <Icon onClick={onClose} name={clearSVG} size="24px" />
       </Modal.Header>
       <Modal.Content className="ui form">{children}</Modal.Content>
@@ -69,7 +69,7 @@ function TileModal({ children, open, submitLabel, onSubmit, onClose, intl }) {
   );
 }
 
-TileModal.propTypes = {
+BlockModal.propTypes = {
   children: PropTypes.node.isRequired,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
@@ -77,9 +77,9 @@ TileModal.propTypes = {
   submitLabel: PropTypes.string,
 };
 
-TileModal.defaultProps = {
+BlockModal.defaultProps = {
   submitLabel: null,
   onSubmit: null,
 };
 
-export default injectIntl(TileModal);
+export default injectIntl(BlockModal);

@@ -19,10 +19,10 @@ import TemplateChooser from '../TemplateChooser/TemplateChooser';
 import {
   reorderArray,
   replaceItemOfArray,
-} from '@kitconcept/volto-tiles/helpers';
+} from '@kitconcept/volto-blocks/helpers';
 
 /**
- * Edit image tile class.
+ * Edit image block class.
  * @class Edit
  * @extends Component
  */
@@ -34,7 +34,7 @@ class Edit extends Component {
    */
   static propTypes = {
     selected: PropTypes.bool.isRequired,
-    tile: PropTypes.string.isRequired,
+    block: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     data: PropTypes.objectOf(PropTypes.any).isRequired,
     content: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -43,11 +43,11 @@ class Edit extends Component {
       loaded: PropTypes.bool,
     }).isRequired,
     pathname: PropTypes.string.isRequired,
-    onChangeTile: PropTypes.func.isRequired,
-    onSelectTile: PropTypes.func.isRequired,
-    onDeleteTile: PropTypes.func.isRequired,
-    onFocusPreviousTile: PropTypes.func.isRequired,
-    onFocusNextTile: PropTypes.func.isRequired,
+    onChangeBlock: PropTypes.func.isRequired,
+    onSelectBlock: PropTypes.func.isRequired,
+    onDeleteBlock: PropTypes.func.isRequired,
+    onFocusPreviousBlock: PropTypes.func.isRequired,
+    onFocusNextBlock: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
     gridType: PropTypes.string,
@@ -64,11 +64,11 @@ class Edit extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeTile = this.onChangeTile.bind(this);
+    this.onChangeBlock = this.onChangeBlock.bind(this);
 
     // sets defaults
     if (!this.props.data.columns) {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         columns: [],
       });
@@ -76,7 +76,7 @@ class Edit extends Component {
   }
 
   onChangeGridItem = (index, gridItemData) => {
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: replaceItemOfArray(this.props.data.columns, index, {
         ...this.props.data.columns[index],
@@ -86,13 +86,13 @@ class Edit extends Component {
   };
 
   /**
-   * Align tile handler
-   * @method onAlignTile
+   * Align block handler
+   * @method onAlignBlock
    * @param {string} align Alignment option
    * @returns {undefined}
    */
-  onAlignTile(align) {
-    this.props.onChangeTile(this.props.tile, {
+  onAlignBlock(align) {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       align,
     });
@@ -118,21 +118,21 @@ class Edit extends Component {
       destination.index,
     );
 
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns,
     });
   };
 
   /**
-   * Change inner tiles handler
-   * @method onChangeTile
+   * Change inner blocks handler
+   * @method onChangeBlock
    * @param {object} editorState Editor state.
    * @param {number} index Editor card index
    * @returns {undefined}
    */
-  onChangeTile(data, index) {
-    this.props.onChangeTile(this.props.tile, {
+  onChangeBlock(data, index) {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: replaceItemOfArray(this.props.data.columns, index, {
         ...this.props.data.columns[index],
@@ -151,7 +151,7 @@ class Edit extends Component {
       },
     ];
     if (this.props.data.columns.length < 4) {
-      this.props.onChangeTile(this.props.tile, {
+      this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         columns: newColumnsState,
       });
@@ -163,7 +163,7 @@ class Edit extends Component {
     const newColumnsState = this.props.data.columns.filter(
       (item, i) => i !== index,
     );
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: newColumnsState,
     });
@@ -171,7 +171,7 @@ class Edit extends Component {
 
   clearColumn = (e, index) => {
     e.stopPropagation();
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: replaceItemOfArray(this.props.data.columns, index, {
         ...this.props.data.columns[index],
@@ -182,7 +182,7 @@ class Edit extends Component {
 
   onChangeColumnSettings = (e, index, key, value) => {
     e.stopPropagation();
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: replaceItemOfArray(this.props.data.columns, index, {
         ...this.props.data.columns[index],
@@ -192,7 +192,7 @@ class Edit extends Component {
   };
 
   onSelectTemplate = templateIndex => {
-    this.props.onChangeTile(this.props.tile, {
+    this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: this.props.templates[templateIndex].columns,
     });
@@ -311,8 +311,8 @@ class Edit extends Component {
         <SidebarPortal selected={this.props.selected}>
           <GridSidebar
             {...this.props}
-            onChangeTile={(tile, data) => {
-              this.onChangeTile(data, data.index);
+            onChangeBlock={(block, data) => {
+              this.onChangeBlock(data, data.index);
             }}
             removeColumn={this.removeColumn}
             addNewColumn={this.addNewColumn}

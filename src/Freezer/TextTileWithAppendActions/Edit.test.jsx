@@ -9,8 +9,8 @@ const mockStore = configureStore();
 
 global.__SERVER__ = true; // eslint-disable-line no-underscore-dangle
 
-describe('Text tile', () => {
-  it('renders an edit text tile component', () => {
+describe('Text block', () => {
+  it('renders an edit text block component', () => {
     const store = mockStore({
       intl: {
         locale: 'en',
@@ -22,14 +22,14 @@ describe('Text tile', () => {
         <Edit
           data={{ text: '' }}
           selected={false}
-          tile="1234"
-          onAddTile={() => {}}
-          onChangeTile={() => {}}
-          onSelectTile={() => {}}
-          onDeleteTile={() => {}}
-          onFocusPreviousTile={() => {}}
-          onFocusNextTile={() => {}}
-          onMutateTile={() => {}}
+          block="1234"
+          onAddBlock={() => {}}
+          onChangeBlock={() => {}}
+          onSelectBlock={() => {}}
+          onDeleteBlock={() => {}}
+          onFocusPreviousBlock={() => {}}
+          onFocusNextBlock={() => {}}
+          onMutateBlock={() => {}}
           handleKeyDown={() => {}}
           index={1}
         />
@@ -38,7 +38,7 @@ describe('Text tile', () => {
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
   });
-  it('renders an edit text tile component in detached mode', () => {
+  it('renders an edit text block component in detached mode', () => {
     const store = mockStore({
       intl: {
         locale: 'en',
@@ -50,14 +50,14 @@ describe('Text tile', () => {
         <Edit
           data={{ text: '<p>body text</p>' }}
           selected={false}
-          tile="1234"
-          onAddTile={() => {}}
-          onChangeTile={() => {}}
-          onSelectTile={() => {}}
-          onDeleteTile={() => {}}
-          onFocusPreviousTile={() => {}}
-          onFocusNextTile={() => {}}
-          onMutateTile={() => {}}
+          block="1234"
+          onAddBlock={() => {}}
+          onChangeBlock={() => {}}
+          onSelectBlock={() => {}}
+          onDeleteBlock={() => {}}
+          onFocusPreviousBlock={() => {}}
+          onFocusNextBlock={() => {}}
+          onMutateBlock={() => {}}
           handleKeyDown={() => {}}
           index={1}
           detached

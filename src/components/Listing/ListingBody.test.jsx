@@ -54,8 +54,8 @@ test('renders a ListingBody component', () => {
             ],
           }}
           properties={{ is_folderish: true }}
-          tile="1234"
-          onChangeTile={() => {}}
+          block="1234"
+          onChangeBlock={() => {}}
         />
       </MemoryRouter>
     </Provider>,

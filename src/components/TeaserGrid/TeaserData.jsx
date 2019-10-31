@@ -22,8 +22,8 @@ const messages = defineMessages({
 
 const TeaserData = ({
   data,
-  tile,
-  onChangeTile,
+  block,
+  onChangeBlock,
   openObjectBrowser,
   required = false,
   intl,
@@ -40,7 +40,7 @@ const TeaserData = ({
           iconAction={
             data.href
               ? () => {
-                  onChangeTile(tile, {
+                  onChangeBlock(block, {
                     ...data,
                     href: '',
                   });
@@ -48,7 +48,7 @@ const TeaserData = ({
               : () => openObjectBrowser('link')
           }
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               href: value,
             });
@@ -59,7 +59,7 @@ const TeaserData = ({
           title={intl.formatMessage(messages.openLinkInNewTab)}
           value={data.openLinkInNewTab ? data.openLinkInNewTab : false}
           onChange={(name, value) => {
-            onChangeTile(tile, {
+            onChangeBlock(block, {
               ...data,
               openLinkInNewTab: value,
             });
@@ -72,8 +72,8 @@ const TeaserData = ({
 
 TeaserData.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
-  tile: PropTypes.string.isRequired,
-  onChangeTile: PropTypes.func.isRequired,
+  block: PropTypes.string.isRequired,
+  onChangeBlock: PropTypes.func.isRequired,
   openObjectBrowser: PropTypes.func.isRequired,
 };
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a Grid Tile Sidebar component 1`] = `
+exports[`renders a Grid Block Sidebar component 1`] = `
 <div
   className="ui raised segments"
 >
@@ -173,7 +173,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
     </div>
     <div
       className="inline field"
-      id="field-listingtile-sort-on"
+      id="field-listingblock-sort-on"
     >
       <div
         className="ui grid"
@@ -188,7 +188,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
               className="wrapper"
             >
               <label
-                htmlFor="select-listingtile-sort-on"
+                htmlFor="select-listingblock-sort-on"
               >
                 Sort on
               </label>
@@ -199,7 +199,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
           >
             <div
               className="css-10nd86i react-select-container"
-              id="select-listingtile-sort-on"
+              id="select-listingblock-sort-on"
               onKeyDown={[Function]}
             >
               <div
@@ -306,7 +306,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
                 </div>
               </div>
               <input
-                name="select-listingtile-sort-on"
+                name="select-listingblock-sort-on"
                 type="hidden"
                 value=""
               />
@@ -317,7 +317,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
     </div>
     <div
       className="inline field"
-      id="field-listingtile-sort-on-reverse"
+      id="field-listingblock-sort-on-reverse"
     >
       <div
         className="ui grid"
@@ -342,7 +342,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
                   checked={false}
                   className="hidden"
                   disabled={false}
-                  name="field-listingtile-sort-on-reverse"
+                  name="field-listingblock-sort-on-reverse"
                   readOnly={true}
                   tabIndex={0}
                   type="checkbox"
@@ -351,7 +351,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
               </div>
               <label
                 className="ui basic horizontal label"
-                htmlFor="field-listingtile-sort-on-reverse"
+                htmlFor="field-listingblock-sort-on-reverse"
                 onClick={[Function]}
               >
                 Reversed order
@@ -362,7 +362,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
       </div>
     </div>
     <div
-      className="inline field"
+      className="inline field text"
       id="field-limit"
     >
       <div
@@ -404,7 +404,7 @@ exports[`renders a Grid Tile Sidebar component 1`] = `
       </div>
     </div>
     <div
-      className="inline field"
+      className="inline field text"
       id="field-itembatchsize"
     >
       <div

@@ -1,6 +1,6 @@
 /**
- * View image tile.
- * @module components/manage/Tiles/Slider/View
+ * View image block.
+ * @module components/manage/Blocks/Slider/View
  */
 
 import React from 'react';
@@ -16,7 +16,7 @@ const getCardsLenght = cards =>
   cards.length + cards.filter(item => item.x2).length;
 
 /**
- * View image tile class.
+ * View image block class.
  * @class View
  * @extends Component
  */
@@ -42,7 +42,7 @@ const View = ({ data }) => {
 
   return (
     <div
-      className={cx('tile cards', {
+      className={cx('block cards', {
         centered: data.align === 'center' || data.align === undefined,
         'space-between': data.align === 'space-between',
         'centered-text': data.centeredText,

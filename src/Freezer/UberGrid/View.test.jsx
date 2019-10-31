@@ -2,14 +2,14 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import View from './View';
 
-jest.mock('../../components/TileRenderer/TileRenderer', () =>
-  jest.fn(() => <div className="thetile" />),
+jest.mock('../../components/BlockRenderer/BlockRenderer', () =>
+  jest.fn(() => <div className="theblock" />),
 );
 
 test('renders a view image component', () => {
   const component = renderer.create(
     <View
-      data={{ columns: [{ id: 'tile', '@type': 'image', image: 'image.jpg' }] }}
+      data={{ columns: [{ id: 'block', '@type': 'image', image: 'image.jpg' }] }}
     />,
   );
   const json = component.toJSON();
