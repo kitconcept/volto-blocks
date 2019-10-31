@@ -173,7 +173,8 @@ class Edit extends Component {
     }));
   };
 
-  openCustomBlockMenu = () => this.setState(() => ({ customBlocksOpened: true }));
+  openCustomBlockMenu = () =>
+    this.setState(() => ({ customBlocksOpened: true }));
 
   /**
    * Render method.
