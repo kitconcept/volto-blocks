@@ -5,6 +5,7 @@ import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import { defineMessages, useIntl } from 'react-intl';
 import { isEqual } from 'lodash';
+import redraft from 'redraft';
 
 import { settings } from '~/config';
 
@@ -16,14 +17,14 @@ const messages = defineMessages({
 });
 
 const TextBody = props => {
-  const { data, block, onChangeBlock, dataName } = props;
+  const { data, block, onChangeBlock, dataName, isEditMode } = props;
 
   let initialEditorState, initialInlineToolbarPlugin;
 
   if (!__SERVER__) {
-    if (props?.data?.text) {
+    if (props?.data?.[dataName]) {
       initialEditorState = EditorState.createWithContent(
-        convertFromRaw(props.data.text),
+        convertFromRaw(props.data[dataName]),
       );
     } else {
       initialEditorState = EditorState.createEmpty();
@@ -38,13 +39,6 @@ const TextBody = props => {
   const inlineToolbarPlugin = React.useRef(initialInlineToolbarPlugin);
   const editorRef = React.useRef(null);
   const intl = useIntl();
-
-  // React.useEffect(() => {
-  //   onChangeBlock(block, {
-  //     ...data,
-  //     text: convertToRaw(editorState.getCurrentContent()),
-  //   });
-  // }, [editorState]);
 
   function onChange(currentEditorState) {
     if (
@@ -66,67 +60,40 @@ const TextBody = props => {
   } else {
     const { InlineToolbar } = inlineToolbarPlugin.current;
 
-    return (
-      <>
-        <Editor
-          ref={editorRef}
-          onChange={onChange}
-          editorState={editorState}
-          plugins={[
-            inlineToolbarPlugin.current,
-            ...settings.richTextEditorPlugins,
-          ]}
-          blockRenderMap={settings.extendedBlockRenderMap}
-          blockStyleFn={settings.blockStyleFn}
-          placeholder={intl.formatMessage(messages.text)}
-          // handleReturn={() => {
-          //   if (!this.props.detached) {
-          //     const selectionState = editorState.getSelection();
-          //     const anchorKey = selectionState.getAnchorKey();
-          //     const currentContent = editorState.getCurrentContent();
-          //     const currentContentBlock = currentContent.getBlockForKey(
-          //       anchorKey,
-          //     );
-          //     const blockType = currentContentBlock.getType();
-          //     if (!includes(settings.listBlockTypes, blockType)) {
-          //       this.props.onSelectBlock(
-          //         this.props.onAddBlock('text', this.props.index + 1),
-          //       );
-          //       return 'handled';
-          //     }
-          //     return 'un-handled';
-          //   }
-          //   return {};
-          // }}
-          // onUpArrow={() => {
-          //   const selectionState = editorState.getSelection();
-          //   const currentCursorPosition = selectionState.getStartOffset();
-
-          //   if (currentCursorPosition === 0) {
-          //     this.props.onFocusPreviousBlock(this.props.block, this.node);
-          //   }
-          // }}
-          // onDownArrow={() => {
-          //   const selectionState = editorState.getSelection();
-          //   const currentCursorPosition = selectionState.getStartOffset();
-          //   const blockLength = editorState
-          //     .getCurrentContent()
-          //     .getFirstBlock()
-          //     .getLength();
-
-          //   if (currentCursorPosition === blockLength) {
-          //     props.onFocusNextBlock(this.props.block, this.node);
-          //   }
-          // }}
-        />
-        <InlineToolbar />
-      </>
-    );
+    if (isEditMode) {
+      return (
+        <>
+          <Editor
+            ref={editorRef}
+            onChange={onChange}
+            editorState={editorState}
+            plugins={[
+              inlineToolbarPlugin.current,
+              ...settings.richTextEditorPlugins,
+            ]}
+            blockRenderMap={settings.extendedBlockRenderMap}
+            blockStyleFn={settings.blockStyleFn}
+            placeholder={intl.formatMessage(messages.text)}
+          />
+          <InlineToolbar />
+        </>
+      );
+    } else {
+      return data[dataName]
+        ? redraft(
+            data[dataName],
+            settings.ToHTMLRenderers,
+            settings.ToHTMLOptions,
+          )
+        : '';
+    }
   }
 };
 
 TextBody.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
+  dataName: PropTypes.string.isRequired,
+  isEditMode: PropTypes.bool,
   selected: PropTypes.bool.isRequired,
   block: PropTypes.string.isRequired,
   onAddBlock: PropTypes.func.isRequired,

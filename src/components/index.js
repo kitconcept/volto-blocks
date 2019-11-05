@@ -15,12 +15,15 @@ import CardViewBlock from './Card/View';
 import TeaserHeroEditBlock from './TeaserHero/Edit';
 import TeaserHeroViewBlock from './TeaserHero/View';
 
+import TextBody from './SimpleBlocks/TextBody';
+
 import BlockModal from './BlockModal/BlockModal';
 import CheckboxWidget from './Widgets/CheckboxWidget';
 import BlockRenderer from './BlockRenderer/BlockRenderer';
 import ObjectBrowser from '../Freezer/ObjectBrowser/ObjectBrowser';
 
 export {
+  TextBody,
   CardsEditBlock,
   CardsViewBlock,
   SliderEditBlock,
