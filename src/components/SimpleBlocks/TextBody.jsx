@@ -16,7 +16,7 @@ const messages = defineMessages({
 });
 
 const TextBody = props => {
-  const { data, block, onChangeBlock } = props;
+  const { data, block, onChangeBlock, dataName } = props;
 
   let initialEditorState, initialInlineToolbarPlugin;
 
@@ -55,7 +55,7 @@ const TextBody = props => {
     ) {
       onChangeBlock(block, {
         ...data,
-        text: convertToRaw(currentEditorState.getCurrentContent()),
+        [dataName]: convertToRaw(currentEditorState.getCurrentContent()),
       });
     }
     setEditorState(currentEditorState);
