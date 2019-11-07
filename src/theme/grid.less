@@ -111,7 +111,7 @@
 
   img {
     width: 100%;
-    margin-bottom: 20px;
+    align-self: flex-start;
   }
 
   a {
@@ -120,6 +120,7 @@
 
   p {
     // Defaults are always standard, on theme with customizations
+    margin-bottom: 0;
     text-align: left;
   }
 
@@ -135,6 +136,10 @@
 
   a {
     display: flex;
+  }
+
+  &.top img {
+    margin-bottom: 25px;
   }
 
   &.top a {
