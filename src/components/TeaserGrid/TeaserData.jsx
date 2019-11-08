@@ -45,7 +45,7 @@ const TeaserData = ({
                     href: '',
                   });
                 }
-              : () => openObjectBrowser('link')
+              : () => openObjectBrowser({ mode: 'link' })
           }
           onChange={(name, value) => {
             onChangeBlock(block, {
