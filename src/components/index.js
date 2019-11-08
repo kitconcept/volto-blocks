@@ -14,6 +14,7 @@ import CardEditBlock from './Card/Edit';
 import CardViewBlock from './Card/View';
 import TeaserHeroEditBlock from './TeaserHero/Edit';
 import TeaserHeroViewBlock from './TeaserHero/View';
+import MultiSourceWidget from './BlockDataWidgets/MultiSourceWidget';
 
 import TextBody from './SimpleBlocks/TextBody';
 
@@ -24,6 +25,7 @@ import ObjectBrowser from '../Freezer/ObjectBrowser/ObjectBrowser';
 
 export {
   TextBody,
+  MultiSourceWidget,
   CardsEditBlock,
   CardsViewBlock,
   SliderEditBlock,
