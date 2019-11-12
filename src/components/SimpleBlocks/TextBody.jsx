@@ -17,7 +17,14 @@ const messages = defineMessages({
 });
 
 const TextBody = props => {
-  const { data, block, onChangeBlock, dataName, isEditMode } = props;
+  const {
+    data,
+    block,
+    onChangeBlock,
+    dataName,
+    isEditMode,
+    noRichText,
+  } = props;
 
   let initialEditorState, initialInlineToolbarPlugin;
 
@@ -75,7 +82,7 @@ const TextBody = props => {
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
           />
-          <InlineToolbar />
+          {!noRichText && <InlineToolbar />}
         </>
       );
     } else {
@@ -103,6 +110,7 @@ TextBody.propTypes = {
   onFocusPreviousBlock: PropTypes.func.isRequired,
   onFocusNextBlock: PropTypes.func.isRequired,
   onSelectBlock: PropTypes.func.isRequired,
+  noRichText: PropTypes.bool,
 };
 
 export default TextBody;
