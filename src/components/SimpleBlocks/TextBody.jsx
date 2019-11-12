@@ -23,7 +23,7 @@ const TextBody = props => {
     onChangeBlock,
     dataName,
     isEditMode,
-    toolbar = true,
+    noRichText,
   } = props;
 
   let initialEditorState, initialInlineToolbarPlugin;
@@ -82,7 +82,7 @@ const TextBody = props => {
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
           />
-          {toolbar && <InlineToolbar />}
+          {!noRichText && <InlineToolbar />}
         </>
       );
     } else {
@@ -110,7 +110,7 @@ TextBody.propTypes = {
   onFocusPreviousBlock: PropTypes.func.isRequired,
   onFocusNextBlock: PropTypes.func.isRequired,
   onSelectBlock: PropTypes.func.isRequired,
-  toolbar: PropTypes.bool,
+  noRichText: PropTypes.bool,
 };
 
 export default TextBody;
