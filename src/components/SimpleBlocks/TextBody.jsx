@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Editor from 'draft-js-plugins-editor';
-import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
+import { Map } from 'immutable';
+import {
+  convertFromRaw,
+  convertToRaw,
+  DefaultDraftBlockRenderMap,
+  EditorState,
+} from 'draft-js';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import { defineMessages, useIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import redraft from 'redraft';
+import { stateFromHTML } from 'draft-js-import-html';
 
 import { settings } from '~/config';
 
@@ -24,15 +31,33 @@ const TextBody = props => {
     dataName,
     isEditMode,
     noRichText,
+    renderElement,
   } = props;
+  console.log(renderElement);
+
+  const blockRenderMap = Map({
+    unstyled: {
+      element: renderElement,
+    },
+  });
+
+  const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(
+    blockRenderMap,
+  );
 
   let initialEditorState, initialInlineToolbarPlugin;
 
   if (!__SERVER__) {
     if (props?.data?.[dataName]) {
-      initialEditorState = EditorState.createWithContent(
-        convertFromRaw(props.data[dataName]),
-      );
+      if (renderElement) {
+        initialEditorState = EditorState.createWithContent(
+          stateFromHTML(props.data[dataName]),
+        );
+      } else {
+        initialEditorState = EditorState.createWithContent(
+          convertFromRaw(props.data[dataName]),
+        );
+      }
     } else {
       initialEditorState = EditorState.createEmpty();
     }
@@ -56,7 +81,17 @@ const TextBody = props => {
     ) {
       onChangeBlock(block, {
         ...data,
-        [dataName]: convertToRaw(currentEditorState.getCurrentContent()),
+        [dataName]: (() => {
+          switch (renderElement) {
+            case 'h1':
+              return currentEditorState.getCurrentContent().getPlainText();
+              break;
+
+            default:
+              return convertToRaw(currentEditorState.getCurrentContent());
+              break;
+          }
+        })(),
       });
     }
     setEditorState(currentEditorState);
@@ -78,7 +113,11 @@ const TextBody = props => {
               inlineToolbarPlugin.current,
               ...settings.richTextEditorPlugins,
             ]}
-            blockRenderMap={settings.extendedBlockRenderMap}
+            blockRenderMap={
+              renderElement
+                ? extendedBlockRenderMap
+                : settings.extendedBlockRenderMap
+            }
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
           />
@@ -86,13 +125,23 @@ const TextBody = props => {
         </>
       );
     } else {
-      return data[dataName]
-        ? redraft(
-            data[dataName],
-            settings.ToHTMLRenderers,
-            settings.ToHTMLOptions,
-          )
-        : '';
+      if (data[dataName]) {
+        switch (renderElement) {
+          case 'h1':
+            return <h1>{data[dataName]}</h1>;
+            break;
+
+          default:
+            return redraft(
+              data[dataName],
+              settings.ToHTMLRenderers,
+              settings.ToHTMLOptions,
+            );
+            break;
+        }
+      } else {
+        return '';
+      }
     }
   }
 };
