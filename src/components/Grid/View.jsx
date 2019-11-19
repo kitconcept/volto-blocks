@@ -12,7 +12,7 @@ const View = ({ data, render }) => {
         'centered-text': data.centeredText,
       })}
     >
-      <Grid columns={data.columns.length}>
+      <Grid stackable columns={data.columns.length}>
         {data.columns.map(column => (
           <Grid.Column key={column.id}>{render(column)}</Grid.Column>
         ))}
