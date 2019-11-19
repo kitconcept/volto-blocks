@@ -31,13 +31,12 @@ const TextBody = props => {
     dataName,
     isEditMode,
     noRichText,
-    renderElement,
+    renderAs,
   } = props;
-  console.log(renderElement);
 
   const blockRenderMap = Map({
     unstyled: {
-      element: renderElement,
+      element: renderAs,
     },
   });
 
@@ -49,7 +48,7 @@ const TextBody = props => {
 
   if (!__SERVER__) {
     if (props?.data?.[dataName]) {
-      if (renderElement) {
+      if (renderAs) {
         initialEditorState = EditorState.createWithContent(
           stateFromHTML(props.data[dataName]),
         );
@@ -82,14 +81,10 @@ const TextBody = props => {
       onChangeBlock(block, {
         ...data,
         [dataName]: (() => {
-          switch (renderElement) {
-            case 'h1':
-              return currentEditorState.getCurrentContent().getPlainText();
-              break;
-
-            default:
-              return convertToRaw(currentEditorState.getCurrentContent());
-              break;
+          if (renderAs) {
+            return currentEditorState.getCurrentContent().getPlainText();
+          } else {
+            return convertToRaw(currentEditorState.getCurrentContent());
           }
         })(),
       });
@@ -114,7 +109,7 @@ const TextBody = props => {
               ...settings.richTextEditorPlugins,
             ]}
             blockRenderMap={
-              renderElement
+              renderAs
                 ? extendedBlockRenderMap
                 : settings.extendedBlockRenderMap
             }
@@ -126,10 +121,23 @@ const TextBody = props => {
       );
     } else {
       if (data[dataName]) {
-        switch (renderElement) {
+        switch (renderAs) {
           case 'h1':
             return <h1>{data[dataName]}</h1>;
-            break;
+          case 'h2':
+            return <h2>{data[dataName]}</h2>;
+          case 'h3':
+            return <h3>{data[dataName]}</h3>;
+          case 'h4':
+            return <h4>{data[dataName]}</h4>;
+          case 'h5':
+            return <h5>{data[dataName]}</h5>;
+          case 'h6':
+            return <h6>{data[dataName]}</h6>;
+          case 'p':
+            return <p>{data[dataName]}</p>;
+          case 'span':
+            return <span>{data[dataName]}</span>;
 
           default:
             return redraft(
@@ -137,7 +145,6 @@ const TextBody = props => {
               settings.ToHTMLRenderers,
               settings.ToHTMLOptions,
             );
-            break;
         }
       } else {
         return '';
