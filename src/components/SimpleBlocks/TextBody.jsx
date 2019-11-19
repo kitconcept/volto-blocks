@@ -80,13 +80,13 @@ const TextBody = props => {
     ) {
       onChangeBlock(block, {
         ...data,
-        [dataName]: () => {
+        [dataName]: (() => {
           if (renderAs) {
             return currentEditorState.getCurrentContent().getPlainText();
           } else {
             return convertToRaw(currentEditorState.getCurrentContent());
           }
-        },
+        })(),
       });
     }
     setEditorState(currentEditorState);
@@ -123,21 +123,21 @@ const TextBody = props => {
       if (data[dataName]) {
         switch (renderAs) {
           case 'h1':
-            return <h1>{data[dataName].blocks[0].text}</h1>;
+            return <h1>{data[dataName]}</h1>;
           case 'h2':
-            return <h2>{data[dataName].blocks[0].text}</h2>;
+            return <h2>{data[dataName]}</h2>;
           case 'h3':
-            return <h3>{data[dataName].blocks[0].text}</h3>;
+            return <h3>{data[dataName]}</h3>;
           case 'h4':
-            return <h4>{data[dataName].blocks[0].text}</h4>;
+            return <h4>{data[dataName]}</h4>;
           case 'h5':
-            return <h5>{data[dataName].blocks[0].text}</h5>;
+            return <h5>{data[dataName]}</h5>;
           case 'h6':
-            return <h6>{data[dataName].blocks[0].text}</h6>;
+            return <h6>{data[dataName]}</h6>;
           case 'p':
-            return <p>{data[dataName].blocks[0].text}</p>;
+            return <p>{data[dataName]}</p>;
           case 'span':
-            return <span>{data[dataName].blocks[0].text}</span>;
+            return <span>{data[dataName]}</span>;
 
           default:
             return redraft(
