@@ -50,7 +50,9 @@ const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
           {(() => {
             const item = (
               <>
-                {result?.image && <img src={result.image.download} alt="" />}
+                {result?.preview_image && (
+                  <img src={result.preview_image.download} alt="" />
+                )}
                 <div>
                   <h3>{result.title}</h3>
                   <p>{result.description}</p>

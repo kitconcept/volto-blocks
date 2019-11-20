@@ -16,7 +16,7 @@ test('renders a Grid Block Proxy Item component', () => {
           data: {
             title: 'the title',
             description: 'the description',
-            image: { download: 'http://image' },
+            preview_image: { download: 'http://image' },
             '@id': 'http://theitem',
           },
         },
