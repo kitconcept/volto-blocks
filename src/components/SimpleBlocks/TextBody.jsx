@@ -34,6 +34,8 @@ const TextBody = props => {
     renderAs,
   } = props;
 
+  const ElementType = renderAs;
+
   const blockRenderMap = Map({
     unstyled: {
       element: renderAs,
@@ -48,7 +50,7 @@ const TextBody = props => {
 
   if (!__SERVER__) {
     if (props?.data?.[dataName]) {
-      if (renderAs) {
+      if (ElementType) {
         initialEditorState = EditorState.createWithContent(
           stateFromHTML(props.data[dataName]),
         );
@@ -121,30 +123,14 @@ const TextBody = props => {
       );
     } else {
       if (data[dataName]) {
-        switch (renderAs) {
-          case 'h1':
-            return <h1>{data[dataName]}</h1>;
-          case 'h2':
-            return <h2>{data[dataName]}</h2>;
-          case 'h3':
-            return <h3>{data[dataName]}</h3>;
-          case 'h4':
-            return <h4>{data[dataName]}</h4>;
-          case 'h5':
-            return <h5>{data[dataName]}</h5>;
-          case 'h6':
-            return <h6>{data[dataName]}</h6>;
-          case 'p':
-            return <p>{data[dataName]}</p>;
-          case 'span':
-            return <span>{data[dataName]}</span>;
-
-          default:
-            return redraft(
-              data[dataName],
-              settings.ToHTMLRenderers,
-              settings.ToHTMLOptions,
-            );
+        if (ElementType) {
+          return <ElementType>{data[dataName]}</ElementType>;
+        } else {
+          return redraft(
+            data[dataName],
+            settings.ToHTMLRenderers,
+            settings.ToHTMLOptions,
+          );
         }
       } else {
         return '';
@@ -167,6 +153,7 @@ TextBody.propTypes = {
   onFocusNextBlock: PropTypes.func.isRequired,
   onSelectBlock: PropTypes.func.isRequired,
   noRichText: PropTypes.bool,
+  renderAs: PropTypes.elementType,
 };
 
 export default TextBody;
