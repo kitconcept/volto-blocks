@@ -51,7 +51,10 @@ const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
             const item = (
               <>
                 {result?.preview_image && (
-                  <img src={result.preview_image.download} alt="" />
+                  <img
+                    src={flattenToAppURL(result.preview_image.download)}
+                    alt=""
+                  />
                 )}
                 <div>
                   <h3>{result.title}</h3>
