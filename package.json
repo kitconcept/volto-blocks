@@ -32,7 +32,9 @@
     "overrides": [
       {
         "files": "*.overrides",
-        "options": { "parser": "less" }
+        "options": {
+          "parser": "less"
+        }
       }
     ]
   },
