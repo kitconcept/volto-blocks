@@ -51,6 +51,7 @@ Array [
                   }
                 }
                 className="icon"
+                onClick={[Function]}
               />
             </div>
             <button

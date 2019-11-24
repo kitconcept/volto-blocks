@@ -60,6 +60,7 @@ exports[`renders a Teaser Hero Sidebar component 1`] = `
                   }
                 }
                 className="icon"
+                onClick={[Function]}
               />
             </div>
             <button

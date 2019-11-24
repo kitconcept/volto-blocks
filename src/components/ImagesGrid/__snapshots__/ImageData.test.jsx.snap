@@ -50,6 +50,7 @@ exports[`renders an Image Data Sidebar component 1`] = `
                 }
               }
               className="icon"
+              onClick={[Function]}
             />
           </div>
           <button
@@ -166,6 +167,7 @@ exports[`renders an Image Data Sidebar component 1`] = `
                 }
               }
               className="icon"
+              onClick={[Function]}
             />
           </div>
           <button

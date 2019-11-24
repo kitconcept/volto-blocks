@@ -116,11 +116,11 @@ class Edit extends Component {
 
   /**
    * Component will receive props
-   * @method componentWillReceiveProps
+   * @method UNSAFE_componentWillReceiveProps
    * @param {Object} nextProps Next properties
    * @returns {undefined}
    */
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_UNSAFE_componentWillReceiveProps(nextProps) {
     if (!this.props.selected && nextProps.selected) {
       this.node.focus();
       this.setState({
