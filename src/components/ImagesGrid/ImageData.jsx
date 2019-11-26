@@ -161,4 +161,7 @@ ImageData.propTypes = {
   openObjectBrowser: PropTypes.func.isRequired,
 };
 
-export default compose(withObjectBrowser, injectIntl)(ImageData);
+export default compose(
+  withObjectBrowser,
+  injectIntl,
+)(ImageData);

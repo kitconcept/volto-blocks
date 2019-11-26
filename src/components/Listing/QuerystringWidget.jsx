@@ -252,10 +252,7 @@ class QuerystringWidget extends Component {
               theme={selectTheme}
               components={{ DropdownIndicator, Option }}
               onChange={data => {
-                this.onChangeValue(
-                  index,
-                  map(data, item => item.value),
-                );
+                this.onChangeValue(index, map(data, item => item.value));
               }}
               isMulti={true}
               value={map(row.v, value => ({
@@ -422,10 +419,7 @@ class QuerystringWidget extends Component {
                       {!this.props.indexes[row.i].operators[row.o].widget && (
                         <Button
                           onClick={event => {
-                            onChange(
-                              id,
-                              remove(value, (v, i) => i !== index),
-                            );
+                            onChange(id, remove(value, (v, i) => i !== index));
                             event.preventDefault();
                           }}
                           style={{
@@ -443,10 +437,7 @@ class QuerystringWidget extends Component {
                     {this.props.indexes[row.i].operators[row.o].widget && (
                       <Button
                         onClick={event => {
-                          onChange(
-                            id,
-                            remove(value, (v, i) => i !== index),
-                          );
+                          onChange(id, remove(value, (v, i) => i !== index));
                           event.preventDefault();
                         }}
                         style={{
