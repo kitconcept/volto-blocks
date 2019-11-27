@@ -36,7 +36,7 @@ const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
           <div className="teaser-item default">
             <img
               src={
-                find(templates, item => item.variation === data.variation)
+                find(templates(), item => item.variation === data.variation)
                   ?.image
               }
               alt=""

@@ -2,7 +2,7 @@ import teaserHeroLeftTemplate from './teaserhero-left-template.svg';
 import teaserHeroTopTemplate from './teaserhero-top-template.svg';
 import teaserHeroRightTemplate from './teaserhero-right-template.svg';
 
-const templates = [
+const templates = () => [
   {
     image: teaserHeroLeftTemplate,
     id: 'teaserherolefttemplate',

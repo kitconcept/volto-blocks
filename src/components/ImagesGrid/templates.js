@@ -5,7 +5,7 @@ import imageGridTemplate2 from './image-grid-2.svg';
 import imageGridTemplate3 from './image-grid-3.svg';
 import imageGridTemplate4 from './image-grid-4.svg';
 
-const templates = [
+const templates = () => [
   {
     image: imageGridTemplate1,
     id: 'imagegridtemplateone',

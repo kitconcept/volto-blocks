@@ -28,7 +28,7 @@ const Edit = ({
           onSelectTemplate={index =>
             onChangeBlock(block, {
               ...data,
-              variation: templates[index].variation,
+              variation: templates()[index].variation,
             })
           }
         />

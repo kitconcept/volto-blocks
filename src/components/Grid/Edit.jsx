@@ -51,7 +51,7 @@ class Edit extends Component {
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
     gridType: PropTypes.string,
-    templates: PropTypes.array.isRequired,
+    templates: PropTypes.func.isRequired,
     sidebarData: PropTypes.func.isRequired,
   };
 
@@ -194,7 +194,7 @@ class Edit extends Component {
   onSelectTemplate = templateIndex => {
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
-      columns: this.props.templates[templateIndex].columns,
+      columns: this.props.templates()[templateIndex].columns,
     });
   };
 

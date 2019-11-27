@@ -5,7 +5,7 @@ import teaserGridTemplate2 from './teaser-grid-2.svg';
 import teaserGridTemplate3 from './teaser-grid-3.svg';
 import teaserGridTemplate4 from './teaser-grid-4.svg';
 
-const templates = [
+const templates = () => [
   {
     image: teaserGridTemplate1,
     id: 'teasergridtemplateone',

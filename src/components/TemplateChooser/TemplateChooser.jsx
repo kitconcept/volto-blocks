@@ -7,8 +7,8 @@ const TemplateChooser = ({ templates, onSelectTemplate, intl }) => {
   return (
     <div className="template-chooser">
       <Message>
-        <Grid columns={templates.length}>
-          {templates.map((template, index) => (
+        <Grid columns={templates().length}>
+          {templates().map((template, index) => (
             <Grid.Column key={template.id}>
               <Button
                 className="template-chooser-item"
@@ -31,7 +31,7 @@ const TemplateChooser = ({ templates, onSelectTemplate, intl }) => {
 };
 
 TemplateChooser.propTypes = {
-  templates: PropTypes.array.isRequired,
+  templates: PropTypes.func.isRequired,
   onSelectTemplate: PropTypes.func.isRequired,
 };
 
