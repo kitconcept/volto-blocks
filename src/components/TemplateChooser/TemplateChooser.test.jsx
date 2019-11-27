@@ -18,7 +18,7 @@ test('renders a TemplateChooser component', () => {
   const component = renderer.create(
     <Provider store={store}>
       <TemplateChooser
-        templates={[
+        templates={() => [
           {
             image: templateSVG,
             id: 'templateid',
