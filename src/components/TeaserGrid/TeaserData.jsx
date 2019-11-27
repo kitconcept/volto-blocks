@@ -77,7 +77,4 @@ TeaserData.propTypes = {
   openObjectBrowser: PropTypes.func.isRequired,
 };
 
-export default compose(
-  withObjectBrowser,
-  injectIntl,
-)(TeaserData);
+export default compose(withObjectBrowser, injectIntl)(TeaserData);
