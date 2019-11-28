@@ -117,6 +117,7 @@ const TextBody = props => {
             }
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
+            customStyleMap={settings.customStyleMap}
           />
           {!noRichText && <InlineToolbar />}
         </>
