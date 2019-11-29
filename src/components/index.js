@@ -15,6 +15,7 @@ import CardViewBlock from './Card/View';
 import TeaserHeroEditBlock from './TeaserHero/Edit';
 import TeaserHeroViewBlock from './TeaserHero/View';
 import MultiSourceWidget from './BlockDataWidgets/MultiSourceWidget';
+import ConditionalLink from './ConditionalLink/ConditionalLink';
 
 import TextBody from './SimpleBlocks/TextBody';
 
@@ -24,6 +25,7 @@ import BlockRenderer from './BlockRenderer/BlockRenderer';
 import ObjectBrowser from '../Freezer/ObjectBrowser/ObjectBrowser';
 
 export {
+  ConditionalLink,
   TextBody,
   MultiSourceWidget,
   CardsEditBlock,
