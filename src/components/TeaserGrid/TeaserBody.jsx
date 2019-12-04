@@ -30,7 +30,7 @@ const TeaserItem = ({ data, block, isEditMode, intl }) => {
 
   return (
     <>
-      {!data.href && (
+      {!data.href && isEditMode && (
         <Message>
           <div className="grid-teaser-item default">
             <img src={imageBlockSVG} alt="" />

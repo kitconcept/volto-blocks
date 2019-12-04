@@ -61,7 +61,7 @@ const ImageItem = ({ data, isEditMode, onChangeGridItem, index, intl }) => {
 
   return (
     <>
-      {!data.url && (
+      {!data.url && isEditMode && (
         <Dropzone onDrop={onDropImage} className="dropzone">
           <Message>
             {uploading.current && (
