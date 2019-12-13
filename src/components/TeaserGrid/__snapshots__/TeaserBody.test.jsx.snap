@@ -9,10 +9,14 @@ exports[`renders a Grid Block Proxy Item component 1`] = `
     onClick={[Function]}
     target={null}
   >
-    <img
-      alt=""
-      src="http://image"
-    />
+    <div
+      className="grid-image-wrapper"
+    >
+      <img
+        alt=""
+        src="http://image"
+      />
+    </div>
     <h3>
       the title
     </h3>

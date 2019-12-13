@@ -103,15 +103,25 @@
 }
 
 // teasers view/edit
+/* This might be required to standardize */
+// .block.__grid.two .grid-image-wrapper {
+//   height: 230px;
+// }
+
 .teaser-item,
 .grid-teaser-item,
 .grid-image-item {
   display: flex;
   flex-direction: column;
 
+  .grid-image-wrapper {
+    display: flex;
+  }
+
   img {
     width: 100%;
-    align-self: flex-start;
+    object-fit: cover;
+    object-position: top left;
   }
 
   a {

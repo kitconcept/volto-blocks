@@ -10,6 +10,10 @@ const View = ({ data, render }) => {
         centered: data.align === 'center' || data.align === undefined,
         'space-between': data.align === 'space-between',
         'centered-text': data.centeredText,
+        one: data.columns.length === 1,
+        two: data.columns.length === 2,
+        three: data.columns.length === 3,
+        four: data.columns.length === 4,
       })}
     >
       <Grid stackable columns={data.columns.length}>
