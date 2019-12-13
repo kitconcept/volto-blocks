@@ -70,15 +70,17 @@ const GridSidebar = props => {
                   />
                 )}
                 <div className="accordion-tools">
-                  <Button.Group>
-                    <Button
-                      icon
-                      basic
-                      onClick={e => props.removeColumn(e, index)}
-                    >
-                      <Icon name={trashSVG} size="20px" color="#e40166" />
-                    </Button>
-                  </Button.Group>
+                  {data.columns.length > 2 && (
+                    <Button.Group>
+                      <Button
+                        icon
+                        basic
+                        onClick={e => props.removeColumn(e, index)}
+                      >
+                        <Icon name={trashSVG} size="20px" color="#e40166" />
+                      </Button>
+                    </Button.Group>
+                  )}
                   {activeAccIndex === 0 ? (
                     <Icon name={upSVG} size="20px" />
                   ) : (
