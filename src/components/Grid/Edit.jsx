@@ -206,14 +206,16 @@ class Edit extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
+    const { data } = this.props;
+
     return (
       <div
         className={cx({
-          [this.props.data['@type']]: true,
-          one: this.props.data.columns.length === 1,
-          two: this.props.data.columns.length === 2,
-          three: this.props.data.columns.length === 3,
-          four: this.props.data.columns.length === 4,
+          [data['@type']]: true,
+          one: data?.columns && data.columns.length === 1,
+          two: data?.columns && data.columns.length === 2,
+          three: data?.columns && data.columns.length === 3,
+          four: data?.columns && data.columns.length === 4,
         })}
       >
         {!this.props.data.columns?.length && (
