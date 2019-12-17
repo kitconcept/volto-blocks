@@ -6,7 +6,7 @@ import { Button, Grid, Ref } from 'semantic-ui-react';
 import { injectIntl } from 'react-intl';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
-
+import cx from 'classnames';
 import { Icon, SidebarPortal } from '@plone/volto/components';
 
 import imageSVG from '@plone/volto/icons/image.svg';
@@ -207,7 +207,15 @@ class Edit extends Component {
    */
   render() {
     return (
-      <>
+      <div
+        className={cx({
+          [this.props.data['@type']]: true,
+          one: this.props.data.columns.length === 1,
+          two: this.props.data.columns.length === 2,
+          three: this.props.data.columns.length === 3,
+          four: this.props.data.columns.length === 4,
+        })}
+      >
         {!this.props.data.columns?.length && (
           <TemplateChooser
             templates={this.props.templates}
@@ -319,7 +327,7 @@ class Edit extends Component {
             sidebarData={this.props.sidebarData}
           />
         </SidebarPortal>
-      </>
+      </div>
     );
   }
 }

@@ -7,6 +7,7 @@ const View = ({ data, render }) => {
   return (
     <div
       className={cx('block __grid', {
+        [data['@type']]: true,
         centered: data.align === 'center' || data.align === undefined,
         'space-between': data.align === 'space-between',
         'centered-text': data.centeredText,
