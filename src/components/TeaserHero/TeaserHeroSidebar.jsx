@@ -5,6 +5,14 @@ import { FormattedMessage } from 'react-intl';
 import TeaserHeroData from './TeaserHeroData';
 
 const TeaserHeroSidebar = props => {
+  const { sidebarData } = props;
+
+  const teaserHeroSidebarDataRender = sidebarData ? (
+    <>{sidebarData(props)}</>
+  ) : (
+    <TeaserHeroData {...props} />
+  );
+
   return (
     <Segment.Group raised>
       <header className="header pulled">
@@ -13,7 +21,7 @@ const TeaserHeroSidebar = props => {
         </h2>
       </header>
 
-      <TeaserHeroData {...props} />
+      {teaserHeroSidebarDataRender}
     </Segment.Group>
   );
 };

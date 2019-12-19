@@ -13,6 +13,7 @@ const Edit = ({
   selected,
   properties,
   render,
+  sidebarData,
 }) => {
   const teaserHeroBodyRender = render ? (
     <>{render(data, id)}</>
@@ -39,6 +40,7 @@ const Edit = ({
           data={data}
           block={block}
           onChangeBlock={onChangeBlock}
+          sidebarData={sidebarData}
         />
       </SidebarPortal>
     </>
