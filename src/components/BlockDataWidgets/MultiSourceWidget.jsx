@@ -79,7 +79,7 @@ const MultiSourceWidget = props => {
           }
         />
       </Segment>
-      <Segment className="form sidebar-image-data">
+      <Segment className="form sidebar-teaser-data">
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId={uuid()} direction="vertical">
             {provided => (
