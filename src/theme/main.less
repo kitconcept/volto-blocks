@@ -164,11 +164,17 @@
     .grid-image-wrapper {
       width: 49%;
       flex: 1 0 auto;
+      @media only screen and (max-width: @largestMobileScreen) {
+        width: 100%;
+      }
     }
 
     h3,
     p {
       padding-left: 20px;
+      @media only screen and (max-width: @largestMobileScreen) {
+        padding-left: 0;
+      }
     }
 
     @media only screen and (max-width: @largestMobileScreen) {
