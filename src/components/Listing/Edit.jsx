@@ -3,11 +3,19 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 import { SidebarPortal } from '@plone/volto/components';
+import { getBaseUrl } from '@plone/volto/helpers';
 
 import ListingSidebar from './ListingSidebar';
 import ListingBody from './ListingBody';
 
-const Edit = ({ data, onChangeBlock, block, selected, properties }) => {
+const Edit = ({
+  data,
+  onChangeBlock,
+  block,
+  selected,
+  properties,
+  pathname,
+}) => {
   React.useEffect(() => {
     if (!data.query) {
       onChangeBlock(block, {
@@ -31,7 +39,13 @@ const Edit = ({ data, onChangeBlock, block, selected, properties }) => {
           {message => <p className="items-preview">{message}</p>}
         </FormattedMessage>
       )}
-      <ListingBody data={data} properties={properties} block={block} />
+      <ListingBody
+        data={data}
+        properties={properties}
+        block={block}
+        path={getBaseUrl(pathname)}
+        isEditMode
+      />
       <SidebarPortal selected={selected}>
         <ListingSidebar
           data={data}

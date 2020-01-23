@@ -9,7 +9,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { getQueryStringResults } from '@kitconcept/volto-blocks/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
-const ListingItem = ({ data, properties, intl }) => {
+const ListingItem = ({ data, properties, path, intl }) => {
   const querystringResults = useSelector(
     state => state.querystringsearch.subrequests,
   );
@@ -17,9 +17,11 @@ const ListingItem = ({ data, properties, intl }) => {
 
   React.useEffect(() => {
     if (data?.query?.length > 0) {
-      dispatch(getQueryStringResults(data, data.block));
+      dispatch(
+        getQueryStringResults(path, { ...data, fullobjects: 1 }, data.block),
+      );
     }
-  }, [dispatch, data, data.block]);
+  }, [dispatch, data, data.block, path]);
 
   const folderItems = properties.is_folderish ? properties.items : [];
 
