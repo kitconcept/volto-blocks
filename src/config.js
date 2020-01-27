@@ -72,6 +72,7 @@ const customBlocks = {
     edit: TeaserGridEditBlock,
     restricted: false,
     mostUsed: true,
+    sidebarTab: 1,
     security: {
       addPermission: [],
       view: [],
@@ -86,6 +87,7 @@ const customBlocks = {
     edit: ImagesGridEditBlock,
     restricted: false,
     mostUsed: true,
+    sidebarTab: 1,
     security: {
       addPermission: [],
       view: [],
@@ -100,6 +102,7 @@ const customBlocks = {
     edit: ListingEditBlock,
     restricted: false,
     mostUsed: true,
+    sidebarTab: 1,
     security: {
       addPermission: [],
       view: [],
@@ -114,6 +117,7 @@ const customBlocks = {
     edit: SliderEditBlock,
     restricted: true,
     mostUsed: false,
+    sidebarTab: 1,
     security: {
       addPermission: [],
       view: [],
@@ -128,6 +132,7 @@ const customBlocks = {
     edit: TeaserHeroEditBlock,
     restricted: false,
     mostUsed: true,
+    sidebarTab: 1,
     security: {
       addPermission: [],
       view: [],
