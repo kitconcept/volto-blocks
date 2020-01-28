@@ -7,8 +7,10 @@ import {
   convertToRaw,
   DefaultDraftBlockRenderMap,
   EditorState,
+  RichUtils,
 } from 'draft-js';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
+import isSoftNewlineEvent from 'draft-js/lib/isSoftNewlineEvent';
 import { defineMessages, useIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import redraft from 'redraft';
@@ -118,6 +120,14 @@ const TextBody = props => {
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
             customStyleMap={settings.customStyleMap}
+            handleReturn={e => {
+              if (isSoftNewlineEvent(e)) {
+                onChange(RichUtils.insertSoftNewline(editorState));
+                return 'handled';
+              }
+              props.onSelectBlock(props.onAddBlock('text', props.index + 1));
+              return 'handled';
+            }}
           />
           {!noRichText && <InlineToolbar />}
         </>
