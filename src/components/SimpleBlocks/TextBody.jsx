@@ -7,7 +7,7 @@ import {
   convertToRaw,
   DefaultDraftBlockRenderMap,
   EditorState,
-  RichUtils
+  RichUtils,
 } from 'draft-js';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import isSoftNewlineEvent from 'draft-js/lib/isSoftNewlineEvent';
@@ -121,18 +121,13 @@ const TextBody = props => {
             placeholder={intl.formatMessage(messages.text)}
             customStyleMap={settings.customStyleMap}
             handleReturn={e => {
-            if (isSoftNewlineEvent(e)) {
-              onChange(
-                RichUtils.insertSoftNewline(editorState),
-              );
+              if (isSoftNewlineEvent(e)) {
+                onChange(RichUtils.insertSoftNewline(editorState));
+                return 'handled';
+              }
+              props.onSelectBlock(props.onAddBlock('text', props.index + 1));
               return 'handled';
-            }
-              props.onSelectBlock(
-              props.onAddBlock('text', props.index + 1),
-            );
-          return 'handled';
-        }}
-
+            }}
           />
           {!noRichText && <InlineToolbar />}
         </>
