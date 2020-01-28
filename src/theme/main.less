@@ -116,6 +116,9 @@
 
   .grid-image-wrapper {
     display: flex;
+    // This one is because Safari has a bug with flexed items, the default is
+    // align-items `stretched`, so it's required to reset it.
+    align-items: flex-start;
   }
 
   img {
