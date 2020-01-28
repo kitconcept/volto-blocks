@@ -36,6 +36,7 @@ import {
   // CardViewBlock,
 } from '@kitconcept/volto-blocks/components';
 
+
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
 import sliderSVG from '@plone/volto/icons/slider.svg';
