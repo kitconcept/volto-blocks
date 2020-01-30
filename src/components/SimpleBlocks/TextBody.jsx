@@ -7,10 +7,8 @@ import {
   convertToRaw,
   DefaultDraftBlockRenderMap,
   EditorState,
-  RichUtils,
 } from 'draft-js';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
-import isSoftNewlineEvent from 'draft-js/lib/isSoftNewlineEvent';
 import { defineMessages, useIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import redraft from 'redraft';
