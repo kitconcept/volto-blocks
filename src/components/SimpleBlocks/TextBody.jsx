@@ -120,6 +120,11 @@ const TextBody = props => {
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
             customStyleMap={settings.customStyleMap}
+            handleReturn={e => {
+              // We need to stop propagate the event for not creating a new block while
+              // in the widget
+              e.stopPropagation();
+            }}
           />
           {!noRichText && <InlineToolbar />}
         </>
