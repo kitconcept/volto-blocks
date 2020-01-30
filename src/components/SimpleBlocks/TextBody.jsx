@@ -120,14 +120,7 @@ const TextBody = props => {
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
             customStyleMap={settings.customStyleMap}
-            handleReturn={e => {
-              if (isSoftNewlineEvent(e)) {
-                onChange(RichUtils.insertSoftNewline(editorState));
-                return 'handled';
-              }
-              props.onSelectBlock(props.onAddBlock('text', props.index + 1));
-              return 'handled';
-            }}
+
           />
           {!noRichText && <InlineToolbar />}
         </>
