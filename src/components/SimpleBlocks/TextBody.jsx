@@ -118,6 +118,16 @@ const TextBody = props => {
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
             customStyleMap={settings.customStyleMap}
+            onUpArrow={e => {
+              // We need to stop propagate the event for not creating a new block while
+              // in the widget
+              e.stopPropagation();
+            }}
+            onDownArrow={e => {
+              // We need to stop propagate the event for not creating a new block while
+              // in the widget
+              e.stopPropagation();
+            }}
             handleReturn={e => {
               // We need to stop propagate the event for not creating a new block while
               // in the widget
