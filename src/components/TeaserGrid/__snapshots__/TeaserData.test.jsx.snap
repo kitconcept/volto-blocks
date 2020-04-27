@@ -96,7 +96,7 @@ exports[`renders a Proxy Data Sidebar component 1`] = `
             className="wrapper"
           >
             <div
-              className="ui fitted checkbox"
+              className="ui checkbox"
               onChange={[Function]}
               onClick={[Function]}
               onMouseDown={[Function]}
@@ -111,15 +111,12 @@ exports[`renders a Proxy Data Sidebar component 1`] = `
                 tabIndex={0}
                 type="checkbox"
               />
-              <label />
+              <label
+                for="field-openLinkInNewTab"
+              >
+                Open in a new tab
+              </label>
             </div>
-            <label
-              className="ui basic horizontal label"
-              htmlFor="field-openLinkInNewTab"
-              onClick={[Function]}
-            >
-              Open in a new tab
-            </label>
           </div>
         </div>
       </div>
