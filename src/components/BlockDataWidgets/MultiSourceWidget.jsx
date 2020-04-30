@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { defineMessages, useIntl } from 'react-intl';
 import { Button, Segment } from 'semantic-ui-react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 
 import { Icon, TextWidget } from '@plone/volto/components';
+import { getContent } from '@plone/volto/actions';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 import { reorderArray } from '@kitconcept/volto-blocks/helpers';
 import trashSVG from '@plone/volto/icons/delete.svg';
@@ -21,6 +23,31 @@ const messages = defineMessages({
 const MultiSourceWidget = props => {
   const { data, block, onChangeBlock, openObjectBrowser } = props;
   const intl = useIntl();
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    // This is the "updater", ensures the data is correct on edit -> select the block
+    if (data.hrefList?.length > 0) {
+      Promise.all(
+        data.hrefList.map(item =>
+          dispatch(getContent(item.url, null, item.id)),
+        ),
+      ).then(result => {
+        onChangeBlock(block, {
+          ...data,
+          hrefList: data.hrefList.map((oldItem, index) => ({
+            ...oldItem,
+            title: result[index].title,
+            description: result[index].description,
+            preview_image: result[index].preview_image,
+          })),
+        });
+      });
+    }
+  }, []);
+
+  const getSelectedContent = ({ url, blockID }) =>
+    dispatch(getContent(url, null, blockID));
 
   const onDragEnd = result => {
     const { source, destination } = result;
@@ -70,11 +97,25 @@ const MultiSourceWidget = props => {
           iconAction={() =>
             openObjectBrowser({
               mode: 'link',
-              onSelectItem: url =>
-                onChangeBlock(block, {
-                  ...data,
-                  hrefList: [...(data.hrefList || []), { url, id: uuid() }],
-                }),
+              onSelectItem: url => {
+                const selectedItem = { url, id: uuid() };
+                // We get the full content on the fly (no store) then grab the desired
+                // values, store them in the formData
+                getSelectedContent(selectedItem).then(resp => {
+                  onChangeBlock(block, {
+                    ...data,
+                    hrefList: [
+                      ...(data.hrefList || []),
+                      {
+                        ...selectedItem,
+                        title: resp.title,
+                        description: resp.description,
+                        preview_image: resp.preview_image,
+                      },
+                    ],
+                  });
+                });
+              },
             })
           }
         />
