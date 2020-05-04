@@ -44,6 +44,7 @@ const MultiSourceWidget = props => {
         });
       });
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
 
   const getSelectedContent = ({ url, blockID }) =>
