@@ -5,7 +5,8 @@ import { defineMessages, useIntl } from 'react-intl';
 import { Button, Segment } from 'semantic-ui-react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
-
+import { isObject, mapValues } from 'lodash';
+import { flattenToAppURL } from '@plone/volto/helpers';
 import { Icon, TextWidget } from '@plone/volto/components';
 import { getContent } from '@plone/volto/actions';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
@@ -19,6 +20,19 @@ const messages = defineMessages({
     defaultMessage: 'Source',
   },
 });
+
+// This prevents any server information be saved in the object by recursivelly call
+// `flattenToAppURL` in every `download` property
+export const recursiveFlattenToAppURL = obj =>
+  mapValues(obj, (value, key) => {
+    if (key === 'download') {
+      return flattenToAppURL(value);
+    } else if (isObject(value)) {
+      return recursiveFlattenToAppURL(value);
+    } else {
+      return value;
+    }
+  });
 
 const MultiSourceWidget = props => {
   const { data, block, onChangeBlock, openObjectBrowser } = props;
@@ -39,7 +53,10 @@ const MultiSourceWidget = props => {
             ...oldItem,
             title: result[index].title,
             description: result[index].description,
-            preview_image: result[index].preview_image,
+            // We get all the object, for be ready for scrset implementations
+            preview_image: recursiveFlattenToAppURL(
+              result[index].preview_image,
+            ),
           })),
         });
       });
@@ -111,7 +128,9 @@ const MultiSourceWidget = props => {
                         ...selectedItem,
                         title: resp.title,
                         description: resp.description,
-                        preview_image: resp.preview_image,
+                        preview_image: recursiveFlattenToAppURL(
+                          resp.preview_image,
+                        ),
                       },
                     ],
                   });
