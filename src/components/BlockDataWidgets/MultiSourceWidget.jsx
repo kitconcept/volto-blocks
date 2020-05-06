@@ -52,11 +52,12 @@ const MultiSourceWidget = props => {
           hrefList: data.hrefList.map((oldItem, index) => ({
             ...oldItem,
             title: result[index].title,
+            nav_title: result[index]?.nav_title,
             description: result[index].description,
-            // We get all the object, for be ready for scrset implementations
-            preview_image: recursiveFlattenToAppURL(
-              result[index].preview_image,
-            ),
+            // We get all the object, for being ready for scrset implementations
+            preview_image: result[index].preview_image
+              ? recursiveFlattenToAppURL(result[index].preview_image)
+              : null,
           })),
         });
       });
@@ -127,10 +128,11 @@ const MultiSourceWidget = props => {
                       {
                         ...selectedItem,
                         title: resp.title,
+                        nav_title: resp?.nav_title,
                         description: resp.description,
-                        preview_image: recursiveFlattenToAppURL(
-                          resp.preview_image,
-                        ),
+                        preview_image: resp.preview_image
+                          ? recursiveFlattenToAppURL(resp.preview_image)
+                          : null,
                       },
                     ],
                   });
