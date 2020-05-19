@@ -113,7 +113,7 @@ Array [
                   type="checkbox"
                 />
                 <label
-                  for="field-openLinkInNewTab"
+                  htmlFor="field-openLinkInNewTab"
                 >
                   Open in a new tab
                 </label>
