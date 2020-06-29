@@ -10,7 +10,7 @@ const Edit = props => {
       {...props}
       gridType="image"
       templates={templates}
-      render={(item, index, onChangeGridItem) => (
+      render={(item, index, undefined, onChangeGridItem) => (
         <ImageBody
           data={item}
           index={index}
