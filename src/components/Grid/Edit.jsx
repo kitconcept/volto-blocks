@@ -109,7 +109,7 @@ class Edit extends Component {
     });
   }
 
-  onDragEnd = (result) => {
+  onDragEnd = result => {
     const { source, destination } = result;
     // dropped outside the list
     if (!destination) {
@@ -202,7 +202,7 @@ class Edit extends Component {
     });
   };
 
-  onSelectTemplate = (templateIndex) => {
+  onSelectTemplate = templateIndex => {
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
       columns: this.props.templates()[templateIndex].columns,
@@ -242,7 +242,7 @@ class Edit extends Component {
               <Button
                 icon
                 basic
-                onClick={(e) => this.addNewColumn(e, 'text')}
+                onClick={e => this.addNewColumn(e, 'text')}
                 disabled={this.props.data.columns.length >= 4}
               >
                 <Icon name={textSVG} size="24px" />
@@ -252,7 +252,7 @@ class Edit extends Component {
               <Button
                 icon
                 basic
-                onClick={(e) => this.addNewColumn(e, 'image')}
+                onClick={e => this.addNewColumn(e, 'image')}
                 disabled={this.props.data.columns.length >= 4}
               >
                 <Icon name={imageSVG} size="24px" />
@@ -262,7 +262,7 @@ class Edit extends Component {
               <Button
                 icon
                 basic
-                onClick={(e) => this.addNewColumn(e, '__card')}
+                onClick={e => this.addNewColumn(e, '__card')}
                 disabled={this.props.data.columns.length >= 4}
               >
                 <Icon name={imagesSVG} size="24px" />
@@ -276,7 +276,7 @@ class Edit extends Component {
               <Button
                 icon
                 basic
-                onClick={(e) => this.addNewColumn(e, this.props.gridType)}
+                onClick={e => this.addNewColumn(e, this.props.gridType)}
               >
                 <Icon name={addSVG} size="24px" />
               </Button>
@@ -285,7 +285,7 @@ class Edit extends Component {
         )}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId={uuid()} direction="horizontal">
-            {(provided) => (
+            {provided => (
               <Ref innerRef={provided.innerRef}>
                 <Grid
                   {...provided.droppableProps}
@@ -300,7 +300,7 @@ class Edit extends Component {
                         index={index}
                         key={item.id}
                       >
-                        {(provided) => {
+                        {provided => {
                           item = { ...item, block: item.id };
                           return (
                             <Ref innerRef={provided.innerRef}>
@@ -312,7 +312,7 @@ class Edit extends Component {
                                 <div
                                   role="presentation"
                                   // This prevents propagation of ENTER
-                                  onKeyDown={(e) => e.stopPropagation()}
+                                  onKeyDown={e => e.stopPropagation()}
                                 >
                                   {this.props.render(
                                     item,
@@ -352,7 +352,7 @@ class Edit extends Component {
 export default compose(
   injectIntl,
   connect(
-    (state) => ({
+    state => ({
       request: state.content.create,
       content: state.content.data,
     }),
