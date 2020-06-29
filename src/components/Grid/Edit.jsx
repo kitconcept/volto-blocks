@@ -76,16 +76,6 @@ class Edit extends Component {
     }
   }
 
-  //   componentDidMount(){
-  //     if (!this.props.data.query) {
-  //       onChangeBlock(this.props.block, {
-  //         ...this.props.data,
-  //         query: [],
-  //         block,
-  //       });
-  //   }
-  // }
-
   onChangeGridItem = (index, gridItemData) => {
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
