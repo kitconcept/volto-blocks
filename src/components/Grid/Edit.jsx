@@ -13,6 +13,7 @@ import imageSVG from '@plone/volto/icons/image.svg';
 import textSVG from '@plone/volto/icons/text.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
+import { getBaseUrl } from '@plone/volto/helpers';
 
 import GridSidebar from './GridSidebar';
 import TemplateChooser from '../TemplateChooser/TemplateChooser';
@@ -289,27 +290,31 @@ class Edit extends Component {
                         index={index}
                         key={item.id}
                       >
-                        {provided => (
-                          <Ref innerRef={provided.innerRef}>
-                            <Grid.Column
-                              key={item.id}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <div
-                                role="presentation"
-                                // This prevents propagation of ENTER
-                                onKeyDown={e => e.stopPropagation()}
+                        {provided => {
+                          item = { ...item, block: item.id };
+                          return (
+                            <Ref innerRef={provided.innerRef}>
+                              <Grid.Column
+                                key={item.id}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
                               >
-                                {this.props.render(
-                                  item,
-                                  index,
-                                  this.onChangeGridItem,
-                                )}
-                              </div>
-                            </Grid.Column>
-                          </Ref>
-                        )}
+                                <div
+                                  role="presentation"
+                                  // This prevents propagation of ENTER
+                                  onKeyDown={e => e.stopPropagation()}
+                                >
+                                  {this.props.render(
+                                    item,
+                                    index,
+                                    getBaseUrl(this.props.pathname),
+                                    this.onChangeGridItem,
+                                  )}
+                                </div>
+                              </Grid.Column>
+                            </Ref>
+                          );
+                        }}
                       </Draggable>
                     ))}
                   {provided.placeholder}

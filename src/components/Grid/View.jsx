@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react';
 import cx from 'classnames';
 
-const View = ({ data, render }) => {
+const View = ({ data, render, path }) => {
   return (
     <div
       className={cx('block __grid', {
@@ -19,7 +19,9 @@ const View = ({ data, render }) => {
     >
       <Grid stackable columns={data.columns.length}>
         {data.columns.map(column => (
-          <Grid.Column key={column.id}>{render(column)}</Grid.Column>
+          <Grid.Column key={column.id}>
+            {render({ ...column, block: column.id }, path)}
+          </Grid.Column>
         ))}
       </Grid>
     </div>
