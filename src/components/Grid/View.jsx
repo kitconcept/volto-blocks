@@ -20,7 +20,7 @@ const View = ({ data, render, path }) => {
       <Grid stackable columns={data.columns.length}>
         {data.columns.map(column => (
           <Grid.Column key={column.id}>
-            {render({ ...column, block: column.id }, path, data.columns)}
+            {render({ ...column, block: column.id }, path, data.columns.length)}
           </Grid.Column>
         ))}
       </Grid>
