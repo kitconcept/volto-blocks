@@ -309,6 +309,7 @@ class Edit extends Component {
                                     index,
                                     getBaseUrl(this.props.pathname),
                                     this.onChangeGridItem,
+                                    data.columns,
                                   )}
                                 </div>
                               </Grid.Column>
