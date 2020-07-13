@@ -4,11 +4,11 @@
   "description": "kitconcept Volto Blocks",
   "main": "index.js",
   "scripts": {
-    "lint": "./node_modules/eslint/bin/eslint.js 'src/**/*.{js,jsx}'",
-    "lint:fix": "./node_modules/eslint/bin/eslint.js --fix 'src/**/*.{js,jsx}'",
-    "prettier": "node_modules/prettier/bin-prettier.js --single-quote src/**/*.{js,jsx,ts,tsx,json,md} --check",
-    "prettier:fix": "node_modules/prettier/bin-prettier.js --single-quote --write src/**/*.{js,jsx,ts,tsx,json,md}",
-    "ci:lint": "./node_modules/eslint/bin/eslint.js -f checkstyle 'src/**/*.{js,jsx}' > eslint.xml"
+    "lint": "./node_modules/.bin/eslint 'src/**/*.{js,jsx}'",
+    "lint:fix": "./node_modules/.bin/eslint --fix 'src/**/*.{js,jsx}'",
+    "lint:ci": "./node_modules/.bin/eslint -f checkstyle 'src/**/*.{js,jsx}' > eslint.xml",
+    "prettier": "./node_modules/.bin/prettier --single-quote src/**/*.{js,jsx,ts,tsx,json,md} --check",
+    "prettier:fix": "./node_modules/prettier/.bin/prettier --single-quote --write src/**/*.{js,jsx,ts,tsx,json,md}"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,8 @@
     "ReactJS",
     "Plone"
   ],
-  "author": "kitconcept, GmbH",
-  "license": "ISC",
+  "author": "kitconcept GmbH",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kitconcept/volto-blocks/issues"
   },
