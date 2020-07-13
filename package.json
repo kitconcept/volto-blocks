@@ -8,7 +8,7 @@
     "lint:fix": "./node_modules/eslint/bin/eslint.js --fix 'src/**/*.{js,jsx}'",
     "lint:ci": "./node_modules/eslint/bin/eslint.js -f checkstyle 'src/**/*.{js,jsx}' > eslint.xml",
     "prettier": "node_modules/prettier/bin-prettier.js --single-quote src/**/*.{js,jsx,ts,tsx,json,md} --check",
-    "prettier:fix": "node_modules/prettier/bin-prettier.js --single-quote --write src/**/*.{js,jsx,ts,tsx,json,md}",
+    "prettier:fix": "node_modules/prettier/bin-prettier.js --single-quote --write src/**/*.{js,jsx,ts,tsx,json,md}"
   },
   "repository": {
     "type": "git",
