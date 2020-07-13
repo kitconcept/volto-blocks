@@ -6,10 +6,7 @@ module.exports = {
         map: [
           ['@plone/volto', '@plone/volto/src'],
           ['@package', './src'],
-          [
-            '@kitconcept/volto-blocks',
-            './src/addons/kitconcept.volto-blocks/src',
-          ],
+          ['@kitconcept/volto-blocks', './src'],
         ],
         extensions: ['.js', '.jsx', '.json'],
       },
