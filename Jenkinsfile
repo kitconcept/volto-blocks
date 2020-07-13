@@ -20,7 +20,6 @@ pipeline {
         deleteDir()
         checkout scm
         sh 'yarn'
-        sh 'yarn lint:ci'
         sh 'yarn prettier'
       }
       post {

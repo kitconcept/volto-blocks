@@ -6,9 +6,9 @@
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js 'src/**/*.{js,jsx}'",
     "lint:fix": "./node_modules/eslint/bin/eslint.js --fix 'src/**/*.{js,jsx}'",
-    "lint:ci": "./node_modules/eslint/bin/eslint.js -f checkstyle 'src/**/*.{js,jsx}' > eslint.xml",
     "prettier": "node_modules/prettier/bin-prettier.js --single-quote src/**/*.{js,jsx,ts,tsx,json,md} --check",
-    "prettier:fix": "node_modules/prettier/bin-prettier.js --single-quote --write src/**/*.{js,jsx,ts,tsx,json,md}"
+    "prettier:fix": "node_modules/prettier/bin-prettier.js --single-quote --write src/**/*.{js,jsx,ts,tsx,json,md}",
+    "ci:lint": "./node_modules/eslint/bin/eslint.js -f checkstyle 'src/**/*.{js,jsx}' > eslint.xml"
   },
   "repository": {
     "type": "git",
@@ -39,24 +39,14 @@
     ]
   },
   "dependencies": {
-    "@plone/volto": "7.1.0",
     "deep-freeze": "0.0.1",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react-hooks": "^4.0.7",
     "react-beautiful-dnd": "10.1.0",
     "react-slick": "0.25.2",
     "slick-carousel": "1.8.1"
   },
   "devDependencies": {
-    "eslint": "^7.4.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-node": "^11.1.0",
+    "eslint": "5.16.0",
     "eslint-plugin-prettier": "3.0.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-standard": "^4.0.1",
     "prettier": "1.19.1"
   }
 }
