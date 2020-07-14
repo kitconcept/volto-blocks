@@ -21,6 +21,7 @@ pipeline {
         checkout scm
         sh 'yarn'
         sh 'yarn prettier'
+        sh 'yarn lint:ci'
       }
       post {
         always {
