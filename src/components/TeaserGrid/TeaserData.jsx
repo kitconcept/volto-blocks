@@ -40,17 +40,29 @@ const TeaserData = ({
           iconAction={
             data.href
               ? () => {
-                  onChangeBlock(block, {
-                    ...data,
-                    href: '',
-                  });
-                }
+                onChangeBlock(block, {
+                  ...data,
+                  href: '',
+                });
+              }
               : () => openObjectBrowser({ mode: 'link' })
           }
           onChange={(name, value) => {
             onChangeBlock(block, {
               ...data,
               href: value,
+            });
+          }}
+        />
+        <TextWidget
+          id="WidthOfGrid"
+          title={"Width of teaser Grid"}
+          required={false}
+          value={data.width}
+          onChange={(name, value) => {
+            onChangeBlock(block, {
+              ...data,
+              width: value,
             });
           }}
         />
