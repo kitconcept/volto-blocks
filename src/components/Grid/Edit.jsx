@@ -298,7 +298,11 @@ class Edit extends Component {
                                 key={item.id}
                                 {...provided.draggableProps}
                                 {...provided.dragHandleProps}
-                                width={item.width ? item.width : 12 / this.props.data.columns.length}
+                                width={
+                                  item.width
+                                    ? item.width
+                                    : 12 / this.props.data.columns.length
+                                }
                               >
                                 <div
                                   role="presentation"
