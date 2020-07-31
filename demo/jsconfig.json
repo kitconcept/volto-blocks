@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@kitconcept/volto-blocks": ["../../src"]
+    }
+  }
+}
