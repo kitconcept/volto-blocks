@@ -12,12 +12,12 @@
  * }
  */
 
-import {
-  settings as defaultSettings,
-  views as defaultViews,
-  widgets as defaultWidgets,
-  blocks as defaultBlocks,
-} from '@plone/volto/config';
+// import {
+//   settings as defaultSettings,
+//   views as defaultViews,
+//   widgets as defaultWidgets,
+//   blocks as defaultBlocks,
+// } from '@plone/volto/config';
 
 import {
   SliderEditBlock,
@@ -43,24 +43,21 @@ import imagesSVG from '@plone/volto/icons/images.svg';
 import listBulletSVG from '@plone/volto/icons/list-bullet.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
 
-export const settings = {
-  ...defaultSettings,
-};
-
-export const views = {
-  ...defaultViews,
-};
-
-export const widgets = {
-  ...defaultWidgets,
-};
+// export const settings = {
+//   ...defaultSettings,
+// };
+//
+// export const views = {
+//   ...defaultViews,
+// };
+//
+// export const widgets = {
+//   ...defaultWidgets,
+// };
 
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
-const customGroupBlocksOrder = insertInArray(
-  defaultBlocks.groupBlocksOrder,
-  newTeasersGroup,
-  2,
-);
+const customGroupBlocksOrder = defaultGroups =>
+  insertInArray(defaultGroups, newTeasersGroup, 2);
 
 const customBlocks = {
   teaserGrid: {
@@ -140,8 +137,22 @@ const customBlocks = {
   },
 };
 
-export const blocks = {
-  ...defaultBlocks,
-  blocksConfig: { ...defaultBlocks.blocksConfig, ...customBlocks },
-  groupBlocksOrder: customGroupBlocksOrder,
+// export const blocks = {
+//   ...defaultBlocks,
+//   blocksConfig: { ...defaultBlocks.blocksConfig, ...customBlocks },
+//   groupBlocksOrder: customGroupBlocksOrder,
+// };
+
+export default config => {
+  return {
+    ...config,
+    blocks: {
+      ...config.blocks,
+      blocksConfig: {
+        ...config.blocks.blocksConfig,
+        ...customBlocks,
+      },
+      groupBlocksOrder: customGroupBlocksOrder(config.blocks.groupBlocksOrder),
+    },
+  };
 };
