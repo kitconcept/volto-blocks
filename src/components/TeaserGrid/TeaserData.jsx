@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Segment } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
-import { CheckboxWidget, TextWidget } from '@plone/volto/components';
+import {
+  CheckboxWidget,
+  TextWidget,
+  TextareaWidget,
+} from '@plone/volto/components';
 import { compose } from 'redux';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
@@ -17,6 +21,10 @@ const messages = defineMessages({
   openLinkInNewTab: {
     id: 'Open in a new tab',
     defaultMessage: 'Open in a new tab',
+  },
+  description: {
+    id: 'Description',
+    defaultMessage: 'Description',
   },
 });
 
@@ -51,6 +59,25 @@ const TeaserData = ({
             onChangeBlock(block, {
               ...data,
               href: value,
+            });
+          }}
+        />
+        <TextWidget
+          id={`description-${data.index}`}
+          title={intl.formatMessage(messages.description)}
+          required={false}
+          value={data.description}
+          icon={data.description && clearSVG}
+          iconAction={() =>
+            onChangeBlock(block, {
+              ...data,
+              description: '',
+            })
+          }
+          onChange={(name, value) => {
+            onChangeBlock(block, {
+              ...data,
+              description: value,
             });
           }}
         />
