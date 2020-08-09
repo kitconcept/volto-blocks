@@ -19,6 +19,8 @@
 //   blocks as defaultBlocks,
 // } from '@plone/volto/config';
 
+import ObjectBrowserWidget from '@plone/volto/components/manage/Widgets/ObjectBrowserWidget';
+
 import {
   SliderEditBlock,
   SliderViewBlock,
@@ -144,6 +146,8 @@ const customBlocks = {
 // };
 
 export default config => {
+  config.widgets.widget.object_browser = ObjectBrowserWidget;
+
   return {
     ...config,
     blocks: {
