@@ -45,6 +45,8 @@ import imagesSVG from '@plone/volto/icons/images.svg';
 import listBulletSVG from '@plone/volto/icons/list-bullet.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
 
+import installUniversalGrid from './UniversalGrid';
+
 // export const settings = {
 //   ...defaultSettings,
 // };
@@ -148,7 +150,7 @@ const customBlocks = {
 export default config => {
   config.widgets.widget.object_browser = ObjectBrowserWidget;
 
-  return {
+  config = {
     ...config,
     blocks: {
       ...config.blocks,
@@ -159,4 +161,6 @@ export default config => {
       groupBlocksOrder: customGroupBlocksOrder(config.blocks.groupBlocksOrder),
     },
   };
+
+  return installUniversalGrid(config);
 };
