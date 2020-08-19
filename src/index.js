@@ -90,21 +90,6 @@ const customBlocks = {
       view: [],
     },
   },
-  listing: {
-    id: 'listing',
-    title: 'Listing',
-    icon: listBulletSVG,
-    group: 'common',
-    view: ListingViewBlock,
-    edit: ListingEditBlock,
-    restricted: false,
-    mostUsed: true,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-  },
   slider: {
     id: 'slider',
     title: 'Slider',
