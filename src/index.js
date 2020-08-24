@@ -54,7 +54,7 @@ import heroSVG from '@plone/volto/icons/hero.svg';
 // };
 
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
-const customGroupBlocksOrder = (defaultGroups) =>
+const customGroupBlocksOrder = defaultGroups =>
   insertInArray(defaultGroups, newTeasersGroup, 2);
 
 const customBlocks = {
@@ -126,7 +126,7 @@ const customBlocks = {
 //   groupBlocksOrder: customGroupBlocksOrder,
 // };
 
-export default (config) => {
+export default config => {
   return {
     ...config,
     blocks: {
