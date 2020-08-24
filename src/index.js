@@ -26,8 +26,6 @@ import {
   TeaserGridViewBlock,
   ImagesGridEditBlock,
   ImagesGridViewBlock,
-  ListingEditBlock,
-  ListingViewBlock,
   TeaserHeroViewBlock,
   TeaserHeroEditBlock,
   // GridEditBlock,
@@ -56,7 +54,7 @@ import heroSVG from '@plone/volto/icons/hero.svg';
 // };
 
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
-const customGroupBlocksOrder = defaultGroups =>
+const customGroupBlocksOrder = (defaultGroups) =>
   insertInArray(defaultGroups, newTeasersGroup, 2);
 
 const customBlocks = {
@@ -82,21 +80,6 @@ const customBlocks = {
     group: 'common',
     view: ImagesGridViewBlock,
     edit: ImagesGridEditBlock,
-    restricted: false,
-    mostUsed: true,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-  },
-  listing: {
-    id: 'listing',
-    title: 'Listing',
-    icon: listBulletSVG,
-    group: 'common',
-    view: ListingViewBlock,
-    edit: ListingEditBlock,
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,
@@ -143,7 +126,7 @@ const customBlocks = {
 //   groupBlocksOrder: customGroupBlocksOrder,
 // };
 
-export default config => {
+export default (config) => {
   return {
     ...config,
     blocks: {
