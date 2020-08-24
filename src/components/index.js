@@ -8,8 +8,6 @@ import TeaserGridEditBlock from './TeaserGrid/Edit';
 import TeaserGridViewBlock from './TeaserGrid/View';
 import ImagesGridEditBlock from './ImagesGrid/Edit';
 import ImagesGridViewBlock from './ImagesGrid/View';
-import ListingEditBlock from './Listing/Edit';
-import ListingViewBlock from './Listing/View';
 import CardEditBlock from './Card/Edit';
 import CardViewBlock from './Card/View';
 import TeaserHeroEditBlock from './TeaserHero/Edit';
@@ -38,8 +36,6 @@ export {
   TeaserGridViewBlock,
   ImagesGridEditBlock,
   ImagesGridViewBlock,
-  ListingEditBlock,
-  ListingViewBlock,
   CardEditBlock,
   CardViewBlock,
   TeaserHeroEditBlock,
