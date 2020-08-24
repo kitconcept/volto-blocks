@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.0.1 (2020-08-24)
+
+- remove all appearances of listing block
+
 ## 2.0.0 (2020-08-24)
 
 - remove listing block, as it is already implemented in volto @jackahl
