@@ -22,7 +22,7 @@ import {
   replaceItemOfArray,
 } from '@kitconcept/volto-blocks/helpers';
 
-import '../../theme/grid.less'
+import '../../theme/grid.less';
 
 /**
  * Edit image block class.
