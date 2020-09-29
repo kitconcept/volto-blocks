@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.0.2 (2020-09-29)
+
+- add grid css
+
 ## 2.0.1 (2020-08-24)
 
 - remove all appearances of listing block
