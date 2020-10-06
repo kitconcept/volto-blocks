@@ -62,20 +62,25 @@ const ImageItem = ({ data, isEditMode, onChangeGridItem, index, intl }) => {
   return (
     <>
       {!data.url && isEditMode && (
-        <Dropzone onDrop={onDropImage} className="dropzone">
-          <Message>
-            {uploading.current && (
-              <Dimmer active>
-                <Loader indeterminate>
-                  {intl.formatMessage(messages.UploadingImage)}
-                </Loader>
-              </Dimmer>
-            )}
-            <div className="grid-image-item default">
-              <img src={imageBlockSVG} alt="" />
-              <p>{intl.formatMessage(messages.PleaseChooseImage)}</p>
+        <Dropzone onDrop={onDropImage}>
+          {({ getRootProps, getInputProps }) => (
+            <div {...getRootProps()}>
+              <Message>
+                {uploading.current && (
+                  <Dimmer active>
+                    <Loader indeterminate>
+                      {intl.formatMessage(messages.UploadingImage)}
+                    </Loader>
+                  </Dimmer>
+                )}
+                <div className="grid-image-item default">
+                  <img src={imageBlockSVG} alt="" />
+                  <input {...getInputProps({ style: { display: 'none' } })} />
+                  <p>{intl.formatMessage(messages.PleaseChooseImage)}</p>
+                </div>
+              </Message>
             </div>
-          </Message>
+          )}
         </Dropzone>
       )}
       {data.url && (
