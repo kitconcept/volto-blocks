@@ -1,8 +1,12 @@
 # Change Log
 
+## 3.0.0 (2020-10-07)
+
+- upgrade to use with Volto 8.2.2 @iFlameing
+
 ## 2.0.2 (2020-09-29)
 
-- add grid css
+- add grid css @iFlameing
 
 ## 2.0.1 (2020-08-24)
 
