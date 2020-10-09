@@ -22,5 +22,5 @@ export {
   reorderArray,
   useDimensions,
   useTraceUpdate,
-  usePrevious
+  usePrevious,
 };

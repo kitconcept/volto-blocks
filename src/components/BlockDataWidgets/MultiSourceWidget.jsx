@@ -23,7 +23,7 @@ const messages = defineMessages({
 
 // This prevents any server information be saved in the object by recursivelly call
 // `flattenToAppURL` in every `download` property
-export const recursiveFlattenToAppURL = obj =>
+export const recursiveFlattenToAppURL = (obj) =>
   mapValues(obj, (value, key) => {
     if (key === 'download') {
       return flattenToAppURL(value);
@@ -34,7 +34,7 @@ export const recursiveFlattenToAppURL = obj =>
     }
   });
 
-const MultiSourceWidget = props => {
+const MultiSourceWidget = (props) => {
   const { data, block, onChangeBlock, openObjectBrowser } = props;
   const intl = useIntl();
   const dispatch = useDispatch();
@@ -43,10 +43,10 @@ const MultiSourceWidget = props => {
     // This is the "updater", ensures the data is correct on edit -> select the block
     if (data.hrefList?.length > 0) {
       Promise.all(
-        data.hrefList.map(item =>
+        data.hrefList.map((item) =>
           dispatch(getContent(item.url, null, item.id)),
         ),
-      ).then(result => {
+      ).then((result) => {
         onChangeBlock(block, {
           ...data,
           hrefList: data.hrefList.map((oldItem, index) => ({
@@ -68,7 +68,7 @@ const MultiSourceWidget = props => {
   const getSelectedContent = ({ url, blockID }) =>
     dispatch(getContent(url, null, blockID));
 
-  const onDragEnd = result => {
+  const onDragEnd = (result) => {
     const { source, destination } = result;
     // dropped outside the list
     if (!destination) {
@@ -116,11 +116,11 @@ const MultiSourceWidget = props => {
           iconAction={() =>
             openObjectBrowser({
               mode: 'link',
-              onSelectItem: url => {
+              onSelectItem: (url) => {
                 const selectedItem = { url, id: uuid() };
                 // We get the full content on the fly (no store) then grab the desired
                 // values, store them in the formData
-                getSelectedContent(selectedItem).then(resp => {
+                getSelectedContent(selectedItem).then((resp) => {
                   onChangeBlock(block, {
                     ...data,
                     hrefList: [
@@ -145,7 +145,7 @@ const MultiSourceWidget = props => {
       <Segment className="form sidebar-teaser-data">
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId={uuid()} direction="vertical">
-            {provided => (
+            {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 {data.hrefList &&
                   data.hrefList.map((item, index) => (
@@ -154,7 +154,7 @@ const MultiSourceWidget = props => {
                       index={index}
                       key={item.id}
                     >
-                      {provided => (
+                      {(provided) => (
                         <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}
@@ -166,7 +166,7 @@ const MultiSourceWidget = props => {
                             <Button
                               icon
                               basic
-                              onClick={e => removeItem(e, index)}
+                              onClick={(e) => removeItem(e, index)}
                             >
                               <Icon
                                 name={trashSVG}

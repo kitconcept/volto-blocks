@@ -23,7 +23,7 @@ const ObjectBrowserNav = ({
       disabled={mode === 'link' && isExternalSelected}
     >
       {currentSearchResults &&
-        currentSearchResults.items.map(item => (
+        currentSearchResults.items.map((item) => (
           <li
             key={item.id}
             className={cx('', {

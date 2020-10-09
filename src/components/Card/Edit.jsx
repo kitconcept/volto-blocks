@@ -32,12 +32,12 @@ const messages = defineMessages({
 
 @injectIntl
 @connect(
-  state => ({
+  (state) => ({
     request: state.content.create,
     content: state.content.data,
     pathname: state.router.location.pathname,
   }),
-  dispatch => bindActionCreators({ createContent }, dispatch),
+  (dispatch) => bindActionCreators({ createContent }, dispatch),
 )
 export default class EditCardBlock extends Component {
   /**
@@ -155,7 +155,7 @@ export default class EditCardBlock extends Component {
    * @param {object} editorState Editor state.
    * @returns {undefined}
    */
-  onChangeText = editorState => {
+  onChangeText = (editorState) => {
     if (
       !isEqual(
         convertToRaw(editorState.getCurrentContent()),
@@ -180,7 +180,7 @@ export default class EditCardBlock extends Component {
     this.setState({
       uploading: true,
     });
-    readAsDataURL(file).then(data => {
+    readAsDataURL(file).then((data) => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
       this.props.createContent(getBaseUrl(this.props.pathname), {
         '@type': 'Image',
@@ -213,7 +213,7 @@ export default class EditCardBlock extends Component {
         className={cx('block __card', {
           selected: this.props.selected,
         })}
-        onKeyDown={e =>
+        onKeyDown={(e) =>
           this.props.handleKeyDown(
             e,
             this.props.index,
@@ -222,7 +222,7 @@ export default class EditCardBlock extends Component {
             { disableArrowUp: true, disableArrowDown: true },
           )
         }
-        ref={node => {
+        ref={(node) => {
           this.node = node;
         }}
       >
@@ -306,7 +306,7 @@ export default class EditCardBlock extends Component {
           </div>
         )}
         <Editor
-          ref={node => {
+          ref={(node) => {
             this.editor = node;
           }}
           onChange={this.onChangeText}

@@ -4,7 +4,7 @@ import TeaserBody from './TeaserBody';
 import TeaserData from './TeaserData';
 import templates from './templates';
 
-const Edit = props => {
+const Edit = (props) => {
   return (
     <EditGrid
       {...props}

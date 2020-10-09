@@ -25,7 +25,7 @@ const View = ({ data }) => (
     })}
   >
     <Slider
-      customPaging={dot => <div />}
+      customPaging={(dot) => <div />}
       dots
       dotsClass="slick-dots slick-thumb"
       infinite

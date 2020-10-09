@@ -118,7 +118,7 @@ class Edit extends Component {
     this.setState({
       uploading: true,
     });
-    readAsDataURL(file).then(data => {
+    readAsDataURL(file).then((data) => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
       this.props.createContent(getBaseUrl(this.props.pathname), {
         '@type': 'Image',
@@ -176,12 +176,12 @@ class Edit extends Component {
    * @param {array} files File objects
    * @returns {undefined}
    */
-  onDrop = file => {
+  onDrop = (file) => {
     this.setState({
       uploading: true,
     });
 
-    readAsDataURL(file[0]).then(data => {
+    readAsDataURL(file[0]).then((data) => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
       this.props.createContent(getBaseUrl(this.props.pathname), {
         '@type': 'Image',
@@ -203,7 +203,7 @@ class Edit extends Component {
    * @param {Object} e Event object
    * @returns {undefined}
    */
-  onKeyDownVariantMenuForm = e => {
+  onKeyDownVariantMenuForm = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       e.stopPropagation();
@@ -235,7 +235,7 @@ class Edit extends Component {
           },
           this.props.data.align,
         )}
-        onKeyDown={e =>
+        onKeyDown={(e) =>
           this.props.handleKeyDown(
             e,
             this.props.index,
@@ -306,7 +306,7 @@ class Edit extends Component {
                       <Button
                         basic
                         icon
-                        onClick={e => {
+                        onClick={(e) => {
                           e.stopPropagation();
                           this.props.openObjectBrowser();
                         }}
@@ -322,7 +322,7 @@ class Edit extends Component {
                       )}
                       // Prevents propagation to the Dropzone and the opening
                       // of the upload browser dialog
-                      onClick={e => e.stopPropagation()}
+                      onClick={(e) => e.stopPropagation()}
                     />
                     {this.state.url && (
                       <Button.Group>
@@ -354,7 +354,7 @@ export default compose(
   withObjectBrowser,
   injectIntl,
   connect(
-    state => ({
+    (state) => ({
       request: state.content.create,
       content: state.content.data,
     }),

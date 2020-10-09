@@ -44,7 +44,7 @@ function getParentURL(url) {
  */
 @injectIntl
 @connect(
-  state => ({
+  (state) => ({
     searchSubrequests: state.search.subrequests,
   }),
   { searchContent },
@@ -126,7 +126,7 @@ class ObjectBrowser extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside, false);
   }
 
-  initialSearch = mode => {
+  initialSearch = (mode) => {
     const currentSelected =
       mode === 'image' ? this.state.selectedImage : this.state.selectedHref;
     if (currentSelected) {
@@ -157,7 +157,7 @@ class ObjectBrowser extends Component {
     this.onChangeBlockData(name, value);
   };
 
-  getIcon = icon => {
+  getIcon = (icon) => {
     switch (icon) {
       case 'Folder':
         return <Icon name={folderSVG} size="24px" />;
@@ -172,7 +172,7 @@ class ObjectBrowser extends Component {
     }
   };
 
-  handleClickOutside = e => {
+  handleClickOutside = (e) => {
     if (
       this.objectBrowser &&
       doesNodeContainClick(this.objectBrowser.current, e)
@@ -183,7 +183,7 @@ class ObjectBrowser extends Component {
 
   objectBrowser = React.createRef();
 
-  navigateTo = id => {
+  navigateTo = (id) => {
     this.props.searchContent(
       id,
       {
@@ -201,26 +201,26 @@ class ObjectBrowser extends Component {
   };
 
   toggleSearchInput = () =>
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       showSearchInput: !prevState.showSearchInput,
     }));
 
   toggleMode = () => {
     if (this.state.mode === 'image') {
-      this.setState(state => ({
+      this.setState((state) => ({
         mode: 'link',
         currentFolder: state.currentLinkFolder,
       }));
       this.initialSearch('link');
     } else {
-      this.setState(state => ({
+      this.setState((state) => ({
         mode: 'image',
         currentFolder: state.currentImageFolder,
       }));
     }
   };
 
-  onSearch = e => {
+  onSearch = (e) => {
     const text = e.target.value;
     text.length > 2
       ? this.props.searchContent(
@@ -242,7 +242,7 @@ class ObjectBrowser extends Component {
         );
   };
 
-  onSelectItem = url => {
+  onSelectItem = (url) => {
     if (this.state.mode === 'image') {
       this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
@@ -271,7 +271,7 @@ class ObjectBrowser extends Component {
     });
   };
 
-  handleClickOnItem = item => {
+  handleClickOnItem = (item) => {
     if (this.state.mode === 'image') {
       if (item.is_folderish) {
         this.navigateTo(item['@id']);
@@ -286,7 +286,7 @@ class ObjectBrowser extends Component {
     }
   };
 
-  handleDoubleClickOnItem = item => {
+  handleDoubleClickOnItem = (item) => {
     if (this.state.mode === 'image') {
       if (item.is_folderish) {
         this.navigateTo(item['@id']);
@@ -312,7 +312,7 @@ class ObjectBrowser extends Component {
 
     return ReactDOM.createPortal(
       <aside
-        onClick={e => {
+        onClick={(e) => {
           e.stopPropagation();
         }}
         ref={this.objectBrowser}

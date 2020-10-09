@@ -12,7 +12,7 @@ import ImageData from './ImageData';
 import upSVG from '@plone/volto/icons/up-key.svg';
 import downSVG from '@plone/volto/icons/down-key.svg';
 
-const GridSidebar = props => {
+const GridSidebar = (props) => {
   const { data, gridType } = props;
   const [activeAccIndex, setActiveAccIndex] = React.useState(0);
 

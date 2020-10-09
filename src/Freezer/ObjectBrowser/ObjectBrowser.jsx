@@ -6,7 +6,7 @@ import ObjectBrowserInner from './ObjectBrowserInner';
 
 const DEFAULT_TIMEOUT = 500;
 
-const ObjectBrowser = props => {
+const ObjectBrowser = (props) => {
   return (
     <CSSTransition
       in={props.objectBrowserIsOpen}
