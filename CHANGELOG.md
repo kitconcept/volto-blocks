@@ -2,23 +2,23 @@
 
 ## 3.0.0 (2020-10-07)
 
-- upgrade to use with Volto 8.2.2 @iFlameing
+- Minimum requirement is now 8.2.2 @iFlameing
 
 ## 2.0.2 (2020-09-29)
 
-- add grid css @iFlameing
+- Add grid css @iFlameing
 
 ## 2.0.1 (2020-08-24)
 
-- remove all appearances of listing block
+- Remove all appearances of listing block
 
 ## 2.0.0 (2020-08-24)
 
-- remove listing block, as it is already implemented in volto @jackahl
+- Remove listing block, as it is already implemented in volto @jackahl
 
 ## 1.3.0 (2020-08-18)
 
-- compatibility for volto 7.x.x @tiberiu
+- Compatibility for volto 7.x.x @tiberiu
 
 ## 1.2.0 (2020-07-13)
 
