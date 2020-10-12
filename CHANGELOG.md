@@ -2,7 +2,7 @@
 
 ## 3.0.0 (2020-10-07)
 
-- Minimum requirement is now 8.2.2 @iFlameing
+- Minimum requirement is now 8.2.2 because of the upgrade of react-dropzone @iFlameing
 
 ## 2.0.2 (2020-09-29)
 
