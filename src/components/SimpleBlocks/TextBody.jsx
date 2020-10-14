@@ -23,7 +23,7 @@ const messages = defineMessages({
   },
 });
 
-const TextBody = props => {
+const TextBody = (props) => {
   const {
     data,
     block,
@@ -118,17 +118,17 @@ const TextBody = props => {
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
             customStyleMap={settings.customStyleMap}
-            onUpArrow={e => {
+            onUpArrow={(e) => {
               // We need to stop propagate the event for not creating a new block while
               // in the widget
               e.stopPropagation();
             }}
-            onDownArrow={e => {
+            onDownArrow={(e) => {
               // We need to stop propagate the event for not creating a new block while
               // in the widget
               e.stopPropagation();
             }}
-            handleReturn={e => {
+            handleReturn={(e) => {
               // We need to stop propagate the event for not creating a new block while
               // in the widget
               e.stopPropagation();

@@ -12,13 +12,6 @@
  * }
  */
 
-// import {
-//   settings as defaultSettings,
-//   views as defaultViews,
-//   widgets as defaultWidgets,
-//   blocks as defaultBlocks,
-// } from '@plone/volto/config';
-
 import {
   SliderEditBlock,
   SliderViewBlock,
@@ -28,10 +21,6 @@ import {
   ImagesGridViewBlock,
   TeaserHeroViewBlock,
   TeaserHeroEditBlock,
-  // GridEditBlock,
-  // GridViewBlock,
-  // CardEditBlock,
-  // CardViewBlock,
 } from '@kitconcept/volto-blocks/components';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
@@ -41,20 +30,8 @@ import imagesSVG from '@plone/volto/icons/images.svg';
 import listBulletSVG from '@plone/volto/icons/list-bullet.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
 
-// export const settings = {
-//   ...defaultSettings,
-// };
-//
-// export const views = {
-//   ...defaultViews,
-// };
-//
-// export const widgets = {
-//   ...defaultWidgets,
-// };
-
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
-const customGroupBlocksOrder = defaultGroups =>
+const customGroupBlocksOrder = (defaultGroups) =>
   insertInArray(defaultGroups, newTeasersGroup, 2);
 
 const customBlocks = {
@@ -126,7 +103,7 @@ const customBlocks = {
 //   groupBlocksOrder: customGroupBlocksOrder,
 // };
 
-export default config => {
+export default (config) => {
   return {
     ...config,
     blocks: {
