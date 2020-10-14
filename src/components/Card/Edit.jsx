@@ -16,7 +16,7 @@ import { settings } from '~/config';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
 import { createContent } from '@plone/volto/actions';
 import { Icon } from '@plone/volto/components';
-import { ObjectBrowser } from '@kitconcept/volto-blocks/components';
+// import { ObjectBrowser } from '@kitconcept/volto-blocks/components';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import imageSVG from '@plone/volto/icons/image.svg';
