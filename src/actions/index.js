@@ -10,6 +10,3 @@
  *   searchContent,
  * };
  */
-
-import { getQueryStringResults } from './querystringsearch/querystringsearch';
-export { getQueryStringResults };
