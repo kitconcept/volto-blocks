@@ -6,8 +6,6 @@ import TeaserGridEditBlock from './TeaserGrid/Edit';
 import TeaserGridViewBlock from './TeaserGrid/View';
 import ImagesGridEditBlock from './ImagesGrid/Edit';
 import ImagesGridViewBlock from './ImagesGrid/View';
-import CardEditBlock from './Card/Edit';
-import CardViewBlock from './Card/View';
 import TeaserHeroEditBlock from './TeaserHero/Edit';
 import TeaserHeroViewBlock from './TeaserHero/View';
 import MultiSourceWidget from './BlockDataWidgets/MultiSourceWidget';
@@ -31,8 +29,6 @@ export {
   TeaserGridViewBlock,
   ImagesGridEditBlock,
   ImagesGridViewBlock,
-  CardEditBlock,
-  CardViewBlock,
   TeaserHeroEditBlock,
   TeaserHeroViewBlock,
   BlockRenderer,
