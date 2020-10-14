@@ -1,5 +1,3 @@
-import CardsEditBlock from './Cards/Edit';
-import CardsViewBlock from './Cards/View';
 import SliderEditBlock from './Slider/Edit';
 import SliderViewBlock from './Slider/View';
 import GridEditBlock from './Grid/Edit';
@@ -20,14 +18,11 @@ import TextBody from './SimpleBlocks/TextBody';
 import BlockModal from './BlockModal/BlockModal';
 import CheckboxWidget from './Widgets/CheckboxWidget';
 import BlockRenderer from './BlockRenderer/BlockRenderer';
-import ObjectBrowser from '../Freezer/ObjectBrowser/ObjectBrowser';
 
 export {
   ConditionalLink,
   TextBody,
   MultiSourceWidget,
-  CardsEditBlock,
-  CardsViewBlock,
   SliderEditBlock,
   SliderViewBlock,
   GridEditBlock,
@@ -43,5 +38,4 @@ export {
   BlockRenderer,
   BlockModal,
   CheckboxWidget,
-  ObjectBrowser,
 };
