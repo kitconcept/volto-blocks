@@ -8,6 +8,8 @@ import ImagesGridEditBlock from './ImagesGrid/Edit';
 import ImagesGridViewBlock from './ImagesGrid/View';
 import TeaserHeroEditBlock from './TeaserHero/Edit';
 import TeaserHeroViewBlock from './TeaserHero/View';
+import ListingGridEditBlock from './ListingGrid/Edit';
+import ListingGridViewBlock from './ListingGrid/View';
 import MultiSourceWidget from './BlockDataWidgets/MultiSourceWidget';
 import ConditionalLink from './ConditionalLink/ConditionalLink';
 
@@ -31,6 +33,8 @@ export {
   ImagesGridViewBlock,
   TeaserHeroEditBlock,
   TeaserHeroViewBlock,
+  ListingGridEditBlock,
+  ListingGridViewBlock,
   BlockRenderer,
   BlockModal,
   CheckboxWidget,

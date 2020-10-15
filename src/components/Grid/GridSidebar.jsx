@@ -36,6 +36,9 @@ const GridSidebar = (props) => {
           {gridType === 'teaser' && (
             <FormattedMessage id="Teaser Grid" defaultMessage="Teaser Grid" />
           )}
+          {gridType === 'listing' && (
+            <FormattedMessage id="Listing Grid" defaultMessage="Listing Grid" />
+          )}
         </h2>
         <Button.Group>
           <Button
@@ -71,6 +74,13 @@ const GridSidebar = (props) => {
                   <FormattedMessage
                     id="Grid Image"
                     defaultMessage="Grid Image {index}"
+                    values={{ index: (index + 1).toString() }}
+                  />
+                )}
+                {gridType === 'listing' && (
+                  <FormattedMessage
+                    id="ListingGrid"
+                    defaultMessage="Listing Grid {index}"
                     values={{ index: (index + 1).toString() }}
                   />
                 )}

@@ -21,6 +21,8 @@ import {
   ImagesGridViewBlock,
   TeaserHeroViewBlock,
   TeaserHeroEditBlock,
+  ListingGridEditBlock,
+  ListingGridViewBlock,
 } from '@kitconcept/volto-blocks/components';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
@@ -57,6 +59,21 @@ const customBlocks = {
     group: 'common',
     view: ImagesGridViewBlock,
     edit: ImagesGridEditBlock,
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
+  listingGrid: {
+    id: 'listingGrid',
+    title: 'Listing Grid',
+    icon: imagesSVG,
+    group: 'common',
+    view: ListingGridViewBlock,
+    edit: ListingGridEditBlock,
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,
