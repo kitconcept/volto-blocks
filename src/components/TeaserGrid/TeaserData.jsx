@@ -173,7 +173,9 @@ const TeaserData = ({
               required={false}
               value={
                 data.preview_image
-                  ? flattenToAppURL(data.preview_image.filename)
+                  ? data.preview_image?.filename
+                    ? flattenToAppURL(data.preview_image.filename)
+                    : flattenToAppURL(data.preview_image)
                   : ''
               }
               icon={data.preview_image ? clearSVG : navTreeSVG}
@@ -187,11 +189,12 @@ const TeaserData = ({
                     }
                   : () =>
                       openObjectBrowser({
-                        onSelectItem: (url) =>
+                        onSelectItem: (url) => {
                           onChangeBlock(block, {
                             ...data,
                             preview_image: url,
-                          }),
+                          });
+                        },
                       })
               }
               onChange={(name, value) => {

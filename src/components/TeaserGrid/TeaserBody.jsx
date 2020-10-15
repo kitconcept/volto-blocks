@@ -26,10 +26,10 @@ function getImageURL(data) {
     // We've manually overriden the image pointing to an image content type,
     // then we have a string, we get it via URL shorthand
     // TODO: get the actual image scale UUID for better caching
-    flattenToAppURL(`${data.preview_image}/@@images/teaser`);
+    return flattenToAppURL(`${data.preview_image}/@@images/image/teaser`);
   } else {
     // Guard for edge cases
-    flattenToAppURL(`${data.href}/@@images/preview_image/teaser`);
+    return flattenToAppURL(`${data.href}/@@images/preview_image/teaser`);
   }
 }
 
