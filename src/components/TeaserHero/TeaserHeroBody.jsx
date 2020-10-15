@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
 import cx from 'classnames';
 import find from 'lodash/find';
-import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import templates from './templates';
 
@@ -19,16 +17,6 @@ const messages = defineMessages({
 });
 
 const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
-  const contentSubrequests = useSelector((state) => state.content.subrequests);
-  const dispatch = useDispatch();
-  const result = contentSubrequests?.[id]?.data;
-
-  React.useEffect(() => {
-    if (data.href) {
-      dispatch(getContent(data.href, null, id));
-    }
-  }, [dispatch, data, id]);
-
   return (
     <>
       {!data.href && (
@@ -45,27 +33,46 @@ const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
           </div>
         </Message>
       )}
-      {data.href && result && (
+      {data.href && (
         <div className={cx('teaser-item', data.variation, {})}>
           {(() => {
             const item = (
               <>
-                {result?.preview_image && (
-                  <img
-                    src={flattenToAppURL(result.preview_image.download)}
-                    alt=""
-                  />
-                )}
+                <div className="grid-image-wrapper">
+                  {data.variation !== 'top' && (
+                    <img
+                      src={flattenToAppURL(
+                        `${data.href}/@@images/preview_image/teaser`,
+                      )}
+                      alt=""
+                      loading="lazy"
+                    />
+                  )}
+                  {data.variation === 'top' && (
+                    <img
+                      src={flattenToAppURL(
+                        `${data.href}/@@images/preview_image/teaserherotop`,
+                      )}
+                      alt=""
+                      loading="lazy"
+                    />
+                  )}
+                </div>
                 <div>
-                  <h3>{result.title}</h3>
-                  <p>{result.description}</p>
+                  {data?.headline && (
+                    <div className="title">
+                      <div className="supertitle">{data.headline}</div>
+                    </div>
+                  )}
+                  <h3>{data?.title}</h3>
+                  <p>{data?.description}</p>
                 </div>
               </>
             );
             if (!isEditMode) {
               return (
                 <Link
-                  to={flattenToAppURL(result['@id'])}
+                  to={flattenToAppURL(data.href)}
                   target={data.openLinkInNewTab ? '_blank' : null}
                 >
                   {item}
