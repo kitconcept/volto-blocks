@@ -51,7 +51,7 @@ const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
                   {data.variation === 'top' && (
                     <img
                       src={flattenToAppURL(
-                        `${data.href}/@@images/preview_image/teaserherotop`,
+                        `${data.href}/@@images/preview_image/larger`,
                       )}
                       alt=""
                       loading="lazy"
@@ -59,11 +59,6 @@ const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
                   )}
                 </div>
                 <div>
-                  {data?.headline && (
-                    <div className="title">
-                      <div className="supertitle">{data.headline}</div>
-                    </div>
-                  )}
                   <h3>{data?.title}</h3>
                   <p>{data?.description}</p>
                 </div>

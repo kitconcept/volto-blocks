@@ -6,6 +6,7 @@ import { CheckboxWidget, TextWidget } from '@plone/volto/components';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 import { useDispatch } from 'react-redux';
 import { getContent } from '@plone/volto/actions';
+import { flattenToAppURL } from '@plone/volto/helpers';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import navTreeSVG from '@plone/volto/icons/nav.svg';
@@ -14,6 +15,10 @@ const messages = defineMessages({
   Source: {
     id: 'Source',
     defaultMessage: 'Source',
+  },
+  SourceImage: {
+    id: 'Source image',
+    defaultMessage: 'Source image',
   },
   Headline: {
     id: 'Headline',
@@ -159,6 +164,40 @@ const TeaserData = ({
                 onChangeBlock(block, {
                   ...data,
                   description: value,
+                });
+              }}
+            />
+            <TextWidget
+              id="source-preview-image"
+              title={intl.formatMessage(messages.SourceImage)}
+              required={false}
+              value={
+                data.preview_image
+                  ? flattenToAppURL(data.preview_image.filename)
+                  : ''
+              }
+              icon={data.preview_image ? clearSVG : navTreeSVG}
+              iconAction={
+                data.preview_image
+                  ? () => {
+                      onChangeBlock(block, {
+                        ...data,
+                        preview_image: '',
+                      });
+                    }
+                  : () =>
+                      openObjectBrowser({
+                        onSelectItem: (url) =>
+                          onChangeBlock(block, {
+                            ...data,
+                            preview_image: url,
+                          }),
+                      })
+              }
+              onChange={(name, value) => {
+                onChangeBlock(block, {
+                  ...data,
+                  preview_image: value,
                 });
               }}
             />

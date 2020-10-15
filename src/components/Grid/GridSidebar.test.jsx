@@ -53,6 +53,8 @@ test('renders a Grid Block Sidebar component', () => {
         onChangeBlock={() => {}}
         openObjectBrowser={() => {}}
         sidebarData={() => <div />}
+        activeColumn={0}
+        onChangeSelectedColumnItem={() => {}}
       />
     </Provider>,
   );

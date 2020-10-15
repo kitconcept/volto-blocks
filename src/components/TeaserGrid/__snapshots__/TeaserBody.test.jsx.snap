@@ -15,13 +15,15 @@ exports[`renders a Grid Block Proxy Item component 1`] = `
       <img
         alt=""
         loading="lazy"
-        src="/news/a-news-item-that-tells-things/@@images/preview_image/teaser"
+        src="/the-image.jpg"
       />
     </div>
-    <h3
-      className="no-supertitle"
-    />
-    <p />
+    <h3>
+      The title
+    </h3>
+    <p>
+      The description
+    </p>
   </a>
 </div>
 `;

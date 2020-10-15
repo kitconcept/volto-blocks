@@ -218,6 +218,84 @@ exports[`renders a Proxy Data Sidebar component 1`] = `
     </div>
   </div>
   <div
+    className="inline field text"
+    id="field-source-preview-image"
+  >
+    <div
+      className="ui grid"
+    >
+      <div
+        className="stretched row"
+      >
+        <div
+          className="four wide column"
+        >
+          <div
+            className="wrapper"
+          >
+            <label
+              htmlFor="field-source-preview-image"
+            >
+              Source image
+            </label>
+          </div>
+        </div>
+        <div
+          className="eight wide column"
+        >
+          <div
+            className="ui icon input"
+          >
+            <input
+              id="field-source-preview-image"
+              maxLength={null}
+              minLength={null}
+              name="source-preview-image"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={[Function]}
+              type="text"
+              value=""
+            />
+            <i
+              aria-hidden="true"
+              attributes={
+                Object {
+                  "viewBox": "",
+                  "xmlns": "",
+                }
+              }
+              className="icon"
+              onClick={[Function]}
+            />
+          </div>
+          <button
+            onClick={[Function]}
+          >
+            <svg
+              className="icon"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+              onClick={null}
+              style={
+                Object {
+                  "fill": "currentColor",
+                  "height": "18px",
+                  "width": "auto",
+                }
+              }
+              viewBox=""
+              xmlns=""
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
     className="inline field"
     id="field-openLinkInNewTab"
   >

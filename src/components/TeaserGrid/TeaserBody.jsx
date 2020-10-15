@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Message } from 'semantic-ui-react';
-import { defineMessages, injectIntl } from 'react-intl';
+import { defineMessages, useIntl } from 'react-intl';
 import imageBlockSVG from '@plone/volto/components/manage/Blocks/Image/block-image.svg';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import cx from 'classnames';
 
 const messages = defineMessages({
   PleaseChooseContent: {
@@ -15,7 +14,28 @@ const messages = defineMessages({
   },
 });
 
-const TeaserBody = ({ data, block, isEditMode, intl }) => {
+function getImageURL(data) {
+  if (
+    data.preview_image.scales?.teaser.download &&
+    typeof data.preview_image === 'object'
+  ) {
+    // If we are using the current image in preview_image in the source object
+    // then we have the scale UID at hand and we can use it right away
+    return flattenToAppURL(data.preview_image.scales.teaser.download);
+  } else if (typeof data.preview_image === 'string') {
+    // We've manually overriden the image pointing to an image content type,
+    // then we have a string, we get it via URL shorthand
+    // TODO: get the actual image scale UUID for better caching
+    flattenToAppURL(`${data.preview_image}/@@images/teaser`);
+  } else {
+    // Guard for edge cases
+    flattenToAppURL(`${data.href}/@@images/preview_image/teaser`);
+  }
+}
+
+const TeaserBody = ({ data, isEditMode }) => {
+  const intl = useIntl();
+
   return (
     <>
       {!data.href && isEditMode && (
@@ -31,23 +51,12 @@ const TeaserBody = ({ data, block, isEditMode, intl }) => {
           {(() => {
             const item = (
               <>
-                <div className="grid-image-wrapper">
-                  <img
-                    src={flattenToAppURL(
-                      `${data.href}/@@images/preview_image/teaser`,
-                    )}
-                    alt=""
-                    loading="lazy"
-                  />
-                </div>
-                {data?.headline && (
-                  <div>
-                    <div className="supertitle">{data.headline}</div>
+                {data?.preview_image && (
+                  <div className="grid-image-wrapper">
+                    <img src={getImageURL(data)} alt="" loading="lazy" />
                   </div>
                 )}
-                <h3 className={cx({ 'no-supertitle': !data.headline })}>
-                  {data?.title}
-                </h3>
+                <h3>{data?.title}</h3>
                 <p>{data?.description}</p>
               </>
             );
@@ -75,4 +84,4 @@ TeaserBody.propTypes = {
   isEditMode: PropTypes.bool,
 };
 
-export default injectIntl(TeaserBody);
+export default TeaserBody;

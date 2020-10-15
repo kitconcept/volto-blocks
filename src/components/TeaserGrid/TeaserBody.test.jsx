@@ -10,18 +10,6 @@ const mockStore = configureStore();
 
 test('renders a Grid Block Proxy Item component', () => {
   const store = mockStore({
-    content: {
-      subrequests: {
-        '2110a241-1389-4cda-8811-77031a540efa': {
-          data: {
-            title: 'the title',
-            description: 'the description',
-            preview_image: { download: 'http://image' },
-            '@id': 'http://theitem',
-          },
-        },
-      },
-    },
     intl: {
       locale: 'en',
       messages: {},
@@ -36,6 +24,15 @@ test('renders a Grid Block Proxy Item component', () => {
             '@type': 'teaser',
             href: '/news/a-news-item-that-tells-things',
             id: '2110a241-1389-4cda-8811-77031a540efa',
+            title: 'The title',
+            description: 'The description',
+            preview_image: {
+              scales: {
+                teaser: {
+                  download: 'http://localhost:8080/Plone/the-image.jpg',
+                },
+              },
+            },
             index: 0,
           }}
           block="1234"
