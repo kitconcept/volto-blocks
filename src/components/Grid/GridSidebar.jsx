@@ -10,14 +10,19 @@ import trashSVG from '@plone/volto/icons/delete.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
 const GridSidebar = (props) => {
-  const { data, gridType, sidebarData } = props;
-  const [activeAccIndex, setActiveAccIndex] = React.useState(0);
+  const {
+    data,
+    gridType,
+    sidebarData,
+    activeColumn,
+    onChangeSelectedColumnItem,
+  } = props;
 
-  function handleAccClick(e, titleProps) {
-    const { index } = titleProps;
-    const newIndex = activeAccIndex === index ? -1 : index;
+  function handleChangeColumn(e, blockProps) {
+    const { index } = blockProps;
+    const newIndex = activeColumn === index ? -1 : index;
 
-    setActiveAccIndex(newIndex);
+    onChangeSelectedColumnItem(newIndex);
   }
 
   return (
@@ -49,9 +54,9 @@ const GridSidebar = (props) => {
           data.columns.map((column, index) => (
             <React.Fragment key={column.id}>
               <Accordion.Title
-                active={activeAccIndex === index}
+                active={activeColumn === index}
                 index={index}
-                onClick={handleAccClick}
+                onClick={handleChangeColumn}
               >
                 {(!gridType || gridType === 'teaser') && (
                   <>
@@ -81,14 +86,14 @@ const GridSidebar = (props) => {
                       </Button>
                     </Button.Group>
                   )}
-                  {activeAccIndex === 0 ? (
+                  {activeColumn === 0 ? (
                     <Icon name={upSVG} size="20px" />
                   ) : (
                     <Icon name={downSVG} size="20px" />
                   )}
                 </div>
               </Accordion.Title>
-              <Accordion.Content active={activeAccIndex === index}>
+              <Accordion.Content active={activeColumn === index}>
                 {sidebarData(props, column, index)}
               </Accordion.Content>
             </React.Fragment>

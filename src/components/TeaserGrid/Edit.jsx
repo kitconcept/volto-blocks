@@ -10,7 +10,7 @@ const Edit = (props) => {
       {...props}
       gridType="teaser"
       templates={templates}
-      render={(item, index, onChangeGridItem) => (
+      render={({ item, index, onChangeGridItem }) => (
         <TeaserBody
           data={item}
           isEditMode

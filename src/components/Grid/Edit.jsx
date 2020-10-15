@@ -58,6 +58,10 @@ class Edit extends Component {
     sidebarData: PropTypes.func.isRequired,
   };
 
+  state = {
+    selectedColumnIndex: 0,
+  };
+
   /**
    * Constructor
    * @method constructor
@@ -125,6 +129,8 @@ class Edit extends Component {
       ...this.props.data,
       columns,
     });
+
+    this.onChangeSelectedColumnItem(destination.index);
   };
 
   /**
@@ -200,6 +206,9 @@ class Edit extends Component {
       columns: this.props.templates()[templateIndex].columns,
     });
   };
+
+  onChangeSelectedColumnItem = (index) =>
+    this.setState({ selectedColumnIndex: index });
 
   node = React.createRef();
 
@@ -305,14 +314,17 @@ class Edit extends Component {
                                   role="presentation"
                                   // This prevents propagation of ENTER
                                   onKeyDown={(e) => e.stopPropagation()}
+                                  onClick={() =>
+                                    this.onChangeSelectedColumnItem(index)
+                                  }
                                 >
-                                  {this.props.render(
+                                  {this.props.render({
                                     item,
                                     index,
-                                    getBaseUrl(this.props.pathname),
-                                    this.onChangeGridItem,
-                                    data.columns,
-                                  )}
+                                    path: getBaseUrl(this.props.pathname),
+                                    onChangeGridItem: this.onChangeGridItem,
+                                    columns: data.columns,
+                                  })}
                                 </div>
                               </Grid.Column>
                             </Ref>
@@ -332,6 +344,8 @@ class Edit extends Component {
             onChangeBlock={(block, data) => {
               this.onChangeBlock(data, data.index);
             }}
+            onChangeSelectedColumnItem={this.onChangeSelectedColumnItem}
+            activeColumn={this.state.selectedColumnIndex}
             removeColumn={this.removeColumn}
             addNewColumn={this.addNewColumn}
             sidebarData={this.props.sidebarData}
