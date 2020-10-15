@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
 import imageBlockSVG from '@plone/volto/components/manage/Blocks/Image/block-image.svg';
-import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import cx from 'classnames';
 
 const messages = defineMessages({
   PleaseChooseContent: {
@@ -16,18 +15,7 @@ const messages = defineMessages({
   },
 });
 
-const TeaserItem = ({ data, block, isEditMode, intl }) => {
-  const contentSubrequests = useSelector((state) => state.content.subrequests);
-  const dispatch = useDispatch();
-  const blockID = data.id || block;
-  const result = contentSubrequests?.[blockID]?.data;
-
-  React.useEffect(() => {
-    if (data.href) {
-      dispatch(getContent(data.href, null, blockID));
-    }
-  }, [dispatch, data, blockID]);
-
+const TeaserBody = ({ data, block, isEditMode, intl }) => {
   return (
     <>
       {!data.href && isEditMode && (
@@ -38,27 +26,35 @@ const TeaserItem = ({ data, block, isEditMode, intl }) => {
           </div>
         </Message>
       )}
-      {data.href && result && (
+      {data.href && (
         <div className="grid-teaser-item top">
           {(() => {
             const item = (
               <>
-                {result?.preview_image && (
-                  <div className="grid-image-wrapper">
-                    <img
-                      src={flattenToAppURL(result.preview_image.download)}
-                      alt=""
-                    />
+                <div className="grid-image-wrapper">
+                  <img
+                    src={flattenToAppURL(
+                      `${data.href}/@@images/preview_image/teaser`,
+                    )}
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
+                {data?.headline && (
+                  <div>
+                    <div className="supertitle">{data.headline}</div>
                   </div>
                 )}
-                <h3>{result.title}</h3>
-                <p>{result.description}</p>
+                <h3 className={cx({ 'no-supertitle': !data.headline })}>
+                  {data?.title}
+                </h3>
+                <p>{data?.description}</p>
               </>
             );
             if (!isEditMode) {
               return (
                 <Link
-                  to={flattenToAppURL(result['@id'])}
+                  to={flattenToAppURL(data.href)}
                   target={data.openLinkInNewTab ? '_blank' : null}
                 >
                   {item}
@@ -74,9 +70,9 @@ const TeaserItem = ({ data, block, isEditMode, intl }) => {
   );
 };
 
-TeaserItem.propTypes = {
+TeaserBody.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   isEditMode: PropTypes.bool,
 };
 
-export default injectIntl(TeaserItem);
+export default injectIntl(TeaserBody);

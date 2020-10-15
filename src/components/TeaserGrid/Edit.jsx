@@ -10,8 +10,13 @@ const Edit = (props) => {
       {...props}
       gridType="teaser"
       templates={templates}
-      render={(item, index) => (
-        <TeaserBody data={item} isEditMode index={index} />
+      render={(item, index, onChangeGridItem) => (
+        <TeaserBody
+          data={item}
+          isEditMode
+          index={index}
+          onChangeGridItem={onChangeGridItem}
+        />
       )}
       sidebarData={(props, column, index) => (
         <TeaserData {...props} data={{ ...column, index }} />
