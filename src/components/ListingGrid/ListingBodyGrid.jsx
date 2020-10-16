@@ -25,9 +25,10 @@ const ListingBody = ({ data, properties, intl, path, isEditMode }) => {
   // keep track of the path value using `usePrevious` hook and conditionally
   // dispatch the action depending on it.
   const pathPrevious = usePrevious(path);
+  const queryPrevious = usePrevious(data.query);
 
   React.useEffect(() => {
-    if (!isEqual(path, pathPrevious)) {
+    if (!isEqual(path, pathPrevious) || !isEqual(data.query, queryPrevious)) {
       if (data?.query?.length > 0) {
         dispatch(
           getQueryStringResults(path, { ...data, fullobjects: 1 }, data.block),
