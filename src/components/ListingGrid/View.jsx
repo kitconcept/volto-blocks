@@ -1,13 +1,15 @@
 import React from 'react';
-import ViewGrid from '../Grid/View';
-import ListingBody from './ListingBodyGrid';
+import {
+  GridViewBlock as ViewGrid,
+  ListingGridBody,
+} from '@kitconcept/volto-blocks/components';
 
 const View = (props) => {
   return (
     <ViewGrid
       {...props}
       render={(column, path, columns) => (
-        <ListingBody data={column} path={path} columns={columns} />
+        <ListingGridBody data={column} path={path} columns={columns} />
       )}
     />
   );

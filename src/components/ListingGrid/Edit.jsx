@@ -1,7 +1,10 @@
 import React from 'react';
-import EditGrid from '../Grid/Edit';
-import ListingData from '@plone/volto/components/manage/Blocks/Listing/ListingData';
-import ListingBody from './ListingBodyGrid';
+import { CheckboxWidget, TextWidget } from '@plone/volto/components';
+import {
+  GridEditBlock as EditGrid,
+  ListingGridBody,
+  ListingGridData,
+} from '@kitconcept/volto-blocks/components';
 import templates from './templates';
 
 const Edit = (props) => {
@@ -12,7 +15,7 @@ const Edit = (props) => {
       templates={templates}
       render={({ item, index, path, columns }) => {
         return (
-          <ListingBody
+          <ListingGridBody
             data={item}
             isEditMode
             index={index}
@@ -22,7 +25,7 @@ const Edit = (props) => {
         );
       }}
       sidebarData={(props, column, index) => (
-        <ListingData {...props} data={{ ...column, index }} />
+        <ListingGridData {...props} data={{ ...column, index }} />
       )}
     />
   );
