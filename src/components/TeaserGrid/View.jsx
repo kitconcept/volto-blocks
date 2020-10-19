@@ -1,6 +1,8 @@
 import React from 'react';
-import ViewGrid from '../Grid/View';
-import TeaserBody from './TeaserBody';
+import {
+  GridViewBlock as ViewGrid,
+  TeaserBody,
+} from '@kitconcept/volto-blocks/components';
 
 const View = (props) => {
   return (

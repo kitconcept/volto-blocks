@@ -1,7 +1,10 @@
 import React from 'react';
-import EditGrid from '../Grid/Edit';
-import TeaserBody from './TeaserBody';
-import TeaserData from './TeaserData';
+import {
+  GridEditBlock as EditGrid,
+  TeaserBody,
+  TeaserData,
+} from '@kitconcept/volto-blocks/components';
+
 import templates from './templates';
 
 const Edit = (props) => {
