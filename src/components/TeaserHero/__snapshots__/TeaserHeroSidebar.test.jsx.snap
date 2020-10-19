@@ -94,51 +94,6 @@ exports[`renders a Teaser Hero Sidebar component 1`] = `
     </div>
     <div
       className="inline field text"
-      id="field-headline-0"
-    >
-      <div
-        className="ui grid"
-      >
-        <div
-          className="stretched row"
-        >
-          <div
-            className="four wide column"
-          >
-            <div
-              className="wrapper"
-            >
-              <label
-                htmlFor="field-headline-0"
-              >
-                Headline
-              </label>
-            </div>
-          </div>
-          <div
-            className="eight wide column"
-          >
-            <div
-              className="ui input"
-            >
-              <input
-                id="field-headline-0"
-                maxLength={null}
-                minLength={null}
-                name="headline-0"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onClick={[Function]}
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="inline field text"
       id="field-title-0"
     >
       <div

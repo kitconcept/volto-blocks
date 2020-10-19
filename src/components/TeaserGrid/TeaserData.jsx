@@ -96,7 +96,6 @@ const TeaserData = ({
                     title: '',
                     description: '',
                     preview_image: '',
-                    headline: '',
                   });
                 }
               : () => openObjectBrowser({ mode: 'link' })
@@ -110,25 +109,6 @@ const TeaserData = ({
         />
         {data?.href && (
           <>
-            <TextWidget
-              id={`headline-${data.index}`}
-              title={intl.formatMessage(messages.Headline)}
-              required={false}
-              value={data.headline}
-              icon={data.headline && clearSVG}
-              iconAction={() => {
-                onChangeBlock(block, {
-                  ...data,
-                  headline: '',
-                });
-              }}
-              onChange={(name, value) => {
-                onChangeBlock(block, {
-                  ...data,
-                  headline: value,
-                });
-              }}
-            />
             <TextWidget
               id={`title-${data.index}`}
               title={intl.formatMessage(messages.title)}
