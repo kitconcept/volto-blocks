@@ -15,14 +15,12 @@ import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 import { getBaseUrl } from '@plone/volto/helpers';
 
-import GridSidebar from './GridSidebar';
-import TemplateChooser from '../TemplateChooser/TemplateChooser';
+import GridSidebar from '@kitconcept/volto-blocks/components/Grid/GridSidebar';
+import TemplateChooser from '@kitconcept/volto-blocks/components/TemplateChooser/TemplateChooser';
 import {
   reorderArray,
   replaceItemOfArray,
 } from '@kitconcept/volto-blocks/helpers';
-
-import '../../theme/grid.less';
 
 /**
  * Edit image block class.
@@ -344,6 +342,7 @@ class Edit extends Component {
             onChangeBlock={(block, data) => {
               this.onChangeBlock(data, data.index);
             }}
+            onChangeFullBlock={this.props.onChangeBlock}
             onChangeSelectedColumnItem={this.onChangeSelectedColumnItem}
             activeColumn={this.state.selectedColumnIndex}
             removeColumn={this.removeColumn}
