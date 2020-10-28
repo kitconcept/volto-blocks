@@ -1,5 +1,4 @@
 import React from 'react';
-import { CheckboxWidget, TextWidget } from '@plone/volto/components';
 import {
   GridEditBlock as EditGrid,
   ListingGridBody,

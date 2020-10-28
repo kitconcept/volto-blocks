@@ -29,7 +29,6 @@ import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
-import listBulletSVG from '@plone/volto/icons/list-bullet.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
 
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };

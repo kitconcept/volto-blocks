@@ -368,13 +368,13 @@ export default class EditCardBlock extends Component {
           }}
         />
         <InlineToolbar />
-        <ObjectBrowser
+        {/* <ObjectBrowser
           objectBrowserIsOpen={this.state.objectBrowserIsOpen}
           closeBrowser={this.closeObjectBrowser}
           block={this.props.block}
           onChangeBlock={this.props.onChangeBlock}
           data={this.props.data}
-        />
+        /> */}
       </div>
     );
   }
