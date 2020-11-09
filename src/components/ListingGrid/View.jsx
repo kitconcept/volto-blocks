@@ -1,13 +1,14 @@
 import React from 'react';
 import ViewGrid from '../Grid/View';
 import ListingBody from './ListingBodyGrid';
+import SimpleComp from './SimpleComp';
 
 const View = (props) => {
   return (
     <ViewGrid
       {...props}
       render={(column, path, columns) => (
-        <ListingBody data={column} path={path} columns={columns} />
+        <SimpleComp data={column} columns={columns} />
       )}
     />
   );
