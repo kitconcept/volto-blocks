@@ -13,6 +13,7 @@ import {
   Ref,
 } from 'semantic-ui-react';
 import { bindActionCreators } from 'redux';
+import { compose } from 'redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -51,20 +52,12 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-@injectIntl
-@connect(
-  (state) => ({
-    request: state.content.create,
-    content: state.content.data,
-  }),
-  (dispatch) => bindActionCreators({ createContent }, dispatch),
-)
 /**
  * Edit image block class.
  * @class Edit
  * @extends Component
  */
-export default class Edit extends Component {
+class Edit extends Component {
   /**
    * Property types.
    * @property {Object} propTypes Property types.
@@ -787,3 +780,14 @@ export default class Edit extends Component {
     );
   }
 }
+
+export default compose(
+  injectIntl,
+  connect(
+    (state) => ({
+      request: state.content.create,
+      content: state.content.data,
+    }),
+    (dispatch) => bindActionCreators({ createContent }, dispatch),
+  ),
+)(Edit);

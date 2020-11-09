@@ -10,6 +10,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import cx from 'classnames';
 import { includes, isEqual } from 'lodash';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
+import { compose } from 'redux';
 
 import { settings } from '~/config';
 
@@ -30,16 +31,7 @@ const messages = defineMessages({
   },
 });
 
-@injectIntl
-@connect(
-  (state) => ({
-    request: state.content.create,
-    content: state.content.data,
-    pathname: state.router.location.pathname,
-  }),
-  (dispatch) => bindActionCreators({ createContent }, dispatch),
-)
-export default class EditCardBlock extends Component {
+class EditCardBlock extends Component {
   /**
    * Property types.
    * @property {Object} propTypes Property types.
@@ -379,3 +371,15 @@ export default class EditCardBlock extends Component {
     );
   }
 }
+
+export default compose(
+  injectIntl,
+  connect(
+    (state) => ({
+      request: state.content.create,
+      content: state.content.data,
+      pathname: state.router.location.pathname,
+    }),
+    (dispatch) => bindActionCreators({ createContent }, dispatch),
+  ),
+)(EditCardBlock);
