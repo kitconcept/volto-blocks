@@ -23,6 +23,8 @@ import {
   TeaserHeroEditBlock,
   ListingGridEditBlock,
   ListingGridViewBlock,
+  HighlightSliderViewBlock,
+  HighlightSliderEditBlock,
 } from '@kitconcept/volto-blocks/components';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
@@ -103,6 +105,21 @@ const customBlocks = {
     group: 'teasers',
     view: TeaserHeroViewBlock,
     edit: TeaserHeroEditBlock,
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
+  highlightSlider: {
+    id: 'highlightSlider',
+    title: 'Highlight Slider',
+    icon: sliderSVG,
+    group: 'teasers',
+    view: HighlightSliderViewBlock,
+    edit: HighlightSliderEditBlock,
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,

@@ -16,6 +16,8 @@ import ListingGridBody from '@kitconcept/volto-blocks/components/ListingGrid/Lis
 import ListingGridData from '@kitconcept/volto-blocks/components/ListingGrid/ListingGridData';
 import MultiSourceWidget from '@kitconcept/volto-blocks/components/BlockDataWidgets/MultiSourceWidget';
 import ConditionalLink from '@kitconcept/volto-blocks/components/ConditionalLink/ConditionalLink';
+import HighlightSliderEditBlock from '@kitconcept/volto-blocks/components/HighlightSlider/Edit';
+import HighlightSliderViewBlock from '@kitconcept/volto-blocks/components/HighlightSlider/View';
 
 import TextBody from '@kitconcept/volto-blocks/components/SimpleBlocks/TextBody';
 
@@ -24,6 +26,8 @@ import CheckboxWidget from '@kitconcept/volto-blocks/components/Widgets/Checkbox
 import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/BlockRenderer';
 
 export {
+  HighlightSliderEditBlock,
+  HighlightSliderViewBlock,
   ConditionalLink,
   TextBody,
   MultiSourceWidget,
