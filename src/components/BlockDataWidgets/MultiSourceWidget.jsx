@@ -116,8 +116,8 @@ const MultiSourceWidget = (props) => {
           iconAction={() =>
             openObjectBrowser({
               mode: 'link',
-              onSelectItem: (url) => {
-                const selectedItem = { url, id: uuid() };
+              onSelectItem: (href) => {
+                const selectedItem = { href, id: uuid() };
                 // We get the full content on the fly (no store) then grab the desired
                 // values, store them in the formData
                 getSelectedContent(selectedItem).then((resp) => {

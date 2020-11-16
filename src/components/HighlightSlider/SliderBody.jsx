@@ -17,7 +17,7 @@ const messages = defineMessages({
 });
 
 const SliderBody = (props) => {
-  const { intl, data, isEditMode } = props;
+  const { data, isEditMode } = props;
 
   return (
     <div className="grid-teaser-item top">
@@ -57,7 +57,7 @@ const SliderBody = (props) => {
             );
             if (!isEditMode) {
               return (
-                <Link to={flattenToAppURL(data.url)}>
+                <Link to={flattenToAppURL(data.href)}>
                   {item}
                   {/* <div className="corner-button">
                     {intl.formatMessage(messages.moreInfo)}
