@@ -214,6 +214,37 @@
   }
 }
 
+.slick-arrow {
+  width: 62px;
+  height: 62px;
+  // background-color: @primary-blue !important;
+
+  &.ui.button {
+    z-index: 9;
+    top: 35%;
+    margin: 0;
+    border-radius: 0;
+
+    .icon:not(.button) {
+      margin: 0 !important;
+      opacity: 1;
+    }
+  }
+
+  &.slick-prev {
+    left: 0;
+  }
+
+  &.slick-next {
+    right: 0;
+  }
+
+  &.slick-prev::before,
+  &.slick-next::before {
+    display: none;
+  }
+}
+
 .view-editview .block.highlightSlider {
   margin-top: 0;
 }
