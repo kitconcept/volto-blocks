@@ -4,7 +4,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 
 import { flattenToAppURL } from '@plone/volto/helpers';
 
-const messages = defineMessages({
+defineMessages({
   PleaseChooseContent: {
     id: 'Please choose an existing content as source for this element',
     defaultMessage:
