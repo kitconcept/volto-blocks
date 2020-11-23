@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { readAsDataURL } from 'promise-file-reader';
 import { Button, Dimmer, Loader, Message } from 'semantic-ui-react';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import Editor from 'draft-js-plugins-editor';
 import { convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -30,16 +30,7 @@ const messages = defineMessages({
   },
 });
 
-@injectIntl
-@connect(
-  (state) => ({
-    request: state.content.create,
-    content: state.content.data,
-    pathname: state.router.location.pathname,
-  }),
-  (dispatch) => bindActionCreators({ createContent }, dispatch),
-)
-export default class EditCardBlock extends Component {
+class EditCardBlock extends Component {
   /**
    * Property types.
    * @property {Object} propTypes Property types.
@@ -379,3 +370,10 @@ export default class EditCardBlock extends Component {
     );
   }
 }
+export default compose( injectIntl, connect((state) => ({
+    request: state.content.create,
+    content: state.content.data,
+    pathname: state.router.location.pathname,
+  }),
+  (dispatch) => bindActionCreators({ createContent }, dispatch),
+))(Edit)
