@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.1.0 (2020-11-23)
+
+- Remove decorators to achieve compatibility with volto 9
+
 ## 3.0.0 (2020-10-07)
 
 - Minimum requirement is now 8.2.2 because of the upgrade of react-dropzone @iFlameing
