@@ -172,7 +172,7 @@ class Edit extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside, false);
   }
 
-  toggleObjectBrowser = index => {
+  toggleObjectBrowser = (index) => {
     this.setState({
       objectBrowserIsOpen: !this.state.objectBrowserIsOpen,
       lastOpenedCard: index,
@@ -195,7 +195,7 @@ class Edit extends Component {
       uploadedImageCardIndex: index,
       // currentSelectedCard: null,
     });
-    readAsDataURL(file).then(data => {
+    readAsDataURL(file).then((data) => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
       this.props.createContent(getBaseUrl(this.props.pathname), {
         '@type': 'Image',
@@ -266,7 +266,7 @@ class Edit extends Component {
     });
   };
 
-  onDragEnd = result => {
+  onDragEnd = (result) => {
     const { source, destination } = result;
     // dropped outside the list
     if (!destination) {
@@ -337,7 +337,7 @@ class Edit extends Component {
     });
   }
 
-  addNewCard = e => {
+  addNewCard = (e) => {
     e.stopPropagation();
     const newCardsState = [
       ...this.props.data.cards,
@@ -396,7 +396,7 @@ class Edit extends Component {
     });
   };
 
-  handleClickOutside = e => {
+  handleClickOutside = (e) => {
     if (this.node && doesNodeContainClick(this.node, e)) return;
     this.setState(() => ({
       currentSelectedCard: null,
@@ -422,7 +422,8 @@ class Edit extends Component {
       // TODO: Do something on ESC key
     }
   }
-  getCardsLenght = cards => cards.length + cards.filter(item => item.x2).length;
+  getCardsLenght = (cards) =>
+    cards.length + cards.filter((item) => item.x2).length;
 
   /**
    * Render method.
@@ -442,7 +443,7 @@ class Edit extends Component {
           'centered-text': this.props.data.centeredText,
           shrinked: this.props.data['x.5'],
         })}
-        onKeyDown={e => {
+        onKeyDown={(e) => {
           this.props.handleKeyDown(
             e,
             this.props.index,
@@ -450,7 +451,7 @@ class Edit extends Component {
             this.node,
           );
         }}
-        ref={node => {
+        ref={(node) => {
           this.node = node;
         }}
       >
@@ -485,7 +486,7 @@ class Edit extends Component {
                 basic
                 className={cx('text-button', {})}
                 active={this.props.data['x.5']}
-                onClick={e =>
+                onClick={(e) =>
                   this.onChangeBlockSettings(
                     'x.5',
                     this.props.data['x.5'] ? !this.props.data['x.5'] : true,
@@ -523,7 +524,7 @@ class Edit extends Component {
         )}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId={uuid()} direction="horizontal">
-            {provided => (
+            {(provided) => (
               <Ref innerRef={provided.innerRef}>
                 <Card.Group
                   className={cx({
@@ -546,7 +547,7 @@ class Edit extends Component {
                         index={index}
                         key={item.id}
                       >
-                        {provided => (
+                        {(provided) => (
                           <Ref innerRef={provided.innerRef}>
                             <Card
                               className={cx({
@@ -554,7 +555,7 @@ class Edit extends Component {
                                 x2: this.props.data.cards[index]['x2'],
                               })}
                               key={item.id}
-                              onClick={e => this.selectCard(e, index)}
+                              onClick={(e) => this.selectCard(e, index)}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
@@ -575,7 +576,7 @@ class Edit extends Component {
                                         <Icon name={uploadSVG} size="24px" />
                                         <input
                                           type="file"
-                                          onChange={e =>
+                                          onChange={(e) =>
                                             this.onUploadImage(e, index)
                                           }
                                           style={{ display: 'none' }}
@@ -591,7 +592,9 @@ class Edit extends Component {
                                       <Button
                                         icon
                                         basic
-                                        onClick={e => this.clearCard(e, index)}
+                                        onClick={(e) =>
+                                          this.clearCard(e, index)
+                                        }
                                       >
                                         <Icon name={clearSVG} size="24px" />
                                       </Button>
@@ -605,7 +608,7 @@ class Edit extends Component {
                                             index
                                           ]['x2'],
                                         })}
-                                        onClick={e =>
+                                        onClick={(e) =>
                                           this.onChangeCardSettings(
                                             e,
                                             index,
@@ -635,7 +638,9 @@ class Edit extends Component {
                                       <Button
                                         icon
                                         basic
-                                        onClick={e => this.removeCard(e, index)}
+                                        onClick={(e) =>
+                                          this.removeCard(e, index)
+                                        }
                                       >
                                         <Icon
                                           name={trashSVG}
@@ -682,7 +687,7 @@ class Edit extends Component {
                               {!this.props.data.hideText && (
                                 <Card.Content
                                   // This prevents propagation of ENTER
-                                  onKeyDown={e => e.stopPropagation()}
+                                  onKeyDown={(e) => e.stopPropagation()}
                                 >
                                   <EditTextBlock
                                     {...this.props}
@@ -777,10 +782,10 @@ class Edit extends Component {
 export default compose(
   injectIntl,
   connect(
-    state => ({
+    (state) => ({
       request: state.content.create,
       content: state.content.data,
     }),
-    dispatch => bindActionCreators({ createContent }, dispatch),
+    (dispatch) => bindActionCreators({ createContent }, dispatch),
   ),
 )(Edit);

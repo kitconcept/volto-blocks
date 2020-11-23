@@ -25,16 +25,16 @@ const messages = defineMessages({
 const ImageItem = ({ data, isEditMode, onChangeGridItem, index, intl }) => {
   const [uploadedImageIndex, setUploadedImageIndex] = React.useState(null);
   const dispatch = useDispatch();
-  const pathname = useSelector(state => state.router.location.pathname);
-  const request = useSelector(state => state.content.create);
-  const content = useSelector(state => state.content.data);
+  const pathname = useSelector((state) => state.router.location.pathname);
+  const request = useSelector((state) => state.content.create);
+  const content = useSelector((state) => state.content.data);
   const uploading = React.useRef(false);
 
-  const onDropImage = file => {
+  const onDropImage = (file) => {
     uploading.current = true;
     setUploadedImageIndex(index);
 
-    readAsDataURL(file[0]).then(data => {
+    readAsDataURL(file[0]).then((data) => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
       dispatch(
         createContent(getBaseUrl(pathname), {

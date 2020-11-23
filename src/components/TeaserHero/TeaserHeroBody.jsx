@@ -19,7 +19,7 @@ const messages = defineMessages({
 });
 
 const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
-  const contentSubrequests = useSelector(state => state.content.subrequests);
+  const contentSubrequests = useSelector((state) => state.content.subrequests);
   const dispatch = useDispatch();
   const result = contentSubrequests?.[id]?.data;
 
@@ -36,7 +36,7 @@ const TeaserHeroBody = ({ data, id, isEditMode, intl }) => {
           <div className="teaser-item default">
             <img
               src={
-                find(templates(), item => item.variation === data.variation)
+                find(templates(), (item) => item.variation === data.variation)
                   ?.image
               }
               alt=""

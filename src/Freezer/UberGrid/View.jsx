@@ -15,7 +15,7 @@ import { BlockRenderer } from '../../components';
  * @extends Component
  */
 const View = ({ data }) => {
-  const isDoubleSized = data.columns.filter(cols => cols.x2).length;
+  const isDoubleSized = data.columns.filter((cols) => cols.x2).length;
 
   return (
     <div
@@ -32,7 +32,7 @@ const View = ({ data }) => {
         })}
         columns={data.columns.length}
       >
-        {data.columns.map(column => (
+        {data.columns.map((column) => (
           <Grid.Column
             key={column.id}
             width={

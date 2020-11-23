@@ -26,7 +26,7 @@ const Edit = ({
       {!data.variation && (
         <TemplateChooser
           templates={templates}
-          onSelectTemplate={index =>
+          onSelectTemplate={(index) =>
             onChangeBlock(block, {
               ...data,
               variation: templates()[index].variation,

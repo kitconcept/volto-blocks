@@ -193,7 +193,7 @@ class Edit extends Component {
       uploadedImageCardIndex: index,
       // currentSelectedCard: null,
     });
-    readAsDataURL(file).then(data => {
+    readAsDataURL(file).then((data) => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
       this.props.createContent(getBaseUrl(this.props.pathname), {
         '@type': 'Image',
@@ -264,7 +264,7 @@ class Edit extends Component {
     });
   };
 
-  onDragEnd = result => {
+  onDragEnd = (result) => {
     const { source, destination } = result;
     // dropped outside the list
     if (!destination) {
@@ -321,7 +321,7 @@ class Edit extends Component {
     });
   }
 
-  addNewCard = e => {
+  addNewCard = (e) => {
     e.stopPropagation();
     const newCardsState = [
       ...this.props.data.cards,
@@ -365,7 +365,7 @@ class Edit extends Component {
     });
   };
 
-  handleClickOutside = e => {
+  handleClickOutside = (e) => {
     if (this.node && doesNodeContainClick(this.node, e)) return;
     this.setState(() => ({
       currentSelectedCard: null,
@@ -409,7 +409,7 @@ class Edit extends Component {
           selected: this.props.selected,
           'centered-text': this.props.data.centeredText,
         })}
-        onKeyDown={e => {
+        onKeyDown={(e) => {
           this.props.handleKeyDown(
             e,
             this.props.index,
@@ -417,7 +417,7 @@ class Edit extends Component {
             this.node,
           );
         }}
-        ref={node => {
+        ref={(node) => {
           this.node = node;
         }}
       >
@@ -469,7 +469,7 @@ class Edit extends Component {
         )}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId={uuid()} direction="horizontal">
-            {provided => (
+            {(provided) => (
               <Ref innerRef={provided.innerRef}>
                 <Card.Group
                   centered
@@ -487,14 +487,14 @@ class Edit extends Component {
                         index={index}
                         key={item.id}
                       >
-                        {provided => (
+                        {(provided) => (
                           <Ref innerRef={provided.innerRef}>
                             <Card
                               className={cx({
                                 'no-borders': this.props.data.noBorders,
                               })}
                               key={item.id}
-                              onClick={e => this.selectCard(e, index)}
+                              onClick={(e) => this.selectCard(e, index)}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
@@ -509,7 +509,7 @@ class Edit extends Component {
                                     // }
                                     >
                                       <Input
-                                        onChange={e =>
+                                        onChange={(e) =>
                                           this.onChangeUrl(e, index)
                                         }
                                         placeholder={this.props.intl.formatMessage(
@@ -522,7 +522,7 @@ class Edit extends Component {
                                         <Icon name={folderSVG} size="24px" />
                                         <input
                                           type="file"
-                                          onChange={e =>
+                                          onChange={(e) =>
                                             this.onUploadImage(e, index)
                                           }
                                           style={{ display: 'none' }}
@@ -534,7 +534,9 @@ class Edit extends Component {
                                       <Button
                                         icon
                                         basic
-                                        onClick={e => this.removeCard(e, index)}
+                                        onClick={(e) =>
+                                          this.removeCard(e, index)
+                                        }
                                       >
                                         <Icon
                                           name={trashSVG}
@@ -552,7 +554,9 @@ class Edit extends Component {
                                       <Button
                                         icon
                                         basic
-                                        onClick={e => this.clearCard(e, index)}
+                                        onClick={(e) =>
+                                          this.clearCard(e, index)
+                                        }
                                       >
                                         <Icon name={clearSVG} size="24px" />
                                       </Button>
@@ -562,7 +566,9 @@ class Edit extends Component {
                                       <Button
                                         icon
                                         basic
-                                        onClick={e => this.removeCard(e, index)}
+                                        onClick={(e) =>
+                                          this.removeCard(e, index)
+                                        }
                                       >
                                         <Icon
                                           name={trashSVG}
@@ -609,7 +615,7 @@ class Edit extends Component {
                               {!this.props.data.hideText && (
                                 <Card.Content
                                   // This prevents propagation of ENTER
-                                  onKeyDown={e => e.stopPropagation()}
+                                  onKeyDown={(e) => e.stopPropagation()}
                                 >
                                   <EditTextBlock
                                     {...this.props}
@@ -681,10 +687,10 @@ class Edit extends Component {
 export default compose(
   injectIntl,
   connect(
-    state => ({
+    (state) => ({
       request: state.content.create,
       content: state.content.data,
     }),
-    dispatch => bindActionCreators({ createContent }, dispatch),
+    (dispatch) => bindActionCreators({ createContent }, dispatch),
   ),
 )(Edit);
