@@ -12,8 +12,8 @@ import cx from 'classnames';
 import { settings } from '~/config';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
-const getCardsLenght = (cards) =>
-  cards.length + cards.filter((item) => item.x2).length;
+const getCardsLenght = cards =>
+  cards.length + cards.filter(item => item.x2).length;
 
 /**
  * View image block class.
@@ -56,7 +56,7 @@ const View = ({ data }) => {
         })}
         itemsPerRow={data.expandCards ? getCardsLenght(data.cards) : 4}
       >
-        {data.cards.map((card) => (
+        {data.cards.map(card => (
           <Card
             key={card.id}
             className={cx({

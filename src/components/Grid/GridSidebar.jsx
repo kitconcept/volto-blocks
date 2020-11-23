@@ -9,7 +9,7 @@ import downSVG from '@plone/volto/icons/down-key.svg';
 import trashSVG from '@plone/volto/icons/delete.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
-const GridSidebar = (props) => {
+const GridSidebar = props => {
   const { data, gridType, sidebarData } = props;
   const [activeAccIndex, setActiveAccIndex] = React.useState(0);
 
@@ -36,7 +36,7 @@ const GridSidebar = (props) => {
           <Button
             icon
             basic
-            onClick={(e) => props.addNewColumn(e, gridType)}
+            onClick={e => props.addNewColumn(e, gridType)}
             disabled={data.columns && data.columns.length >= 4}
           >
             <Icon name={addSVG} size="24px" />
@@ -75,7 +75,7 @@ const GridSidebar = (props) => {
                       <Button
                         icon
                         basic
-                        onClick={(e) => props.removeColumn(e, index)}
+                        onClick={e => props.removeColumn(e, index)}
                       >
                         <Icon name={trashSVG} size="20px" color="#e40166" />
                       </Button>

@@ -185,7 +185,7 @@ class Edit extends Component {
       uploadedImageCardIndex: index,
       // currentSelectedCard: null,
     });
-    readAsDataURL(file).then((data) => {
+    readAsDataURL(file).then(data => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
       this.props.createContent(getBaseUrl(this.props.pathname), {
         '@type': 'Image',
@@ -256,7 +256,7 @@ class Edit extends Component {
     });
   };
 
-  onDragEnd = (result) => {
+  onDragEnd = result => {
     const { source, destination } = result;
     // dropped outside the list
     if (!destination) {
@@ -369,7 +369,7 @@ class Edit extends Component {
     });
   };
 
-  handleClickOutside = (e) => {
+  handleClickOutside = e => {
     if (this.node && doesNodeContainClick(this.node, e)) return;
     this.setState(() => ({
       currentSelectedCard: null,
@@ -395,8 +395,7 @@ class Edit extends Component {
       // TODO: Do something on ESC key
     }
   }
-  getCardsLenght = (cards) =>
-    cards.length + cards.filter((item) => item.x2).length;
+  getCardsLenght = cards => cards.length + cards.filter(item => item.x2).length;
 
   /**
    * Render method.
@@ -405,7 +404,7 @@ class Edit extends Component {
    */
   render() {
     const isDoubleSized = this.props.data.columns
-      ? this.props.data.columns.filter((cols) => cols.x2).length
+      ? this.props.data.columns.filter(cols => cols.x2).length
       : 0;
 
     return (
@@ -420,7 +419,7 @@ class Edit extends Component {
           'centered-text': this.props.data.centeredText,
         })}
         tabIndex={0}
-        onKeyDown={(e) => {
+        onKeyDown={e => {
           this.props.handleKeyDown(
             e,
             this.props.index,
@@ -428,7 +427,7 @@ class Edit extends Component {
             this.node,
           );
         }}
-        ref={(node) => {
+        ref={node => {
           this.node = node;
         }}
       >
@@ -440,7 +439,7 @@ class Edit extends Component {
                 <Button
                   icon
                   basic
-                  onClick={(e) => this.addNewColumn(e, 'text')}
+                  onClick={e => this.addNewColumn(e, 'text')}
                   disabled={this.props.data.columns.length >= 4}
                 >
                   <Icon name={textSVG} size="24px" />
@@ -450,7 +449,7 @@ class Edit extends Component {
                 <Button
                   icon
                   basic
-                  onClick={(e) => this.addNewColumn(e, 'image')}
+                  onClick={e => this.addNewColumn(e, 'image')}
                   disabled={this.props.data.columns.length >= 4}
                 >
                   <Icon name={imageSVG} size="24px" />
@@ -460,7 +459,7 @@ class Edit extends Component {
                 <Button
                   icon
                   basic
-                  onClick={(e) => this.addNewColumn(e, '__card')}
+                  onClick={e => this.addNewColumn(e, '__card')}
                   disabled={this.props.data.columns.length >= 4}
                 >
                   <Icon name={imagesSVG} size="24px" />
@@ -485,7 +484,7 @@ class Edit extends Component {
                 <Button
                   icon
                   basic
-                  onClick={(e) => this.addNewColumn(e, 'image')}
+                  onClick={e => this.addNewColumn(e, 'image')}
                   disabled={this.props.data.columns.length >= 4}
                 >
                   <Icon name={imageSVG} size="24px" />
@@ -495,7 +494,7 @@ class Edit extends Component {
           )}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId={uuid()} direction="horizontal">
-            {(provided) => (
+            {provided => (
               <Ref innerRef={provided.innerRef}>
                 <Grid
                   className={cx({
@@ -516,11 +515,11 @@ class Edit extends Component {
                         index={index}
                         key={item.id}
                       >
-                        {(provided) => (
+                        {provided => (
                           <Ref innerRef={provided.innerRef}>
                             <Grid.Column
                               key={item.id}
-                              onClick={(e) => this.selectCard(e, index)}
+                              onClick={e => this.selectCard(e, index)}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                               width={
@@ -538,7 +537,7 @@ class Edit extends Component {
                             >
                               <div
                                 // This prevents propagation of ENTER
-                                onKeyDown={(e) => e.stopPropagation()}
+                                onKeyDown={e => e.stopPropagation()}
                               >
                                 {/* <SidebarPortal selected={this.props.selected}>
                                   <GridSidebar
@@ -577,7 +576,7 @@ class Edit extends Component {
                                           this.props.data.columns.length < 2 ||
                                           (!item.x2 && isDoubleSized)
                                         }
-                                        onClick={(e) =>
+                                        onClick={e =>
                                           this.onChangeColumnSettings(
                                             e,
                                             index,
@@ -599,7 +598,7 @@ class Edit extends Component {
                                       <Button
                                         icon
                                         basic
-                                        onClick={(e) =>
+                                        onClick={e =>
                                           this.removeColumn(e, index)
                                         }
                                       >
@@ -679,7 +678,7 @@ export default compose(
   withObjectBrowser,
   injectIntl,
   connect(
-    (state) => ({
+    state => ({
       request: state.content.create,
       content: state.content.data,
     }),

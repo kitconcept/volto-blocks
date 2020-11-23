@@ -163,9 +163,9 @@ class Edit extends Component {
   }
 
   toggleAddNewBlock = () =>
-    this.setState((state) => ({ addNewBlockOpened: !state.addNewBlockOpened }));
+    this.setState(state => ({ addNewBlockOpened: !state.addNewBlockOpened }));
 
-  handleClickOutside = (e) => {
+  handleClickOutside = e => {
     if (this.ref && doesNodeContainClick(this.ref, e)) return;
     this.setState(() => ({
       addNewBlockOpened: false,
@@ -193,7 +193,7 @@ class Edit extends Component {
         role="presentation"
         onClick={() => this.props.onSelectBlock(this.props.block)}
         className={cx('block text', { selected: this.props.selected })}
-        ref={(node) => (this.ref = node)}
+        ref={node => (this.ref = node)}
       >
         {this.props.selected &&
           (this.props.appendSecondaryActions || this.props.appendActions) && (
@@ -265,7 +265,7 @@ class Edit extends Component {
               this.props.onFocusNextBlock(this.props.block, this.node);
             }
           }}
-          ref={(node) => {
+          ref={node => {
             this.node = node;
           }}
         />
@@ -327,7 +327,7 @@ class Edit extends Component {
         )}
         {this.state.addNewBlockOpened && this.state.customBlocksOpened && (
           <div className="add-block toolbar">
-            {blocks.customBlocks.map((block) => (
+            {blocks.customBlocks.map(block => (
               <Button.Group key={block.title}>
                 <Button
                   icon

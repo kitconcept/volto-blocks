@@ -4,7 +4,7 @@ import templates from './templates';
 import ImageBody from './ImageBody';
 import ImageData from './ImageData';
 
-const Edit = (props) => {
+const Edit = props => {
   return (
     <EditGrid
       {...props}

@@ -17,7 +17,7 @@ const messages = defineMessages({
 });
 
 const TeaserItem = ({ data, block, isEditMode, intl }) => {
-  const contentSubrequests = useSelector((state) => state.content.subrequests);
+  const contentSubrequests = useSelector(state => state.content.subrequests);
   const dispatch = useDispatch();
   const blockID = data.id || block;
   const result = contentSubrequests?.[blockID]?.data;
