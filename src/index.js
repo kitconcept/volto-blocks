@@ -57,6 +57,14 @@ const TableSchema = () => ({
   required: ['title'],
 });
 
+const schemaEnhancer = (schema) => {
+  schema.properties.newfield = {
+    title: 'new field',
+  };
+  schema.fieldsets[0].fields.push('newfield');
+  return schema;
+};
+
 const customBlocks = {
   uberGrid: {
     id: 'uberGrid',
@@ -99,7 +107,7 @@ const customBlocks = {
           </>
         ),
         schemaExtender: TableSchema(),
-        schemaExtenderItem: TableSchema(),
+        schemaExtenderItem: schemaEnhancer,
       },
     },
   },

@@ -11,9 +11,10 @@ import {
   VariationsSchemaExtender,
 } from '@kitconcept/volto-blocks/components';
 import { TeaserGridSchema } from './schema';
+import { blocks } from '~/config';
 
 const TeaserData = (props) => {
-  const { data, block, onChangeBlock } = props;
+  const { block, data, dataGrid, onChangeBlock } = props;
 
   const intl = useIntl();
   const dispatch = useDispatch();
@@ -50,22 +51,28 @@ const TeaserData = (props) => {
 
   const schema = TeaserGridSchema({ ...props, intl });
 
+  const applySchemaEnhancer = (schema) => {
+    const variations = blocks?.blocksConfig?.[dataGrid['@type']]?.variations;
+
+    const schemaExtender =
+      variations?.[dataGrid?.variation]?.['schemaExtenderItem'];
+
+    return schemaExtender(schema);
+  };
+
   return (
-    <>
-      <SchemaRenderer
-        schema={schema}
-        title={schema.title}
-        onChangeField={(id, value) => {
-          onChangeBlock(block, {
-            ...data,
-            [id]: value,
-          });
-        }}
-        formData={data}
-        fieldIndex={data.index}
-      />
-      <VariationsSchemaExtender {...props} schemaKey={'schemaExtenderItem'} />
-    </>
+    <SchemaRenderer
+      schema={applySchemaEnhancer(schema)}
+      title={schema.title}
+      onChangeField={(id, value) => {
+        onChangeBlock(block, {
+          ...data,
+          [id]: value,
+        });
+      }}
+      formData={data}
+      fieldIndex={data.index}
+    />
   );
 };
 
