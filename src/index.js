@@ -106,7 +106,7 @@ const customBlocks = {
             thinggy
           </>
         ),
-        schemaExtender: TableSchema(),
+        schemaExtender: schemaEnhancer,
         schemaExtenderItem: schemaEnhancer,
       },
     },

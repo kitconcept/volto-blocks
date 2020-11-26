@@ -57,7 +57,11 @@ const TeaserData = (props) => {
     const schemaExtender =
       variations?.[dataGrid?.variation]?.['schemaExtenderItem'];
 
-    return schemaExtender(schema);
+    if (schemaExtender) {
+      return schemaExtender(schema);
+    } else {
+      return schema;
+    }
   };
 
   return (

@@ -9,13 +9,19 @@ import downSVG from '@plone/volto/icons/down-key.svg';
 import trashSVG from '@plone/volto/icons/delete.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
+import { gridDefaultSchema } from './schema';
+
 import {
   VariationsSchemaExtender,
   VariationsWidget,
+  SchemaRenderer,
 } from '@kitconcept/volto-blocks/components';
+
+import { blocks } from '~/config';
 
 const GridSidebar = (props) => {
   const {
+    block,
     data,
     gridType,
     sidebarData,
@@ -30,6 +36,18 @@ const GridSidebar = (props) => {
 
     onChangeSelectedColumnItem(newIndex);
   }
+
+  const applySchemaEnhancer = (schema) => {
+    const variations = blocks?.blocksConfig?.[data['@type']]?.variations;
+
+    const schemaExtender = variations?.[data?.variation]?.['schemaExtender'];
+
+    if (schemaExtender) {
+      return schemaExtender(schema, props);
+    } else {
+      return schema;
+    }
+  };
 
   return (
     <Segment.Group raised>
@@ -60,10 +78,23 @@ const GridSidebar = (props) => {
 
       <Segment className="form attached">
         <VariationsWidget {...props} onChangeBlock={onChangeFullBlock} />
-        <VariationsSchemaExtender
+        <SchemaRenderer
+          schema={applySchemaEnhancer(gridDefaultSchema(props))}
+          title={gridDefaultSchema.title}
+          onChangeField={(id, value) => {
+            onChangeFullBlock(block, {
+              ...data,
+              [id]: value,
+            });
+          }}
+          formData={data}
+          fieldIndex={data.index}
+          basic
+        />
+        {/* <VariationsSchemaExtender
           {...props}
           onChangeBlock={onChangeFullBlock}
-        />
+        /> */}
       </Segment>
 
       <Accordion fluid styled className="form">

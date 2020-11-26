@@ -3,25 +3,15 @@ import { SchemaRenderer } from '@kitconcept/volto-blocks/components';
 import { blocks } from '~/config';
 
 const VariationsSchemaExtender = (props) => {
-  const {
-    block,
-    data,
-    dataGrid,
-    schemaKey = 'schemaExtender',
-    onChangeBlock,
-  } = props;
+  const { block, data, onChangeBlock } = props;
 
-  const variations =
-    blocks?.blocksConfig?.[data['@type']]?.variations ||
-    blocks?.blocksConfig?.[dataGrid['@type']]?.variations;
+  const variations = blocks?.blocksConfig?.[data['@type']]?.variations;
 
-  const schema =
-    variations?.[data?.variation]?.[schemaKey] ||
-    variations?.[dataGrid?.variation]?.[schemaKey];
+  const schema = variations?.[data?.variation]?.['schemaExtender'];
 
   return (
     <>
-      {variations && (data.variation || dataGrid.variation) && schema && (
+      {variations && data.variation && schema && (
         <SchemaRenderer
           schema={schema}
           title={schema.title}
