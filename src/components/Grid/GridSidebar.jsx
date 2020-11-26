@@ -37,9 +37,9 @@ const GridSidebar = (props) => {
     onChangeSelectedColumnItem(newIndex);
   }
 
-  const applySchemaEnhancer = (schema) => {
-    const variations = blocks?.blocksConfig?.[data['@type']]?.variations;
+  const variations = blocks?.blocksConfig?.[data['@type']]?.variations;
 
+  const applySchemaEnhancer = (schema) => {
     const schemaExtender = variations?.[data?.variation]?.['schemaExtender'];
 
     if (schemaExtender) {
@@ -76,22 +76,24 @@ const GridSidebar = (props) => {
         </Button.Group>
       </header>
 
-      <Segment className="form attached" style={{ padding: 0 }}>
-        <VariationsWidget {...props} onChangeBlock={onChangeFullBlock} />
-        <SchemaRenderer
-          schema={applySchemaEnhancer(gridDefaultSchema(props))}
-          title={gridDefaultSchema.title}
-          onChangeField={(id, value) => {
-            onChangeFullBlock(block, {
-              ...data,
-              [id]: value,
-            });
-          }}
-          formData={data}
-          fieldIndex={data.index}
-          basic
-        />
-      </Segment>
+      {variations && Object.keys(variations).length > 1 && (
+        <Segment className="form attached" style={{ padding: 0 }}>
+          <VariationsWidget {...props} onChangeBlock={onChangeFullBlock} />
+          <SchemaRenderer
+            schema={applySchemaEnhancer(gridDefaultSchema(props))}
+            title={gridDefaultSchema.title}
+            onChangeField={(id, value) => {
+              onChangeFullBlock(block, {
+                ...data,
+                [id]: value,
+              });
+            }}
+            formData={data}
+            fieldIndex={data.index}
+            basic
+          />
+        </Segment>
+      )}
 
       <Accordion fluid styled className="form">
         {data.columns &&

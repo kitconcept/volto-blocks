@@ -43,13 +43,13 @@ const customGroupBlocksOrder = (defaultGroups) =>
 
 // Schema enhancer example, a function with schema => schema signature
 // It might take a second and third argument props and int, if required
-const schemaEnhancer = (schema) => {
-  schema.properties.newfield = {
-    title: 'new field',
-  };
-  schema.fieldsets[0].fields.push('newfield');
-  return schema;
-};
+// const schemaEnhancer = (schema) => {
+//   schema.properties.newfield = {
+//     title: 'new field',
+//   };
+//   schema.fieldsets[0].fields.push('newfield');
+//   return schema;
+// };
 
 const customBlocks = {
   uberGrid: {
@@ -81,23 +81,24 @@ const customBlocks = {
       addPermission: [],
       view: [],
     },
-    variations: {
-      default: { label: 'Default', template: TeaserDefaultTemplate },
-      custom: {
-        label: 'Custom',
-        components: {
-          view: TeaserDefaultTemplate,
-          wrapper: (props) => (
-            <>
-              hey! {props.data.description2} asdasd {props.children} bottoms
-              thinggy
-            </>
-          ),
-        },
-        schemaExtender: schemaEnhancer,
-        schemaExtenderItem: schemaEnhancer,
-      },
-    },
+    // Variations example
+    // variations: {
+    //   default: { label: 'Default', template: TeaserDefaultTemplate },
+    //   custom: {
+    //     label: 'Custom',
+    //     components: {
+    //       view: TeaserDefaultTemplate,
+    //       wrapper: (props) => (
+    //         <>
+    //           hey! {props.data.description2} asdasd {props.children} bottoms
+    //           thinggy
+    //         </>
+    //       ),
+    //     },
+    //     schemaExtender: schemaEnhancer,
+    //     schemaExtenderItem: schemaEnhancer,
+    //   },
+    // },
   },
   imagesGrid: {
     id: 'imagesGrid',
