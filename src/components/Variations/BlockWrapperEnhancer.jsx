@@ -4,7 +4,7 @@ import { blocks } from '~/config';
 const BlockWrapperEnhancer = (props) => {
   const { data } = props;
   const variations = blocks?.blocksConfig?.[data['@type']]?.variations;
-  const Wrapper = variations?.[data.variation]?.wrapper;
+  const Wrapper = variations?.[data.variation]?.components?.wrapper;
 
   if (Wrapper) {
     return <Wrapper {...props}>{props.children}</Wrapper>;

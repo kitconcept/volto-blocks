@@ -87,13 +87,13 @@ const customBlocks = {
         label: 'Custom',
         components: {
           view: TeaserDefaultTemplate,
+          wrapper: (props) => (
+            <>
+              hey! {props.data.description2} asdasd {props.children} bottoms
+              thinggy
+            </>
+          ),
         },
-        wrapper: (props) => (
-          <>
-            hey! {props.data.description2} asdasd {props.children} bottoms
-            thinggy
-          </>
-        ),
         schemaExtender: schemaEnhancer,
         schemaExtenderItem: schemaEnhancer,
       },
