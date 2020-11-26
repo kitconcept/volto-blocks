@@ -12,7 +12,6 @@ import addSVG from '@plone/volto/icons/add.svg';
 import { gridDefaultSchema } from './schema';
 
 import {
-  VariationsSchemaExtender,
   VariationsWidget,
   SchemaRenderer,
 } from '@kitconcept/volto-blocks/components';
@@ -28,6 +27,7 @@ const GridSidebar = (props) => {
     activeColumn,
     onChangeSelectedColumnItem,
     onChangeFullBlock,
+    intl,
   } = props;
 
   function handleChangeColumn(e, blockProps) {
@@ -43,7 +43,7 @@ const GridSidebar = (props) => {
     const schemaExtender = variations?.[data?.variation]?.['schemaExtender'];
 
     if (schemaExtender) {
-      return schemaExtender(schema, props);
+      return schemaExtender(schema, props, intl);
     } else {
       return schema;
     }
@@ -91,10 +91,6 @@ const GridSidebar = (props) => {
           fieldIndex={data.index}
           basic
         />
-        {/* <VariationsSchemaExtender
-          {...props}
-          onChangeBlock={onChangeFullBlock}
-        /> */}
       </Segment>
 
       <Accordion fluid styled className="form">

@@ -6,10 +6,7 @@ import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrow
 import { useDispatch } from 'react-redux';
 import { getContent } from '@plone/volto/actions';
 
-import {
-  SchemaRenderer,
-  VariationsSchemaExtender,
-} from '@kitconcept/volto-blocks/components';
+import { SchemaRenderer } from '@kitconcept/volto-blocks/components';
 import { TeaserGridSchema } from './schema';
 import { blocks } from '~/config';
 
@@ -58,7 +55,7 @@ const TeaserData = (props) => {
       variations?.[dataGrid?.variation]?.['schemaExtenderItem'];
 
     if (schemaExtender) {
-      return schemaExtender(schema);
+      return schemaExtender(schema, props, intl);
     } else {
       return schema;
     }

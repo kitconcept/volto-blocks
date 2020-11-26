@@ -41,22 +41,8 @@ const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
 const customGroupBlocksOrder = (defaultGroups) =>
   insertInArray(defaultGroups, newTeasersGroup, 2);
 
-const TableSchema = () => ({
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['description2'],
-    },
-  ],
-  properties: {
-    description2: {
-      title: 'Description2',
-    },
-  },
-  required: ['title'],
-});
-
+// Schema enhancer example, a function with schema => schema signature
+// It might take a second and third argument props and int, if required
 const schemaEnhancer = (schema) => {
   schema.properties.newfield = {
     title: 'new field',
