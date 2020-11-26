@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a grid view component 1`] = `
+<div
+  className="block __grid teaserGrid centered four"
+>
+  <div
+    className="ui stackable four column grid"
+  >
+    <div
+      className="column"
+    >
+      <div
+        className="the item"
+      />
+    </div>
+    <div
+      className="column"
+    >
+      <div
+        className="the item"
+      />
+    </div>
+    <div
+      className="column"
+    >
+      <div
+        className="the item"
+      />
+    </div>
+    <div
+      className="column"
+    >
+      <div
+        className="the item"
+      />
+    </div>
+  </div>
+</div>
+`;

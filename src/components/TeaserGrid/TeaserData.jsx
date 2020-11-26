@@ -1,50 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Segment } from 'semantic-ui-react';
-import { defineMessages, useIntl } from 'react-intl';
-import { CheckboxWidget, TextWidget } from '@plone/volto/components';
+import { useIntl } from 'react-intl';
+
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 import { useDispatch } from 'react-redux';
 import { getContent } from '@plone/volto/actions';
-import { flattenToAppURL } from '@plone/volto/helpers';
 
-import clearSVG from '@plone/volto/icons/clear.svg';
-import navTreeSVG from '@plone/volto/icons/nav.svg';
+import {
+  SchemaRenderer,
+  VariationsSchemaExtender,
+} from '@kitconcept/volto-blocks/components';
+import { TeaserGridSchema } from './schema';
 
-const messages = defineMessages({
-  Source: {
-    id: 'Source',
-    defaultMessage: 'Source',
-  },
-  SourceImage: {
-    id: 'Source image',
-    defaultMessage: 'Source image',
-  },
-  Headline: {
-    id: 'Headline',
-    defaultMessage: 'Headline',
-  },
-  openLinkInNewTab: {
-    id: 'Open in a new tab',
-    defaultMessage: 'Open in a new tab',
-  },
-  title: {
-    id: 'Title',
-    defaultMessage: 'Title',
-  },
-  description: {
-    id: 'Description',
-    defaultMessage: 'Description',
-  },
-});
+const TeaserData = (props) => {
+  const { data, block, onChangeBlock } = props;
 
-const TeaserData = ({
-  data,
-  block,
-  onChangeBlock,
-  openObjectBrowser,
-  required = false,
-}) => {
   const intl = useIntl();
   const dispatch = useDispatch();
   const blockID = data.id || block;
@@ -78,126 +48,23 @@ const TeaserData = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.href]);
 
+  const schema = TeaserGridSchema({ ...props, intl });
+
   return (
     <>
-      <Segment className="form sidebar-image-data">
-        <TextWidget
-          id={`source-${data.index}`}
-          title={intl.formatMessage(messages.Source)}
-          required={false}
-          value={data.href}
-          icon={data.href ? clearSVG : navTreeSVG}
-          iconAction={
-            data.href
-              ? () => {
-                  onChangeBlock(block, {
-                    ...data,
-                    href: '',
-                    title: '',
-                    description: '',
-                    preview_image: '',
-                  });
-                }
-              : () => openObjectBrowser({ mode: 'link' })
-          }
-          onChange={(name, value) => {
-            onChangeBlock(block, {
-              ...data,
-              href: value,
-            });
-          }}
-        />
-        {data?.href && (
-          <>
-            <TextWidget
-              id={`title-${data.index}`}
-              title={intl.formatMessage(messages.title)}
-              required={false}
-              value={data.title}
-              icon={data.title && clearSVG}
-              iconAction={() =>
-                onChangeBlock(block, {
-                  ...data,
-                  title: '',
-                })
-              }
-              onChange={(name, value) => {
-                onChangeBlock(block, {
-                  ...data,
-                  title: value,
-                });
-              }}
-            />
-            <TextWidget
-              id={`description-${data.index}`}
-              title={intl.formatMessage(messages.description)}
-              required={false}
-              value={data.description}
-              icon={data.description && clearSVG}
-              iconAction={() =>
-                onChangeBlock(block, {
-                  ...data,
-                  description: '',
-                })
-              }
-              onChange={(name, value) => {
-                onChangeBlock(block, {
-                  ...data,
-                  description: value,
-                });
-              }}
-            />
-            <TextWidget
-              id="source-preview-image"
-              title={intl.formatMessage(messages.SourceImage)}
-              required={false}
-              value={
-                data.preview_image
-                  ? data.preview_image?.filename
-                    ? flattenToAppURL(data.preview_image.filename)
-                    : flattenToAppURL(data.preview_image)
-                  : ''
-              }
-              icon={data.preview_image ? clearSVG : navTreeSVG}
-              iconAction={
-                data.preview_image
-                  ? () => {
-                      onChangeBlock(block, {
-                        ...data,
-                        preview_image: '',
-                      });
-                    }
-                  : () =>
-                      openObjectBrowser({
-                        onSelectItem: (url) => {
-                          onChangeBlock(block, {
-                            ...data,
-                            preview_image: url,
-                          });
-                        },
-                      })
-              }
-              onChange={(name, value) => {
-                onChangeBlock(block, {
-                  ...data,
-                  preview_image: value,
-                });
-              }}
-            />
-          </>
-        )}
-        <CheckboxWidget
-          id="openLinkInNewTab"
-          title={intl.formatMessage(messages.openLinkInNewTab)}
-          value={data.openLinkInNewTab ? data.openLinkInNewTab : false}
-          onChange={(name, value) => {
-            onChangeBlock(block, {
-              ...data,
-              openLinkInNewTab: value,
-            });
-          }}
-        />
-      </Segment>
+      <SchemaRenderer
+        schema={schema}
+        title={schema.title}
+        onChangeField={(id, value) => {
+          onChangeBlock(block, {
+            ...data,
+            [id]: value,
+          });
+        }}
+        formData={data}
+        fieldIndex={data.index}
+      />
+      <VariationsSchemaExtender {...props} schemaKey={'schemaExtenderItem'} />
     </>
   );
 };

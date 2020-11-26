@@ -11,7 +11,7 @@
  *   }
  * }
  */
-
+import React from 'react';
 import {
   SliderEditBlock,
   SliderViewBlock,
@@ -25,7 +25,11 @@ import {
   ListingGridViewBlock,
   HighlightSliderViewBlock,
   HighlightSliderEditBlock,
+  UberGridViewBlock,
+  UberGridEditBlock,
 } from '@kitconcept/volto-blocks/components';
+
+import TeaserDefaultTemplate from '@kitconcept/volto-blocks/components/TeaserGrid/TeaserDefaultTemplate';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
@@ -37,7 +41,38 @@ const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
 const customGroupBlocksOrder = (defaultGroups) =>
   insertInArray(defaultGroups, newTeasersGroup, 2);
 
+const TableSchema = () => ({
+  fieldsets: [
+    {
+      id: 'default',
+      title: 'Default',
+      fields: ['description2'],
+    },
+  ],
+  properties: {
+    description2: {
+      title: 'Description2',
+    },
+  },
+  required: ['title'],
+});
+
 const customBlocks = {
+  uberGrid: {
+    id: 'uberGrid',
+    title: 'Uber grid',
+    icon: imagesSVG,
+    group: 'common',
+    view: UberGridViewBlock,
+    edit: UberGridEditBlock,
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
   teaserGrid: {
     id: 'teaserGrid',
     title: 'Teaser grid',
@@ -51,6 +86,21 @@ const customBlocks = {
     security: {
       addPermission: [],
       view: [],
+    },
+    variations: {
+      default: { label: 'Default', template: TeaserDefaultTemplate },
+      custom: {
+        label: 'Custom',
+        template: TeaserDefaultTemplate,
+        wrapper: (props) => (
+          <>
+            hey! {props.data.description2} asdasd {props.children} bottoms
+            thinggy
+          </>
+        ),
+        schemaExtender: TableSchema(),
+        schemaExtenderItem: TableSchema(),
+      },
     },
   },
   imagesGrid: {

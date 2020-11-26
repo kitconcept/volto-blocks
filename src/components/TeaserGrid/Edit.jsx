@@ -22,7 +22,11 @@ const Edit = (props) => {
         />
       )}
       sidebarData={(props, column, index) => (
-        <TeaserData {...props} data={{ ...column, index }} />
+        <TeaserData
+          {...props}
+          data={{ ...column, index }}
+          dataGrid={props.data} // This allows to access the full data from the items
+        />
       )}
     />
   );

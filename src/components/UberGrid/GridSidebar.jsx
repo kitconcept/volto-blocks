@@ -9,11 +9,6 @@ import downSVG from '@plone/volto/icons/down-key.svg';
 import trashSVG from '@plone/volto/icons/delete.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
-import {
-  VariationsSchemaExtender,
-  VariationsWidget,
-} from '@kitconcept/volto-blocks/components';
-
 const GridSidebar = (props) => {
   const {
     data,
@@ -21,7 +16,6 @@ const GridSidebar = (props) => {
     sidebarData,
     activeColumn,
     onChangeSelectedColumnItem,
-    onChangeFullBlock,
   } = props;
 
   function handleChangeColumn(e, blockProps) {
@@ -57,15 +51,7 @@ const GridSidebar = (props) => {
           </Button>
         </Button.Group>
       </header>
-
-      <Segment className="form attached">
-        <VariationsWidget {...props} onChangeBlock={onChangeFullBlock} />
-        <VariationsSchemaExtender
-          {...props}
-          onChangeBlock={onChangeFullBlock}
-        />
-      </Segment>
-
+      hey
       <Accordion fluid styled className="form">
         {data.columns &&
           data.columns.map((column, index) => (
@@ -118,7 +104,7 @@ const GridSidebar = (props) => {
                 </div>
               </Accordion.Title>
               <Accordion.Content active={activeColumn === index}>
-                {sidebarData(props, column, index)}
+                {/* {sidebarData(props, column, index)} */}
               </Accordion.Content>
             </React.Fragment>
           ))}

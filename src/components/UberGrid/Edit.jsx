@@ -7,7 +7,7 @@ import { injectIntl } from 'react-intl';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
-import { Icon, SidebarPortal } from '@plone/volto/components';
+import { BlockChooser, Icon, SidebarPortal } from '@plone/volto/components';
 
 import imageSVG from '@plone/volto/icons/image.svg';
 import textSVG from '@plone/volto/icons/text.svg';
@@ -15,14 +15,15 @@ import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 import { getBaseUrl } from '@plone/volto/helpers';
 
-import GridSidebar from '@kitconcept/volto-blocks/components/Grid/GridSidebar';
+import GridSidebar from '@kitconcept/volto-blocks/components/UberGrid/GridSidebar';
+import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/BlockRenderer';
 import TemplateChooser from '@kitconcept/volto-blocks/components/TemplateChooser/TemplateChooser';
-import { BlockWrapperEnhancer } from '@kitconcept/volto-blocks/components';
-
 import {
   reorderArray,
   replaceItemOfArray,
 } from '@kitconcept/volto-blocks/helpers';
+
+import templates from './templates';
 
 /**
  * Edit image block class.
@@ -203,7 +204,7 @@ class Edit extends Component {
   onSelectTemplate = (templateIndex) => {
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
-      columns: this.props.templates()[templateIndex].columns,
+      columns: templates()[templateIndex].columns,
     });
   };
 
@@ -232,11 +233,11 @@ class Edit extends Component {
       >
         {!this.props.data.columns?.length && (
           <TemplateChooser
-            templates={this.props.templates}
+            templates={templates}
             onSelectTemplate={this.onSelectTemplate}
           />
         )}
-        {this.props.selected && this.props.gridType && (
+        {this.props.selected && (
           <div className="toolbar">
             <Button.Group>
               <Button
@@ -249,66 +250,81 @@ class Edit extends Component {
             </Button.Group>
           </div>
         )}
-        <BlockWrapperEnhancer {...this.props}>
-          <DragDropContext onDragEnd={this.onDragEnd}>
-            <Droppable droppableId={uuid()} direction="horizontal">
-              {(provided) => (
-                <Ref innerRef={provided.innerRef}>
-                  <Grid
-                    {...provided.droppableProps}
-                    columns={
-                      this.props.data.columns
-                        ? this.props.data.columns.length
-                        : 0
-                    }
-                  >
-                    {this.props.data.columns &&
-                      this.props.data.columns.map((item, index) => (
-                        <Draggable
-                          draggableId={item.id}
-                          index={index}
-                          key={item.id}
-                        >
-                          {(provided) => {
-                            item = { ...item, block: item.id };
-                            return (
-                              <Ref innerRef={provided.innerRef}>
-                                <Grid.Column
-                                  key={item.id}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId={uuid()} direction="horizontal">
+            {(provided) => (
+              <Ref innerRef={provided.innerRef}>
+                <Grid
+                  {...provided.droppableProps}
+                  columns={
+                    this.props.data.columns ? this.props.data.columns.length : 0
+                  }
+                >
+                  {this.props.data.columns &&
+                    this.props.data.columns.map((item, index) => (
+                      <Draggable
+                        draggableId={item.id}
+                        index={index}
+                        key={item.id}
+                      >
+                        {(provided) => {
+                          item = { ...item, block: item.id };
+                          return (
+                            <Ref innerRef={provided.innerRef}>
+                              <Grid.Column
+                                key={item.id}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <div
+                                  role="presentation"
+                                  // This prevents propagation of ENTER
+                                  onKeyDown={(e) => e.stopPropagation()}
+                                  onClick={() =>
+                                    this.onChangeSelectedColumnItem(index)
+                                  }
                                 >
-                                  <div
-                                    role="presentation"
-                                    // This prevents propagation of ENTER
-                                    onKeyDown={(e) => e.stopPropagation()}
-                                    onClick={() =>
-                                      this.onChangeSelectedColumnItem(index)
-                                    }
-                                  >
-                                    {this.props.render({
-                                      item,
-                                      index,
-                                      path: getBaseUrl(this.props.pathname),
-                                      onChangeGridItem: this.onChangeGridItem,
-                                      columns: data.columns,
-                                    })}
-                                  </div>
-                                </Grid.Column>
-                              </Ref>
-                            );
-                          }}
-                        </Draggable>
-                      ))}
-                    {provided.placeholder}
-                  </Grid>
-                </Ref>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </BlockWrapperEnhancer>
+                                  {item['@type'] ? (
+                                    <BlockRenderer
+                                      block={item.id}
+                                      edit
+                                      type={item['@type']}
+                                      selected={
+                                        this.state.selectedColumnIndex === index
+                                      }
+                                      onChangeBlock={this.onChangeGridItem}
+                                      data={this.props.data.columns[index]}
+                                    />
+                                  ) : (
+                                    <BlockChooser
+                                      onMutateBlock={(block, value) =>
+                                        this.onChangeGridItem(index, value)
+                                      }
+                                      currentBlock={this.props.block}
+                                    />
+                                  )}
 
-        <SidebarPortal selected={this.props.selected}>
+                                  {/* {this.props.render({
+                                    item,
+                                    index,
+                                    path: getBaseUrl(this.props.pathname),
+                                    onChangeGridItem: this.onChangeGridItem,
+                                    columns: data.columns,
+                                  })} */}
+                                </div>
+                              </Grid.Column>
+                            </Ref>
+                          );
+                        }}
+                      </Draggable>
+                    ))}
+                  {provided.placeholder}
+                </Grid>
+              </Ref>
+            )}
+          </Droppable>
+        </DragDropContext>
+        {/* <SidebarPortal selected={this.props.selected}>
           <GridSidebar
             {...this.props}
             onChangeBlock={(block, data) => {
@@ -321,7 +337,7 @@ class Edit extends Component {
             addNewColumn={this.addNewColumn}
             sidebarData={this.props.sidebarData}
           />
-        </SidebarPortal>
+        </SidebarPortal> */}
       </div>
     );
   }

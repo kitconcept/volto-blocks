@@ -19,15 +19,30 @@ import ConditionalLink from '@kitconcept/volto-blocks/components/ConditionalLink
 import HighlightSliderEditBlock from '@kitconcept/volto-blocks/components/HighlightSlider/Edit';
 import HighlightSliderViewBlock from '@kitconcept/volto-blocks/components/HighlightSlider/View';
 
+import VariationsWidget from '@kitconcept/volto-blocks/components/Variations/VariationsWidget';
+import VariationsSchemaExtender from '@kitconcept/volto-blocks/components/Variations/VariationsSchemaExtender';
+import BlockWrapperEnhancer from '@kitconcept/volto-blocks/components/Variations/BlockWrapperEnhancer';
+
+import UberGridEditBlock from '@kitconcept/volto-blocks/components/UberGrid/Edit';
+import UberGridViewBlock from '@kitconcept/volto-blocks/components/UberGrid/View';
+
 import TextBody from '@kitconcept/volto-blocks/components/SimpleBlocks/TextBody';
 
 import BlockModal from '@kitconcept/volto-blocks/components/BlockModal/BlockModal';
 import CheckboxWidget from '@kitconcept/volto-blocks/components/Widgets/CheckboxWidget';
 import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/BlockRenderer';
 
+import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/SchemaRenderer';
+
 export {
+  BlockWrapperEnhancer,
+  VariationsWidget,
+  VariationsSchemaExtender,
+  UberGridEditBlock,
+  UberGridViewBlock,
   HighlightSliderEditBlock,
   HighlightSliderViewBlock,
+  SchemaRenderer,
   ConditionalLink,
   TextBody,
   MultiSourceWidget,
