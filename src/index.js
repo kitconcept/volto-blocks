@@ -85,7 +85,9 @@ const customBlocks = {
       default: { label: 'Default', template: TeaserDefaultTemplate },
       custom: {
         label: 'Custom',
-        template: TeaserDefaultTemplate,
+        components: {
+          view: TeaserDefaultTemplate,
+        },
         wrapper: (props) => (
           <>
             hey! {props.data.description2} asdasd {props.children} bottoms

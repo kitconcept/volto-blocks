@@ -76,7 +76,7 @@ const GridSidebar = (props) => {
         </Button.Group>
       </header>
 
-      <Segment className="form attached">
+      <Segment className="form attached" style={{ padding: 0 }}>
         <VariationsWidget {...props} onChangeBlock={onChangeFullBlock} />
         <SchemaRenderer
           schema={applySchemaEnhancer(gridDefaultSchema(props))}

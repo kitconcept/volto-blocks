@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import TeaserDefaultTemplate from '@kitconcept/volto-blocks/components/TeaserGrid/TeaserDefaultTemplate';
 import { blocks } from '~/config';
 
 const TeaserBody = (props) => {
@@ -8,11 +9,12 @@ const TeaserBody = (props) => {
   const { data } = props;
 
   const variation =
-    data.template && !!variationsConfig[data.template]
-      ? data.template
+    variationsConfig && data.variation && !!variationsConfig[data.variation]
+      ? data.variation
       : 'default';
 
-  const BlockTemplate = variationsConfig[variation]?.template;
+  const BlockTemplate =
+    variationsConfig?.[variation]?.components?.view || TeaserDefaultTemplate;
 
   return <BlockTemplate {...props} />;
 };
