@@ -6,7 +6,7 @@ exports[`renders an Image Data Sidebar component 1`] = `
 >
   <div
     className="inline field text"
-    id="field-source"
+    id="field-source-0"
   >
     <div
       className="ui grid"
@@ -21,7 +21,7 @@ exports[`renders an Image Data Sidebar component 1`] = `
             className="wrapper"
           >
             <label
-              htmlFor="field-source"
+              htmlFor="field-source-0"
             >
               Source
             </label>
@@ -34,10 +34,13 @@ exports[`renders an Image Data Sidebar component 1`] = `
             className="ui icon input"
           >
             <input
-              disabled={false}
-              id="field-source"
-              name="source"
+              id="field-source-0"
+              maxLength={null}
+              minLength={null}
+              name="source-0"
+              onBlur={[Function]}
               onChange={[Function]}
+              onClick={[Function]}
               type="text"
               value=""
             />
@@ -81,7 +84,7 @@ exports[`renders an Image Data Sidebar component 1`] = `
   </div>
   <div
     className="inline field text"
-    id="field-alt"
+    id="field-alt-0"
   >
     <div
       className="ui grid"
@@ -96,7 +99,7 @@ exports[`renders an Image Data Sidebar component 1`] = `
             className="wrapper"
           >
             <label
-              htmlFor="field-alt"
+              htmlFor="field-alt-0"
             >
               Alt text
             </label>
@@ -109,10 +112,13 @@ exports[`renders an Image Data Sidebar component 1`] = `
             className="ui input"
           >
             <input
-              disabled={false}
-              id="field-alt"
-              name="alt"
+              id="field-alt-0"
+              maxLength={null}
+              minLength={null}
+              name="alt-0"
+              onBlur={[Function]}
               onChange={[Function]}
+              onClick={[Function]}
               type="text"
               value=""
             />
@@ -123,7 +129,7 @@ exports[`renders an Image Data Sidebar component 1`] = `
   </div>
   <div
     className="inline field text"
-    id="field-link"
+    id="field-link-0"
   >
     <div
       className="ui grid"
@@ -138,7 +144,7 @@ exports[`renders an Image Data Sidebar component 1`] = `
             className="wrapper"
           >
             <label
-              htmlFor="field-link"
+              htmlFor="field-link-0"
             >
               Link to
             </label>
@@ -151,12 +157,15 @@ exports[`renders an Image Data Sidebar component 1`] = `
             className="ui icon input"
           >
             <input
-              disabled={false}
-              id="field-link"
-              name="link"
+              id="field-link-0"
+              maxLength={null}
+              minLength={null}
+              name="link-0"
+              onBlur={[Function]}
               onChange={[Function]}
+              onClick={[Function]}
               type="text"
-              value=""
+              value="/news/a-news-item-that-tells-things"
             />
             <i
               aria-hidden="true"
@@ -222,7 +231,6 @@ exports[`renders an Image Data Sidebar component 1`] = `
               <input
                 checked={false}
                 className="hidden"
-                disabled={false}
                 name="field-openLinkInNewTab"
                 readOnly={true}
                 tabIndex={0}

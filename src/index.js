@@ -21,13 +21,14 @@ import {
   ImagesGridViewBlock,
   TeaserHeroViewBlock,
   TeaserHeroEditBlock,
+  ListingGridEditBlock,
+  ListingGridViewBlock,
 } from '@kitconcept/volto-blocks/components';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
-import listBulletSVG from '@plone/volto/icons/list-bullet.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
 
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
@@ -57,6 +58,21 @@ const customBlocks = {
     group: 'common',
     view: ImagesGridViewBlock,
     edit: ImagesGridEditBlock,
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
+  listingGrid: {
+    id: 'listingGrid',
+    title: 'Listing Grid',
+    icon: imagesSVG,
+    group: 'common',
+    view: ListingGridViewBlock,
+    edit: ListingGridEditBlock,
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,

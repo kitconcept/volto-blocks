@@ -23,6 +23,7 @@ test('renders a Teaser Hero Sidebar component', () => {
           href: '/de/a-page/news1',
           variation: 'left',
           padded: true,
+          index: 0,
         }}
         block="1c58b5a2-26fb-4112-832b-fad88af1ae0e"
         onChangeBlock={() => {}}

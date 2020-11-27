@@ -1,19 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Form, Grid, Segment } from 'semantic-ui-react';
 import TeaserData from '../TeaserGrid/TeaserData';
 import TeaserHeroVariations from './TeaserHeroVariations';
 
-const TeaserHeroData = ({
-  data,
-  block,
-  onChangeBlock,
-  required = false,
-  intl,
-}) => {
+const TeaserHeroData = ({ data, block, onChangeBlock, required = false }) => {
   return (
     <>
+      {/*  Inherits all the customized teaser data from the TeaserGrid */}
       <TeaserData data={data} block={block} onChangeBlock={onChangeBlock} />
       <Segment className="form sidebar-image-data">
         <Form.Field inline>
@@ -51,4 +46,4 @@ TeaserHeroData.propTypes = {
   onChangeBlock: PropTypes.func.isRequired,
 };
 
-export default injectIntl(TeaserHeroData);
+export default TeaserHeroData;

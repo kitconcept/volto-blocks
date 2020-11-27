@@ -78,7 +78,7 @@ const ImageData = ({
       )}
       <Segment className="form sidebar-image-data">
         <TextWidget
-          id="source"
+          id={`source-${data.index}`}
           title={intl.formatMessage(messages.Source)}
           required={false}
           value={data.url ? flattenToAppURL(data.url) : ''}
@@ -102,7 +102,7 @@ const ImageData = ({
         />
 
         <TextWidget
-          id="alt"
+          id={`alt-${data.index}`}
           title={intl.formatMessage(messages.AltText)}
           required={false}
           value={alt}
@@ -116,7 +116,7 @@ const ImageData = ({
         />
 
         <TextWidget
-          id="link"
+          id={`link-${data.index}`}
           title={intl.formatMessage(messages.LinkTo)}
           required={false}
           value={data.href}
