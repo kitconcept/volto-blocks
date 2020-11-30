@@ -1,0 +1,28 @@
+.uber-grid-default-item {
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .ui.basic.button.add-block-button {
+    .icon {
+      height: 40px !important;
+    }
+
+    .circled {
+      background: #f3f5f7;
+      border: none;
+      padding: 10px;
+    }
+  }
+
+  .blocks-chooser {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
+.block .block.detached:hover::before {
+  border: none;
+}

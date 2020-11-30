@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { blocks } from '~/config';
+import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
 /**
  * BlockRenderer container class.
@@ -41,4 +42,4 @@ BlockRenderer.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default BlockRenderer;
+export default withObjectBrowser(BlockRenderer);

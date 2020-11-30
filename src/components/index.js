@@ -16,6 +16,8 @@ import ListingGridBody from '@kitconcept/volto-blocks/components/ListingGrid/Lis
 import ListingGridData from '@kitconcept/volto-blocks/components/ListingGrid/ListingGridData';
 import MultiSourceWidget from '@kitconcept/volto-blocks/components/BlockDataWidgets/MultiSourceWidget';
 import ConditionalLink from '@kitconcept/volto-blocks/components/ConditionalLink/ConditionalLink';
+import HighlightEditBlock from '@kitconcept/volto-blocks/components/Highlight/Edit';
+import HighlightViewBlock from '@kitconcept/volto-blocks/components/Highlight/View';
 import HighlightSliderEditBlock from '@kitconcept/volto-blocks/components/HighlightSlider/Edit';
 import HighlightSliderViewBlock from '@kitconcept/volto-blocks/components/HighlightSlider/View';
 
@@ -38,6 +40,8 @@ export {
   VariationsWidget,
   UberGridEditBlock,
   UberGridViewBlock,
+  HighlightEditBlock,
+  HighlightViewBlock,
   HighlightSliderEditBlock,
   HighlightSliderViewBlock,
   SchemaRenderer,

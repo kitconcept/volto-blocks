@@ -29,8 +29,6 @@ import {
   UberGridEditBlock,
 } from '@kitconcept/volto-blocks/components';
 
-import TeaserDefaultTemplate from '@kitconcept/volto-blocks/components/TeaserGrid/TeaserDefaultTemplate';
-
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
 import sliderSVG from '@plone/volto/icons/slider.svg';

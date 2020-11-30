@@ -18,12 +18,16 @@ import { getBaseUrl } from '@plone/volto/helpers';
 import GridSidebar from '@kitconcept/volto-blocks/components/UberGrid/GridSidebar';
 import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/BlockRenderer';
 import TemplateChooser from '@kitconcept/volto-blocks/components/TemplateChooser/TemplateChooser';
+import NewBlockAddButton from './NewBlockAddButton';
+
 import {
   reorderArray,
   replaceItemOfArray,
 } from '@kitconcept/volto-blocks/helpers';
 
 import templates from './templates';
+
+import { blocks } from '~/config';
 
 /**
  * Edit image block class.
@@ -286,22 +290,26 @@ class Edit extends Component {
                                 >
                                   {item['@type'] ? (
                                     <BlockRenderer
+                                      {...this.props}
                                       block={item.id}
                                       edit
                                       type={item['@type']}
                                       selected={
                                         this.state.selectedColumnIndex === index
                                       }
-                                      onChangeBlock={this.onChangeGridItem}
+                                      onChangeBlock={(block, data) => {
+                                        this.onChangeGridItem(index, data);
+                                      }}
                                       data={this.props.data.columns[index]}
                                     />
                                   ) : (
-                                    <BlockChooser
-                                      onMutateBlock={(block, value) =>
-                                        this.onChangeGridItem(index, value)
-                                      }
-                                      currentBlock={this.props.block}
-                                    />
+                                    <div className="uber-grid-default-item">
+                                      <NewBlockAddButton
+                                        block={this.props.blocks}
+                                        index={index}
+                                        onChangeGridItem={this.onChangeGridItem}
+                                      />
+                                    </div>
                                   )}
 
                                   {/* {this.props.render({

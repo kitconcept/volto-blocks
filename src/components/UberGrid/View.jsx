@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid } from 'semantic-ui-react';
 import cx from 'classnames';
+import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/BlockRenderer';
 
 const View = ({ data, render, path }) => {
   return (
@@ -20,7 +21,11 @@ const View = ({ data, render, path }) => {
       <Grid stackable columns={data.columns.length}>
         {data.columns.map((column) => (
           <Grid.Column key={column.id}>
-            {render({ ...column, block: column.id }, path, data.columns)}
+            <BlockRenderer
+              block={column.id}
+              type={column['@type']}
+              data={column}
+            />
           </Grid.Column>
         ))}
       </Grid>
