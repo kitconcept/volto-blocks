@@ -20,6 +20,8 @@ import HighlightEditBlock from '@kitconcept/volto-blocks/components/Highlight/Ed
 import HighlightViewBlock from '@kitconcept/volto-blocks/components/Highlight/View';
 import HighlightSliderEditBlock from '@kitconcept/volto-blocks/components/HighlightSlider/Edit';
 import HighlightSliderViewBlock from '@kitconcept/volto-blocks/components/HighlightSlider/View';
+import CarouselEditBlock from './Carousel/Edit';
+import CarouselViewBlock from './Carousel/View';
 
 import VariationsWidget from '@kitconcept/volto-blocks/components/Variations/VariationsWidget';
 import BlockWrapperEnhancer from '@kitconcept/volto-blocks/components/Variations/BlockWrapperEnhancer';
@@ -36,6 +38,8 @@ import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/Blo
 import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/SchemaRenderer';
 
 export {
+  CarouselEditBlock,
+  CarouselViewBlock,
   BlockWrapperEnhancer,
   VariationsWidget,
   UberGridEditBlock,

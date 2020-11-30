@@ -44,7 +44,7 @@ const MultiSourceWidget = (props) => {
     if (data.hrefList?.length > 0) {
       Promise.all(
         data.hrefList.map((item) =>
-          dispatch(getContent(item.url, null, item.id)),
+          dispatch(getContent(item.href, null, item.id)),
         ),
       ).then((result) => {
         onChangeBlock(block, {
@@ -161,7 +161,7 @@ const MultiSourceWidget = (props) => {
                           {...provided.dragHandleProps}
                           className="data-items-listing"
                         >
-                          {item.url}
+                          {item.href}
                           <Button.Group>
                             <Button
                               icon

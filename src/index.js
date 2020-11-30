@@ -13,6 +13,8 @@
  */
 import React from 'react';
 import {
+  CarouselEditBlock,
+  CarouselViewBlock,
   SliderEditBlock,
   SliderViewBlock,
   TeaserGridEditBlock,
@@ -50,6 +52,21 @@ const customGroupBlocksOrder = (defaultGroups) =>
 // };
 
 const customBlocks = {
+  carousel: {
+    id: 'carousel',
+    title: 'Carousel',
+    icon: imagesSVG,
+    group: 'common',
+    view: CarouselViewBlock,
+    edit: CarouselEditBlock,
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
   uberGrid: {
     id: 'uberGrid',
     title: 'Uber grid',
