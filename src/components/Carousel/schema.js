@@ -1,21 +1,56 @@
-const itemSchema = (props) => ({
-  title: 'Item',
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['title'],
-    },
-  ],
+import { defineMessages } from 'react-intl';
+import { flattenToAppURL } from '@plone/volto/helpers';
 
-  properties: {
-    title: {
-      type: 'string',
-      title: 'Title',
-    },
+import clearSVG from '@plone/volto/icons/clear.svg';
+import navTreeSVG from '@plone/volto/icons/nav.svg';
+
+const messages = defineMessages({
+  Source: {
+    id: 'Source',
+    defaultMessage: 'Source',
   },
-  required: [],
 });
+
+const itemSchema = (props) => {
+  const { data, intl, onChangeBlock, openObjectBrowser } = props;
+
+  return {
+    title: 'Item',
+    fieldsets: [
+      {
+        id: 'default',
+        title: 'Default',
+        fields: ['href2', 'proxy'],
+      },
+    ],
+
+    properties: {
+      href2: {
+        title: intl.formatMessage(messages.Source),
+        widget: 'object_browser2',
+      },
+      proxy: {
+        title: 'proxy',
+      },
+      href: {
+        title: intl.formatMessage(messages.Source),
+        icon: data.href ? clearSVG : navTreeSVG,
+        iconAction: data.href
+          ? () => {
+              onChangeBlock(data.block, {
+                ...props.data,
+                href: '',
+                title: '',
+                description: '',
+                preview_image: '',
+              });
+            }
+          : () => openObjectBrowser({ mode: 'link' }),
+      },
+    },
+    required: [],
+  };
+};
 
 export const carouselSchema = (props) => ({
   title: 'Carousel',
@@ -28,15 +63,10 @@ export const carouselSchema = (props) => ({
   ],
   properties: {
     columns: {
-      widget: 'object_list_inline',
+      widget: 'object_list',
       title: 'items',
-      schema: itemSchema(props),
+      schema: itemSchema,
     },
   },
   required: [],
 });
-// config.widgets.widget.object = ObjectWidget;
-// config.widgets.widget.object_list = ObjectListWidget;
-// config.widgets.widget.object_list_inline = ObjectListInlineWidget;
-// config.widgets.widget.object_by_type = ObjectByTypeWidget;
-// config.widgets.widget.option_mapping = MappingWidget;

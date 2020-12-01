@@ -15,6 +15,7 @@ import React from 'react';
 import {
   CarouselEditBlock,
   CarouselViewBlock,
+  ObjectListWidget,
   SliderEditBlock,
   SliderViewBlock,
   TeaserGridEditBlock,
@@ -32,6 +33,7 @@ import {
 } from '@kitconcept/volto-blocks/components';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
+import { ObjectBrowserWidget } from '@kitconcept/volto-blocks/components';
 
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
@@ -199,6 +201,9 @@ const customBlocks = {
 // };
 
 export default (config) => {
+  config.widgets.widget.object_list = ObjectListWidget;
+  config.widgets.widget.object_browser2 = ObjectBrowserWidget({ mode: 'link' });
+
   return {
     ...config,
     blocks: {

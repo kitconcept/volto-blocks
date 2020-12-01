@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
+// import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
+import { SchemaRenderer } from '../../components';
+import { useIntl } from 'react-intl';
 import { carouselSchema } from './schema';
+import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 
 const CarouselData = (props) => {
-  const schema = carouselSchema(props);
+  const intl = useIntl();
+  const schema = carouselSchema({ ...props, intl });
 
   return (
-    <InlineForm
+    <SchemaRenderer
       schema={schema}
       title={schema.title}
       onChangeField={(id, value) => {
@@ -18,6 +22,7 @@ const CarouselData = (props) => {
       }}
       formData={props.data}
       block={props.block}
+      onChangeBlock={props.onChangeBlock}
     />
   );
 };
@@ -28,4 +33,4 @@ CarouselData.propTypes = {
   onChangeBlock: PropTypes.func.isRequired,
 };
 
-export default CarouselData;
+export default withObjectBrowser(CarouselData);
