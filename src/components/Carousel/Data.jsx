@@ -1,25 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
-import { carouselSchema } from './schema';
+import { MultiSourceWidget } from '../../components';
 
 const CarouselData = (props) => {
-  const schema = carouselSchema(props);
-
-  return (
-    <InlineForm
-      schema={schema}
-      title={schema.title}
-      onChangeField={(id, value) => {
-        props.onChangeBlock(props.block, {
-          ...props.data,
-          [id]: value,
-        });
-      }}
-      formData={props.data}
-      block={props.block}
-    />
-  );
+  return <MultiSourceWidget {...props} />;
 };
 
 CarouselData.propTypes = {
