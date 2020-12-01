@@ -65,8 +65,8 @@ const MultiSourceWidget = (props) => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
 
-  const getSelectedContent = ({ url, blockID }) =>
-    dispatch(getContent(url, null, blockID));
+  const getSelectedContent = ({ href, blockID }) =>
+    dispatch(getContent(href, null, blockID));
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
