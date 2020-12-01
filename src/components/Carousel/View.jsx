@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Message } from 'semantic-ui-react';
+import { Button, Grid, Message } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import teaserHeroTopTemplate from '@kitconcept/volto-blocks/components/TeaserHero/teaserhero-top-template.svg';
 import { defineMessages, useIntl } from 'react-intl';
@@ -18,6 +18,7 @@ const messages = defineMessages({
 
 const PrevArrow = ({ className, style, onClick }) => (
   <Button
+    icon
     className={className}
     style={{ ...style, display: 'block' }}
     onClick={onClick}
@@ -28,6 +29,7 @@ const PrevArrow = ({ className, style, onClick }) => (
 
 const NextArrow = ({ className, style, onClick }) => (
   <Button
+    icon
     className={className}
     style={{ ...style, display: 'block' }}
     onClick={onClick}
@@ -41,7 +43,7 @@ const CarouselView = (props) => {
   const intl = useIntl();
 
   return (
-    <div className="block highlightSlider">
+    <div className="block carousel">
       {(data.hrefList?.length === 0 || !data.hrefList) && isEditMode && (
         <Message>
           <div className="teaser-item default">
@@ -51,13 +53,13 @@ const CarouselView = (props) => {
         </Message>
       )}
       {data.hrefList?.length > 0 && (
-        <div className="full-width">
+        <div className="">
           <Slider
             dots
-            infinite
+            infinite={false}
             speed={500}
-            slidesToShow={1}
-            slidesToScroll={1}
+            slidesToShow={3}
+            slidesToScroll={3}
             nextArrow={<NextArrow />}
             prevArrow={<PrevArrow />}
           >
