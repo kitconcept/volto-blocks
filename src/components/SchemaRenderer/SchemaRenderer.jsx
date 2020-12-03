@@ -4,6 +4,7 @@ import React from 'react';
 import { keys, map } from 'lodash';
 import { Field } from '@plone/volto/components';
 import { Segment, Message } from 'semantic-ui-react';
+import { MaybeWrap } from '..';
 
 const messages = defineMessages({
   editValues: {
@@ -32,12 +33,18 @@ const InlineForm = ({
   intl,
   fieldIndex,
   basic = false,
+  unwrapped = false,
 }) => {
   const _ = intl.formatMessage;
   const defaultFieldset = schema.fieldsets.find((o) => o.id === 'default');
   const other = schema.fieldsets.filter((o) => o.id !== 'default');
   return (
-    <Segment.Group raised={!basic} className="form">
+    <MaybeWrap
+      as={Segment.Group}
+      wrap={!unwrapped}
+      raised={!basic}
+      className="form"
+    >
       {title && (
         <header className="header pulled">
           <h2>{title}</h2>
@@ -115,7 +122,7 @@ const InlineForm = ({
           </Segment>
         </div>
       ))}
-    </Segment.Group>
+    </MaybeWrap>
   );
 };
 

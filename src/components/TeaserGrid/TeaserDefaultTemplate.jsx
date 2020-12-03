@@ -15,7 +15,7 @@ const messages = defineMessages({
   },
 });
 
-const TeaserDefaultTemplate = ({ data, isEditMode }) => {
+const TeaserDefaultTemplate = ({ data, dataBlock, isEditMode }) => {
   const intl = useIntl();
 
   return (
@@ -39,7 +39,7 @@ const TeaserDefaultTemplate = ({ data, isEditMode }) => {
                   </div>
                 )}
                 <h3>{data?.title}</h3>
-                <p>{data?.description}</p>
+                {!dataBlock.hide_description && <p>{data?.description}</p>}
               </>
             );
             if (!isEditMode) {

@@ -17,7 +17,7 @@ const itemSchema = (props) => ({
   required: [],
 });
 
-export const carouselSchema = (props) => ({
+export const carouselSchemaExperimental = (props) => ({
   title: 'Carousel',
   fieldsets: [
     {
@@ -31,6 +31,29 @@ export const carouselSchema = (props) => ({
       widget: 'object_list_inline',
       title: 'items',
       schema: itemSchema(props),
+    },
+  },
+  required: [],
+});
+
+export const carouselSchema = (props) => ({
+  title: 'Carousel',
+  fieldsets: [
+    {
+      id: 'default',
+      title: 'Default',
+      fields: ['items_to_show', 'hide_description'],
+    },
+  ],
+  properties: {
+    items_to_show: {
+      type: 'number',
+      title: 'Items to show',
+      defaultValue: 4,
+    },
+    hide_description: {
+      title: 'Hide description',
+      type: 'boolean',
     },
   },
   required: [],

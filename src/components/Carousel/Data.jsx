@@ -1,9 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MultiSourceWidget } from '../../components';
+import { MultiSourceWidget, SchemaRenderer } from '../../components';
+import { carouselSchema } from './schema';
 
 const CarouselData = (props) => {
-  return <MultiSourceWidget {...props} />;
+  const { block, data, onChangeBlock } = props;
+  const schema = carouselSchema(props);
+
+  return (
+    <>
+      <SchemaRenderer
+        schema={schema}
+        onChangeField={(id, value) => {
+          onChangeBlock(block, {
+            ...data,
+            [id]: value,
+          });
+        }}
+        formData={data}
+        fieldIndex={data.index}
+        basic
+        unwrapped
+      />
+      <MultiSourceWidget {...props} />
+    </>
+  );
 };
 
 CarouselData.propTypes = {

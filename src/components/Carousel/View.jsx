@@ -58,14 +58,19 @@ const CarouselView = (props) => {
             dots
             infinite={false}
             speed={500}
-            slidesToShow={3}
-            slidesToScroll={3}
+            slidesToShow={data.items_to_show || 4}
+            slidesToScroll={data.items_to_show || 4}
             nextArrow={<NextArrow />}
             prevArrow={<PrevArrow />}
           >
             {data.hrefList &&
               data.hrefList.map((item) => (
-                <Body key={item.id} data={item} isEditMode={isEditMode} />
+                <Body
+                  key={item.id}
+                  data={item}
+                  isEditMode={isEditMode}
+                  dataBlock={data}
+                />
               ))}
           </Slider>
         </div>
