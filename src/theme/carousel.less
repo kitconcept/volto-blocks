@@ -1,6 +1,16 @@
 .block.carousel {
-  // Extra margin bottom because of the floated elements
-  margin-bottom: 6em;
+  // Extra padding bottom because of the floated elements excluding the
+  // unfortunate duplicated wrappers
+  &:not(.inner):not([role='presentation']) {
+    padding-bottom: 6em;
+  }
+  .wrapperstyle.full {
+    padding-bottom: 0;
+  }
+
+  .full-width {
+    padding-bottom: 6em;
+  }
 
   h3 {
     margin-top: 0;

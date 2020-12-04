@@ -4,11 +4,14 @@ import { MultiSourceWidget, SchemaRenderer } from '../../components';
 import { carouselSchema } from './schema';
 
 const CarouselData = (props) => {
-  const { block, data, onChangeBlock } = props;
-  const schema = carouselSchema(props);
+  const { block, data, onChangeBlock, schemaEnhancer } = props;
+  const schema = schemaEnhancer
+    ? schemaEnhancer(carouselSchema(props), props)
+    : carouselSchema(props);
 
   return (
     <>
+      <MultiSourceWidget {...props} />
       <SchemaRenderer
         schema={schema}
         onChangeField={(id, value) => {
@@ -22,7 +25,6 @@ const CarouselData = (props) => {
         basic
         unwrapped
       />
-      <MultiSourceWidget {...props} />
     </>
   );
 };

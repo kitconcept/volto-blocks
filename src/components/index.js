@@ -23,6 +23,8 @@ import HighlightSliderViewBlock from '@kitconcept/volto-blocks/components/Highli
 import CarouselEditBlock from './Carousel/Edit';
 import CarouselViewBlock from './Carousel/View';
 import MaybeWrap from './MaybeWrap/MaybeWrap';
+import withStyleWrapper from './withStyleWrapper/withStyleWrapper';
+import SimpleColorPicker from './Widgets/SimpleColorPicker';
 
 import VariationsWidget from '@kitconcept/volto-blocks/components/Variations/VariationsWidget';
 import BlockWrapperEnhancer from '@kitconcept/volto-blocks/components/Variations/BlockWrapperEnhancer';
@@ -39,6 +41,8 @@ import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/Blo
 import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/SchemaRenderer';
 
 export {
+  withStyleWrapper,
+  SimpleColorPicker,
   MaybeWrap,
   CarouselEditBlock,
   CarouselViewBlock,

@@ -3,7 +3,8 @@ import { defineMessages, injectIntl } from 'react-intl';
 import React from 'react';
 import { keys, map } from 'lodash';
 import { Field } from '@plone/volto/components';
-import { Segment, Message } from 'semantic-ui-react';
+import AnimateHeight from 'react-animate-height';
+import { Accordion, Segment, Message } from 'semantic-ui-react';
 import { MaybeWrap } from '..';
 
 const messages = defineMessages({
@@ -38,6 +39,15 @@ const InlineForm = ({
   const _ = intl.formatMessage;
   const defaultFieldset = schema.fieldsets.find((o) => o.id === 'default');
   const other = schema.fieldsets.filter((o) => o.id !== 'default');
+
+  const [currentActiveFieldset, setCurrentActiveFieldset] = React.useState(0);
+  function handleCurrentActiveFieldset(e, blockProps) {
+    const { index } = blockProps;
+    const newIndex = currentActiveFieldset === index ? -1 : index;
+
+    setCurrentActiveFieldset(newIndex);
+  }
+
   return (
     <MaybeWrap
       as={Segment.Group}
@@ -99,28 +109,42 @@ const InlineForm = ({
         </Segment>
       </div>
 
-      {other.map((fieldset) => (
-        <div key={fieldset.id} id={`blockform-fieldset-${fieldset.id}`}>
-          {title && (
-            <Segment className="secondary attached">{fieldset.title}</Segment>
-          )}
-          <Segment className="attached">
-            {map(fieldset.fields, (field) => (
-              <Field
-                {...schema.properties[field]}
-                id={fieldIndex ? `${field}-${fieldIndex}` : field}
-                value={schema.properties[field].value || formData[field]}
-                required={schema.required.indexOf(field) !== -1}
-                onChange={(id, value) => {
-                  onChangeField(id, value);
-                }}
-                key={field}
-                error={errors[field]}
-                block={block}
-              />
-            ))}
-          </Segment>
-        </div>
+      {other.map((fieldset, index) => (
+        <Accordion fluid styled className="form">
+          <div key={fieldset.id} id={`blockform-fieldset-${fieldset.id}`}>
+            <Accordion.Title
+              active={currentActiveFieldset === index}
+              index={index}
+              onClick={handleCurrentActiveFieldset}
+            >
+              {fieldset.title && <>{fieldset.title}</>}
+            </Accordion.Title>
+            <Accordion.Content active={currentActiveFieldset === index}>
+              <AnimateHeight
+                animateOpacity
+                duration={500}
+                height={currentActiveFieldset === index ? 'auto' : 0}
+              >
+                <Segment className="attached">
+                  {map(fieldset.fields, (field) => (
+                    <Field
+                      {...schema.properties[field]}
+                      id={fieldIndex ? `${field}-${fieldIndex}` : field}
+                      value={schema.properties[field].value || formData[field]}
+                      required={schema.required.indexOf(field) !== -1}
+                      onChange={(id, value) => {
+                        onChangeField(id, value);
+                      }}
+                      key={field}
+                      error={errors[field]}
+                      block={block}
+                    />
+                  ))}
+                </Segment>
+              </AnimateHeight>
+            </Accordion.Content>
+          </div>
+        </Accordion>
       ))}
     </MaybeWrap>
   );

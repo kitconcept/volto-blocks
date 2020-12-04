@@ -13,6 +13,8 @@
  */
 import React from 'react';
 import {
+  withStyleWrapper,
+  SimpleColorPicker,
   CarouselEditBlock,
   CarouselViewBlock,
   SliderEditBlock,
@@ -57,8 +59,8 @@ const customBlocks = {
     title: 'Carousel',
     icon: imagesSVG,
     group: 'common',
-    view: CarouselViewBlock,
-    edit: CarouselEditBlock,
+    view: withStyleWrapper(CarouselViewBlock),
+    edit: withStyleWrapper(CarouselEditBlock),
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,
@@ -197,8 +199,9 @@ const customBlocks = {
 //   blocksConfig: { ...defaultBlocks.blocksConfig, ...customBlocks },
 //   groupBlocksOrder: customGroupBlocksOrder,
 // };
-
 export default (config) => {
+  config.widgets.widget.style_simple_color = SimpleColorPicker;
+
   return {
     ...config,
     blocks: {

@@ -3,6 +3,7 @@ import { Button, Grid, Message } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import teaserHeroTopTemplate from '@kitconcept/volto-blocks/components/TeaserHero/teaserhero-top-template.svg';
 import { defineMessages, useIntl } from 'react-intl';
+import cx from 'classnames';
 
 import Body from './Body';
 import leftArrowSVG from './slider-previous.svg';
@@ -43,7 +44,11 @@ const CarouselView = (props) => {
   const intl = useIntl();
 
   return (
-    <div className="block carousel">
+    <div
+      className={cx('block carousel', {
+        'wrapperstyle full': data.useBigContainer,
+      })}
+    >
       {(data.hrefList?.length === 0 || !data.hrefList) && isEditMode && (
         <Message>
           <div className="teaser-item default">
@@ -53,7 +58,10 @@ const CarouselView = (props) => {
         </Message>
       )}
       {data.hrefList?.length > 0 && (
-        <div className="">
+        <div
+          className={cx({ 'full-width': data.useBigContainer })}
+          style={{ backgroundColor: props.data.bg_color }}
+        >
           <Slider
             dots
             infinite={false}
