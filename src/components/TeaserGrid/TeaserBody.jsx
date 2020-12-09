@@ -6,11 +6,13 @@ import { blocks } from '~/config';
 
 const TeaserBody = (props) => {
   const variationsConfig = blocks.blocksConfig.teaserGrid.variations;
-  const { data } = props;
+  const { dataBlock } = props;
 
   const variation =
-    variationsConfig && data.variation && !!variationsConfig[data.variation]
-      ? data.variation
+    variationsConfig &&
+    dataBlock.variation &&
+    !!variationsConfig[dataBlock.variation]
+      ? dataBlock.variation
       : 'default';
 
   const BlockTemplate =
