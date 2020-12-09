@@ -42,10 +42,13 @@ export const carouselSchema = (props) => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['items_to_show', 'hide_description'],
+      fields: ['headline', 'items_to_show', 'hide_description'],
     },
   ],
   properties: {
+    headline: {
+      title: 'Headline',
+    },
     items_to_show: {
       type: 'number',
       title: 'Items to show',

@@ -1,6 +1,7 @@
 .block.carousel {
   // Extra padding bottom because of the floated elements excluding the
   // unfortunate duplicated wrappers
+  // Works with the Block enhancers
   &:not(.inner):not([role='presentation']) {
     padding-bottom: 6em;
   }
@@ -11,6 +12,11 @@
   .full-width {
     padding-bottom: 6em;
   }
+
+  &[role='presentation'] > .full-width {
+    padding-bottom: 0;
+  }
+  // End extra ^^
 
   h3 {
     margin-top: 0;
