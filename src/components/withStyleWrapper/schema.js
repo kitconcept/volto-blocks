@@ -8,6 +8,7 @@ export const styleWrapperSchemaEnhancer = (schema) => {
   schema.properties.bg_color = {
     widget: 'style_simple_color',
     title: 'Bg color',
+    availableColors: ['#004176'],
   };
   schema.properties.useBigContainer = {
     type: 'boolean',

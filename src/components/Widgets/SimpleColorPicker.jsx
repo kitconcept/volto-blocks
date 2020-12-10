@@ -7,7 +7,7 @@ import loadable from '@loadable/component';
 const GithubPicker = loadable(() => import('react-color/lib/Github'));
 
 export default (props) => {
-  const { id, value, onChange, available_colors } = props;
+  const { id, value, onChange, availableColors } = props;
   const [showPicker, setShowPicker] = React.useState(false);
 
   return (
@@ -41,7 +41,7 @@ export default (props) => {
             width="220px"
             triangle="top"
             className="color-picker"
-            colors={available_colors}
+            colors={availableColors}
             color={value || '#000'}
             onChangeComplete={(value) => {
               setShowPicker(false);
