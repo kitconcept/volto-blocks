@@ -1,8 +1,4 @@
 import { defineMessages } from 'react-intl';
-import { flattenToAppURL } from '@plone/volto/helpers';
-
-import clearSVG from '@plone/volto/icons/clear.svg';
-import navTreeSVG from '@plone/volto/icons/nav.svg';
 
 const messages = defineMessages({
   Source: {
@@ -12,7 +8,7 @@ const messages = defineMessages({
 });
 
 const itemSchema = (props) => {
-  const { data, intl, onChangeBlock, openObjectBrowser } = props;
+  const { intl } = props;
 
   return {
     title: 'Item',
@@ -20,45 +16,40 @@ const itemSchema = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['href2', 'proxy'],
+        fields: ['href', 'title', 'description', 'preview_image'],
       },
     ],
 
     properties: {
-      href2: {
-        title: intl.formatMessage(messages.Source),
-        widget: 'object_browser2',
-      },
-      proxy: {
-        title: 'proxy',
-      },
       href: {
         title: intl.formatMessage(messages.Source),
-        icon: data.href ? clearSVG : navTreeSVG,
-        iconAction: data.href
-          ? () => {
-              onChangeBlock(data.block, {
-                ...props.data,
-                href: '',
-                title: '',
-                description: '',
-                preview_image: '',
-              });
-            }
-          : () => openObjectBrowser({ mode: 'link' }),
+        widget: 'object_browser',
+        mode: 'link',
+        selectedItemAttrs: ['Title', 'Description', 'preview_image'],
+      },
+      title: {
+        title: 'Title',
+      },
+      description: {
+        title: 'Description',
+      },
+      preview_image: {
+        title: 'Image',
+        widget: 'object_browser',
+        mode: 'image',
       },
     },
     required: [],
   };
 };
 
-export const carouselSchemaExperimental = (props) => ({
+export const carouselSchema = (props) => ({
   title: 'Carousel',
   fieldsets: [
     {
       id: 'default',
       title: 'Default',
-      fields: ['columns'],
+      fields: ['columns', 'headline', 'items_to_show', 'hide_description'],
     },
   ],
   properties: {
@@ -67,20 +58,6 @@ export const carouselSchemaExperimental = (props) => ({
       title: 'items',
       schema: itemSchema,
     },
-  },
-  required: [],
-});
-
-export const carouselSchema = (props) => ({
-  title: 'Carousel',
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['headline', 'items_to_show', 'hide_description'],
-    },
-  ],
-  properties: {
     headline: {
       title: 'Headline',
     },

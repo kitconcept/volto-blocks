@@ -203,7 +203,7 @@ const customBlocks = {
 // };
 export default (config) => {
   config.widgets.widget.object_list = ObjectListWidget;
-  config.widgets.widget.object_browser2 = ObjectBrowserWidget({ mode: 'link' });
+  config.widgets.widget.object_browser = ObjectBrowserWidget;
   config.widgets.widget.style_simple_color = SimpleColorPicker;
 
   return {

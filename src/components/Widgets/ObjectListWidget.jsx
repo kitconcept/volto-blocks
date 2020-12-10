@@ -18,7 +18,7 @@ import './style.less';
 const ObjectListInlineWidget = (props) => {
   const { id, schema, value = [], onChange, schemaExtender } = props;
   const [activeColumn, setActiveColumn] = React.useState(0);
-  console.log(props);
+
   function handleChangeColumn(e, blockProps) {
     const { index } = blockProps;
     const newIndex = activeColumn === index ? -1 : index;
@@ -29,7 +29,7 @@ const ObjectListInlineWidget = (props) => {
   return (
     <div className="objectlist-widget">
       <FormFieldWrapper {...props}>
-        <div className="button-wrapper">
+        <div className="add-item-button-wrapper">
           <Button
             compact
             icon
@@ -91,12 +91,6 @@ const ObjectListInlineWidget = (props) => {
 
                   <div className="accordion-title-wrapper">
                     {`${objectSchema.title} #${index + 1}`}
-                    &nbsp;
-                    {activeColumn === index ? (
-                      <VoltoIcon name={upSVG} size="20px" />
-                    ) : (
-                      <VoltoIcon name={downSVG} size="20px" />
-                    )}
                   </div>
                   <button
                     onClick={() => {
@@ -107,6 +101,11 @@ const ObjectListInlineWidget = (props) => {
                     }}
                   >
                     <VoltoIcon name={deleteSVG} size="20px" color="#e40166" />
+                    {activeColumn === index ? (
+                      <VoltoIcon name={upSVG} size="20px" />
+                    ) : (
+                      <VoltoIcon name={downSVG} size="20px" />
+                    )}
                   </button>
                 </Accordion.Title>
                 <Accordion.Content active={activeColumn === index}>
