@@ -52,7 +52,7 @@ const itemSchema = (props) => {
   };
 };
 
-export const carouselSchema = (props) => ({
+export const carouselSchemaExperimental = (props) => ({
   title: 'Carousel',
   fieldsets: [
     {
@@ -66,6 +66,32 @@ export const carouselSchema = (props) => ({
       widget: 'object_list',
       title: 'items',
       schema: itemSchema,
+    },
+  },
+  required: [],
+});
+
+export const carouselSchema = (props) => ({
+  title: 'Carousel',
+  fieldsets: [
+    {
+      id: 'default',
+      title: 'Default',
+      fields: ['headline', 'items_to_show', 'hide_description'],
+    },
+  ],
+  properties: {
+    headline: {
+      title: 'Headline',
+    },
+    items_to_show: {
+      type: 'number',
+      title: 'Items to show',
+      defaultValue: 4,
+    },
+    hide_description: {
+      title: 'Hide description',
+      type: 'boolean',
     },
   },
   required: [],

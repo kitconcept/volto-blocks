@@ -25,6 +25,9 @@ import CarouselViewBlock from './Carousel/View';
 import ObjectListWidget from './Widgets/ObjectListWidget';
 import DragDropList from './DragDropList/DragDropList';
 import ObjectBrowserWidget from './Widgets/ObjectBrowserWidget';
+import MaybeWrap from './MaybeWrap/MaybeWrap';
+import withStyleWrapper from './withStyleWrapper/withStyleWrapper';
+import SimpleColorPicker from './Widgets/SimpleColorPicker';
 
 import VariationsWidget from '@kitconcept/volto-blocks/components/Variations/VariationsWidget';
 import BlockWrapperEnhancer from '@kitconcept/volto-blocks/components/Variations/BlockWrapperEnhancer';
@@ -43,6 +46,9 @@ import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/S
 export {
   ObjectBrowserWidget,
   DragDropList,
+  withStyleWrapper,
+  SimpleColorPicker,
+  MaybeWrap,
   CarouselEditBlock,
   CarouselViewBlock,
   ObjectListWidget,

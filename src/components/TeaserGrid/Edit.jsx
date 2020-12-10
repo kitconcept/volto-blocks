@@ -18,6 +18,7 @@ const Edit = (props) => {
           data={item}
           isEditMode
           index={index}
+          dataBlock={props.data}
           onChangeGridItem={onChangeGridItem}
         />
       )}
