@@ -39,16 +39,14 @@ pipeline {
       steps {
         sh '''docker pull plone/volto-addon-ci'''
         sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci test'''
-        sh '''mkdir -p xunit-reports'''
-        sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/coverage xunit-reports/'''
-        sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
-        sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/unit_tests_log.txt xunit-reports/'''
-        stash name: "xunit-reports", includes: "xunit-reports/**/*"
       }
       post {
         always {
+          sh '''mkdir -p xunit-reports'''
+          sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/coverage xunit-reports/'''
+          sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
+          sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/unit_tests_log.txt xunit-reports/'''
           sh '''docker rm -v $BUILD_TAG-volto'''
-          unstash 'xunit-reports'
           junit 'xunit-reports/junit.xml'
           archiveArtifacts artifacts: 'xunit-reports/unit_tests_log.txt', fingerprint: true
           archiveArtifacts artifacts: 'xunit-reports/coverage/lcov.info', fingerprint: true
