@@ -48,6 +48,7 @@ pipeline {
       post {
         always {
           sh '''docker rm -v $BUILD_TAG-volto'''
+          unstash 'xunit-reports'
           junit 'xunit-reports/junit.xml'
           archiveArtifacts artifacts: 'xunit-reports/unit_tests_log.txt', fingerprint: true
           archiveArtifacts artifacts: 'xunit-reports/coverage/lcov.info', fingerprint: true
