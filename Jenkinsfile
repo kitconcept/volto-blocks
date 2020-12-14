@@ -37,8 +37,8 @@ pipeline {
 
     stage('Unit tests') {
       steps {
-        sh '''docker pull eeacms/volto-test'''
-        sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" plone/volto-addon-ci'''
+        sh '''docker pull plone/volto-addon-ci'''
+        sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci test'''
         sh '''mkdir -p xunit-reports'''
         sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/coverage xunit-reports/'''
         sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
@@ -59,9 +59,7 @@ pipeline {
       }
       post {
         always {
-          steps {
-            sh '''docker rm -v $BUILD_TAG-volto'''
-          }
+          sh '''docker rm -v $BUILD_TAG-volto'''
         }
       }
     }
