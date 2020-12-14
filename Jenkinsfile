@@ -37,8 +37,6 @@ pipeline {
 
     stage('Unit tests') {
       steps {
-        parallel(
-
           script {
             try {
               sh '''docker pull eeacms/volto-test'''
@@ -64,8 +62,7 @@ pipeline {
               sh '''docker rm -v $BUILD_TAG-volto'''
             }
           }
-
-        )
+        }
       }
     }
 
