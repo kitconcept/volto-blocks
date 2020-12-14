@@ -47,8 +47,10 @@ pipeline {
           sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
           sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/unit_tests_log.txt xunit-reports/'''
           sh '''docker rm -v $BUILD_TAG-volto'''
-          junit 'xunit-reports/junit.xml'
-          sh 'cat xunit-reports/junit.xml'
+          step([
+            $class: 'JUnitResultArchiver',
+            testResults: 'xunit-reports/junit.xml'
+          ])
           archiveArtifacts artifacts: 'xunit-reports/unit_tests_log.txt', fingerprint: true
           archiveArtifacts artifacts: 'xunit-reports/coverage/lcov.info', fingerprint: true
           publishHTML (target : [
