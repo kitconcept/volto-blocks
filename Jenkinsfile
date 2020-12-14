@@ -3,7 +3,7 @@
 pipeline {
 
   agent {
-    label 'node6'
+    label 'docker'
   }
 
   environment {
