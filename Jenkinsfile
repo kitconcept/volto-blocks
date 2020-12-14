@@ -10,7 +10,7 @@ pipeline {
         GIT_NAME = "volto-blocks"
         NAMESPACE = "kitconcept"
         DEPENDENCIES = ""
-    }
+  }
 
   options {
     buildDiscarder(logRotator(numToKeepStr:'20'))
@@ -37,31 +37,29 @@ pipeline {
 
     stage('Unit tests') {
       steps {
-          script {
-            try {
-              sh '''docker pull eeacms/volto-test'''
-              sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" plone/volto-addon-ci'''
-              sh '''mkdir -p xunit-reports'''
-              sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/coverage xunit-reports/'''
-              sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
-              sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/unit_tests_log.txt xunit-reports/'''
-              stash name: "xunit-reports", includes: "xunit-reports/**/*"
-              junit 'xunit-reports/junit.xml'
-              archiveArtifacts artifacts: 'xunit-reports/unit_tests_log.txt', fingerprint: true
-              archiveArtifacts artifacts: 'xunit-reports/coverage/lcov.info', fingerprint: true
-              publishHTML (target : [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'xunit-reports/coverage/lcov-report',
-                reportFiles: 'index.html',
-                reportName: 'UTCoverage',
-                reportTitles: 'Unit Tests Code Coverage'
-              ])
-            } finally {
-              sh '''docker rm -v $BUILD_TAG-volto'''
-            }
-          }
+        sh '''docker pull eeacms/volto-test'''
+        sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" plone/volto-addon-ci'''
+        sh '''mkdir -p xunit-reports'''
+        sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/coverage xunit-reports/'''
+        sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
+        sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/unit_tests_log.txt xunit-reports/'''
+        stash name: "xunit-reports", includes: "xunit-reports/**/*"
+        junit 'xunit-reports/junit.xml'
+        archiveArtifacts artifacts: 'xunit-reports/unit_tests_log.txt', fingerprint: true
+        archiveArtifacts artifacts: 'xunit-reports/coverage/lcov.info', fingerprint: true
+        publishHTML (target : [
+          allowMissing: false,
+          alwaysLinkToLastBuild: true,
+          keepAll: true,
+          reportDir: 'xunit-reports/coverage/lcov-report',
+          reportFiles: 'index.html',
+          reportName: 'UTCoverage',
+          reportTitles: 'Unit Tests Code Coverage'
+        ])
+      }
+      post {
+        steps {
+          sh '''docker rm -v $BUILD_TAG-volto'''
         }
       }
     }
