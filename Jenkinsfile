@@ -58,8 +58,10 @@ pipeline {
         ])
       }
       post {
-        steps {
-          sh '''docker rm -v $BUILD_TAG-volto'''
+        always {
+          steps {
+            sh '''docker rm -v $BUILD_TAG-volto'''
+          }
         }
       }
     }
