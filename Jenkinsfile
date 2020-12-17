@@ -21,34 +21,34 @@ pipeline {
 
   stages {
     // Static Code Analysis
-    stage('Static Code Analysis') {
-      steps {
-        parallel(
-          "ESlint": {
-            node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
-            }
-          },
+    // stage('Static Code Analysis') {
+    //   steps {
+    //     parallel(
+    //       "ESlint": {
+    //         node(label: 'docker') {
+    //           sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
+    //         }
+    //       },
 
-          "stylelint": {
-            node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
-            }
-          },
+    //       "stylelint": {
+    //         node(label: 'docker') {
+    //           sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
+    //         }
+    //       },
 
-          "Prettier": {
-            node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
-            }
-          }
-        )
-      }
-      post {
-        always {
-          recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
-        }
-      }
-    }
+    //       "Prettier": {
+    //         node(label: 'docker') {
+    //           sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
+    //         }
+    //       }
+    //     )
+    //   }
+    //   post {
+    //     always {
+    //       recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
+    //     }
+    //   }
+    // }
 
     stage('Unit tests') {
       steps {
