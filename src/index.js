@@ -98,6 +98,9 @@ const customBlocks = {
       addPermission: [],
       view: [],
     },
+    // Minimum items allowed
+    // minItemsAllowed: 1,
+    //
     // Variations example
     // variations: {
     //   default: { label: 'Default', template: TeaserDefaultTemplate },
