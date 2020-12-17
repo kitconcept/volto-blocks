@@ -224,6 +224,7 @@ class Edit extends Component {
       <div
         className={cx({
           [data['@type']]: true,
+          [data.variation]: data.variation,
           one: data?.columns && data.columns.length === 1,
           two: data?.columns && data.columns.length === 2,
           three: data?.columns && data.columns.length === 3,
