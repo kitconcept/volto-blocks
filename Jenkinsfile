@@ -23,10 +23,25 @@ pipeline {
     // Static Code Analysis
     stage('Static Code Analysis') {
       steps {
-        deleteDir()
-        checkout scm
-        sh 'yarn'
-        sh 'yarn prettier'
+        parallel(
+          "ESlint": {
+            node(label: 'docker') {
+              sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
+            }
+          },
+
+          "stylelint": {
+            node(label: 'docker') {
+              sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
+            }
+          },
+
+          "Prettier": {
+            node(label: 'docker') {
+              sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
+            }
+          }
+        )
       }
       post {
         always {
@@ -63,6 +78,29 @@ pipeline {
             reportTitles: 'Unit Tests Code Coverage'
           ])
         }
+      }
+    }
+
+    stage('Acceptance tests') {
+      steps {
+        parallel(
+
+          "Cypress": {
+            script {
+              try {
+                sh '''docker pull plone; docker run -d --name="$BUILD_TAG-plone" -e SITE="Plone" -e PROFILES="profile-plone.restapi:blocks" plone fg'''
+                sh '''docker pull plone/volto-addon-ci; docker run -i --name="$BUILD_TAG-cypress" --link $BUILD_TAG-plone:plone -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci cypress'''
+              } finally {
+                sh '''mkdir -p cypress-reports'''
+                sh '''docker cp $BUILD_TAG-cypress:/opt/frontend/my-volto-project/src/addons/$GIT_NAME/cypress/videos cypress-reports/'''
+                stash name: "cypress-reports", includes: "cypress-reports/**/*"
+                archiveArtifacts artifacts: 'cypress-reports/videos/*.mp4', fingerprint: true
+                sh '''echo "$(docker stop $BUILD_TAG-plone; docker rm -v $BUILD_TAG-plone; docker rm -v $BUILD_TAG-cypress)" '''
+              }
+            }
+          }
+
+        )
       }
     }
 
