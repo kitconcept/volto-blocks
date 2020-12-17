@@ -52,7 +52,6 @@ class Edit extends Component {
     onFocusPreviousBlock: PropTypes.func.isRequired,
     onFocusNextBlock: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
-    createContent: PropTypes.func.isRequired,
     gridType: PropTypes.string,
     templates: PropTypes.func.isRequired,
     sidebarData: PropTypes.func.isRequired,
