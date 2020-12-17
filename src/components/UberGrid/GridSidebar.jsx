@@ -10,13 +10,7 @@ import trashSVG from '@plone/volto/icons/delete.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
 const GridSidebar = (props) => {
-  const {
-    data,
-    gridType,
-    sidebarData,
-    activeColumn,
-    onChangeSelectedColumnItem,
-  } = props;
+  const { data, gridType, activeColumn, onChangeSelectedColumnItem } = props;
 
   function handleChangeColumn(e, blockProps) {
     const { index } = blockProps;

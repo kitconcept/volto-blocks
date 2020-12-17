@@ -9,9 +9,6 @@ import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
 import { Icon, SidebarPortal } from '@plone/volto/components';
 
-import imageSVG from '@plone/volto/icons/image.svg';
-import textSVG from '@plone/volto/icons/text.svg';
-import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 import { getBaseUrl } from '@plone/volto/helpers';
 

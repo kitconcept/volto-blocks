@@ -21,34 +21,31 @@ pipeline {
 
   stages {
     // Static Code Analysis
-    // stage('Static Code Analysis') {
-    //   steps {
-    //     parallel(
-    //       "ESlint": {
-    //         node(label: 'docker') {
-    //           sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
-    //         }
-    //       },
+    stage('Static Code Analysis') {
+      parallel {
+        stage('ESlint') {
+          steps {
+            sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
+          }
+        },
+        stage('stylelint') {
+          steps {
+            sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
+          }
+        },
+        stage('Prettier') {
+          steps {
+            sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
+          }
+        },
+      }
 
-    //       "stylelint": {
-    //         node(label: 'docker') {
-    //           sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
-    //         }
-    //       },
-
-    //       "Prettier": {
-    //         node(label: 'docker') {
-    //           sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
-    //         }
-    //       }
-    //     )
-    //   }
-    //   post {
-    //     always {
-    //       recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
-    //     }
-    //   }
-    // }
+      post {
+        always {
+          recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
+        }
+      }
+    }
 
     stage('Unit tests') {
       steps {
@@ -83,24 +80,17 @@ pipeline {
 
     stage('Acceptance tests') {
       steps {
-        parallel(
-
-          "Cypress": {
-            script {
-              try {
-                sh '''docker pull plone; docker run -d --name="$BUILD_TAG-plone" -e SITE="Plone" -e PROFILES="profile-plone.restapi:blocks" plone fg'''
-                sh '''docker pull plone/volto-addon-ci; docker run -i --name="$BUILD_TAG-cypress" --link $BUILD_TAG-plone:plone -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci cypress'''
-              } finally {
-                sh '''mkdir -p cypress-reports'''
-                sh '''docker cp $BUILD_TAG-cypress:/opt/frontend/my-volto-project/src/addons/$GIT_NAME/cypress/videos cypress-reports/'''
-                stash name: "cypress-reports", includes: "cypress-reports/**/*"
-                archiveArtifacts artifacts: 'cypress-reports/videos/*.mp4', fingerprint: true
-                sh '''echo "$(docker stop $BUILD_TAG-plone; docker rm -v $BUILD_TAG-plone; docker rm -v $BUILD_TAG-cypress)" '''
-              }
-            }
-          }
-
-        )
+        sh '''docker pull plone; docker run -d --name="$BUILD_TAG-plone" -e SITE="Plone" -e PROFILES="profile-plone.restapi:blocks" plone fg'''
+        sh '''docker pull plone/volto-addon-ci; docker run -i --name="$BUILD_TAG-cypress" --link $BUILD_TAG-plone:plone -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci cypress'''
+      }
+      post {
+        always {
+          sh '''mkdir -p cypress-reports'''
+          sh '''docker cp $BUILD_TAG-cypress:/opt/frontend/my-volto-project/src/addons/$GIT_NAME/cypress/videos cypress-reports/'''
+          stash name: "cypress-reports", includes: "cypress-reports/**/*"
+          archiveArtifacts artifacts: 'cypress-reports/videos/*.mp4', fingerprint: true
+          sh '''echo "$(docker stop $BUILD_TAG-plone; docker rm -v $BUILD_TAG-plone; docker rm -v $BUILD_TAG-cypress)" '''
+        }
       }
     }
 

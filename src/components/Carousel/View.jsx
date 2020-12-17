@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Message } from 'semantic-ui-react';
+import { Button, Message } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import teaserHeroTopTemplate from '@kitconcept/volto-blocks/components/TeaserHero/teaserhero-top-template.svg';
 import { defineMessages, useIntl } from 'react-intl';
