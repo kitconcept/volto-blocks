@@ -25,16 +25,19 @@ pipeline {
       parallel {
         stage('ESlint') {
           steps {
+            sh '''docker pull plone/volto-addon-ci'''
             sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
           }
         }
         stage('stylelint') {
           steps {
+            sh '''docker pull plone/volto-addon-ci'''
             sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
           }
         }
         stage('Prettier') {
           steps {
+            sh '''docker pull plone/volto-addon-ci'''
             sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
           }
         }
