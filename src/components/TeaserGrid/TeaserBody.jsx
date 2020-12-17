@@ -63,7 +63,11 @@ const TeaserBody = ({ data, isEditMode }) => {
               <>
                 {data?.preview_image && (
                   <div className="grid-image-wrapper">
-                    <img src={getImageURL(data)} alt="" loading="lazy" />
+                    <img
+                      src={flattenToAppURL(getImageURL(data))}
+                      alt=""
+                      loading="lazy"
+                    />
                   </div>
                 )}
                 <h3>{data?.title}</h3>
