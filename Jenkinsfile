@@ -25,18 +25,24 @@ pipeline {
       parallel {
         stage('ESlint') {
           steps {
+            deleteDir()
+            checkout scm
             sh '''docker pull plone/volto-addon-ci'''
             sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
           }
         }
         stage('stylelint') {
           steps {
+            deleteDir()
+            checkout scm
             sh '''docker pull plone/volto-addon-ci'''
             sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
           }
         }
         stage('Prettier') {
           steps {
+            deleteDir()
+            checkout scm
             sh '''docker pull plone/volto-addon-ci'''
             sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
           }
@@ -52,6 +58,8 @@ pipeline {
 
     stage('Unit tests') {
       steps {
+        deleteDir()
+        checkout scm
         sh '''docker pull plone/volto-addon-ci'''
         sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci test'''
       }
@@ -83,6 +91,8 @@ pipeline {
 
     stage('Acceptance tests') {
       steps {
+        deleteDir()
+        checkout scm
         sh '''docker pull plone; docker run -d --name="$BUILD_TAG-plone" -e SITE="Plone" -e PROFILES="profile-plone.restapi:blocks" plone fg'''
         sh '''docker pull plone/volto-addon-ci; docker run -i --name="$BUILD_TAG-cypress" --link $BUILD_TAG-plone:plone -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci cypress'''
       }
