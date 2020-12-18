@@ -1,5 +1,9 @@
 module.exports = {
   testMatch: ['**/src/addons/**/?(*.)+(spec|test).[jt]s?(x)'],
+  collectCoverageFrom: [
+    'src/addons/**/src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts',
+  ],
   moduleNameMapper: {
     '@plone/volto/cypress': '<rootDir>/node_modules/@plone/volto/cypress',
     '@plone/volto/babel': '<rootDir>/node_modules/@plone/volto/babel',
