@@ -49,7 +49,8 @@ const GridSidebar = (props) => {
     }
   };
 
-  const { minItemsAllowed } = blocks?.blocksConfig?.[data['@type']];
+  const minItemsAllowed =
+    blocks?.blocksConfig?.[data['@type']]?.minItemsAllowed;
 
   return (
     <Segment.Group raised>
