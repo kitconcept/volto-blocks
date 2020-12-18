@@ -34,9 +34,11 @@ function teardown() {
 
 switch (command) {
   case 'setup':
-    return setup();
+    setup();
+    break;
   case 'teardown':
-    return teardown();
+    teardown();
+    break;
   default:
-    return setup();
+    setup();
 }
