@@ -7,8 +7,11 @@ import { MaybeWrap } from '..';
 const withStyleWrapper = (Component) => ({ ...props }) => {
   return (
     <div
-      className={cx({ 'full-width': props.data.useFullBackgroundContainer })}
-      style={{ backgroundColor: props.data.bg_color }}
+      className={cx({
+        'full-width': props.data.useFullBackgroundContainer,
+        [`custom-style-${props.data.bg_color?.replace('#', '')}`]: props.data
+          .bg_color,
+      })}
     >
       <MaybeWrap
         as={Container}

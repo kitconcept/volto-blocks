@@ -35,6 +35,7 @@ export function TeaserGridSchema(props) {
   const { data, intl, onChangeBlock, openObjectBrowser } = props;
 
   return {
+    block: 'teaserGrid',
     fieldsets: [
       {
         id: 'default',
