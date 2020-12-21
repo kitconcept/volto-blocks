@@ -22,6 +22,6 @@ module.exports = {
     '^.+\\.scss$': 'jest-css-modules',
     '^.+\\.(png)$': 'jest-file',
     '^.+\\.(jpg)$': 'jest-file',
-    '^.+\\.(svg)$': './jest-svgsystem-transform.js',
+    '^.+\\.(svg)$': './node_modules/@plone/volto/jest-svgsystem-transform.js',
   },
 };
