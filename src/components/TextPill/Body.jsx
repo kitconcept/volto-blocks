@@ -79,6 +79,7 @@ const TextBody = (props) => {
       setTimeout(editorRef.current.focus, 0);
       setEditorState(EditorState.moveFocusToEnd(editorState));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.selected]);
 
   function onChange(currentEditorState) {
