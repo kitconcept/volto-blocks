@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { defineMessages, injectIntl } from 'react-intl';
 
-import { flattenToAppURL } from '@plone/volto/helpers';
 import { TeaserBody } from '../../components';
 
 defineMessages({
@@ -18,8 +16,6 @@ defineMessages({
 });
 
 const CarouselBody = (props) => {
-  const { data, isEditMode } = props;
-
   return <TeaserBody {...props} />;
 };
 

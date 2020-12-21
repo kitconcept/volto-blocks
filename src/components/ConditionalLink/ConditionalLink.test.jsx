@@ -19,7 +19,7 @@ describe('ConditionalLink', () => {
   it('renders a ConditionalLink component with link', () => {
     const component = renderer.create(
       <MemoryRouter>
-        <ConditionalLink condition>
+        <ConditionalLink condition to="/">
           <h1>Title</h1>
         </ConditionalLink>
       </MemoryRouter>,

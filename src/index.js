@@ -11,7 +11,6 @@
  *   }
  * }
  */
-import React from 'react';
 import {
   withStyleWrapper,
   SimpleColorPicker,
@@ -37,7 +36,6 @@ import {
 } from '@kitconcept/volto-blocks/components';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
-import { ObjectBrowserWidget } from '@kitconcept/volto-blocks/components';
 
 import textSVG from '@plone/volto/icons/subtext.svg';
 import sliderSVG from '@plone/volto/icons/slider.svg';
@@ -224,7 +222,6 @@ const customBlocks = {
 // };
 export default (config) => {
   config.widgets.widget.object_list = ObjectListWidget;
-  config.widgets.widget.object_browser = ObjectBrowserWidget;
   config.widgets.widget.style_simple_color = SimpleColorPicker;
 
   return {
