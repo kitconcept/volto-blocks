@@ -19,7 +19,6 @@ const itemSchema = (props) => ({
 
 export const carouselSchemaExperimental = (props) => ({
   title: 'Carousel',
-  block: 'carousel',
   fieldsets: [
     {
       id: 'default',
@@ -39,7 +38,6 @@ export const carouselSchemaExperimental = (props) => ({
 
 export const carouselSchema = (props) => ({
   title: 'Carousel',
-  block: 'carousel',
   fieldsets: [
     {
       id: 'default',
