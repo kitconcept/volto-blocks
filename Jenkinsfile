@@ -56,7 +56,7 @@ pipeline {
         deleteDir()
         checkout scm
         sh '''docker pull plone/volto-addon-ci'''
-        sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci bash -c "set -o pipefail; RAZZLE_JEST_CONFIG=$RAZZLE_JEST_CONFIG CI=true yarn test src/addons/$GIT_NAME/src --watchAll=false --reporters=default --reporters=jest-junit | tee -a unit_tests_log.txt"'''
+        sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci test'''
       }
       post {
         always {
