@@ -15,4 +15,13 @@ module.exports = {
     'load-volto-addons':
       '<rootDir>/node_modules/@plone/volto/jest-addons-loader.js',
   },
+  transform: {
+    '^.+\\.js(x)?$': 'babel-jest',
+    '^.+\\.css$': 'jest-css-modules',
+    '^.+\\.less$': 'jest-css-modules',
+    '^.+\\.scss$': 'jest-css-modules',
+    '^.+\\.(png)$': 'jest-file',
+    '^.+\\.(jpg)$': 'jest-file',
+    '^.+\\.(svg)$': './jest-svgsystem-transform.js',
+  },
 };
