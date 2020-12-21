@@ -31,10 +31,13 @@ import {
   HighlightSliderEditBlock,
   UberGridViewBlock,
   UberGridEditBlock,
+  TextPillEditBlock,
+  TextPillViewBlock,
 } from '@kitconcept/volto-blocks/components';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
+import textSVG from '@plone/volto/icons/subtext.svg';
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
@@ -187,6 +190,21 @@ const customBlocks = {
     group: 'teasers',
     view: HighlightSliderViewBlock,
     edit: HighlightSliderEditBlock,
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
+  textPillWithStyle: {
+    id: 'textPillWithStyle',
+    title: 'Text pill',
+    icon: textSVG,
+    group: 'text',
+    view: withStyleWrapper(TextPillViewBlock),
+    edit: withStyleWrapper(TextPillEditBlock),
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,
