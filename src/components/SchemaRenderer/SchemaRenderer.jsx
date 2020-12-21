@@ -87,27 +87,24 @@ const InlineForm = ({
       <div id={`blockform-fieldset-${defaultFieldset.id}`}>
         <Segment className="form attached">
           {map(defaultFieldset.fields, (field, index) => (
-            <>
-              {console.log(schema.properties[field])}
-              <Field
-                {...schema.properties[field]}
-                id={fieldIndex !== undefined ? `${field}-${fieldIndex}` : field}
-                fieldSet={defaultFieldset.title.toLowerCase()}
-                focus={index === 0}
-                value={schema.properties[field].value || formData[field]}
-                required={schema.required.indexOf(field) !== -1}
-                onChange={(id, value) => {
-                  const name =
-                    fieldIndex !== undefined
-                      ? id.replace(`-${fieldIndex}`, '')
-                      : id;
-                  onChangeField(name, value);
-                }}
-                key={field}
-                error={errors[field]}
-                block={block}
-              />
-            </>
+            <Field
+              {...schema.properties[field]}
+              id={fieldIndex !== undefined ? `${field}-${fieldIndex}` : field}
+              fieldSet={defaultFieldset.title.toLowerCase()}
+              focus={index === 0}
+              value={schema.properties[field].value || formData[field]}
+              required={schema.required.indexOf(field) !== -1}
+              onChange={(id, value) => {
+                const name =
+                  fieldIndex !== undefined
+                    ? id.replace(`-${fieldIndex}`, '')
+                    : id;
+                onChangeField(name, value);
+              }}
+              key={field}
+              error={errors[field]}
+              block={block}
+            />
           ))}
         </Segment>
       </div>
