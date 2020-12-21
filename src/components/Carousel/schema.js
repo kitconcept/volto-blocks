@@ -1,41 +1,47 @@
-const itemSchema = (props) => ({
-  title: 'Item',
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['title'],
-    },
-  ],
+import { defineMessages } from 'react-intl';
 
-  properties: {
-    title: {
-      type: 'string',
-      title: 'Title',
-    },
+const messages = defineMessages({
+  Source: {
+    id: 'Source',
+    defaultMessage: 'Source',
   },
-  required: [],
 });
 
-export const carouselSchemaExperimental = (props) => ({
-  title: 'Carousel',
-  block: 'carousel',
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['columns'],
+const itemSchema = (props) => {
+  const { intl } = props;
+
+  return {
+    title: 'Item',
+    fieldsets: [
+      {
+        id: 'default',
+        title: 'Default',
+        fields: ['href', 'title', 'description', 'preview_image'],
+      },
+    ],
+
+    properties: {
+      href: {
+        title: intl.formatMessage(messages.Source),
+        widget: 'object_browser',
+        mode: 'link',
+        selectedItemAttrs: ['Title', 'Description', 'preview_image'],
+      },
+      title: {
+        title: 'Title',
+      },
+      description: {
+        title: 'Description',
+      },
+      preview_image: {
+        title: 'Image',
+        widget: 'object_browser',
+        mode: 'image',
+      },
     },
-  ],
-  properties: {
-    columns: {
-      widget: 'object_list_inline',
-      title: 'items',
-      schema: itemSchema(props),
-    },
-  },
-  required: [],
-});
+    required: [],
+  };
+};
 
 export const carouselSchema = (props) => ({
   title: 'Carousel',
@@ -44,10 +50,15 @@ export const carouselSchema = (props) => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['headline', 'items_to_show', 'hide_description'],
+      fields: ['columns', 'headline', 'items_to_show', 'hide_description'],
     },
   ],
   properties: {
+    columns: {
+      widget: 'object_list',
+      title: 'items',
+      schema: itemSchema,
+    },
     headline: {
       title: 'Headline',
     },

@@ -22,6 +22,9 @@ import HighlightSliderEditBlock from '@kitconcept/volto-blocks/components/Highli
 import HighlightSliderViewBlock from '@kitconcept/volto-blocks/components/HighlightSlider/View';
 import CarouselEditBlock from './Carousel/Edit';
 import CarouselViewBlock from './Carousel/View';
+import ObjectListWidget from './Widgets/ObjectListWidget';
+import DragDropList from './DragDropList/DragDropList';
+import ObjectBrowserWidget from './Widgets/ObjectBrowserWidget';
 import TextPillEditBlock from './TextPill/Edit';
 import TextPillViewBlock from './TextPill/View';
 import MaybeWrap from './MaybeWrap/MaybeWrap';
@@ -43,6 +46,8 @@ import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/Blo
 import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/SchemaRenderer';
 
 export {
+  ObjectBrowserWidget,
+  DragDropList,
   TextPillEditBlock,
   TextPillViewBlock,
   withStyleWrapper,
@@ -50,6 +55,7 @@ export {
   MaybeWrap,
   CarouselEditBlock,
   CarouselViewBlock,
+  ObjectListWidget,
   BlockWrapperEnhancer,
   VariationsWidget,
   UberGridEditBlock,
