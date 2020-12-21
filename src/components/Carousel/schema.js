@@ -45,6 +45,7 @@ const itemSchema = (props) => {
 
 export const carouselSchema = (props) => ({
   title: 'Carousel',
+  block: 'carousel',
   fieldsets: [
     {
       id: 'default',

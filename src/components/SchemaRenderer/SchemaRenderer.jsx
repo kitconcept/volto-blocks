@@ -110,7 +110,7 @@ const InlineForm = ({
       </div>
 
       {other.map((fieldset, index) => (
-        <Accordion fluid styled className="form">
+        <Accordion fluid styled className="form" key={fieldset.id}>
           <div key={fieldset.id} id={`blockform-fieldset-${fieldset.id}`}>
             <Accordion.Title
               active={currentActiveFieldset === index}

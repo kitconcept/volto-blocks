@@ -35,7 +35,11 @@ const TeaserDefaultTemplate = ({ data, dataBlock, isEditMode }) => {
               <>
                 {data?.preview_image && (
                   <div className="grid-image-wrapper">
-                    <img src={getTeaserImageURL(data)} alt="" loading="lazy" />
+                    <img
+                      src={flattenToAppURL(getTeaserImageURL(data))}
+                      alt=""
+                      loading="lazy"
+                    />
                   </div>
                 )}
                 <h3>{data?.title}</h3>

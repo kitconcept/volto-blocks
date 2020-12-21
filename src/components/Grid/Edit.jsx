@@ -52,7 +52,6 @@ class Edit extends Component {
     onFocusPreviousBlock: PropTypes.func.isRequired,
     onFocusNextBlock: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
-    createContent: PropTypes.func.isRequired,
     gridType: PropTypes.string,
     templates: PropTypes.func.isRequired,
     sidebarData: PropTypes.func.isRequired,
@@ -224,6 +223,7 @@ class Edit extends Component {
       <div
         className={cx({
           [data['@type']]: true,
+          [data.variation]: data.variation,
           one: data?.columns && data.columns.length === 1,
           two: data?.columns && data.columns.length === 2,
           three: data?.columns && data.columns.length === 3,
