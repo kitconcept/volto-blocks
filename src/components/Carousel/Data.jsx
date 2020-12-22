@@ -10,7 +10,7 @@ import { difference } from '@plone/volto/helpers';
 import { replaceItemOfArray } from '@kitconcept/volto-blocks/helpers';
 
 const CarouselData = (props) => {
-  const { block, data, onChangeBlock } = props;
+  const { block, data, onChangeBlock, schemaEnhancer } = props;
   const { columns } = props.data;
   const previous = usePrevious(columns);
 
@@ -33,7 +33,9 @@ const CarouselData = (props) => {
   }, [columns]);
 
   const intl = useIntl();
-  const schema = carouselSchema({ ...props, intl });
+  const schema = schemaEnhancer
+    ? schemaEnhancer(carouselSchema({ ...props, intl }), props)
+    : carouselSchema(props);
 
   return (
     <SchemaRenderer

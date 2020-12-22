@@ -25,7 +25,7 @@ const itemSchema = (props) => {
         title: intl.formatMessage(messages.Source),
         widget: 'object_browser',
         mode: 'link',
-        selectedItemAttrs: ['Title', 'Description', 'preview_image'],
+        selectedItemAttrs: ['Title', 'Description', 'hasPreviewImage'],
       },
       title: {
         title: 'Title',
@@ -34,7 +34,7 @@ const itemSchema = (props) => {
         title: 'Description',
       },
       preview_image: {
-        title: 'Image',
+        title: 'Image override',
         widget: 'object_browser',
         mode: 'image',
       },

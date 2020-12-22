@@ -1,7 +1,19 @@
 import React from 'react';
-import { defineMessages, injectIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
+import { Message } from 'semantic-ui-react';
+import { defineMessages, useIntl } from 'react-intl';
+import imageBlockSVG from '@plone/volto/components/manage/Blocks/Image/block-image.svg';
+import { flattenToAppURL } from '@plone/volto/helpers';
+import { getTeaserImageURL } from './utils';
+import { MaybeWrap } from '../../components';
 
-import { TeaserBody } from '../../components';
+const messages = defineMessages({
+  PleaseChooseContent: {
+    id: 'Please choose an existing content as source for this element',
+    defaultMessage:
+      'Please choose an existing content as source for this element',
+  },
+});
 
 defineMessages({
   PleaseChooseContent: {
@@ -15,8 +27,47 @@ defineMessages({
   },
 });
 
-const CarouselBody = (props) => {
-  return <TeaserBody {...props} />;
+const CarouselBody = ({ data, dataBlock, isEditMode }) => {
+  const intl = useIntl();
+  const href = data.href?.[0];
+  const image = data.preview_image?.[0];
+  console.log(image);
+  return (
+    <>
+      {!href && isEditMode && (
+        <Message>
+          <div className="grid-teaser-item default">
+            <img src={imageBlockSVG} alt="" />
+            <p>{intl.formatMessage(messages.PleaseChooseContent)}</p>
+          </div>
+        </Message>
+      )}
+      {href && (
+        <div className="grid-teaser-item top">
+          <MaybeWrap
+            condition={!isEditMode}
+            as={Link}
+            to={flattenToAppURL(href['@id'])}
+            target={data.openLinkInNewTab ? '_blank' : null}
+          >
+            <>
+              {(href.hasPreviewImage || image) && (
+                <div className="grid-image-wrapper">
+                  <img
+                    src={flattenToAppURL(getTeaserImageURL(href, image))}
+                    alt=""
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <h3>{data?.title}</h3>
+              {!dataBlock.hide_description && <p>{data?.description}</p>}
+            </>
+          </MaybeWrap>
+        </div>
+      )}
+    </>
+  );
 };
 
-export default injectIntl(CarouselBody);
+export default CarouselBody;

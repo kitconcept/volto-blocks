@@ -8,7 +8,7 @@ export function getTeaserImageURL(data) {
   ) {
     return data.preview_image.download;
   } else if (
-    data.preview_image.scales?.teaser.download &&
+    data.preview_image?.scales?.teaser.download &&
     typeof data.preview_image === 'object'
   ) {
     // If we are using the current image in preview_image in the source object
