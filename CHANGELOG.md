@@ -1,5 +1,25 @@
 # Change Log
 
+# 5.0.0 (unreleased)
+
+## Breaking
+
+Might be that the teaser grid is not 100% backwards compatible, so double check.
+
+## Features
+
+- New blocks: Carousel, TextPill, UberGrid, HighLight, HighLightSlider
+- Improved TeaserGrid, added Variations and Enhancers support
+- Variations and enhancers general components for enabling other blocks as well
+- StylingWrapper enhancer
+- General util components (MaybeWrap, SchemaRenderer, ...)
+- Widgets: ObjectListWidget, SimpleColorPicker
+
+## Internal
+
+- Testing, testing, testing
+- Linting and Prettier as well in place
+
 ## 3.0.0 (2020-10-07)
 
 - Minimum requirement is now 8.2.2 because of the upgrade of react-dropzone @iFlameing
