@@ -31,7 +31,7 @@ const CarouselBody = ({ data, dataBlock, isEditMode }) => {
   const intl = useIntl();
   const href = data.href?.[0];
   const image = data.preview_image?.[0];
-  console.log(image);
+
   return (
     <>
       {!href && isEditMode && (
