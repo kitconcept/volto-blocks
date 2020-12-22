@@ -44,7 +44,7 @@ const MultiSourceWidget = (props) => {
     if (data.hrefList?.length > 0) {
       Promise.all(
         data.hrefList.map((item) =>
-          dispatch(getContent(item.url, null, item.id)),
+          dispatch(getContent(item.href, null, item.id)),
         ),
       ).then((result) => {
         onChangeBlock(block, {
@@ -65,8 +65,8 @@ const MultiSourceWidget = (props) => {
     /* eslint-disable react-hooks/exhaustive-deps */
   }, []);
 
-  const getSelectedContent = ({ url, blockID }) =>
-    dispatch(getContent(url, null, blockID));
+  const getSelectedContent = ({ href, blockID }) =>
+    dispatch(getContent(href, null, blockID));
 
   const onDragEnd = (result) => {
     const { source, destination } = result;
@@ -116,8 +116,8 @@ const MultiSourceWidget = (props) => {
           iconAction={() =>
             openObjectBrowser({
               mode: 'link',
-              onSelectItem: (url) => {
-                const selectedItem = { url, id: uuid() };
+              onSelectItem: (href) => {
+                const selectedItem = { href, id: uuid() };
                 // We get the full content on the fly (no store) then grab the desired
                 // values, store them in the formData
                 getSelectedContent(selectedItem).then((resp) => {
@@ -161,7 +161,7 @@ const MultiSourceWidget = (props) => {
                           {...provided.dragHandleProps}
                           className="data-items-listing"
                         >
-                          {item.url}
+                          {item.href}
                           <Button.Group>
                             <Button
                               icon

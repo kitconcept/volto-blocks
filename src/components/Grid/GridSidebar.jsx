@@ -9,13 +9,25 @@ import downSVG from '@plone/volto/icons/down-key.svg';
 import trashSVG from '@plone/volto/icons/delete.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
+import { gridDefaultSchema } from './schema';
+
+import {
+  VariationsWidget,
+  SchemaRenderer,
+} from '@kitconcept/volto-blocks/components';
+
+import { blocks } from '~/config';
+
 const GridSidebar = (props) => {
   const {
+    block,
     data,
     gridType,
     sidebarData,
     activeColumn,
     onChangeSelectedColumnItem,
+    onChangeFullBlock,
+    intl,
   } = props;
 
   function handleChangeColumn(e, blockProps) {
@@ -24,6 +36,21 @@ const GridSidebar = (props) => {
 
     onChangeSelectedColumnItem(newIndex);
   }
+
+  const variations = blocks?.blocksConfig?.[data['@type']]?.variations;
+
+  const applySchemaEnhancer = (schema) => {
+    const schemaExtender = variations?.[data?.variation]?.['schemaExtender'];
+
+    if (schemaExtender) {
+      return schemaExtender(schema, props, intl);
+    } else {
+      return schema;
+    }
+  };
+
+  const minItemsAllowed =
+    blocks?.blocksConfig?.[data['@type']]?.minItemsAllowed;
 
   return (
     <Segment.Group raised>
@@ -51,6 +78,25 @@ const GridSidebar = (props) => {
           </Button>
         </Button.Group>
       </header>
+
+      {variations && Object.keys(variations).length > 1 && (
+        <Segment className="form attached" style={{ padding: 0 }}>
+          <VariationsWidget {...props} onChangeBlock={onChangeFullBlock} />
+          <SchemaRenderer
+            schema={applySchemaEnhancer(gridDefaultSchema(props))}
+            title={gridDefaultSchema.title}
+            onChangeField={(id, value) => {
+              onChangeFullBlock(block, {
+                ...data,
+                [id]: value,
+              });
+            }}
+            formData={data}
+            fieldIndex={data.index}
+            basic
+          />
+        </Segment>
+      )}
 
       <Accordion fluid styled className="form">
         {data.columns &&
@@ -85,7 +131,7 @@ const GridSidebar = (props) => {
                   />
                 )}
                 <div className="accordion-tools">
-                  {data.columns.length > 2 && (
+                  {data.columns.length > minItemsAllowed && (
                     <Button.Group>
                       <Button
                         icon

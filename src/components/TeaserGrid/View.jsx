@@ -6,7 +6,10 @@ import {
 
 const View = (props) => {
   return (
-    <ViewGrid {...props} render={(column) => <TeaserBody data={column} />} />
+    <ViewGrid
+      {...props}
+      render={(column) => <TeaserBody data={column} dataBlock={props.data} />}
+    />
   );
 };
 

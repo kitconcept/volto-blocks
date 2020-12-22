@@ -11,8 +11,12 @@
  *   }
  * }
  */
-
 import {
+  withStyleWrapper,
+  SimpleColorPicker,
+  CarouselEditBlock,
+  CarouselViewBlock,
+  ObjectListWidget,
   SliderEditBlock,
   SliderViewBlock,
   TeaserGridEditBlock,
@@ -23,10 +27,17 @@ import {
   TeaserHeroEditBlock,
   ListingGridEditBlock,
   ListingGridViewBlock,
+  HighlightSliderViewBlock,
+  HighlightSliderEditBlock,
+  UberGridViewBlock,
+  UberGridEditBlock,
+  TextPillEditBlock,
+  TextPillViewBlock,
 } from '@kitconcept/volto-blocks/components';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
+import textSVG from '@plone/volto/icons/subtext.svg';
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
@@ -35,7 +46,47 @@ const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
 const customGroupBlocksOrder = (defaultGroups) =>
   insertInArray(defaultGroups, newTeasersGroup, 2);
 
+// Schema enhancer example, a function with schema => schema signature
+// It might take a second and third argument props and int, if required
+// const schemaEnhancer = (schema) => {
+//   schema.properties.newfield = {
+//     title: 'new field',
+//   };
+//   schema.fieldsets[0].fields.push('newfield');
+//   return schema;
+// };
+
 const customBlocks = {
+  carousel: {
+    id: 'carousel',
+    title: 'Carousel',
+    icon: imagesSVG,
+    group: 'common',
+    view: withStyleWrapper(CarouselViewBlock),
+    edit: withStyleWrapper(CarouselEditBlock),
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
+  uberGrid: {
+    id: 'uberGrid',
+    title: 'Uber grid',
+    icon: imagesSVG,
+    group: 'common',
+    view: UberGridViewBlock,
+    edit: UberGridEditBlock,
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
   teaserGrid: {
     id: 'teaserGrid',
     title: 'Teaser grid',
@@ -50,6 +101,27 @@ const customBlocks = {
       addPermission: [],
       view: [],
     },
+    // Minimum items allowed
+    // minItemsAllowed: 1,
+    //
+    // Variations example
+    // variations: {
+    //   default: { label: 'Default', template: TeaserDefaultTemplate },
+    //   custom: {
+    //     label: 'Custom',
+    //     components: {
+    //       view: TeaserDefaultTemplate,
+    //       wrapper: (props) => (
+    //         <>
+    //           hey! {props.data.description2} asdasd {props.children} bottoms
+    //           thinggy
+    //         </>
+    //       ),
+    //     },
+    //     schemaExtender: schemaEnhancer,
+    //     schemaExtenderItem: schemaEnhancer,
+    //   },
+    // },
   },
   imagesGrid: {
     id: 'imagesGrid',
@@ -111,6 +183,36 @@ const customBlocks = {
       view: [],
     },
   },
+  highlightSlider: {
+    id: 'highlightSlider',
+    title: 'Highlight Slider',
+    icon: sliderSVG,
+    group: 'teasers',
+    view: HighlightSliderViewBlock,
+    edit: HighlightSliderEditBlock,
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
+  textPillWithStyle: {
+    id: 'textPillWithStyle',
+    title: 'Text pill',
+    icon: textSVG,
+    group: 'text',
+    view: withStyleWrapper(TextPillViewBlock),
+    edit: withStyleWrapper(TextPillEditBlock),
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
 };
 
 // export const blocks = {
@@ -118,8 +220,10 @@ const customBlocks = {
 //   blocksConfig: { ...defaultBlocks.blocksConfig, ...customBlocks },
 //   groupBlocksOrder: customGroupBlocksOrder,
 // };
-
 export default (config) => {
+  config.widgets.widget.object_list = ObjectListWidget;
+  config.widgets.widget.style_simple_color = SimpleColorPicker;
+
   return {
     ...config,
     blocks: {

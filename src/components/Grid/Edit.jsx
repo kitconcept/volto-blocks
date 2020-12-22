@@ -9,14 +9,13 @@ import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
 import { Icon, SidebarPortal } from '@plone/volto/components';
 
-import imageSVG from '@plone/volto/icons/image.svg';
-import textSVG from '@plone/volto/icons/text.svg';
-import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 import { getBaseUrl } from '@plone/volto/helpers';
 
 import GridSidebar from '@kitconcept/volto-blocks/components/Grid/GridSidebar';
 import TemplateChooser from '@kitconcept/volto-blocks/components/TemplateChooser/TemplateChooser';
+import { BlockWrapperEnhancer } from '@kitconcept/volto-blocks/components';
+
 import {
   reorderArray,
   replaceItemOfArray,
@@ -50,7 +49,6 @@ class Edit extends Component {
     onFocusPreviousBlock: PropTypes.func.isRequired,
     onFocusNextBlock: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
-    createContent: PropTypes.func.isRequired,
     gridType: PropTypes.string,
     templates: PropTypes.func.isRequired,
     sidebarData: PropTypes.func.isRequired,
@@ -222,6 +220,7 @@ class Edit extends Component {
       <div
         className={cx({
           [data['@type']]: true,
+          [data.variation]: data.variation,
           one: data?.columns && data.columns.length === 1,
           two: data?.columns && data.columns.length === 2,
           three: data?.columns && data.columns.length === 3,
@@ -233,41 +232,6 @@ class Edit extends Component {
             templates={this.props.templates}
             onSelectTemplate={this.onSelectTemplate}
           />
-        )}
-        {/* Remaining code from the Uber Grid, useful when we implement the multi-item use case */}
-        {this.props.selected && !this.props.gridType && (
-          <div className="toolbar">
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={(e) => this.addNewColumn(e, 'text')}
-                disabled={this.props.data.columns.length >= 4}
-              >
-                <Icon name={textSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={(e) => this.addNewColumn(e, 'image')}
-                disabled={this.props.data.columns.length >= 4}
-              >
-                <Icon name={imageSVG} size="24px" />
-              </Button>
-            </Button.Group>
-            <Button.Group>
-              <Button
-                icon
-                basic
-                onClick={(e) => this.addNewColumn(e, '__card')}
-                disabled={this.props.data.columns.length >= 4}
-              >
-                <Icon name={imagesSVG} size="24px" />
-              </Button>
-            </Button.Group>
-          </div>
         )}
         {this.props.selected && this.props.gridType && (
           <div className="toolbar">
@@ -282,60 +246,65 @@ class Edit extends Component {
             </Button.Group>
           </div>
         )}
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Droppable droppableId={uuid()} direction="horizontal">
-            {(provided) => (
-              <Ref innerRef={provided.innerRef}>
-                <Grid
-                  {...provided.droppableProps}
-                  columns={
-                    this.props.data.columns ? this.props.data.columns.length : 0
-                  }
-                >
-                  {this.props.data.columns &&
-                    this.props.data.columns.map((item, index) => (
-                      <Draggable
-                        draggableId={item.id}
-                        index={index}
-                        key={item.id}
-                      >
-                        {(provided) => {
-                          item = { ...item, block: item.id };
-                          return (
-                            <Ref innerRef={provided.innerRef}>
-                              <Grid.Column
-                                key={item.id}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                              >
-                                <div
-                                  role="presentation"
-                                  // This prevents propagation of ENTER
-                                  onKeyDown={(e) => e.stopPropagation()}
-                                  onClick={() =>
-                                    this.onChangeSelectedColumnItem(index)
-                                  }
+        <BlockWrapperEnhancer {...this.props}>
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <Droppable droppableId={uuid()} direction="horizontal">
+              {(provided) => (
+                <Ref innerRef={provided.innerRef}>
+                  <Grid
+                    {...provided.droppableProps}
+                    columns={
+                      this.props.data.columns
+                        ? this.props.data.columns.length
+                        : 0
+                    }
+                  >
+                    {this.props.data.columns &&
+                      this.props.data.columns.map((item, index) => (
+                        <Draggable
+                          draggableId={item.id}
+                          index={index}
+                          key={item.id}
+                        >
+                          {(provided) => {
+                            item = { ...item, block: item.id };
+                            return (
+                              <Ref innerRef={provided.innerRef}>
+                                <Grid.Column
+                                  key={item.id}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
                                 >
-                                  {this.props.render({
-                                    item,
-                                    index,
-                                    path: getBaseUrl(this.props.pathname),
-                                    onChangeGridItem: this.onChangeGridItem,
-                                    columns: data.columns,
-                                  })}
-                                </div>
-                              </Grid.Column>
-                            </Ref>
-                          );
-                        }}
-                      </Draggable>
-                    ))}
-                  {provided.placeholder}
-                </Grid>
-              </Ref>
-            )}
-          </Droppable>
-        </DragDropContext>
+                                  <div
+                                    role="presentation"
+                                    // This prevents propagation of ENTER
+                                    onKeyDown={(e) => e.stopPropagation()}
+                                    onClick={() =>
+                                      this.onChangeSelectedColumnItem(index)
+                                    }
+                                  >
+                                    {this.props.render({
+                                      item,
+                                      index,
+                                      path: getBaseUrl(this.props.pathname),
+                                      onChangeGridItem: this.onChangeGridItem,
+                                      columns: data.columns,
+                                    })}
+                                  </div>
+                                </Grid.Column>
+                              </Ref>
+                            );
+                          }}
+                        </Draggable>
+                      ))}
+                    {provided.placeholder}
+                  </Grid>
+                </Ref>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </BlockWrapperEnhancer>
+
         <SidebarPortal selected={this.props.selected}>
           <GridSidebar
             {...this.props}

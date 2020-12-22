@@ -1,0 +1,254 @@
+/* Highlight block */
+.block.highlight {
+  margin-bottom: 65px;
+
+  &:first-child {
+    /* This is the adjustment for the margin top */
+    margin-top: -14px;
+    @media only screen and (max-width: @largestTabletScreen) {
+      margin-top: 0;
+    }
+  }
+
+  .teaser-item.top a {
+    position: relative;
+    min-height: 600px;
+  }
+
+  .highlight-image-wrapper {
+    display: flex;
+    height: 600px;
+
+    img {
+      align-self: unset;
+    }
+
+    @media only screen and (max-width: @largestMobileScreen) {
+      height: initial;
+      flex-direction: column;
+    }
+  }
+
+  .teaser-item img {
+    margin-bottom: 0;
+  }
+
+  .teaser-item-title {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+
+    /* This is because between iPad to @largestTabletScreen the text in the hightlight is too big */
+    @media only screen and (min-width: @largestMobileScreen) and (max-width: @largestTabletScreen) {
+      position: static;
+      flex-direction: column;
+    }
+
+    @media only screen and (max-width: @largestMobileScreen) {
+      position: static;
+      flex-direction: column;
+    }
+
+    .title,
+    p {
+      flex: 1 1 50%;
+      padding: 30px 50px 30px 50px;
+      margin: 0;
+      @media only screen and (max-width: @largestMobileScreen) {
+        padding: 30px 10px 30px 16px;
+      }
+    }
+
+    .title {
+      background: rgba(0, 103, 161, 0.8);
+    }
+
+    .supertitle {
+      display: inline-block;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #fefefe;
+      color: #fefefe;
+      font-size: @14px;
+      letter-spacing: -0.12px;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin-top: 10px;
+      color: #fefefe;
+      font-size: 42px;
+      letter-spacing: -0.31px;
+    }
+
+    p {
+      padding-bottom: 80px;
+      background: rgba(100, 121, 132, 0.8);
+      color: #fefefe;
+      font-size: @18px;
+      font-weight: 300;
+    }
+  }
+}
+
+.view-editview .block.highlight {
+  margin-top: 0;
+}
+
+/* HighlightSlider block */
+.block.highlightSlider {
+  margin-bottom: 65px;
+
+  &:first-child {
+    /* This is the adjustment for the margin top */
+    margin-top: -14px;
+    @media only screen and (max-width: @largestTabletScreen) {
+      margin-top: 0;
+    }
+  }
+
+  .teaser-item.top {
+    position: relative;
+
+    a {
+      position: relative;
+      min-height: 600px;
+    }
+  }
+
+  .highlight-image-wrapper {
+    display: flex;
+    height: 600px;
+
+    img {
+      align-self: unset;
+
+      @media only screen and (max-width: @largestTabletScreen) {
+        object-position: initial;
+      }
+    }
+
+    @media only screen and (max-width: @largestTabletScreen) {
+      /* Problem with Safari */
+      display: initial;
+      height: initial;
+    }
+  }
+
+  .teaser-item img {
+    margin-bottom: 0;
+  }
+
+  .teaser-item-title {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+
+    /* This is because between iPad to @largestTabletScreen the text in the hightlight is too big */
+    @media only screen and (min-width: @largestMobileScreen) and (max-width: @largestTabletScreen) {
+      position: static;
+      flex-direction: column;
+    }
+
+    @media only screen and (max-width: @largestMobileScreen) {
+      position: static;
+      flex-direction: column;
+    }
+
+    .title,
+    p {
+      flex: 1 1 50%;
+      padding: 30px 50px 30px 50px;
+      margin: 0;
+    }
+
+    .title {
+      background: rgba(0, 103, 161, 0.8);
+    }
+
+    .supertitle {
+      display: inline-block;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #fefefe;
+      color: #fefefe;
+      font-size: @14px;
+      letter-spacing: -0.12px;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin-top: 10px;
+      color: #fefefe;
+      font-size: 42px;
+      letter-spacing: -0.31px;
+    }
+
+    p {
+      padding-bottom: 80px;
+      background: rgba(100, 121, 132, 0.8);
+      color: #fefefe;
+      font-size: @18px;
+      font-weight: 300;
+    }
+  }
+
+  .slick-dots {
+    bottom: 16px;
+    width: initial;
+    padding-left: 42px;
+    text-align: left;
+
+    li {
+      margin: 0 5px !important;
+    }
+  }
+
+  .slick-dots li button:before {
+    color: #fff;
+    font-size: 24px;
+  }
+
+  .slick-arrow {
+    top: 35%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent !important;
+  }
+}
+
+.slick-arrow {
+  width: 62px;
+  height: 62px;
+  // background-color: @primary-blue !important;
+
+  &.ui.button {
+    z-index: 9;
+    top: 35%;
+    margin: 0;
+    border-radius: 0;
+
+    .icon:not(.button) {
+      margin: 0 !important;
+      opacity: 1;
+    }
+  }
+
+  &.slick-prev {
+    left: 0;
+  }
+
+  &.slick-next {
+    right: 0;
+  }
+
+  &.slick-prev::before,
+  &.slick-next::before {
+    display: none;
+  }
+}
+
+.view-editview .block.highlightSlider {
+  margin-top: 0;
+}

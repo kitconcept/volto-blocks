@@ -51,33 +51,6 @@ exports[`renders a Grid Block Sidebar component 1`] = `
       <div
         className="accordion-tools"
       >
-        <div
-          className="ui buttons"
-        >
-          <button
-            className="ui basic icon button"
-            onClick={[Function]}
-          >
-            <svg
-              className="icon"
-              dangerouslySetInnerHTML={
-                Object {
-                  "__html": undefined,
-                }
-              }
-              onClick={null}
-              style={
-                Object {
-                  "fill": "#e40166",
-                  "height": "20px",
-                  "width": "auto",
-                }
-              }
-              viewBox=""
-              xmlns=""
-            />
-          </button>
-        </div>
         <svg
           className="icon"
           dangerouslySetInnerHTML={
@@ -111,33 +84,6 @@ exports[`renders a Grid Block Sidebar component 1`] = `
       <div
         className="accordion-tools"
       >
-        <div
-          className="ui buttons"
-        >
-          <button
-            className="ui basic icon button"
-            onClick={[Function]}
-          >
-            <svg
-              className="icon"
-              dangerouslySetInnerHTML={
-                Object {
-                  "__html": undefined,
-                }
-              }
-              onClick={null}
-              style={
-                Object {
-                  "fill": "#e40166",
-                  "height": "20px",
-                  "width": "auto",
-                }
-              }
-              viewBox=""
-              xmlns=""
-            />
-          </button>
-        </div>
         <svg
           className="icon"
           dangerouslySetInnerHTML={
@@ -171,33 +117,6 @@ exports[`renders a Grid Block Sidebar component 1`] = `
       <div
         className="accordion-tools"
       >
-        <div
-          className="ui buttons"
-        >
-          <button
-            className="ui basic icon button"
-            onClick={[Function]}
-          >
-            <svg
-              className="icon"
-              dangerouslySetInnerHTML={
-                Object {
-                  "__html": undefined,
-                }
-              }
-              onClick={null}
-              style={
-                Object {
-                  "fill": "#e40166",
-                  "height": "20px",
-                  "width": "auto",
-                }
-              }
-              viewBox=""
-              xmlns=""
-            />
-          </button>
-        </div>
         <svg
           className="icon"
           dangerouslySetInnerHTML={
@@ -231,33 +150,6 @@ exports[`renders a Grid Block Sidebar component 1`] = `
       <div
         className="accordion-tools"
       >
-        <div
-          className="ui buttons"
-        >
-          <button
-            className="ui basic icon button"
-            onClick={[Function]}
-          >
-            <svg
-              className="icon"
-              dangerouslySetInnerHTML={
-                Object {
-                  "__html": undefined,
-                }
-              }
-              onClick={null}
-              style={
-                Object {
-                  "fill": "#e40166",
-                  "height": "20px",
-                  "width": "auto",
-                }
-              }
-              viewBox=""
-              xmlns=""
-            />
-          </button>
-        </div>
         <svg
           className="icon"
           dangerouslySetInnerHTML={

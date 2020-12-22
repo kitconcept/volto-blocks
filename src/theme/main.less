@@ -102,6 +102,14 @@
   box-shadow: none;
 }
 
+.ui.segments .ui.segments {
+  border-width: 0;
+}
+
+#sidebar-properties .ui.segment.form {
+  padding-bottom: 1em;
+}
+
 // teasers view/edit
 /* This might be required to standardize */
 // .block.__grid.two .grid-image-wrapper {
@@ -345,3 +353,18 @@
     margin-left: 10px !important;
   }
 }
+
+.ui.accordion .segment {
+  padding: 0;
+}
+
+.teaserGrid [data-rbd-draggable-context-id] {
+  margin-bottom: 0;
+}
+
+// @import 'slider';
+@import (less) '~slick-carousel/slick/slick.css';
+@import (less) '~slick-carousel/slick/slick-theme.css';
+@import 'highlight';
+@import 'ubergrid';
+@import 'carousel';
