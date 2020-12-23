@@ -4,7 +4,8 @@
   "description": "kitconcept Volto Blocks",
   "main": "index.js",
   "scripts": {
-    "start-test-backend": "make start-test-backend"
+    "start-test-backend": "make start-test-backend",
+    "prettier": "make prettier"
   },
   "repository": {
     "type": "git",

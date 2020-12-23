@@ -111,11 +111,6 @@ export function TeaserGridSchema(props) {
         title: intl.formatMessage(messages.openLinkInNewTab),
         type: 'boolean',
         value: data.openLinkInNewTab ? data.openLinkInNewTab : false,
-        iconAction: () =>
-          onChangeBlock(data.block, {
-            ...data,
-            description: '',
-          }),
       },
     },
     required: [],

@@ -16,10 +16,15 @@ const Edit = (props) => {
           index={index}
           onChangeGridItem={onChangeGridItem}
           isEditMode
+          dataGrid={props.data} // This allows to access the full data from the items
         />
       )}
       sidebarData={(props, column, index) => (
-        <ImageData {...props} data={{ ...column, index }} />
+        <ImageData
+          {...props}
+          data={{ ...column, index }}
+          dataGrid={props.data} // This allows to access the full data from the items
+        />
       )}
     />
   );

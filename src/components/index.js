@@ -29,6 +29,7 @@ import TextPillViewBlock from './TextPill/View';
 import MaybeWrap from './MaybeWrap/MaybeWrap';
 import withStyleWrapper from './withStyleWrapper/withStyleWrapper';
 import SimpleColorPicker from './Widgets/SimpleColorPicker';
+import ImagesGridIconsVariation from './ImagesGrid/IconsVariation';
 
 import VariationsWidget from '@kitconcept/volto-blocks/components/Variations/VariationsWidget';
 import BlockWrapperEnhancer from '@kitconcept/volto-blocks/components/Variations/BlockWrapperEnhancer';
@@ -45,6 +46,7 @@ import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/Blo
 import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/SchemaRenderer';
 
 export {
+  ImagesGridIconsVariation,
   DragDropList,
   TextPillEditBlock,
   TextPillViewBlock,

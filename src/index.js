@@ -12,6 +12,7 @@
  * }
  */
 import {
+  ImagesGridIconsVariation,
   withStyleWrapper,
   SimpleColorPicker,
   CarouselEditBlock,
@@ -34,6 +35,7 @@ import {
   TextPillEditBlock,
   TextPillViewBlock,
 } from '@kitconcept/volto-blocks/components';
+import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
@@ -46,9 +48,9 @@ const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
 const customGroupBlocksOrder = (defaultGroups) =>
   insertInArray(defaultGroups, newTeasersGroup, 2);
 
-// Schema enhancer example, a function with schema => schema signature
+// Schema extender example, a function with schema => schema signature
 // It might take a second and third argument props and int, if required
-// const schemaEnhancer = (schema) => {
+// const schemaExtender = (schema) => {
 //   schema.properties.newfield = {
 //     title: 'new field',
 //   };
@@ -118,8 +120,8 @@ const customBlocks = {
     //         </>
     //       ),
     //     },
-    //     schemaExtender: schemaEnhancer,
-    //     schemaExtenderItem: schemaEnhancer,
+    //     schemaExtender: schemaExtender,
+    //     schemaExtenderItem: schemaExtender,
     //   },
     // },
   },
@@ -128,14 +130,25 @@ const customBlocks = {
     title: 'Images grid',
     icon: imagesSVG,
     group: 'common',
-    view: ImagesGridViewBlock,
-    edit: ImagesGridEditBlock,
+    view: withStyleWrapper(ImagesGridViewBlock),
+    edit: withStyleWrapper(ImagesGridEditBlock),
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,
     security: {
       addPermission: [],
       view: [],
+    },
+    minItemsAllowed: 2,
+    variations: {
+      default: { label: 'Default' },
+      icons: {
+        label: 'Icons',
+        components: {
+          view: ImagesGridIconsVariation,
+        },
+        schemaExtenderItem: ImagesGridIconsVariationSchemaExtender,
+      },
     },
   },
   listingGrid: {
