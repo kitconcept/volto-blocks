@@ -1,5 +1,6 @@
 import { defineMessages } from 'react-intl';
 import { flattenToAppURL } from '@plone/volto/helpers';
+import { insertInArray } from '../../helpers/Utils/Utils';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import navTreeSVG from '@plone/volto/icons/nav.svg';
@@ -58,7 +59,7 @@ export function ImagesGridSchema(props) {
         title: 'Default',
         fields: [
           'url',
-          ...(data.url ? ['title', 'alt', 'href', 'openLinkInNewTab'] : []),
+          ...(data.url ? ['alt', 'href', 'openLinkInNewTab'] : []),
         ],
       },
     ],
@@ -114,4 +115,14 @@ export function ImagesGridSchema(props) {
     },
     required: [],
   };
+}
+
+export function ImagesGridIconsVariationSchemaExtender(schema, { data }) {
+  let newFields;
+  if (data.url) {
+    newFields = insertInArray(schema.fieldsets[0].fields, 'title', 1);
+    schema.fieldsets[0].fields = newFields;
+  }
+
+  return schema;
 }

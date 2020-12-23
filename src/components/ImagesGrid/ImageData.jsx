@@ -1,16 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Segment } from 'semantic-ui-react';
-import { defineMessages, useIntl } from 'react-intl';
-import { CheckboxWidget, TextWidget } from '@plone/volto/components';
-import { blocks, settings } from '~/config';
-import { flattenToAppURL } from '@plone/volto/helpers';
+import { useIntl } from 'react-intl';
+import { blocks } from '~/config';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 import { SchemaRenderer } from '../../components';
 import { ImagesGridSchema } from './schema';
-
-import clearSVG from '@plone/volto/icons/clear.svg';
-import navTreeSVG from '@plone/volto/icons/nav.svg';
 
 const ImageData = (props) => {
   const { data, dataGrid, block, onChangeBlock } = props;
@@ -19,7 +13,7 @@ const ImageData = (props) => {
 
   const schema = ImagesGridSchema({ ...props, intl });
 
-  const applySchemaEnhancer = (schema) => {
+  const applyVariationSchemaExtender = (schema) => {
     const variations = blocks?.blocksConfig?.[dataGrid['@type']]?.variations;
 
     const schemaExtender =
@@ -34,7 +28,7 @@ const ImageData = (props) => {
 
   return (
     <SchemaRenderer
-      schema={applySchemaEnhancer(schema)}
+      schema={applyVariationSchemaExtender(schema)}
       title={schema.title}
       onChangeField={(id, value) => {
         onChangeBlock(block, {

@@ -26,3 +26,15 @@ export const styleWrapperSchemaEnhancer = (schema) => {
   };
   return schema;
 };
+
+export const nullSchema = () => ({
+  fieldsets: [
+    {
+      id: 'default',
+      title: 'Default',
+      fields: [],
+    },
+  ],
+  properties: {},
+  required: [],
+});

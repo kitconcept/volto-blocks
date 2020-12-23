@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Accordion, Button, Segment } from 'semantic-ui-react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Icon } from '@plone/volto/components';
 
 import upSVG from '@plone/volto/icons/up-key.svg';
@@ -10,6 +10,7 @@ import trashSVG from '@plone/volto/icons/delete.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 
 import { gridDefaultSchema } from './schema';
+import { nullSchema } from '../withStyleWrapper/schema';
 
 import {
   VariationsWidget,
@@ -27,7 +28,7 @@ const GridSidebar = (props) => {
     activeColumn,
     onChangeSelectedColumnItem,
     onChangeFullBlock,
-    intl,
+    schemaEnhancer,
   } = props;
 
   function handleChangeColumn(e, blockProps) {
@@ -37,13 +38,28 @@ const GridSidebar = (props) => {
     onChangeSelectedColumnItem(newIndex);
   }
 
+  const intl = useIntl();
+
   const variations = blocks?.blocksConfig?.[data['@type']]?.variations;
 
-  const applySchemaEnhancer = (schema) => {
-    const schemaExtender = variations?.[data?.variation]?.['schemaExtender'];
+  const applyVariationSchemaExtender = (schema) => {
+    // We enhance the schema from two possible sources: Variation extenders and enhancers
+    // This is the variation extender
+    const VariationSchemaExtender =
+      variations?.[data?.variation]?.['schemaExtender'];
 
-    if (schemaExtender) {
-      return schemaExtender(schema, props, intl);
+    if (VariationSchemaExtender) {
+      return VariationSchemaExtender(schema, props, intl);
+    } else {
+      return schema;
+    }
+  };
+
+  const applyEnhancerSchema = (schema) => {
+    // We enhance the schema from two possible sources: Variation extenders and enhancers
+    // This is the enhancer schema
+    if (schemaEnhancer) {
+      return schemaEnhancer(schema);
     } else {
       return schema;
     }
@@ -83,7 +99,7 @@ const GridSidebar = (props) => {
         <Segment className="form attached" style={{ padding: 0 }}>
           <VariationsWidget {...props} onChangeBlock={onChangeFullBlock} />
           <SchemaRenderer
-            schema={applySchemaEnhancer(gridDefaultSchema(props))}
+            schema={applyVariationSchemaExtender(gridDefaultSchema(props))}
             title={gridDefaultSchema.title}
             onChangeField={(id, value) => {
               onChangeFullBlock(block, {
@@ -155,6 +171,27 @@ const GridSidebar = (props) => {
             </React.Fragment>
           ))}
       </Accordion>
+      {/* In our grids, the block enhancers come after the grid data */}
+      {schemaEnhancer && (
+        <Segment className="form attached" style={{ padding: 0 }}>
+          <SchemaRenderer
+            schema={applyEnhancerSchema({
+              ...nullSchema(),
+              block: data['@type'],
+            })}
+            title={gridDefaultSchema.title}
+            onChangeField={(id, value) => {
+              onChangeFullBlock(block, {
+                ...data,
+                [id]: value,
+              });
+            }}
+            formData={data}
+            fieldIndex={data.index}
+            basic
+          />
+        </Segment>
+      )}
     </Segment.Group>
   );
 };
@@ -166,4 +203,4 @@ GridSidebar.propTypes = {
   sidebarData: PropTypes.func.isRequired,
 };
 
-export default injectIntl(GridSidebar);
+export default GridSidebar;
