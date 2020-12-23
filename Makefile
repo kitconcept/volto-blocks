@@ -31,3 +31,13 @@ test: ## Run unit test suite for the addon
 prettier: ## Run unit test suite for the addon
 	@echo "$(GREEN)==> Run prettier for the addon$(RESET)"
 	docker run -it --rm -e NAMESPACE="$(NAMESPACE)" -e DEPENDENCIES="$(DEPENDENCIES)" -e GIT_NAME="$(GIT_NAME)" -v $(shell pwd):/opt/frontend/my-volto-project/src/addons/$(GIT_NAME) plone/volto-addon-ci prettier
+
+.PHONY: lint
+lint: ## Run unit test suite for the addon
+	@echo "$(GREEN)==> Run ESlint for the addon$(RESET)"
+	docker run -it --rm -e NAMESPACE="$(NAMESPACE)" -e DEPENDENCIES="$(DEPENDENCIES)" -e GIT_NAME="$(GIT_NAME)" -v $(shell pwd):/opt/frontend/my-volto-project/src/addons/$(GIT_NAME) plone/volto-addon-ci eslint
+
+.PHONY: stylelint
+stylelint: ## Run unit test suite for the addon
+	@echo "$(GREEN)==> Run stylelint for the addon$(RESET)"
+	docker run -it --rm -e NAMESPACE="$(NAMESPACE)" -e DEPENDENCIES="$(DEPENDENCIES)" -e GIT_NAME="$(GIT_NAME)" -v $(shell pwd):/opt/frontend/my-volto-project/src/addons/$(GIT_NAME) plone/volto-addon-ci stylelint

@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start-test-backend": "make start-test-backend",
-    "prettier": "make prettier"
+    "prettier": "make prettier",
+    "lint": "make lint",
+    "stylelint": "make stylelint",
+    "test": "make test"
   },
   "repository": {
     "type": "git",
