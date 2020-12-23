@@ -26,3 +26,8 @@ help: ## This help message
 test: ## Run unit test suite for the addon
 	@echo "$(GREEN)==> Run unit test suite for the addon$(RESET)"
 	docker run -it --rm -e NAMESPACE="$(NAMESPACE)" -e DEPENDENCIES="$(DEPENDENCIES)" -e GIT_NAME="$(GIT_NAME)" -v $(shell pwd):/opt/frontend/my-volto-project/src/addons/$(GIT_NAME) plone/volto-addon-ci bash -c "RAZZLE_JEST_CONFIG=$(RAZZLE_JEST_CONFIG) yarn test src/addons/$(GIT_NAME) --watchAll"
+
+.PHONY: prettier
+prettier: ## Run unit test suite for the addon
+	@echo "$(GREEN)==> Run prettier for the addon$(RESET)"
+	docker run -it --rm -e NAMESPACE="$(NAMESPACE)" -e DEPENDENCIES="$(DEPENDENCIES)" -e GIT_NAME="$(GIT_NAME)" -v $(shell pwd):/opt/frontend/my-volto-project/src/addons/$(GIT_NAME) plone/volto-addon-ci prettier

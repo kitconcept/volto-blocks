@@ -8,7 +8,7 @@ import { ImagesGridSchema } from './schema';
 
 const ImageData = (props) => {
   const { data, dataGrid, block, onChangeBlock } = props;
-  // const [alt, setAlt] = React.useState(data.alt || '');
+
   const intl = useIntl();
 
   const schema = ImagesGridSchema({ ...props, intl });
