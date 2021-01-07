@@ -213,7 +213,7 @@ const customBlocks = {
   },
   textPillWithStyle: {
     id: 'textPillWithStyle',
-    title: 'Text pill',
+    title: 'Text with background color',
     icon: textSVG,
     group: 'text',
     view: withStyleWrapper(TextPillViewBlock),

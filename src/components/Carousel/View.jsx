@@ -46,7 +46,7 @@ const CarouselView = (props) => {
   return (
     <div
       className={cx('block carousel', {
-        'wrapperstyle full': data.useBigContainer,
+        'wrapperstyle full': data.useLargeContainer,
       })}
     >
       {(data.columns?.length === 0 || !data.columns) && isEditMode && (
@@ -59,7 +59,7 @@ const CarouselView = (props) => {
       )}
       {data.columns?.length > 0 && (
         <div
-          className={cx({ 'full-width': data.useBigContainer })}
+          className={cx({ 'full-width': data.useLargeContainer })}
           style={{ backgroundColor: props.data.bg_color }}
         >
           {data.headline && <h2>{data.headline}</h2>}

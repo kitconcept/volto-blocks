@@ -8,7 +8,7 @@ export const styleWrapperSchemaEnhancer = (schema) => {
   schema.fieldsets.push({
     id: 'styling',
     title: 'Styling',
-    fields: ['bg_color', 'useBigContainer', 'useFullBackgroundContainer'],
+    fields: ['bg_color', 'useLargeContainer', 'useFullBackgroundContainer'],
   });
 
   schema.properties.bg_color = {
@@ -16,13 +16,13 @@ export const styleWrapperSchemaEnhancer = (schema) => {
     title: 'Bg color',
     availableColors,
   };
-  schema.properties.useBigContainer = {
+  schema.properties.useLargeContainer = {
     type: 'boolean',
-    title: 'Use big container',
+    title: 'Use large width',
   };
   schema.properties.useFullBackgroundContainer = {
     type: 'boolean',
-    title: 'Use full background container',
+    title: 'Use full width colored background',
   };
   return schema;
 };

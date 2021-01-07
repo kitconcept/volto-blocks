@@ -1,4 +1,5 @@
 export const TextBodySchema = (props) => ({
+  title: 'Text block with background color',
   block: 'textPillWithStyle',
   fieldsets: [
     {

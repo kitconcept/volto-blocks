@@ -16,7 +16,7 @@ const withStyleWrapper = (Component) => ({ ...props }) => {
       <MaybeWrap
         as={Container}
         wrap={
-          props.data.useFullBackgroundContainer && !props.data.useBigContainer
+          props.data.useFullBackgroundContainer && !props.data.useLargeContainer
         }
       >
         <Component {...props} schemaEnhancer={styleWrapperSchemaEnhancer} />

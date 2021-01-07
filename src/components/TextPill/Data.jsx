@@ -9,10 +9,23 @@ const TextPillData = (props) => {
     ? schemaEnhancer(TextBodySchema(props), props)
     : null;
 
+  // Removing the useLargeContainer from the enhancer, since it has no sense,
+  // making sure the second fieldset is the styling one.
+  if (schema.fieldsets.length > 1 && schema.fieldsets[1].id === 'styling') {
+    const index = schema.fieldsets[1].fields.indexOf('useLargeContainer');
+    schema.fieldsets[1].fields.splice(index, 1);
+  }
+
+  // Default value for the styling useFullBackgroundContainer is true
+  if (data.useFullBackgroundContainer === undefined) {
+    data.useFullBackgroundContainer = true;
+  }
+
   return (
     <>
       <SchemaRenderer
         schema={schema}
+        title={schema.title}
         onChangeField={(id, value) => {
           onChangeBlock(block, {
             ...data,
