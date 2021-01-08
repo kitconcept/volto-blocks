@@ -84,23 +84,31 @@ pipeline {
       }
     }
 
-    // stage('Acceptance tests') {
-    //   steps {
-    //     deleteDir()
-    //     checkout scm
-    //     sh '''docker pull plone; docker run -d --name="$BUILD_TAG-plone" -e SITE="Plone" -e PROFILES="profile-plone.restapi:blocks" plone fg'''
-    //     sh '''docker pull plone/volto-addon-ci; docker run -i --name="$BUILD_TAG-cypress" --link $BUILD_TAG-plone:plone -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci cypress'''
-    //   }
-    //   post {
-    //     always {
-    //       sh '''mkdir -p cypress-reports'''
-    //       sh '''docker cp $BUILD_TAG-cypress:/opt/frontend/my-volto-project/src/addons/$GIT_NAME/cypress/videos cypress-reports/'''
-    //       stash name: "cypress-reports", includes: "cypress-reports/**/*"
-    //       archiveArtifacts artifacts: 'cypress-reports/videos/*.mp4', fingerprint: true
-    //       sh '''echo "$(docker stop $BUILD_TAG-plone; docker rm -v $BUILD_TAG-plone; docker rm -v $BUILD_TAG-cypress)" '''
-    //     }
-    //   }
-    // }
+    stage('Acceptance tests') {
+      steps {
+        deleteDir()
+        checkout scm
+        sh 'yarn ci:cypress'
+        // sh '''docker pull plone; docker run -d --name="$BUILD_TAG-plone" -e SITE="Plone" -e PROFILES="profile-plone.restapi:blocks" plone fg'''
+        // sh '''docker pull plone/volto-addon-ci; docker run -i --name="$BUILD_TAG-cypress" --link $BUILD_TAG-plone:plone -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci cypress'''
+      }
+      post {
+        always {
+          archiveArtifacts artifacts: 'cypress/videos/**/*.mp4', fingerprint: true, allowEmptyArchive: true
+          archiveArtifacts artifacts: 'cypress/screenshots/**/*.png', fingerprint: true, allowEmptyArchive: true
+          junit 'results/cypress-report-*.xml'
+        }
+      }
+      // post {
+      //   always {
+      //     sh '''mkdir -p cypress-reports'''
+      //     sh '''docker cp $BUILD_TAG-cypress:/opt/frontend/my-volto-project/src/addons/$GIT_NAME/cypress/videos cypress-reports/'''
+      //     stash name: "cypress-reports", includes: "cypress-reports/**/*"
+      //     archiveArtifacts artifacts: 'cypress-reports/videos/*.mp4', fingerprint: true
+      //     sh '''echo "$(docker stop $BUILD_TAG-plone; docker rm -v $BUILD_TAG-plone; docker rm -v $BUILD_TAG-cypress)" '''
+      //   }
+      // }
+    }
 
   }
 
