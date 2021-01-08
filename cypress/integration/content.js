@@ -1,8 +1,6 @@
 context('Content Acceptance Tests', () => {
   beforeEach(() => {
     cy.autologin();
-    cy.setCookie('lang', 'de');
-    cy.setCookie('confirm_privacy', 'confirmed');
   });
 
   it('As a site administrator I can add a page', function () {
@@ -34,7 +32,7 @@ context('Content Acceptance Tests', () => {
       .type('This is a page')
       .get('.documentFirstHeading span[data-text]')
       .contains('This is a page');
-    cy.get('.tile.inner.text .public-DraftEditor-content')
+    cy.get('.block.inner.text .public-DraftEditor-content')
       .type('This is the text.')
       .get('span[data-text]')
       .contains('This is the text');
