@@ -3,7 +3,7 @@ const command = process.argv[2];
 
 // create a client
 const client = xmlrpc.createClient({
-  host: 'localhost',
+  host: process.env.CYPRESS_BACKEND_HOST || 'localhost',
   port: 55001,
   path: '/plone/RobotRemote',
 });
