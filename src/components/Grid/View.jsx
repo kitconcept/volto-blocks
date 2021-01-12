@@ -20,7 +20,7 @@ const View = ({ data, itemFixedWidth, render, path }) => {
     >
       <Grid
         stackable
-        centered={this.props.itemFixedWidth}
+        centered={itemFixedWidth}
         columns={itemFixedWidth || data?.columns?.length || 0}
       >
         {data.columns.map((column) => (
