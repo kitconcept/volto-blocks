@@ -103,8 +103,8 @@ const customBlocks = {
       addPermission: [],
       view: [],
     },
-    // Minimum items allowed
-    // minItemsAllowed: 1,
+    // Maximum items allowed
+    // maxItemsAllowed: 6,
     //
     // Variations example
     // variations: {
@@ -139,11 +139,14 @@ const customBlocks = {
       addPermission: [],
       view: [],
     },
-    minItemsAllowed: 2,
+    // Maximum items allowed
+    // maxItemsAllowed: 6,
     variations: {
       default: { label: 'Default' },
       icons: {
         label: 'Icons',
+        maxItemsAllowed: 6,
+        itemFixedWidth: 6,
         components: {
           view: ImagesGridIconsVariation,
         },

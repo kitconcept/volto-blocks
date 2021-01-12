@@ -5,27 +5,19 @@ import teaserGridTemplate2 from './teaser-grid-2.svg';
 import teaserGridTemplate3 from './teaser-grid-3.svg';
 import teaserGridTemplate4 from './teaser-grid-4.svg';
 
-import { blocks } from '~/config';
-
 const templates = () => {
-  const minItemsAllowed = blocks?.blocksConfig?.['teaserGrid']?.minItemsAllowed;
-
   return [
-    ...(minItemsAllowed === 1
-      ? [
-          {
-            image: teaserGridTemplate1,
-            id: 'teasergridtemplatetwo',
-            title: '1 column',
-            columns: [
-              {
-                id: uuid(),
-                '@type': 'teaser',
-              },
-            ],
-          },
-        ]
-      : []),
+    {
+      image: teaserGridTemplate1,
+      id: 'teasergridtemplateone',
+      title: '1 column',
+      columns: [
+        {
+          id: uuid(),
+          '@type': 'teaser',
+        },
+      ],
+    },
     {
       image: teaserGridTemplate2,
       id: 'teasergridtemplatetwo',

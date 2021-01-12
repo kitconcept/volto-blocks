@@ -3,13 +3,26 @@ import EditGrid from '../Grid/Edit';
 import templates from './templates';
 import ImageBody from './ImageBody';
 import ImageData from './ImageData';
+import { blocks } from '~/config';
 
 const Edit = (props) => {
+  const variations = blocks?.blocksConfig?.[props.data['@type']]?.variations;
+  const maxItemsAllowed =
+    (variations && variations?.[props.data.variation]?.maxItemsAllowed) ||
+    blocks?.blocksConfig?.[props.data['@type']]?.maxItemsAllowed ||
+    4;
+  const itemFixedWidth =
+    (variations && variations?.[props.data.variation]?.itemFixedWidth) ||
+    blocks?.blocksConfig?.[props.data['@type']]?.itemFixedWidth ||
+    null;
+
   return (
     <EditGrid
       {...props}
       gridType="image"
       templates={templates}
+      maxItemsAllowed={maxItemsAllowed}
+      itemFixedWidth={itemFixedWidth}
       render={({ item, index, onChangeGridItem }) => (
         <ImageBody
           data={item}

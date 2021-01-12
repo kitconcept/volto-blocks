@@ -52,6 +52,7 @@ class Edit extends Component {
     gridType: PropTypes.string,
     templates: PropTypes.func.isRequired,
     sidebarData: PropTypes.func.isRequired,
+    itemFixedWidth: PropTypes.string,
   };
 
   state = {
@@ -155,7 +156,7 @@ class Edit extends Component {
         '@type': type,
       },
     ];
-    if (this.props.data.columns.length < 4) {
+    if (this.props.data.columns.length < this.props.maxItemsAllowed) {
       this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         columns: newColumnsState,
@@ -253,10 +254,11 @@ class Edit extends Component {
                 <Ref innerRef={provided.innerRef}>
                   <Grid
                     {...provided.droppableProps}
+                    centered={this.props.itemFixedWidth}
                     columns={
-                      this.props.data.columns
-                        ? this.props.data.columns.length
-                        : 0
+                      this.props.itemFixedWidth ||
+                      this.props.data?.columns?.length ||
+                      0
                     }
                   >
                     {this.props.data.columns &&

@@ -65,9 +65,6 @@ const GridSidebar = (props) => {
     }
   };
 
-  const minItemsAllowed =
-    blocks?.blocksConfig?.[data['@type']]?.minItemsAllowed;
-
   return (
     <Segment.Group raised>
       <header className="header pulled">
@@ -147,7 +144,7 @@ const GridSidebar = (props) => {
                   />
                 )}
                 <div className="accordion-tools">
-                  {data.columns.length > minItemsAllowed && (
+                  {data.columns.length > 1 && (
                     <Button.Group>
                       <Button
                         icon
