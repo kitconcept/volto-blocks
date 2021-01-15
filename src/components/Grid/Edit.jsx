@@ -156,7 +156,7 @@ class Edit extends Component {
         '@type': type,
       },
     ];
-    if (this.props.data.columns.length < this.props.maxItemsAllowed) {
+    if (this.props.data.columns.length < (this.props.maxItemsAllowed || 4)) {
       this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         columns: newColumnsState,
