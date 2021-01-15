@@ -35,7 +35,7 @@ const CarouselData = (props) => {
   const intl = useIntl();
   const schema = schemaEnhancer
     ? schemaEnhancer(carouselSchema({ ...props, intl }), props)
-    : carouselSchema(props);
+    : carouselSchema({ ...props, intl });
 
   return (
     <SchemaRenderer

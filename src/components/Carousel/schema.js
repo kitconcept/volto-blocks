@@ -5,6 +5,10 @@ const messages = defineMessages({
     id: 'Source',
     defaultMessage: 'Source',
   },
+  Carousel: {
+    id: 'Carousel',
+    defaultMessage: 'Carousel',
+  },
 });
 
 const itemSchema = (props) => {
@@ -44,7 +48,7 @@ const itemSchema = (props) => {
 };
 
 export const carouselSchema = (props) => ({
-  title: 'Carousel',
+  title: props.intl.formatMessage(messages.Carousel),
   block: 'carousel',
   fieldsets: [
     {
