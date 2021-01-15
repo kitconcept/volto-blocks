@@ -5,12 +5,15 @@ import { Dimmer, Loader, Message } from 'semantic-ui-react';
 import { defineMessages, useIntl } from 'react-intl';
 import Dropzone from 'react-dropzone';
 import { readAsDataURL } from 'promise-file-reader';
-import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
+import {
+  isInternalURL,
+  flattenToAppURL,
+  getBaseUrl,
+} from '@plone/volto/helpers';
 import imageBlockSVG from '@plone/volto/components/manage/Blocks/Image/block-image.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { createContent } from '@plone/volto/actions';
 import { MaybeWrap } from '../../components';
-import { settings } from '~/config';
 
 const messages = defineMessages({
   PleaseChooseImage: {
@@ -95,7 +98,7 @@ const DefaultItemBody = ({ data, isEditMode, onChangeGridItem, index }) => {
           >
             <img
               src={
-                data.url.includes(settings.apiPath)
+                isInternalURL(data.url)
                   ? `${flattenToAppURL(data.url)}/@@images/image/teaser`
                   : data.url
               }
