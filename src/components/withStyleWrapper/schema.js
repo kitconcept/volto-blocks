@@ -1,6 +1,22 @@
 import { blocks } from '~/config';
+import { defineMessages } from 'react-intl';
 
-export const styleWrapperSchemaEnhancer = (schema) => {
+const messages = defineMessages({
+  bgColor: {
+    id: 'Background color',
+    defaultMessage: 'Background color',
+  },
+  useLargeContainer: {
+    id: 'Use large width',
+    defaultMessage: 'Use large width',
+  },
+  useFullBackgroundContainer: {
+    id: 'Use full width colored background',
+    defaultMessage: 'Use full width colored background',
+  },
+});
+
+export const styleWrapperSchemaEnhancer = (intl) => (schema) => {
   // The incoming schema should have the key "block" for identify itself
   // and then being able to get block specific settings, like the availableColors
   const availableColors = blocks?.blocksConfig?.[schema.block]?.availableColors;
@@ -13,16 +29,16 @@ export const styleWrapperSchemaEnhancer = (schema) => {
 
   schema.properties.bg_color = {
     widget: 'style_simple_color',
-    title: 'Background color',
+    title: intl.formatMessage(messages.bgColor),
     availableColors,
   };
   schema.properties.useLargeContainer = {
     type: 'boolean',
-    title: 'Use large width',
+    title: intl.formatMessage(messages.useLargeContainer),
   };
   schema.properties.useFullBackgroundContainer = {
     type: 'boolean',
-    title: 'Use full width colored background',
+    title: intl.formatMessage(messages.useFullBackgroundContainer),
   };
   return schema;
 };
