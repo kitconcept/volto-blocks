@@ -1,5 +1,9 @@
 import React from 'react';
 
-export default function MaybeWrap({ wrap, as: Component = 'div', ...props }) {
-  return wrap ? <Component {...props} /> : props.children;
+export default function MaybeWrap({
+  condition,
+  as: Component = 'div',
+  ...props
+}) {
+  return condition ? <Component {...props} /> : props.children;
 }

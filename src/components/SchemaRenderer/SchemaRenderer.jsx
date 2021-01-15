@@ -51,7 +51,7 @@ const InlineForm = ({
   return (
     <MaybeWrap
       as={Segment.Group}
-      wrap={!unwrapped}
+      condition={!unwrapped}
       raised={!basic}
       className="form"
     >

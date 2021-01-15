@@ -18,7 +18,7 @@ const withStyleWrapper = (Component) => ({ ...props }) => {
     >
       <MaybeWrap
         as={Container}
-        wrap={
+        condition={
           props.data.useFullBackgroundContainer && !props.data.useLargeContainer
         }
       >
