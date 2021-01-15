@@ -1,15 +1,27 @@
 import { v4 as uuid } from 'uuid';
+import { defineMessages } from 'react-intl';
 
 import imageGridTemplate1 from './image-grid-1.svg';
 import imageGridTemplate2 from './image-grid-2.svg';
 import imageGridTemplate3 from './image-grid-3.svg';
 import imageGridTemplate4 from './image-grid-4.svg';
 
-const templates = () => [
+const messages = defineMessages({
+  image: {
+    id: 'image',
+    defaultMessage: 'image',
+  },
+  images: {
+    id: 'images',
+    defaultMessage: 'images',
+  },
+});
+
+const templates = (intl) => [
   {
     image: imageGridTemplate1,
     id: 'imagegridtemplateone',
-    title: '1 image',
+    title: `1 ${intl.formatMessage(messages.image)}`,
     columns: [
       {
         id: uuid(),
@@ -20,7 +32,7 @@ const templates = () => [
   {
     image: imageGridTemplate2,
     id: 'imagegridtemplatetwo',
-    title: '2 images',
+    title: `2 ${intl.formatMessage(messages.images)}`,
     columns: [
       {
         id: uuid(),
@@ -35,7 +47,7 @@ const templates = () => [
   {
     image: imageGridTemplate3,
     id: 'imagegridtemplatethree',
-    title: '3 images',
+    title: `3 ${intl.formatMessage(messages.images)}`,
     columns: [
       {
         id: uuid(),
@@ -54,7 +66,7 @@ const templates = () => [
   {
     image: imageGridTemplate4,
     id: 'imagegridtemplatefour',
-    title: '4 images',
+    title: `4 ${intl.formatMessage(messages.images)}`,
     columns: [
       {
         id: uuid(),

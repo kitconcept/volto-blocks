@@ -200,7 +200,7 @@ class Edit extends Component {
   onSelectTemplate = (templateIndex) => {
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
-      columns: this.props.templates()[templateIndex].columns,
+      columns: this.props.templates(this.props.intl)[templateIndex].columns,
     });
   };
 
