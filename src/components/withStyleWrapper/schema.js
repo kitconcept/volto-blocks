@@ -13,7 +13,7 @@ export const styleWrapperSchemaEnhancer = (schema) => {
 
   schema.properties.bg_color = {
     widget: 'style_simple_color',
-    title: 'Bg color',
+    title: 'Background color',
     availableColors,
   };
   schema.properties.useLargeContainer = {

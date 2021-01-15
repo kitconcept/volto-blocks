@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 import { SchemaRenderer } from '../../components';
 import { TextBodySchema } from './schema';
 
 const TextPillData = (props) => {
   const { block, data, onChangeBlock, schemaEnhancer } = props;
+  const intl = useIntl();
   const schema = schemaEnhancer
-    ? schemaEnhancer(TextBodySchema(props), props)
+    ? schemaEnhancer(TextBodySchema({ ...props, intl }), props)
     : null;
 
   // Removing the useLargeContainer from the enhancer, since it has no sense,
