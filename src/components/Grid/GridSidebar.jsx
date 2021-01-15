@@ -29,6 +29,7 @@ const GridSidebar = (props) => {
     onChangeSelectedColumnItem,
     onChangeFullBlock,
     schemaEnhancer,
+    maxItemsAllowed,
   } = props;
 
   function handleChangeColumn(e, blockProps) {
@@ -85,7 +86,7 @@ const GridSidebar = (props) => {
             icon
             basic
             onClick={(e) => props.addNewColumn(e, gridType)}
-            disabled={data.columns && data.columns.length >= 4}
+            disabled={data?.columns?.length >= (maxItemsAllowed || 4)}
           >
             <Icon name={addSVG} size="24px" />
           </Button>
