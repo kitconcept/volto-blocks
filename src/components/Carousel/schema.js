@@ -9,13 +9,50 @@ const messages = defineMessages({
     id: 'Carousel',
     defaultMessage: 'Carousel',
   },
+  title: {
+    id: 'Title',
+    defaultMessage: 'Title',
+  },
+  description: {
+    id: 'Description',
+    defaultMessage: 'Description',
+  },
+  imageOverride: {
+    id: 'Image override',
+    defaultMessage: 'Image override',
+  },
+  item: {
+    id: 'Item',
+    defaultMessage: 'Item',
+  },
+  items: {
+    id: 'Items',
+    defaultMessage: 'Items',
+  },
+  addItem: {
+    id: 'Add item',
+    defaultMessage: 'Add item',
+  },
+  headline: {
+    id: 'Headline',
+    defaultMessage: 'Headline',
+  },
+  itemsToShow: {
+    id: 'Items to show',
+    defaultMessage: 'Items to show',
+  },
+  hideDescription: {
+    id: 'Hide description',
+    defaultMessage: 'Hide description',
+  },
 });
 
 const itemSchema = (props) => {
   const { intl } = props;
 
   return {
-    title: 'Item',
+    title: intl.formatMessage(messages.item),
+    addMessage: intl.formatMessage(messages.addItem),
     fieldsets: [
       {
         id: 'default',
@@ -32,13 +69,13 @@ const itemSchema = (props) => {
         selectedItemAttrs: ['Title', 'Description', 'hasPreviewImage'],
       },
       title: {
-        title: 'Title',
+        title: intl.formatMessage(messages.title),
       },
       description: {
-        title: 'Description',
+        title: intl.formatMessage(messages.description),
       },
       preview_image: {
-        title: 'Image override',
+        title: intl.formatMessage(messages.imageOverride),
         widget: 'object_browser',
         mode: 'image',
       },
@@ -65,19 +102,19 @@ export const carouselSchema = (props) => ({
   properties: {
     columns: {
       widget: 'object_list',
-      title: 'items',
+      title: props.intl.formatMessage(messages.items),
       schema: itemSchema,
     },
     headline: {
-      title: 'Headline',
+      title: props.intl.formatMessage(messages.headline),
     },
     items_to_show: {
       type: 'number',
-      title: 'Items to show',
+      title: props.intl.formatMessage(messages.itemsToShow),
       defaultValue: 4,
     },
     hide_description: {
-      title: 'Hide description',
+      title: props.intl.formatMessage(messages.hideDescription),
       type: 'boolean',
     },
   },

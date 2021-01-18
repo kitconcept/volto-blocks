@@ -44,7 +44,8 @@ const ObjectListInlineWidget = (props) => {
           >
             <VoltoIcon name={addSVG} size="18px" />
             &nbsp;
-            {`Add ${objectSchema.title}`}
+            {/* Custom addMessage in schema, else default to english */}
+            {objectSchema.addMessage || `Add ${objectSchema.title}`}
           </Button>
         </div>
       </FormFieldWrapper>
