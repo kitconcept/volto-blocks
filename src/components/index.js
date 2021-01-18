@@ -34,9 +34,6 @@ import ImagesGridIconsVariation from './ImagesGrid/IconsVariation';
 import VariationsWidget from '@kitconcept/volto-blocks/components/Variations/VariationsWidget';
 import BlockWrapperEnhancer from '@kitconcept/volto-blocks/components/Variations/BlockWrapperEnhancer';
 
-import UberGridEditBlock from '@kitconcept/volto-blocks/components/UberGrid/Edit';
-import UberGridViewBlock from '@kitconcept/volto-blocks/components/UberGrid/View';
-
 import TextBody from '@kitconcept/volto-blocks/components/SimpleBlocks/TextBody';
 
 import BlockModal from '@kitconcept/volto-blocks/components/BlockModal/BlockModal';
@@ -58,8 +55,6 @@ export {
   ObjectListWidget,
   BlockWrapperEnhancer,
   VariationsWidget,
-  UberGridEditBlock,
-  UberGridViewBlock,
   HighlightEditBlock,
   HighlightViewBlock,
   HighlightSliderEditBlock,

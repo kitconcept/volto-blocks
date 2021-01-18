@@ -24,7 +24,8 @@ export const styleWrapperSchemaEnhancer = (intl) => (schema) => {
   schema.fieldsets.push({
     id: 'styling',
     title: 'Styling',
-    fields: ['bg_color', 'useLargeContainer', 'useFullBackgroundContainer'],
+    fields: ['bg_color', 'useFullBackgroundContainer'],
+    //'useLargeContainer'
   });
 
   schema.properties.bg_color = {
