@@ -45,6 +45,10 @@ const messages = defineMessages({
     id: 'Hide description',
     defaultMessage: 'Hide description',
   },
+  settings: {
+    id: 'Settings',
+    defaultMessage: 'Settings',
+  },
 });
 
 const itemSchema = (props) => {
@@ -95,7 +99,7 @@ export const carouselSchema = (props) => ({
     },
     {
       id: 'settings',
-      title: 'Settings',
+      title: props.intl.formatMessage(messages.settings),
       fields: ['headline', 'items_to_show', 'hide_description'],
     },
   ],
