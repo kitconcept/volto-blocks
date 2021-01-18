@@ -7,15 +7,10 @@ import { injectIntl } from 'react-intl';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
-import { BlockChooser, Icon, SidebarPortal } from '@plone/volto/components';
+import { Icon } from '@plone/volto/components';
 
-import imageSVG from '@plone/volto/icons/image.svg';
-import textSVG from '@plone/volto/icons/text.svg';
-import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
-import { getBaseUrl } from '@plone/volto/helpers';
 
-import GridSidebar from '@kitconcept/volto-blocks/components/UberGrid/GridSidebar';
 import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/BlockRenderer';
 import TemplateChooser from '@kitconcept/volto-blocks/components/TemplateChooser/TemplateChooser';
 import NewBlockAddButton from './NewBlockAddButton';
@@ -26,8 +21,6 @@ import {
 } from '@kitconcept/volto-blocks/helpers';
 
 import templates from './templates';
-
-import { blocks } from '~/config';
 
 /**
  * Edit image block class.

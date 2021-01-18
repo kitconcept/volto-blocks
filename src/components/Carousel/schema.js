@@ -1,51 +1,73 @@
-const itemSchema = (props) => ({
-  title: 'Item',
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['title'],
-    },
-  ],
+import { defineMessages } from 'react-intl';
 
-  properties: {
-    title: {
-      type: 'string',
-      title: 'Title',
-    },
+const messages = defineMessages({
+  Source: {
+    id: 'Source',
+    defaultMessage: 'Source',
   },
-  required: [],
+  Carousel: {
+    id: 'Carousel',
+    defaultMessage: 'Carousel',
+  },
 });
 
-export const carouselSchemaExperimental = (props) => ({
-  title: 'Carousel',
+const itemSchema = (props) => {
+  const { intl } = props;
+
+  return {
+    title: 'Item',
+    fieldsets: [
+      {
+        id: 'default',
+        title: 'Default',
+        fields: ['href', 'title', 'description', 'preview_image'],
+      },
+    ],
+
+    properties: {
+      href: {
+        title: intl.formatMessage(messages.Source),
+        widget: 'object_browser',
+        mode: 'link',
+        selectedItemAttrs: ['Title', 'Description', 'hasPreviewImage'],
+      },
+      title: {
+        title: 'Title',
+      },
+      description: {
+        title: 'Description',
+      },
+      preview_image: {
+        title: 'Image override',
+        widget: 'object_browser',
+        mode: 'image',
+      },
+    },
+    required: [],
+  };
+};
+
+export const carouselSchema = (props) => ({
+  title: props.intl.formatMessage(messages.Carousel),
+  block: 'carousel',
   fieldsets: [
     {
       id: 'default',
       title: 'Default',
       fields: ['columns'],
     },
-  ],
-  properties: {
-    columns: {
-      widget: 'object_list_inline',
-      title: 'items',
-      schema: itemSchema(props),
-    },
-  },
-  required: [],
-});
-
-export const carouselSchema = (props) => ({
-  title: 'Carousel',
-  fieldsets: [
     {
-      id: 'default',
-      title: 'Default',
+      id: 'settings',
+      title: 'Settings',
       fields: ['headline', 'items_to_show', 'hide_description'],
     },
   ],
   properties: {
+    columns: {
+      widget: 'object_list',
+      title: 'items',
+      schema: itemSchema,
+    },
     headline: {
       title: 'Headline',
     },

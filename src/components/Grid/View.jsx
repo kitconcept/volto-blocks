@@ -4,7 +4,7 @@ import { Grid } from 'semantic-ui-react';
 import cx from 'classnames';
 import { BlockWrapperEnhancer } from '@kitconcept/volto-blocks/components';
 
-const View = ({ data, render, path }) => {
+const View = ({ data, itemFixedWidth, render, path }) => {
   return (
     <BlockWrapperEnhancer data={data}>
       <div

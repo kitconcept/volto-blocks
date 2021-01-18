@@ -1,22 +1,56 @@
-export const styleWrapperSchemaEnhancer = (schema) => {
+import { blocks } from '~/config';
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  bgColor: {
+    id: 'Background color',
+    defaultMessage: 'Background color',
+  },
+  useLargeContainer: {
+    id: 'Use large width',
+    defaultMessage: 'Use large width',
+  },
+  useFullBackgroundContainer: {
+    id: 'Use full width colored background',
+    defaultMessage: 'Use full width colored background',
+  },
+});
+
+export const styleWrapperSchemaEnhancer = (intl) => (schema) => {
+  // The incoming schema should have the key "block" for identify itself
+  // and then being able to get block specific settings, like the availableColors
+  const availableColors = blocks?.blocksConfig?.[schema.block]?.availableColors;
+
   schema.fieldsets.push({
     id: 'styling',
     title: 'Styling',
-    fields: ['bg_color', 'useBigContainer', 'useFullBackgroundContainer'],
+    fields: ['bg_color', 'useLargeContainer', 'useFullBackgroundContainer'],
   });
 
   schema.properties.bg_color = {
     widget: 'style_simple_color',
-    title: 'Bg color',
-    availableColors: ['#004176'],
+    title: intl.formatMessage(messages.bgColor),
+    availableColors,
   };
-  schema.properties.useBigContainer = {
+  schema.properties.useLargeContainer = {
     type: 'boolean',
-    title: 'Use big container',
+    title: intl.formatMessage(messages.useLargeContainer),
   };
   schema.properties.useFullBackgroundContainer = {
     type: 'boolean',
-    title: 'Use full background container',
+    title: intl.formatMessage(messages.useFullBackgroundContainer),
   };
   return schema;
 };
+
+export const nullSchema = () => ({
+  fieldsets: [
+    {
+      id: 'default',
+      title: 'Default',
+      fields: [],
+    },
+  ],
+  properties: {},
+  required: [],
+});

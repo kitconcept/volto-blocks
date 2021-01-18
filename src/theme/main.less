@@ -9,7 +9,7 @@
   }
 
   .column {
-    z-index: 5;
+    z-index: 2;
   }
 }
 
@@ -362,9 +362,15 @@
   margin-bottom: 0;
 }
 
+.imagesGrid [data-rbd-draggable-context-id] {
+  margin-bottom: 0;
+}
+
 // @import 'slider';
 @import (less) '~slick-carousel/slick/slick.css';
 @import (less) '~slick-carousel/slick/slick-theme.css';
+@import 'teasers';
 @import 'highlight';
 @import 'ubergrid';
 @import 'carousel';
+@import 'textpill';

@@ -11,12 +11,13 @@
  *   }
  * }
  */
-import React from 'react';
 import {
+  ImagesGridIconsVariation,
   withStyleWrapper,
   SimpleColorPicker,
   CarouselEditBlock,
   CarouselViewBlock,
+  ObjectListWidget,
   SliderEditBlock,
   SliderViewBlock,
   TeaserGridEditBlock,
@@ -31,10 +32,14 @@ import {
   HighlightSliderEditBlock,
   UberGridViewBlock,
   UberGridEditBlock,
+  TextPillEditBlock,
+  TextPillViewBlock,
 } from '@kitconcept/volto-blocks/components';
+import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 
+import textSVG from '@plone/volto/icons/subtext.svg';
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
@@ -43,9 +48,9 @@ const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
 const customGroupBlocksOrder = (defaultGroups) =>
   insertInArray(defaultGroups, newTeasersGroup, 2);
 
-// Schema enhancer example, a function with schema => schema signature
+// Schema extender example, a function with schema => schema signature
 // It might take a second and third argument props and int, if required
-// const schemaEnhancer = (schema) => {
+// const schemaExtender = (schema) => {
 //   schema.properties.newfield = {
 //     title: 'new field',
 //   };
@@ -98,8 +103,8 @@ const customBlocks = {
       addPermission: [],
       view: [],
     },
-    // Minimum items allowed
-    // minItemsAllowed: 1,
+    // Maximum items allowed
+    // maxItemsAllowed: 6,
     //
     // Variations example
     // variations: {
@@ -115,8 +120,8 @@ const customBlocks = {
     //         </>
     //       ),
     //     },
-    //     schemaExtender: schemaEnhancer,
-    //     schemaExtenderItem: schemaEnhancer,
+    //     schemaExtender: schemaExtender,
+    //     schemaExtenderItem: schemaExtender,
     //   },
     // },
   },
@@ -125,14 +130,28 @@ const customBlocks = {
     title: 'Images grid',
     icon: imagesSVG,
     group: 'common',
-    view: ImagesGridViewBlock,
-    edit: ImagesGridEditBlock,
+    view: withStyleWrapper(ImagesGridViewBlock),
+    edit: withStyleWrapper(ImagesGridEditBlock),
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,
     security: {
       addPermission: [],
       view: [],
+    },
+    // Maximum items allowed
+    // maxItemsAllowed: 6,
+    variations: {
+      default: { label: 'Default' },
+      icons: {
+        label: 'Icons',
+        maxItemsAllowed: 6,
+        itemFixedWidth: 6,
+        components: {
+          view: ImagesGridIconsVariation,
+        },
+        schemaExtenderItem: ImagesGridIconsVariationSchemaExtender,
+      },
     },
   },
   listingGrid: {
@@ -195,6 +214,21 @@ const customBlocks = {
       view: [],
     },
   },
+  textPillWithStyle: {
+    id: 'textPillWithStyle',
+    title: 'Text with background color',
+    icon: textSVG,
+    group: 'text',
+    view: withStyleWrapper(TextPillViewBlock),
+    edit: withStyleWrapper(TextPillEditBlock),
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
 };
 
 // export const blocks = {
@@ -203,6 +237,7 @@ const customBlocks = {
 //   groupBlocksOrder: customGroupBlocksOrder,
 // };
 export default (config) => {
+  config.widgets.widget.object_list = ObjectListWidget;
   config.widgets.widget.style_simple_color = SimpleColorPicker;
 
   return {

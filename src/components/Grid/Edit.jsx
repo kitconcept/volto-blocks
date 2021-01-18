@@ -9,9 +9,6 @@ import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
 import { Icon, SidebarPortal } from '@plone/volto/components';
 
-import imageSVG from '@plone/volto/icons/image.svg';
-import textSVG from '@plone/volto/icons/text.svg';
-import imagesSVG from '@plone/volto/icons/images.svg';
 import addSVG from '@plone/volto/icons/add.svg';
 import { getBaseUrl } from '@plone/volto/helpers';
 
@@ -52,10 +49,10 @@ class Edit extends Component {
     onFocusPreviousBlock: PropTypes.func.isRequired,
     onFocusNextBlock: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
-    createContent: PropTypes.func.isRequired,
     gridType: PropTypes.string,
     templates: PropTypes.func.isRequired,
     sidebarData: PropTypes.func.isRequired,
+    itemFixedWidth: PropTypes.string,
   };
 
   state = {
@@ -159,7 +156,7 @@ class Edit extends Component {
         '@type': type,
       },
     ];
-    if (this.props.data.columns.length < 4) {
+    if (this.props.data.columns.length < (this.props.maxItemsAllowed || 4)) {
       this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         columns: newColumnsState,
@@ -203,7 +200,7 @@ class Edit extends Component {
   onSelectTemplate = (templateIndex) => {
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
-      columns: this.props.templates()[templateIndex].columns,
+      columns: this.props.templates(this.props.intl)[templateIndex].columns,
     });
   };
 
@@ -244,6 +241,10 @@ class Edit extends Component {
                 icon
                 basic
                 onClick={(e) => this.addNewColumn(e, this.props.gridType)}
+                disabled={
+                  this.props.data?.columns?.length >=
+                  (this.props.maxItemsAllowed || 4)
+                }
               >
                 <Icon name={addSVG} size="24px" />
               </Button>
@@ -257,10 +258,11 @@ class Edit extends Component {
                 <Ref innerRef={provided.innerRef}>
                   <Grid
                     {...provided.droppableProps}
+                    centered={this.props.itemFixedWidth}
                     columns={
-                      this.props.data.columns
-                        ? this.props.data.columns.length
-                        : 0
+                      this.props.itemFixedWidth ||
+                      this.props.data?.columns?.length ||
+                      0
                     }
                   >
                     {this.props.data.columns &&

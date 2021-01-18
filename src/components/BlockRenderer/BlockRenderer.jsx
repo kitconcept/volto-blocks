@@ -9,6 +9,11 @@ import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrow
  * @extends Component
  */
 function BlockRenderer(props) {
+  if (!props.type) {
+    // We could have an empty block, although should be handled somewhere else
+    return null;
+  }
+
   const EditBlock = blocks.blocksConfig[props.type].edit;
   const ViewBlock = blocks.blocksConfig[props.type].view;
 

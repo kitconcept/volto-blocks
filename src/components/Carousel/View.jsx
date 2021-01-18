@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Message } from 'semantic-ui-react';
+import { Button, Message } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import teaserHeroTopTemplate from '@kitconcept/volto-blocks/components/TeaserHero/teaserhero-top-template.svg';
 import { defineMessages, useIntl } from 'react-intl';
@@ -46,10 +46,10 @@ const CarouselView = (props) => {
   return (
     <div
       className={cx('block carousel', {
-        'wrapperstyle full': data.useBigContainer,
+        'wrapperstyle full': data.useLargeContainer,
       })}
     >
-      {(data.hrefList?.length === 0 || !data.hrefList) && isEditMode && (
+      {(data.columns?.length === 0 || !data.columns) && isEditMode && (
         <Message>
           <div className="teaser-item default">
             <img src={teaserHeroTopTemplate} alt="" />
@@ -57,9 +57,9 @@ const CarouselView = (props) => {
           </div>
         </Message>
       )}
-      {data.hrefList?.length > 0 && (
+      {data.columns?.length > 0 && (
         <div
-          className={cx({ 'full-width': data.useBigContainer })}
+          className={cx({ 'full-width': data.useLargeContainer })}
           style={{ backgroundColor: props.data.bg_color }}
         >
           {data.headline && <h2>{data.headline}</h2>}
@@ -72,8 +72,8 @@ const CarouselView = (props) => {
             nextArrow={<NextArrow />}
             prevArrow={<PrevArrow />}
           >
-            {data.hrefList &&
-              data.hrefList.map((item) => (
+            {data.columns &&
+              data.columns.map((item) => (
                 <Body
                   key={item.id}
                   data={item}

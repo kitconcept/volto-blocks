@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 import { Button, Grid, Message } from 'semantic-ui-react';
-import { injectIntl } from 'react-intl';
 
-const TemplateChooser = ({ templates, onSelectTemplate, intl }) => {
+const TemplateChooser = ({ templates, onSelectTemplate }) => {
+  const intl = useIntl();
   return (
     <div className="template-chooser">
       <Message>
-        <Grid columns={templates().length}>
-          {templates().map((template, index) => (
+        <Grid columns={templates(intl).length}>
+          {templates(intl).map((template, index) => (
             <Grid.Column key={template.id}>
               <Button
                 className="template-chooser-item"
@@ -35,4 +36,4 @@ TemplateChooser.propTypes = {
   onSelectTemplate: PropTypes.func.isRequired,
 };
 
-export default injectIntl(TemplateChooser);
+export default TemplateChooser;
