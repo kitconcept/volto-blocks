@@ -47,7 +47,10 @@ const VariationsWidget = ({ data, block, onChangeBlock }) => {
                 options={Object.keys(variations).map((key) => {
                   return {
                     value: key,
-                    ...variations[key],
+                    label: intl.formatMessage({
+                      id: variations[key].label,
+                      defaultMessage: variations[key].label,
+                    }),
                   };
                 })}
                 styles={customSelectStyles}
@@ -55,7 +58,10 @@ const VariationsWidget = ({ data, block, onChangeBlock }) => {
                 components={{ DropdownIndicator, Option }}
                 value={{
                   value: value,
-                  label: variations[value].label,
+                  label: intl.formatMessage({
+                    id: variations[value].label,
+                    defaultMessage: variations[value].label,
+                  }),
                 }}
                 onChange={(field) => {
                   onChangeBlock(block, {
