@@ -75,7 +75,7 @@ const CarouselView = (props) => {
             {data.columns &&
               data.columns.map((item) => (
                 <Body
-                  key={item.id}
+                  key={item['@id']}
                   data={item}
                   isEditMode={isEditMode}
                   dataBlock={data}

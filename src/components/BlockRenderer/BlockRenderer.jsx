@@ -47,4 +47,8 @@ BlockRenderer.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
+BlockRenderer.defaultProps = {
+  edit: false,
+};
+
 export default withObjectBrowser(BlockRenderer);
