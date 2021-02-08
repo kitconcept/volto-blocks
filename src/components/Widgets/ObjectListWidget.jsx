@@ -33,14 +33,15 @@ const ObjectListInlineWidget = (props) => {
           <Button
             compact
             icon
-            onClick={() =>
+            onClick={() => {
               onChange(id, [
                 ...value,
                 {
                   '@id': uuid(),
                 },
-              ])
-            }
+              ]);
+              setActiveColumn(value.length);
+            }}
           >
             <VoltoIcon name={addSVG} size="18px" />
             &nbsp;
@@ -93,21 +94,23 @@ const ObjectListInlineWidget = (props) => {
                   <div className="accordion-title-wrapper">
                     {`${objectSchema.title} #${index + 1}`}
                   </div>
-                  <button
-                    onClick={() => {
-                      onChange(
-                        id,
-                        value.filter((v, i) => i !== index),
-                      );
-                    }}
-                  >
-                    <VoltoIcon name={deleteSVG} size="20px" color="#e40166" />
+                  <div>
+                    <button
+                      onClick={() => {
+                        onChange(
+                          id,
+                          value.filter((v, i) => i !== index),
+                        );
+                      }}
+                    >
+                      <VoltoIcon name={deleteSVG} size="20px" color="#e40166" />
+                    </button>
                     {activeColumn === index ? (
                       <VoltoIcon name={upSVG} size="20px" />
                     ) : (
                       <VoltoIcon name={downSVG} size="20px" />
                     )}
-                  </button>
+                  </div>
                 </Accordion.Title>
                 <Accordion.Content active={activeColumn === index}>
                   <Segment>
