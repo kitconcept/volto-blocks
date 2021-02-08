@@ -1,0 +1,50 @@
+[
+  {
+    "id": "Source",
+    "defaultMessage": "Source"
+  },
+  {
+    "id": "Carousel",
+    "defaultMessage": "Carousel"
+  },
+  {
+    "id": "Title",
+    "defaultMessage": "Title"
+  },
+  {
+    "id": "Description",
+    "defaultMessage": "Description"
+  },
+  {
+    "id": "Image override",
+    "defaultMessage": "Image override"
+  },
+  {
+    "id": "Item",
+    "defaultMessage": "Item"
+  },
+  {
+    "id": "Items",
+    "defaultMessage": "Items"
+  },
+  {
+    "id": "Add item",
+    "defaultMessage": "Add item"
+  },
+  {
+    "id": "Headline",
+    "defaultMessage": "Headline"
+  },
+  {
+    "id": "Items to show",
+    "defaultMessage": "Items to show"
+  },
+  {
+    "id": "Hide description",
+    "defaultMessage": "Hide description"
+  },
+  {
+    "id": "Settings",
+    "defaultMessage": "Settings"
+  }
+]

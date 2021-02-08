@@ -1,0 +1,268 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language: \n"
+"Language-Team: \n"
+"Content-Type: \n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: components/Carousel/schema
+msgid "Add item"
+msgstr ""
+
+#: components/HighlightSlider/SliderSidebar
+msgid "Aktuelles"
+msgstr ""
+
+#: components/ImagesGrid/schema
+msgid "Alignment"
+msgstr ""
+
+#: components/ImagesGrid/schema
+msgid "Alt text"
+msgstr ""
+
+#: components/withStyleWrapper/schema
+msgid "Background color"
+msgstr ""
+
+#: components/Slider/Edit
+msgid "Browse or type URL"
+msgstr ""
+
+#: components/BlockModal/BlockModal
+msgid "Cancel"
+msgstr ""
+
+#: components/Carousel/schema
+msgid "Carousel"
+msgstr ""
+
+#: components/Widgets/CheckboxWidget
+msgid "Default"
+msgstr ""
+
+#: components/Carousel/schema
+#: components/TeaserGrid/schema
+#: components/Widgets/CheckboxWidget
+msgid "Description"
+msgstr ""
+
+#: components/ImagesGrid/DefaultItemBody
+#: components/ImagesGrid/IconsVariation
+msgid "Drop a file, click for upload or browse the site"
+msgstr ""
+
+#: components/SchemaRenderer/SchemaRenderer
+msgid "Error"
+msgstr ""
+
+#: components/ImagesGrid/schema
+msgid "External URL"
+msgstr ""
+
+#: components/Grid/GridSidebar
+msgid "Grid"
+msgstr ""
+
+#: components/Grid/GridSidebar
+msgid "Grid Element"
+msgstr ""
+
+#: components/Grid/GridSidebar
+msgid "Grid Image"
+msgstr ""
+
+#: components/Carousel/schema
+#: components/TeaserGrid/schema
+msgid "Headline"
+msgstr ""
+
+#: components/Carousel/schema
+msgid "Hide description"
+msgstr ""
+
+#: components/Highlight/HighlightSidebar
+msgid "Highlight"
+msgstr ""
+
+#: components/ImagesGrid/schema
+msgid "Image"
+msgstr ""
+
+#: components/Carousel/schema
+msgid "Image override"
+msgstr ""
+
+#: components/Grid/GridSidebar
+msgid "Images Grid"
+msgstr ""
+
+#: components/Carousel/schema
+msgid "Item"
+msgstr ""
+
+#: components/Carousel/schema
+msgid "Items"
+msgstr ""
+
+#: components/Carousel/schema
+msgid "Items to show"
+msgstr ""
+
+#: components/ImagesGrid/schema
+msgid "Link to"
+msgstr ""
+
+#: components/Grid/GridSidebar
+msgid "Listing Grid"
+msgstr ""
+
+#: components/Grid/GridSidebar
+msgid "ListingGrid"
+msgstr ""
+
+#: components/ImagesGrid/schema
+msgid "No image selected"
+msgstr ""
+
+#: components/ListingGrid/ListingGridBody
+msgid "No items found in this container."
+msgstr ""
+
+#: components/ListingGrid/ListingGridBody
+msgid "No results found."
+msgstr ""
+
+#: components/ImagesGrid/schema
+#: components/TeaserGrid/schema
+msgid "Open in a new tab"
+msgstr ""
+
+#: components/BlockModal/BlockModal
+#: components/Slider/Edit
+#: Freezer/Cards/Edit
+msgid "Options"
+msgstr ""
+
+#: components/ImagesGrid/schema
+msgid "Origin"
+msgstr ""
+
+#: components/Carousel/Body
+#: components/Carousel/View
+#: components/Highlight/HighlightBody
+#: components/HighlightSlider/SliderBody
+#: components/HighlightSlider/View
+#: components/TeaserGrid/TeaserDefaultTemplate
+#: components/TeaserHero/TeaserHeroBody
+msgid "Please choose an existing content as source for this element"
+msgstr ""
+
+#: components/Widgets/CheckboxWidget
+msgid "Required"
+msgstr ""
+
+#: components/BlockModal/BlockModal
+msgid "Save"
+msgstr ""
+
+#: components/Carousel/schema
+msgid "Settings"
+msgstr ""
+
+#: components/Widgets/CheckboxWidget
+msgid "Short Name"
+msgstr ""
+
+#: components/BlockDataWidgets/MultiSourceWidget
+#: components/Carousel/schema
+#: components/ImagesGrid/schema
+#: components/TeaserGrid/schema
+msgid "Source"
+msgstr ""
+
+#: components/TeaserGrid/schema
+msgid "Source image"
+msgstr ""
+
+#: components/Grid/GridSidebar
+msgid "Teaser Grid"
+msgstr ""
+
+#: components/TeaserHero/TeaserHeroSidebar
+msgid "Teaser Hero"
+msgstr ""
+
+#: components/TextPill/schema
+msgid "Text block with background color"
+msgstr ""
+
+#: components/SchemaRenderer/SchemaRenderer
+msgid "There were some errors"
+msgstr ""
+
+#: components/Carousel/schema
+#: components/ImagesGrid/schema
+#: components/TeaserGrid/schema
+#: components/Widgets/CheckboxWidget
+msgid "Title"
+msgstr ""
+
+#: components/SimpleBlocks/TextBody
+#: components/TextPill/Body
+#: Freezer/Card/Edit
+#: Freezer/TextTileWithAppendActions/Edit
+msgid "Type text…"
+msgstr ""
+
+#: components/ImagesGrid/DefaultItemBody
+#: components/ImagesGrid/IconsVariation
+msgid "Uploading image"
+msgstr ""
+
+#: components/withStyleWrapper/schema
+msgid "Use full width colored background"
+msgstr ""
+
+#: components/withStyleWrapper/schema
+msgid "Use large width"
+msgstr ""
+
+#: components/Widgets/CheckboxWidget
+msgid "Used for programmatic access to the fieldset."
+msgstr ""
+
+#: components/TeaserHero/TeaserHeroData
+#: components/Variations/VariationsWidget
+msgid "Variation"
+msgstr ""
+
+#: components/ListingGrid/templates
+#: components/TeaserGrid/templates
+msgid "column"
+msgstr ""
+
+#: components/ListingGrid/templates
+#: components/TeaserGrid/templates
+msgid "columns"
+msgstr ""
+
+#: components/ImagesGrid/templates
+msgid "image"
+msgstr ""
+
+#: components/ImagesGrid/templates
+msgid "images"
+msgstr ""
+
+#: components/Carousel/Body
+#: components/Highlight/HighlightBody
+#: components/HighlightSlider/SliderBody
+msgid "moreInfo"
+msgstr ""
