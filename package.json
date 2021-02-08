@@ -4,6 +4,7 @@
   "description": "kitconcept Volto Blocks",
   "main": "index.js",
   "scripts": {
+    "i18n": "rm -rf build/messages && NODE_ENV=production node src/i18n.js",
     "prettier": "make prettier",
     "lint": "make lint",
     "stylelint": "make stylelint",

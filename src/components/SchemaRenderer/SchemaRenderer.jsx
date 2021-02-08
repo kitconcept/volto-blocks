@@ -11,10 +11,6 @@ import upSVG from '@plone/volto/icons/up-key.svg';
 import downSVG from '@plone/volto/icons/down-key.svg';
 
 const messages = defineMessages({
-  editValues: {
-    id: 'Edit values',
-    defaultMessage: 'Edit values',
-  },
   error: {
     id: 'Error',
     defaultMessage: 'Error',
