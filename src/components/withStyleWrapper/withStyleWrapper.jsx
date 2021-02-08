@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl';
 import { styleWrapperSchemaEnhancer } from './schema';
 import { Container } from 'semantic-ui-react';
 import cx from 'classnames';
-import { MaybeWrap } from '..';
 
 const withStyleWrapper = (Component) => ({ ...props }) => {
   const intl = useIntl();
@@ -16,17 +15,14 @@ const withStyleWrapper = (Component) => ({ ...props }) => {
           .bg_color,
       })}
     >
-      <MaybeWrap
-        as={Container}
-        condition={
-          props.data.useFullBackgroundContainer && !props.data.useLargeContainer
-        }
-      >
+      {/* This container is to maintain the style cascade consistent with the `full-width` hack */}
+      <Container>
         <Component
           {...props}
-          schemaEnhancer={styleWrapperSchemaEnhancer(intl)}
+          // The enhancer is a function that returns a schema enhancer function
+          schemaEnhancer={styleWrapperSchemaEnhancer(props.data['@type'], intl)}
         />
-      </MaybeWrap>
+      </Container>
     </div>
   );
 };

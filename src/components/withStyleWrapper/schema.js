@@ -16,10 +16,8 @@ const messages = defineMessages({
   },
 });
 
-export const styleWrapperSchemaEnhancer = (intl) => (schema) => {
-  // The incoming schema should have the key "block" for identify itself
-  // and then being able to get block specific settings, like the availableColors
-  const availableColors = blocks?.blocksConfig?.[schema.block]?.availableColors;
+export const styleWrapperSchemaEnhancer = (block, intl) => (schema) => {
+  const availableColors = blocks?.blocksConfig?.[block]?.availableColors;
 
   schema.fieldsets.push({
     id: 'styling',
