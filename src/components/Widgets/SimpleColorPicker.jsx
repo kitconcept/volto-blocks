@@ -9,7 +9,7 @@ const GithubPicker = loadable(() => import('react-color/lib/Github'));
 export default (props) => {
   const { id, value, onChange, availableColors } = props;
   const [showPicker, setShowPicker] = React.useState(false);
-
+  const defaultColor = props.defaultColor || '#000';
   return (
     <FormFieldWrapper
       {...props}
@@ -19,8 +19,8 @@ export default (props) => {
       <div style={{ paddingTop: '10px' }}>
         <Button.Group>
           <Button
-            color={value}
-            style={{ backgroundColor: value }}
+            color={value || defaultColor}
+            style={{ backgroundColor: value || defaultColor }}
             onClick={() => setShowPicker(true)}
             size="huge"
             title="Pick color"
@@ -42,7 +42,7 @@ export default (props) => {
             triangle="top"
             className="color-picker"
             colors={availableColors}
-            color={value || '#000'}
+            color={value || defaultColor}
             onChangeComplete={(value) => {
               setShowPicker(false);
               onChange(id, value.hex);
