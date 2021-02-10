@@ -75,12 +75,7 @@ export function TeaserGridSchema(props) {
       },
       description: {
         title: intl.formatMessage(messages.description),
-        icon: data.description && clearSVG,
-        iconAction: () =>
-          onChangeBlock(data.block, {
-            ...data,
-            description: '',
-          }),
+        widget: 'textarea',
       },
       preview_image: {
         title: intl.formatMessage(messages.SourceImage),
