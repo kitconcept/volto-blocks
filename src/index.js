@@ -33,6 +33,8 @@ import {
   TextPillEditBlock,
   TextPillViewBlock,
   ObjectByType,
+  ButtonViewBlock,
+  ButtonEditBlock,
 } from '@kitconcept/volto-blocks/components';
 import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
 
@@ -42,6 +44,7 @@ import textSVG from '@plone/volto/icons/subtext.svg';
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
+import CircleMenuSVG from '@plone/volto/icons/circle-menu.svg';
 
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
 const customGroupBlocksOrder = (defaultGroups) =>
@@ -205,6 +208,21 @@ const customBlocks = {
     group: 'text',
     view: withStyleWrapper(TextPillViewBlock),
     edit: withStyleWrapper(TextPillEditBlock),
+    restricted: false,
+    mostUsed: true,
+    sidebarTab: 1,
+    security: {
+      addPermission: [],
+      view: [],
+    },
+  },
+  buttonBlock: {
+    id: 'buttonBlock',
+    title: 'Button',
+    icon: CircleMenuSVG,
+    group: 'common',
+    view: ButtonViewBlock,
+    edit: ButtonEditBlock,
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,

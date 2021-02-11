@@ -31,6 +31,8 @@ import MaybeWrap from './MaybeWrap/MaybeWrap';
 import withStyleWrapper from './withStyleWrapper/withStyleWrapper';
 import SimpleColorPicker from './Widgets/SimpleColorPicker';
 import ImagesGridIconsVariation from './ImagesGrid/IconsVariation';
+import ButtonViewBlock from './ButtonBlock/View';
+import ButtonEditBlock from './ButtonBlock/Edit';
 
 import VariationsWidget from '@kitconcept/volto-blocks/components/Variations/VariationsWidget';
 import BlockWrapperEnhancer from '@kitconcept/volto-blocks/components/Variations/BlockWrapperEnhancer';
@@ -84,4 +86,6 @@ export {
   BlockModal,
   CheckboxWidget,
   ObjectByType,
+  ButtonViewBlock,
+  ButtonEditBlock,
 };
