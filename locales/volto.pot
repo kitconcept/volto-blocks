@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2021-02-08T10:24:09.143Z\n"
+"POT-Creation-Date: 2021-02-11T12:53:45.499Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -23,6 +23,7 @@ msgstr ""
 msgid "Aktuelles"
 msgstr ""
 
+#: components/ButtonBlock/ButtonData
 #: components/ImagesGrid/schema
 # defaultMessage: Alignment
 msgid "Alignment"
@@ -43,6 +44,21 @@ msgstr ""
 msgid "Browse or type URL"
 msgstr ""
 
+#: components/ButtonBlock/ButtonSidebar
+# defaultMessage: Button
+msgid "Button"
+msgstr ""
+
+#: components/ButtonBlock/ButtonData
+# defaultMessage: Button Link
+msgid "ButtonLink"
+msgstr ""
+
+#: components/ButtonBlock/ButtonData
+# defaultMessage: Button Title
+msgid "ButtonTitle"
+msgstr ""
+
 #: components/BlockModal/BlockModal
 # defaultMessage: Cancel
 msgid "Cancel"
@@ -51,6 +67,11 @@ msgstr ""
 #: components/Carousel/schema
 # defaultMessage: Carousel
 msgid "Carousel"
+msgstr ""
+
+#: components/ButtonBlock/AlignButtonBlock
+# defaultMessage: Center
+msgid "Center"
 msgstr ""
 
 #: components/Widgets/CheckboxWidget
@@ -79,6 +100,11 @@ msgstr ""
 #: components/ImagesGrid/schema
 # defaultMessage: External URL
 msgid "External URL"
+msgstr ""
+
+#: components/ButtonBlock/AlignButtonBlock
+# defaultMessage: Full
+msgid "Full"
 msgstr ""
 
 #: components/Grid/GridSidebar
@@ -140,6 +166,11 @@ msgstr ""
 #: components/Carousel/schema
 # defaultMessage: Items to show
 msgid "Items to show"
+msgstr ""
+
+#: components/ButtonBlock/AlignButtonBlock
+# defaultMessage: Left
+msgid "Left"
 msgstr ""
 
 #: components/ImagesGrid/schema
@@ -204,6 +235,11 @@ msgstr ""
 #: components/Widgets/CheckboxWidget
 # defaultMessage: Required
 msgid "Required"
+msgstr ""
+
+#: components/ButtonBlock/AlignButtonBlock
+# defaultMessage: Right
+msgid "Right"
 msgstr ""
 
 #: components/BlockModal/BlockModal
