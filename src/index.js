@@ -43,6 +43,11 @@ import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
 
+const serverConfig =
+  typeof __SERVER__ !== 'undefined' && __SERVER__
+    ? require('./server').default
+    : false;
+
 const newTeasersGroup = { id: 'teasers', title: 'Teasers' };
 const customGroupBlocksOrder = (defaultGroups) =>
   insertInArray(defaultGroups, newTeasersGroup, 2);
@@ -224,6 +229,13 @@ export default (config) => {
   config.widgets.widget.object_list = ObjectListWidget;
   config.widgets.widget.style_simple_color = SimpleColorPicker;
   config.widgets.widget.object_by_type = ObjectByType;
+
+  if (serverConfig) {
+    config.settings.expressMiddleware = [
+      ...config.settings.expressMiddleware,
+      ...serverConfig,
+    ];
+  }
 
   return {
     ...config,
