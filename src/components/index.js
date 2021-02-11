@@ -23,6 +23,7 @@ import HighlightSliderViewBlock from '@kitconcept/volto-blocks/components/Highli
 import CarouselEditBlock from './Carousel/Edit';
 import CarouselViewBlock from './Carousel/View';
 import ObjectListWidget from './Widgets/ObjectListWidget';
+import ObjectByType from './Widgets/objectByType';
 import DragDropList from './DragDropList/DragDropList';
 import TextPillEditBlock from './TextPill/Edit';
 import TextPillViewBlock from './TextPill/View';
@@ -82,4 +83,5 @@ export {
   BlockRenderer,
   BlockModal,
   CheckboxWidget,
+  ObjectByType,
 };

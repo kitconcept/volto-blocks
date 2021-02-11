@@ -32,6 +32,7 @@ import {
   HighlightSliderEditBlock,
   TextPillEditBlock,
   TextPillViewBlock,
+  ObjectByType,
 } from '@kitconcept/volto-blocks/components';
 import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
 
@@ -222,6 +223,7 @@ const customBlocks = {
 export default (config) => {
   config.widgets.widget.object_list = ObjectListWidget;
   config.widgets.widget.style_simple_color = SimpleColorPicker;
+  config.widgets.widget.object_by_type = ObjectByType;
 
   return {
     ...config,
