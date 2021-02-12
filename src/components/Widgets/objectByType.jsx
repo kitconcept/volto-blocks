@@ -30,7 +30,7 @@ export const ObjectByTypeWidget = (props) => {
         return (
           <Tab.Pane>
             <ObjectWidget
-              schema={schema()}
+              schema={schema(props)}
               id={id}
               errors={errors}
               value={value[id] || {}}
