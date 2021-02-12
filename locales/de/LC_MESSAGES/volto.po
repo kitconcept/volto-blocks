@@ -24,6 +24,7 @@ msgstr "Element hinzufügen"
 msgid "Aktuelles"
 msgstr ""
 
+#: components/ButtonBlock/ButtonData
 #: components/ImagesGrid/schema
 msgid "Alignment"
 msgstr "Ausrichtung"
@@ -40,6 +41,18 @@ msgstr "Hintergrundfarbe"
 msgid "Browse or type URL"
 msgstr "Durchsuchen oder URL eintippen"
 
+#: components/ButtonBlock/ButtonSidebar
+msgid "Button"
+msgstr "Button"
+
+#: components/ButtonBlock/ButtonData
+msgid "ButtonLink"
+msgstr "Button Link"
+
+#: components/ButtonBlock/ButtonData
+msgid "ButtonTitle"
+msgstr "Button Titel"
+
 #: components/BlockModal/BlockModal
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -47,6 +60,10 @@ msgstr "Abbrechen"
 #: components/Carousel/schema
 msgid "Carousel"
 msgstr "Karoussel"
+
+#: components/ButtonBlock/AlignButtonBlock
+msgid "Center"
+msgstr "Zentriert"
 
 #: components/Widgets/CheckboxWidget
 msgid "Default"
@@ -70,6 +87,10 @@ msgstr "Fehler"
 #: components/ImagesGrid/schema
 msgid "External URL"
 msgstr "Externe URL"
+
+#: components/ButtonBlock/AlignButtonBlock
+msgid "Full"
+msgstr "Voll"
 
 #: components/Grid/GridSidebar
 msgid "Grid"
@@ -119,6 +140,10 @@ msgstr "Elemente"
 #: components/Carousel/schema
 msgid "Items to show"
 msgstr "Anzuzeigende Elemente"
+
+#: components/ButtonBlock/AlignButtonBlock
+msgid "Left"
+msgstr "Links"
 
 #: components/ImagesGrid/schema
 msgid "Link to"
@@ -172,6 +197,10 @@ msgstr "Bitte wählen sie einen existierenden Inhalt als Quelle für dieses Elem
 #: components/Widgets/CheckboxWidget
 msgid "Required"
 msgstr "Benötigt"
+
+#: components/ButtonBlock/AlignButtonBlock
+msgid "Right"
+msgstr "Rechts"
 
 #: components/BlockModal/BlockModal
 msgid "Save"

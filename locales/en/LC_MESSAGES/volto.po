@@ -19,6 +19,7 @@ msgstr ""
 msgid "Aktuelles"
 msgstr ""
 
+#: components/ButtonBlock/ButtonData
 #: components/ImagesGrid/schema
 msgid "Alignment"
 msgstr ""
@@ -35,12 +36,28 @@ msgstr ""
 msgid "Browse or type URL"
 msgstr ""
 
+#: components/ButtonBlock/ButtonSidebar
+msgid "Button"
+msgstr ""
+
+#: components/ButtonBlock/ButtonData
+msgid "ButtonLink"
+msgstr ""
+
+#: components/ButtonBlock/ButtonData
+msgid "ButtonTitle"
+msgstr ""
+
 #: components/BlockModal/BlockModal
 msgid "Cancel"
 msgstr ""
 
 #: components/Carousel/schema
 msgid "Carousel"
+msgstr ""
+
+#: components/ButtonBlock/AlignButtonBlock
+msgid "Center"
 msgstr ""
 
 #: components/Widgets/CheckboxWidget
@@ -64,6 +81,10 @@ msgstr ""
 
 #: components/ImagesGrid/schema
 msgid "External URL"
+msgstr ""
+
+#: components/ButtonBlock/AlignButtonBlock
+msgid "Full"
 msgstr ""
 
 #: components/Grid/GridSidebar
@@ -113,6 +134,10 @@ msgstr ""
 
 #: components/Carousel/schema
 msgid "Items to show"
+msgstr ""
+
+#: components/ButtonBlock/AlignButtonBlock
+msgid "Left"
 msgstr ""
 
 #: components/ImagesGrid/schema
@@ -166,6 +191,10 @@ msgstr ""
 
 #: components/Widgets/CheckboxWidget
 msgid "Required"
+msgstr ""
+
+#: components/ButtonBlock/AlignButtonBlock
+msgid "Right"
 msgstr ""
 
 #: components/BlockModal/BlockModal
