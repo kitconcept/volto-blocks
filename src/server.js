@@ -1,6 +1,8 @@
 /* eslint no-console: 0 */
 import express from 'express';
+import { run } from 'node-jq';
 import { getContent } from '@plone/volto/actions';
+import { settings } from '~/config';
 
 function jsonExporter(req, res, next) {
   const { store } = req.app.locals;
@@ -14,6 +16,26 @@ function jsonExporter(req, res, next) {
 
   store
     .dispatch(getContent(req.path.replace('/export', '')))
+    .then((content) => {
+      return run(
+        `. | .blocks[].columns[]?.href[]?."@id"? |= sub("${settings.apiPath}";"")`,
+        content,
+        {
+          input: 'json',
+          output: 'json',
+        },
+      );
+    })
+    .then((content) => {
+      return run(
+        `. | .blocks[].hrefList[]?.href |= sub("${settings.apiPath}";"")`,
+        content,
+        {
+          input: 'json',
+          output: 'json',
+        },
+      );
+    })
     .then((content) => {
       const {
         blocks,
