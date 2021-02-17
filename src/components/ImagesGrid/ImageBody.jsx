@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DefaultItemBody from './DefaultItemBody';
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 
 const ImageItem = (props) => {
   const { dataGrid } = props;
 
   const variationsConfig =
-    blocks.blocksConfig?.[dataGrid?.['@type']]?.variations;
+    config.blocks.blocksConfig?.[dataGrid?.['@type']]?.variations;
 
   const variation =
     variationsConfig &&

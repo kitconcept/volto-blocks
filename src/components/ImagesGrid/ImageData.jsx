@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
 import { SchemaRenderer } from '../../components';
 import { ImagesGridSchema } from './schema';
@@ -14,7 +14,8 @@ const ImageData = (props) => {
   const schema = ImagesGridSchema({ ...props, intl });
 
   const applyVariationSchemaExtender = (schema) => {
-    const variations = blocks?.blocksConfig?.[dataGrid['@type']]?.variations;
+    const variations =
+      config.blocks?.blocksConfig?.[dataGrid['@type']]?.variations;
 
     const schemaExtender =
       variations?.[dataGrid?.variation]?.['schemaExtenderItem'];

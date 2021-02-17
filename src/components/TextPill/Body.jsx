@@ -14,7 +14,7 @@ import { isEqual } from 'lodash';
 import redraft from 'redraft';
 import { stateFromHTML } from 'draft-js-import-html';
 
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 const messages = defineMessages({
   text: {
@@ -33,6 +33,7 @@ const TextBody = (props) => {
     noRichText,
     renderAs,
   } = props;
+  const { settings } = config;
 
   const ElementType = renderAs;
 

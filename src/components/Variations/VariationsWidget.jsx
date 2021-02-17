@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Grid, Form } from 'semantic-ui-react';
 import { defineMessages, useIntl } from 'react-intl';
 import loadable from '@loadable/component';
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 
 import {
   Option,
@@ -23,7 +23,7 @@ const messages = defineMessages({
 
 const VariationsWidget = ({ data, block, onChangeBlock }) => {
   const intl = useIntl();
-  const variations = blocks?.blocksConfig?.[data['@type']]?.variations;
+  const variations = config.blocks?.blocksConfig?.[data['@type']]?.variations;
   let value = data.variation || 'default';
 
   if (variations && Object.keys(variations).length > 1) {

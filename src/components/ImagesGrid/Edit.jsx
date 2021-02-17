@@ -3,9 +3,10 @@ import EditGrid from '../Grid/Edit';
 import templates from './templates';
 import ImageBody from './ImageBody';
 import ImageData from './ImageData';
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 
 const Edit = (props) => {
+  const { blocks } = config;
   const variations = blocks?.blocksConfig?.[props.data['@type']]?.variations;
   const maxItemsAllowed =
     (variations && variations?.[props.data.variation]?.maxItemsAllowed) ||

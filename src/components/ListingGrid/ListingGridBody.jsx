@@ -10,9 +10,10 @@ import paginationRightSVG from '@plone/volto/icons/right-key.svg';
 import { isEqual } from 'lodash';
 
 import { usePrevious } from '@kitconcept/volto-blocks/helpers';
-import { blocks, settings } from '~/config';
+import config from '@plone/volto/registry';
 
 const ListingBody = ({ data, properties, intl, path, isEditMode }) => {
+  const { settings } = config;
   const [currentPage, setCurrentPage] = React.useState(1);
   const content = useSelector((state) => state.content.data);
   const querystringResults = useSelector(
@@ -73,7 +74,7 @@ const ListingBody = ({ data, properties, intl, path, isEditMode }) => {
         []
       : folderItems;
 
-  const templateConfig = blocks.blocksConfig.listing.templates;
+  const templateConfig = config.blocksConfig.listing.templates;
 
   let templateName =
     data.template && !!templateConfig[data.template]
