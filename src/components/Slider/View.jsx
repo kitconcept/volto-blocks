@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import redraft from 'redraft';
 import cx from 'classnames';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
 /**
@@ -40,7 +40,7 @@ const View = ({ data }) => (
             className={`slide slide-${index + 1}`}
             style={{
               background: `linear-gradient(to bottom, rgba(8, 7, 7, 0.57) 0%, rgba(238, 238, 238, 0) 35%, transparent 100%), url(${
-                card.url.startsWith(settings.apiPath)
+                card.url.startsWith(config.settings.apiPath)
                   ? `${flattenToAppURL(card.url)}/@@images/image`
                   : card.url
               }) no-repeat`,
@@ -51,8 +51,8 @@ const View = ({ data }) => (
               {card.text &&
                 redraft(
                   card.text,
-                  settings.ToHTMLRenderers,
-                  settings.ToHTMLOptions,
+                  config.settings.ToHTMLRenderers,
+                  config.settings.ToHTMLOptions,
                 )}
             </div>
           </div>

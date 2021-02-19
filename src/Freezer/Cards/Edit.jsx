@@ -19,7 +19,7 @@ import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 import { Icon, EditTextBlock } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
@@ -655,7 +655,7 @@ class Edit extends Component {
                               {item.url ? (
                                 <Image
                                   src={
-                                    item.url.includes(settings.apiPath)
+                                    item.url.includes(config.settings.apiPath)
                                       ? `${flattenToAppURL(
                                           item.url,
                                         )}/@@images/image`

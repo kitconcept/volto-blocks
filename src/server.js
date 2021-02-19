@@ -2,7 +2,7 @@
 import express from 'express';
 import { run } from 'node-jq';
 import { getContent } from '@plone/volto/actions';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 function jsonExporter(req, res, next) {
   const { store } = req.app.locals;
@@ -18,7 +18,7 @@ function jsonExporter(req, res, next) {
     .dispatch(getContent(req.path.replace('/export', '')))
     .then((content) => {
       return run(
-        `. | .blocks[].columns[]?.href[]?."@id"? |= sub("${settings.apiPath}";"")`,
+        `. | .blocks[].columns[]?.href[]?."@id"? |= sub("${config.settings.apiPath}";"")`,
         content,
         {
           input: 'json',
@@ -28,7 +28,7 @@ function jsonExporter(req, res, next) {
     })
     .then((content) => {
       return run(
-        `. | .blocks[].hrefList[]?.href |= sub("${settings.apiPath}";"")`,
+        `. | .blocks[].hrefList[]?.href |= sub("${config.settings.apiPath}";"")`,
         content,
         {
           input: 'json',

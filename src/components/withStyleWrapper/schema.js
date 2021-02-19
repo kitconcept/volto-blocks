@@ -1,4 +1,4 @@
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -17,7 +17,7 @@ const messages = defineMessages({
 });
 
 export const styleWrapperSchemaEnhancer = (block, intl) => (schema) => {
-  const availableColors = blocks?.blocksConfig?.[block]?.availableColors;
+  const availableColors = config.blocks?.blocksConfig?.[block]?.availableColors;
 
   schema.fieldsets.push({
     id: 'styling',

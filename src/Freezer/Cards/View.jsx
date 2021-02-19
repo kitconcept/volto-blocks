@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { Card, Image } from 'semantic-ui-react';
 import redraft from 'redraft';
 import cx from 'classnames';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
 const getCardsLenght = (cards) =>
@@ -21,6 +21,7 @@ const getCardsLenght = (cards) =>
  * @extends Component
  */
 const View = ({ data }) => {
+  const { settings } = config;
   function getLinkProps(data) {
     if (data.external) {
       const isReallyExternal =

@@ -11,9 +11,7 @@ import cx from 'classnames';
 import { includes, isEqual } from 'lodash';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import { compose } from 'redux';
-
-import { settings } from '~/config';
-
+import config from '@plone/volto/registry';
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
 import { createContent } from '@plone/volto/actions';
 import { Icon } from '@plone/volto/components';
@@ -77,7 +75,7 @@ class EditCardBlock extends Component {
       }
 
       const inlineToolbarPlugin = createInlineToolbarPlugin({
-        structure: settings.richTextEditorInlineToolbarButtons,
+        structure: config.settings.richTextEditorInlineToolbarButtons,
       });
 
       this.state = {
@@ -195,6 +193,7 @@ class EditCardBlock extends Component {
     if (__SERVER__) {
       return <div />;
     }
+    const { settings } = config;
 
     const { InlineToolbar } = this.state.inlineToolbarPlugin;
 

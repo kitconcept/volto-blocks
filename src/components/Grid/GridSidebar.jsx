@@ -17,7 +17,7 @@ import {
   SchemaRenderer,
 } from '@kitconcept/volto-blocks/components';
 
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 
 const GridSidebar = (props) => {
   const {
@@ -41,7 +41,7 @@ const GridSidebar = (props) => {
 
   const intl = useIntl();
 
-  const variations = blocks?.blocksConfig?.[data['@type']]?.variations;
+  const variations = config.blocks?.blocksConfig?.[data['@type']]?.variations;
 
   const applyVariationSchemaExtender = (schema) => {
     // We enhance the schema from two possible sources: Variation extenders and enhancers
