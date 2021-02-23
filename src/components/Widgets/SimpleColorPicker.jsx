@@ -9,7 +9,7 @@ const GithubPicker = loadable(() => import('react-color/lib/Github'));
 export default (props) => {
   const { id, value, onChange, availableColors } = props;
   const [showPicker, setShowPicker] = React.useState(false);
-  const defaultColor = props.defaultColor || '#000';
+  const defaultColor = props.defaultColor || '#fff';
   return (
     <FormFieldWrapper
       {...props}
@@ -20,7 +20,10 @@ export default (props) => {
         <Button.Group>
           <Button
             color={value || defaultColor}
-            style={{ backgroundColor: value || defaultColor }}
+            style={{
+              backgroundColor: value || defaultColor,
+              border: !props.defaultColor ? '1px solid #ddd' : null,
+            }}
             onClick={() => setShowPicker(true)}
             size="huge"
             title="Pick color"
