@@ -11,6 +11,7 @@ const TextPillData = (props) => {
     ? schemaEnhancer(TextBodySchema({ ...props, intl }), props)
     : null;
 
+  /* Reenable this again to allow containerwidth and fullwidth TextPill Blocks
   // Removing the useLargeContainer from the enhancer, since it has no sense,
   // making sure the second fieldset is the styling one.
   if (schema.fieldsets.length > 1 && schema.fieldsets[1].id === 'styling') {
@@ -22,6 +23,7 @@ const TextPillData = (props) => {
   if (data.useFullBackgroundContainer === undefined) {
     data.useFullBackgroundContainer = true;
   }
+  */
 
   return (
     <>
