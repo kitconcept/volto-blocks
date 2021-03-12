@@ -9,7 +9,12 @@ const TeaserHeroData = ({ data, block, onChangeBlock, required = false }) => {
   return (
     <>
       {/*  Inherits all the customized teaser data from the TeaserGrid */}
-      <TeaserData data={data} block={block} onChangeBlock={onChangeBlock} />
+      <TeaserData
+        data={data}
+        block={block}
+        onChangeBlock={onChangeBlock}
+        dataGrid={data}
+      />
       <Segment className="form sidebar-image-data">
         <Form.Field inline>
           <Grid>

@@ -32,7 +32,7 @@ const messages = defineMessages({
 });
 
 export function TeaserGridSchema(props) {
-  const { data, intl, onChangeBlock, openObjectBrowser } = props;
+  const { block, data, intl, onChangeBlock, openObjectBrowser } = props;
 
   return {
     block: 'teaserGrid',
@@ -54,8 +54,8 @@ export function TeaserGridSchema(props) {
         icon: data.href ? clearSVG : navTreeSVG,
         iconAction: data.href
           ? () => {
-              onChangeBlock(data.block, {
-                ...props.data,
+              onChangeBlock(block, {
+                ...data,
                 href: '',
                 title: '',
                 description: '',
@@ -63,12 +63,13 @@ export function TeaserGridSchema(props) {
               });
             }
           : () => openObjectBrowser({ mode: 'link' }),
+        value: data.href && flattenToAppURL(data.href),
       },
       title: {
         title: intl.formatMessage(messages.title),
         icon: data.title && clearSVG,
         iconAction: () =>
-          onChangeBlock(data.block, {
+          onChangeBlock(block, {
             ...data,
             title: '',
           }),
@@ -87,7 +88,7 @@ export function TeaserGridSchema(props) {
           : '',
         iconAction: data.preview_image
           ? () => {
-              onChangeBlock(data.block, {
+              onChangeBlock(block, {
                 ...data,
                 preview_image: '',
               });
@@ -95,7 +96,7 @@ export function TeaserGridSchema(props) {
           : () =>
               openObjectBrowser({
                 onSelectItem: (url) => {
-                  onChangeBlock(data.block, {
+                  onChangeBlock(block, {
                     ...data,
                     preview_image: url,
                   });

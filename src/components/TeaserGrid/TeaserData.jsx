@@ -74,6 +74,7 @@ const TeaserData = (props) => {
       }}
       formData={data}
       fieldIndex={data.index}
+      unwrapped
     />
   );
 };
