@@ -37,6 +37,56 @@ function jsonExporter(req, res, next) {
       );
     })
     .then((content) => {
+      return run(
+        `(.. | .href? | strings) |= sub("${config.settings.apiPath}";"")`,
+        content,
+        {
+          input: 'json',
+          output: 'json',
+        },
+      );
+    })
+    .then((content) => {
+      return run(
+        `(.. | .href? | arrays | .[]."@id") |= sub("${config.settings.apiPath}";"")`,
+        content,
+        {
+          input: 'json',
+          output: 'json',
+        },
+      );
+    })
+    .then((content) => {
+      return run(
+        `(.. | .preview_image? | arrays | .[]."@id") |= sub("${config.settings.apiPath}";"")`,
+        content,
+        {
+          input: 'json',
+          output: 'json',
+        },
+      );
+    })
+    .then((content) => {
+      return run(
+        `(.. | .url? | arrays | .[]."@id") |= sub("${config.settings.apiPath}";"")`,
+        content,
+        {
+          input: 'json',
+          output: 'json',
+        },
+      );
+    })
+    .then((content) => {
+      return run(
+        `(.. | .url? | strings) |= sub("${config.settings.apiPath}";"")`,
+        content,
+        {
+          input: 'json',
+          output: 'json',
+        },
+      );
+    })
+    .then((content) => {
       const {
         blocks,
         blocks_layout,
