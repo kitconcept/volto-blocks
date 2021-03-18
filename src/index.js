@@ -35,7 +35,7 @@ import {
   ObjectByType,
   ButtonViewBlock,
   ButtonEditBlock,
-  QuerystringSidebarWidget
+  QuerystringSidebarWidget,
 } from '@kitconcept/volto-blocks/components';
 import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
 
@@ -248,7 +248,7 @@ export default (config) => {
   config.widgets.widget.object_list = ObjectListWidget;
   config.widgets.widget.style_simple_color = SimpleColorPicker;
   config.widgets.widget.object_by_type = ObjectByType;
-  config.widgets.id.query=QuerystringSidebarWidget;
+  config.widgets.id.query = QuerystringSidebarWidget;
 
   if (serverConfig) {
     config.settings.expressMiddleware = [
