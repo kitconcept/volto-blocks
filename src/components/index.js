@@ -45,6 +45,7 @@ import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/Blo
 
 import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/SchemaRenderer';
 import QuerystringSidebarWidget from '@kitconcept/volto-blocks/components/Widgets/QuerystringSidebarWidget';
+import QueryStringSortOnWidget from '@kitconcept/volto-blocks/components/Widgets/QueryStringSortOnWidget';
 
 export {
   ImagesGridIconsVariation,
@@ -90,4 +91,5 @@ export {
   ButtonViewBlock,
   ButtonEditBlock,
   QuerystringSidebarWidget,
+  QueryStringSortOnWidget,
 };
