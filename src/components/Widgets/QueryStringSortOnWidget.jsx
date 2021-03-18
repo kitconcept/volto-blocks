@@ -1,11 +1,8 @@
 import React from 'react';
-import { FormFieldWrapper, Icon } from '@plone/volto/components';
-import { Button } from 'semantic-ui-react';
+import { FormFieldWrapper } from '@plone/volto/components';
 import { toPairs, groupBy, map } from 'lodash';
 import { defineMessages, useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
-
-import clearSVG from '@plone/volto/icons/clear.svg';
 
 import {
   Option,
