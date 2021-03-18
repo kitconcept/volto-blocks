@@ -11,6 +11,10 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#: components/Widgets/QuerystringSidebarWidget
+msgid "Add criteria"
+msgstr ""
+
 #: components/Carousel/schema
 msgid "Add item"
 msgstr ""
@@ -58,6 +62,10 @@ msgstr ""
 
 #: components/ButtonBlock/AlignButtonBlock
 msgid "Center"
+msgstr ""
+
+#: components/Widgets/QuerystringSidebarWidget
+msgid "Criteria"
 msgstr ""
 
 #: components/Widgets/CheckboxWidget
@@ -294,4 +302,8 @@ msgstr ""
 #: components/Highlight/HighlightBody
 #: components/HighlightSlider/SliderBody
 msgid "moreInfo"
+msgstr ""
+
+#: components/Widgets/QuerystringSidebarWidget
+msgid "querystring-widget-select"
 msgstr ""

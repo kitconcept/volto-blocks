@@ -16,6 +16,10 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "X-Is-Fallback-For: de-at de-li de-lu de-ch de-de\n"
 
+#: components/Widgets/QuerystringSidebarWidget
+msgid "Add criteria"
+msgstr ""
+
 #: components/Carousel/schema
 msgid "Add item"
 msgstr "Element hinzufügen"
@@ -64,6 +68,10 @@ msgstr "Karoussel"
 #: components/ButtonBlock/AlignButtonBlock
 msgid "Center"
 msgstr "Zentriert"
+
+#: components/Widgets/QuerystringSidebarWidget
+msgid "Criteria"
+msgstr ""
 
 #: components/Widgets/CheckboxWidget
 msgid "Default"
@@ -299,4 +307,8 @@ msgstr "Bilder"
 #: components/Highlight/HighlightBody
 #: components/HighlightSlider/SliderBody
 msgid "moreInfo"
+msgstr ""
+
+#: components/Widgets/QuerystringSidebarWidget
+msgid "querystring-widget-select"
 msgstr ""
