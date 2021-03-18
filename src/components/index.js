@@ -44,6 +44,7 @@ import CheckboxWidget from '@kitconcept/volto-blocks/components/Widgets/Checkbox
 import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/BlockRenderer';
 
 import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/SchemaRenderer';
+import QuerystringSidebarWidget from '@kitconcept/volto-blocks/components/Widgets/QuerystringSidebarWidget';
 
 export {
   ImagesGridIconsVariation,
@@ -88,4 +89,5 @@ export {
   ObjectByType,
   ButtonViewBlock,
   ButtonEditBlock,
+  QuerystringSidebarWidget,
 };
