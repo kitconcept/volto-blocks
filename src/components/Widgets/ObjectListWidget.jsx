@@ -33,7 +33,8 @@ const ObjectListInlineWidget = (props) => {
           <Button
             compact
             icon
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               onChange(id, [
                 ...value,
                 {
