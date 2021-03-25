@@ -62,7 +62,7 @@ const CarouselView = (props) => {
           className={cx({ 'full-width': data.useLargeContainer })}
           style={{ backgroundColor: props.data.bg_color }}
         >
-          {data.headline && <h2>{data.headline}</h2>}
+          {data.headline && <h2 className="headline">{data.headline}</h2>}
           <Slider
             dots
             infinite={false}
