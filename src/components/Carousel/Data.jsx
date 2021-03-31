@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
+import { isArray, isEmpty } from 'lodash';
 import { SchemaRenderer } from '../../components';
 import { usePrevious } from '../../helpers';
 import { useIntl } from 'react-intl';
@@ -28,6 +28,21 @@ const CarouselData = (props) => {
           }),
         });
       }
+      // TODO: Ask Timo if we need to reset the values if href is empty
+      // if (
+      //   index !== -1 &&
+      //   isArray(diff[index]?.href) &&
+      //   isEmpty(diff[index]?.href)
+      // ) {
+      //   onChangeBlock(block, {
+      //     ...data,
+      //     columns: replaceItemOfArray(data.columns, index, {
+      //       ...data.columns[index],
+      //       title: '',
+      //       description: '',
+      //     }),
+      //   });
+      // }
     }
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [columns]);
