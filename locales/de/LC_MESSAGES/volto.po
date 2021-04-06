@@ -177,6 +177,10 @@ msgstr "Keine Elemente in diesem Behälter gefunden."
 msgid "No results found."
 msgstr "Keine Ergebnisse gefunden."
 
+#: components/Widgets/QueryStringSortOnWidget
+msgid "No selection"
+msgstr ""
+
 #: components/ImagesGrid/schema
 #: components/TeaserGrid/schema
 msgid "Open in a new tab"
@@ -221,6 +225,10 @@ msgstr "Einstellungen"
 #: components/Widgets/CheckboxWidget
 msgid "Short Name"
 msgstr "Kurzname"
+
+#: components/Widgets/QueryStringSortOnWidget
+msgid "Sort on"
+msgstr ""
 
 #: components/BlockDataWidgets/MultiSourceWidget
 #: components/Carousel/schema
