@@ -115,7 +115,7 @@ function jsonExporter(req, res, next) {
 function jsonExporterMiddleware() {
   const middleware = express.Router();
 
-  middleware.all(['**/export'], jsonExporter);
+  middleware.all(['**/export', '/export'], jsonExporter);
   middleware.id = 'jsonExport';
   return middleware;
 }
