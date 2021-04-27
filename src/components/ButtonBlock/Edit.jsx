@@ -6,7 +6,7 @@ import View from './View';
 const Edit = (props) => {
   const { data, block, onChangeBlock, selected } = props;
   return (
-    <div className="block headline">
+    <>
       <View {...props} isEditMode />
       <SidebarPortal selected={selected}>
         <ButtonSidebar
@@ -16,7 +16,7 @@ const Edit = (props) => {
           onChangeBlock={onChangeBlock}
         />
       </SidebarPortal>
-    </div>
+    </>
   );
 };
 
