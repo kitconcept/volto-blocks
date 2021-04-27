@@ -18,7 +18,7 @@ msgstr ""
 
 #: components/Widgets/QuerystringSidebarWidget
 msgid "Add criteria"
-msgstr ""
+msgstr "Kriterien hinzufügen"
 
 #: components/Carousel/schema
 msgid "Add item"
@@ -71,7 +71,7 @@ msgstr "Zentriert"
 
 #: components/Widgets/QuerystringSidebarWidget
 msgid "Criteria"
-msgstr ""
+msgstr "Kriterium"
 
 #: components/Widgets/CheckboxWidget
 msgid "Default"
@@ -179,7 +179,7 @@ msgstr "Keine Ergebnisse gefunden."
 
 #: components/Widgets/QueryStringSortOnWidget
 msgid "No selection"
-msgstr ""
+msgstr "Keine Auswahl"
 
 #: components/ImagesGrid/schema
 #: components/TeaserGrid/schema
@@ -228,7 +228,7 @@ msgstr "Kurzname"
 
 #: components/Widgets/QueryStringSortOnWidget
 msgid "Sort on"
-msgstr ""
+msgstr "Sortieren nach"
 
 #: components/BlockDataWidgets/MultiSourceWidget
 #: components/Carousel/schema
@@ -319,4 +319,4 @@ msgstr ""
 
 #: components/Widgets/QuerystringSidebarWidget
 msgid "querystring-widget-select"
-msgstr ""
+msgstr "Select Auswahlfeld"
