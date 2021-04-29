@@ -319,4 +319,4 @@ msgstr ""
 
 #: components/Widgets/QuerystringSidebarWidget
 msgid "querystring-widget-select"
-msgstr ""
+msgstr "Select Auswahlfeld"
