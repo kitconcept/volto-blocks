@@ -3,11 +3,13 @@ import { Button, Message } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import teaserHeroTopTemplate from '@kitconcept/volto-blocks/components/TeaserHero/teaserhero-top-template.svg';
 import { defineMessages, useIntl } from 'react-intl';
+import { Icon } from '@plone/volto/components';
+
 import cx from 'classnames';
 
 import Body from './Body';
-import leftArrowSVG from './slider-previous.svg';
-import rightArrowSVG from './slider-next.svg';
+import rightArrowSVG from '@plone/volto/icons/right-key.svg';
+import leftArrowSVG from '@plone/volto/icons/left-key.svg';
 
 const messages = defineMessages({
   PleaseChooseContent: {
@@ -24,7 +26,7 @@ const PrevArrow = ({ className, style, onClick }) => (
     style={{ ...style, display: 'block' }}
     onClick={onClick}
   >
-    <img src={leftArrowSVG} width="24" height="24" alt="Previous" />
+    <Icon name={leftArrowSVG} size="48px" />
   </Button>
 );
 
@@ -35,7 +37,7 @@ const NextArrow = ({ className, style, onClick }) => (
     style={{ ...style, display: 'block' }}
     onClick={onClick}
   >
-    <img src={rightArrowSVG} width="24" height="24" alt="Previous" />
+    <Icon name={rightArrowSVG} size="48px" />
   </Button>
 );
 
