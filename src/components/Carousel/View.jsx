@@ -11,7 +11,6 @@ import Body from './Body';
 import rightArrowSVG from '@plone/volto/icons/right-key.svg';
 import leftArrowSVG from '@plone/volto/icons/left-key.svg';
 
-
 const messages = defineMessages({
   PleaseChooseContent: {
     id: 'Please choose an existing content as source for this element',
