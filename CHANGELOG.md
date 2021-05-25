@@ -1,22 +1,22 @@
 # Change Log
 
-# 6.0.0 (unreleased)
+## 6.0.0 (unreleased)
 
-## Breaking
+### Breaking
 
-## Features
+### Features
 
-## Bugfix
+### Bugfix
 
-## Internal
+### Internal
 
-# 5.0.0 (2021-02-08)
+## 5.0.0 (2021-02-08)
 
-## Breaking
+### Breaking
 
 Might be that the teaser grid is not 100% backwards compatible, so double check.
 
-## Features
+### Features
 
 - New blocks: Carousel, TextPill, UberGrid, HighLight, HighLightSlider
 - Improved TeaserGrid, added Variations and Enhancers support
@@ -25,7 +25,7 @@ Might be that the teaser grid is not 100% backwards compatible, so double check.
 - General util components (MaybeWrap, SchemaRenderer, ...)
 - Widgets: ObjectListWidget, SimpleColorPicker
 
-## Internal
+### Internal
 
 - Testing, testing, testing
 - Linting and Prettier as well in place
