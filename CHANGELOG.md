@@ -1,5 +1,15 @@
 # Change Log
 
+# 6.0.0 (unreleased)
+
+## Breaking
+
+## Features
+
+## Bugfix
+
+## Internal
+
 # 5.0.0 (2021-02-08)
 
 ## Breaking
