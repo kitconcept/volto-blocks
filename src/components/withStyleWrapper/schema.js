@@ -42,8 +42,9 @@ export const styleWrapperSchemaEnhancer = (block, intl) => (schema) => {
   return schema;
 };
 
-export const styleWrapperSchemaEnhancerV13 = ({schema, formData, intl}) => {
-  const availableColors = config.blocks?.blocksConfig?.[formData['@type']]?.availableColors;
+export const styleWrapperSchemaEnhancerV13 = ({ schema, formData, intl }) => {
+  const availableColors =
+    config.blocks?.blocksConfig?.[formData['@type']]?.availableColors;
 
   schema.fieldsets.push({
     id: 'styling',
