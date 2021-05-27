@@ -111,7 +111,7 @@ const TextBody = (props) => {
 
     if (isEditMode) {
       return (
-        <>
+        <div className="block textPillWithStyle">
           <Editor
             ref={editorRef}
             onChange={onChange}
@@ -145,7 +145,7 @@ const TextBody = (props) => {
             }}
           />
           {!noRichText && <InlineToolbar />}
-        </>
+        </div>
       );
     } else {
       if (data[dataName]) {
