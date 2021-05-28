@@ -44,6 +44,16 @@ const NextArrow = ({ className, style, onClick }) => (
 const CarouselView = (props) => {
   const { data, isEditMode } = props;
   const intl = useIntl();
+  let noOfSlide = 4;
+  if (data.items_to_show) {
+    if (data.items_to_show <= 0) {
+      noOfSlide = 1;
+    } else if (data.items_to_show >= 5) {
+      noOfSlide = 4;
+    } else {
+      noOfSlide = data.items_to_show;
+    }
+  }
 
   return (
     <div
@@ -69,8 +79,8 @@ const CarouselView = (props) => {
             dots
             infinite={false}
             speed={500}
-            slidesToShow={data.items_to_show || 4}
-            slidesToScroll={data.items_to_show || 4}
+            slidesToShow={noOfSlide}
+            slidesToScroll={noOfSlide}
             nextArrow={<NextArrow />}
             prevArrow={<PrevArrow />}
           >
