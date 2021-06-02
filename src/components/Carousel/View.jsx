@@ -48,8 +48,8 @@ const CarouselView = (props) => {
   if (data.items_to_show) {
     if (data.items_to_show <= 0) {
       noOfSlide = 1;
-    } else if (data.items_to_show >= 5) {
-      noOfSlide = 4;
+    } else if (data.items_to_show > 5) {
+      noOfSlide = 5;
     } else {
       noOfSlide = data.items_to_show;
     }
