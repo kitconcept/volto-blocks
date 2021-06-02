@@ -15,7 +15,11 @@
     "ci:cypress": "start-test ci:test-acceptance-server http-get://localhost:55001/plone ci:cypress:run",
     "ci:test-acceptance-server": "make test-acceptance-server",
     "cy:test:fixture:setup": "node cypress/support/reset-fixture.js",
-    "cy:test:fixture:teardown": "node cypress/support/reset-fixture.js teardown"
+    "cy:test:fixture:teardown": "node cypress/support/reset-fixture.js teardown",
+    "dry-release": "release-it --dry-run",
+    "release": "release-it",
+    "release-major-alpha": "release-it major --preRelease=alpha",
+    "release-alpha": "release-it --preRelease=alpha"
   },
   "repository": {
     "type": "git",
@@ -67,6 +71,23 @@
       ]
     }
   },
+  "release-it": {
+    "hooks": {
+      "before:bump": "yarn i18n",
+      "after:bump": "node changelogupdater.js bump ${version}",
+      "after:release": "node changelogupdater.js back ${version} && git commit -am 'Back to development' && git push"
+    },
+    "git": {
+      "changelog": "node changelogupdater.js excerpt",
+      "requireUpstream": false,
+      "requireCleanWorkingDir": false
+    },
+    "github": {
+      "release": true,
+      "releaseName": "${version}",
+      "releaseNotes": "node changelogupdater.js excerpt"
+    }
+  },
   "dependencies": {
     "deep-freeze": "0.0.1",
     "node-jq": "1.12.0",
@@ -82,7 +103,8 @@
     "stylelint": "13.3.3",
     "stylelint-config-idiomatic-order": "8.1.0",
     "stylelint-config-prettier": "8.0.1",
-    "stylelint-prettier": "1.1.2"
+    "stylelint-prettier": "1.1.2",
+    "release-it": "14.7.0"
   },
   "peerDependencies": {
     "@plone/volto": ">=12.0.0"
