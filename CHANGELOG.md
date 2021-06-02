@@ -36,6 +36,7 @@
 
 - Fix to TeaserHeros (Victor Fernandez de Alba)
 - Slight CSS correction (Victor Fernandez de Alba)
+- Allow the carousel to have 5 elements in one frame @iFlameing
 
 ### Internal
 
