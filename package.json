@@ -86,6 +86,9 @@
       "release": true,
       "releaseName": "${version}",
       "releaseNotes": "node changelogupdater.js excerpt"
+    },
+    "npm": {
+      "publish": false
     }
   },
   "dependencies": {
