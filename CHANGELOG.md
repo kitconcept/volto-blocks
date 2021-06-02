@@ -1,5 +1,15 @@
 # Change Log
 
+## 7.0.0 (unreleased)
+
+### Breaking
+
+### Features
+
+### Bugfix
+
+### Internal
+
 ## 6.0.0 (2021-02-12)
 
 ### Breaking
