@@ -6,7 +6,36 @@
 
 ### Features
 
+- Color Picker pass `defaultColor` prop from config (Victor Fernandez de Alba)
+- CSS fix for slate blocks (Victor Fernandez de Alba)
+- Fixing the bug when we have length of carousel block is 0 or when we have large number (#66) (Alok Kumar)
+- Add missing classname to TextPill, for controlling it via CSS (Victor Fernandez de Alba)
+- Fix heading level (Victor Fernandez de Alba)
+- Add schema enhancer compatible with V13 (for now in a separate export) (Victor Fernandez de Alba)
+- Merge pull request #65 from kitconcept/carousel-arrow (Alok Kumar)
+- Replacing the carousel block with svg instead of img tag (iFlameing)
+- Slight change in layout z-index for highlights to not colide with the personal menu (Victor Fernandez de Alba)
+- missing locales for qs widget (Victor Fernandez de Alba)
+- Improve retrieval of exported things (Victor Fernandez de Alba)
+- export also the root (Victor Fernandez de Alba)
+- Remove filigrane (Victor Fernandez de Alba)
+- Improve objectwidget (Victor Fernandez de Alba)
+- Add support for external links to the carousel (Victor Fernandez de Alba)
+- Add headline to Carousel (Victor Fernandez de Alba)
+- Adjustments to better CSS in objectlist widget (Victor Fernandez de Alba)
+- prevetdefault in the button of the object_list (Victor Fernandez de Alba)
+- Add externals to carousel (Victor Fernandez de Alba)
+- Add sort_on (Victor Fernandez de Alba)
+- Merge pull request #60 from kitconcept/query (Víctor Fernández de Alba)
+- adding querystringsidebarwidget (iFlameing)
+- Small adjustments, add more jq transformers to the export middleware (Victor Fernandez de Alba)
+- reenable useLargeContainer option in TextPill Block (#59) (steffenri)
+- Improve color picker default: now is white (as transparent) instead of black. Added a border to the button. (Victor Fernandez de Alba)
+
 ### Bugfix
+
+- Fix to TeaserHeros (Victor Fernandez de Alba)
+- Slight CSS correction (Victor Fernandez de Alba)
 
 ### Internal
 
