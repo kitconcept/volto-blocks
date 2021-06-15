@@ -4,6 +4,8 @@
 
 ### Breaking
 
+- Text Pill with Background color now is powered by Slate @sneridagh
+
 ### Feature
 
 ### Bugfix
