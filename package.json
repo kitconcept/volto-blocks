@@ -2,7 +2,10 @@
   "name": "@kitconcept/volto-blocks",
   "version": "7.0.0",
   "description": "kitconcept Volto Blocks",
-  "main": "index.js",
+  "main": "src/index.js",
+  "addons": [
+    "volto-slate:minimalDefault,simpleLink"
+  ],
   "scripts": {
     "i18n": "rm -rf build/messages && NODE_ENV=production node src/i18n.js",
     "prettier": "make prettier",
@@ -97,7 +100,7 @@
     "react-color": "2.19.3",
     "react-slick": "0.25.2",
     "slick-carousel": "1.8.1",
-    "volto-slate": "*"
+    "volto-slate": "2.7.0"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "3.1.3",
