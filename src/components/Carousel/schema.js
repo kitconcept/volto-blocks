@@ -71,6 +71,7 @@ const itemSchema = (props) => {
         widget: 'object_browser',
         mode: 'link',
         selectedItemAttrs: ['Title', 'Description', 'hasPreviewImage'],
+        allowExternals: true,
       },
       title: {
         title: intl.formatMessage(messages.title),
@@ -83,6 +84,7 @@ const itemSchema = (props) => {
         title: intl.formatMessage(messages.imageOverride),
         widget: 'object_browser',
         mode: 'image',
+        allowExternals: true,
       },
     },
     required: [],

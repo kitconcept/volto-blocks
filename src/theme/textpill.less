@@ -6,4 +6,10 @@
   [class^='custom-style-']:not(.fullwidth) {
     padding: 2em;
   }
+
+  // If the header is the first line, then do not reserve vertical space
+  h2:first-child,
+  h3:first-child {
+    margin-top: 0;
+  }
 }

@@ -331,7 +331,7 @@
   text-align: center;
 }
 
-.block:not(.text) {
+.block:not(.text):not(.slate) {
   clear: both;
 }
 
@@ -374,6 +374,13 @@
   .ui.segment.form.sidebar-listing-data {
     padding-bottom: 0 !important;
     border-bottom: none;
+  }
+}
+
+[id^='blockform-fieldset-'] .objectlist-widget {
+  [data-rbd-droppable-id] {
+    margin-right: 10px;
+    margin-left: 10px;
   }
 }
 

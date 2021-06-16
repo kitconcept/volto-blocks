@@ -23,7 +23,7 @@ Cypress.Commands.add('autologin', () => {
     .then((response) => cy.setCookie('auth_token', response.body.token));
 });
 
-// --- CREATE CONTENT --------------------------------------------------------
+// --- CREATE CONTENT (with slate blocks)--------------------------------------------------------
 Cypress.Commands.add(
   'createContent',
   ({
@@ -34,21 +34,14 @@ Cypress.Commands.add(
     allow_discussion = false,
   }) => {
     let api_url, auth;
-    if (Cypress.env('API') === 'guillotina') {
-      api_url = 'http://localhost:8081/db/web';
-      auth = {
-        user: 'root',
-        pass: 'root',
-      };
-    } else {
-      api_url = `http://${
-        Cypress.env('BACKEND_HOST') || 'localhost'
-      }:55001/plone`;
-      auth = {
-        user: 'admin',
-        pass: 'secret',
-      };
-    }
+    api_url = `http://${
+      Cypress.env('BACKEND_HOST') || 'localhost'
+    }:55001/plone`;
+    auth = {
+      user: 'admin',
+      pass: 'secret',
+    };
+
     if (contentType === 'File') {
       return cy.request({
         method: 'POST',
@@ -108,7 +101,7 @@ Cypress.Commands.add(
             title: contentTitle,
             blocks: {
               'd3f1c443-583f-4e8e-a682-3bf25752a300': { '@type': 'title' },
-              '7624cf59-05d0-4055-8f55-5fd6597d84b0': { '@type': 'text' },
+              '7624cf59-05d0-4055-8f55-5fd6597d84b0': { '@type': 'slate' },
             },
             blocks_layout: {
               items: [
@@ -120,6 +113,10 @@ Cypress.Commands.add(
           },
         })
         .then(() => console.log(`${contentType} created`));
+      // .catch(() => {
+      //   cy.exec('yarn cy:test:fixture:teardown');
+      //   cy.exec('yarn cy:test:fixture:setup');
+      // });
     } else {
       return cy
         .request({
@@ -340,4 +337,23 @@ Cypress.Commands.add('store', () => {
 
 Cypress.Commands.add('settings', (key, value) => {
   return cy.window().its('settings');
+});
+
+Cypress.Commands.add('typeInSlate', { prevSubject: true }, (subject, text) => {
+  return (
+    cy
+      .wrap(subject)
+      .then((subject) => {
+        subject[0].dispatchEvent(
+          new InputEvent('beforeinput', {
+            inputType: 'insertText',
+            data: text,
+          }),
+        );
+        return subject;
+      })
+      // TODO: do this only for Electron-based browser which does not understand instantaneously
+      // that the user inserted some text in the block
+      .wait(1000)
+  );
 });

@@ -1,12 +1,102 @@
 # Change Log
 
-# 5.0.0 (unreleased)
+## 7.0.1 (unreleased)
 
-## Breaking
+### Breaking
+
+- Text Pill with Background color now is powered by Slate @sneridagh
+- All text blocks are assumed to be Slate from now on @sneridagh
+- Remove ListingGrid as now it's superseeded by volto-blocks-grid @sneridagh
+
+### Feature
+
+### Bugfix
+
+### Internal
+
+- Changelog forced by default @sneridagh
+
+## 7.0.0 (2021-06-15)
+
+### Breaking
+
+### Features
+
+- Color Picker pass `defaultColor` prop from config (Victor Fernandez de Alba)
+- CSS fix for slate blocks (Victor Fernandez de Alba)
+- Fixing the bug when we have length of carousel block is 0 or when we have large number (#66) (Alok Kumar)
+- Add missing classname to TextPill, for controlling it via CSS (Victor Fernandez de Alba)
+- Fix heading level (Victor Fernandez de Alba)
+- Add schema enhancer compatible with V13 (for now in a separate export) (Victor Fernandez de Alba)
+- Merge pull request #65 from kitconcept/carousel-arrow (Alok Kumar)
+- Replacing the carousel block with svg instead of img tag (iFlameing)
+- Slight change in layout z-index for highlights to not colide with the personal menu (Victor Fernandez de Alba)
+- missing locales for qs widget (Victor Fernandez de Alba)
+- Improve retrieval of exported things (Victor Fernandez de Alba)
+- export also the root (Victor Fernandez de Alba)
+- Remove filigrane (Victor Fernandez de Alba)
+- Improve objectwidget (Victor Fernandez de Alba)
+- Add support for external links to the carousel (Victor Fernandez de Alba)
+- Add headline to Carousel (Victor Fernandez de Alba)
+- Adjustments to better CSS in objectlist widget (Victor Fernandez de Alba)
+- prevetdefault in the button of the object_list (Victor Fernandez de Alba)
+- Add externals to carousel (Victor Fernandez de Alba)
+- Add sort_on (Victor Fernandez de Alba)
+- Merge pull request #60 from kitconcept/query (Víctor Fernández de Alba)
+- adding querystringsidebarwidget (iFlameing)
+- Small adjustments, add more jq transformers to the export middleware (Victor Fernandez de Alba)
+- reenable useLargeContainer option in TextPill Block (#59) (steffenri)
+- Improve color picker default: now is white (as transparent) instead of black. Added a border to the button. (Victor Fernandez de Alba)
+
+### Bugfix
+
+- Fix to TeaserHeros (Victor Fernandez de Alba)
+- Slight CSS correction (Victor Fernandez de Alba)
+- Allow the carousel to have 5 elements in one frame @iFlameing
+
+### Internal
+
+## 6.0.0 (2021-02-12)
+
+### Breaking
+
+- Volto 12 onwards compat @sneridagh
+
+### Features
+
+- Merge pull request #56 from kitconcept/exportMiddlewareRemoveServer (Víctor Fernández de Alba)
+- Export middleware use jq for remove server part (Victor Fernandez de Alba)
+- Merge pull request #55 from kitconcept/object-by-type-props (Alok Kumar)
+- passing props to shema (iFlameing)
+- Merge pull request #53 from kitconcept/button-block (Víctor Fernández de Alba)
+- Merge pull request #52 from kitconcept/color-picker-default-color (Víctor Fernández de Alba)
+- Merge pull request #54 from kitconcept/expressexport (Víctor Fernández de Alba)
+- Add new express middleware for exports (Victor Fernandez de Alba)
+- add button block (jackahl)
+- Merge pull request #50 from kitconcept/objectByTypeWidget (Víctor Fernández de Alba)
+- add Interface to colorpicker to define a defaultcolor (jackahl)
+- Teaser description as TextArea widget in old teasers too, to be consistent (Victor Fernandez de Alba)
+- Teaser description as TextArea widget (Victor Fernandez de Alba)
+- Add focus to the object list widget (Victor Fernandez de Alba)
+- Remove the optional container, make it mandatory to prevent full re-render of the tree. Enhance the schemaEnhancer (Victor Fernandez de Alba)
+- Merge pull request #51 from kitconcept/translations (Víctor Fernández de Alba)
+- Add production env var to xypress (Victor Fernandez de Alba)
+- adding object by type widget (iFlameing)
+
+### Bugfix
+
+### Internal
+
+- Add translations (Victor Fernandez de Alba)
+- ESlint (Victor Fernandez de Alba)
+
+## 5.0.0 (2021-02-08)
+
+### Breaking
 
 Might be that the teaser grid is not 100% backwards compatible, so double check.
 
-## Features
+### Features
 
 - New blocks: Carousel, TextPill, UberGrid, HighLight, HighLightSlider
 - Improved TeaserGrid, added Variations and Enhancers support
@@ -15,7 +105,7 @@ Might be that the teaser grid is not 100% backwards compatible, so double check.
 - General util components (MaybeWrap, SchemaRenderer, ...)
 - Widgets: ObjectListWidget, SimpleColorPicker
 
-## Internal
+### Internal
 
 - Testing, testing, testing
 - Linting and Prettier as well in place

@@ -1,7 +1,8 @@
 {
-  "baseUrl": "http://localhost:3000/",
+  "baseUrl": "http://localhost:3000",
   "defaultCommandTimeout": 15000,
   "reporter": "junit",
+  "viewportWidth": 1280,
   "video": true,
   "reporterOptions": {
     "mochaFile": "results/cypress-report-[hash].xml",

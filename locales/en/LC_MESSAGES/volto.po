@@ -172,6 +172,10 @@ msgstr ""
 msgid "No results found."
 msgstr ""
 
+#: components/Widgets/QueryStringSortOnWidget
+msgid "No selection"
+msgstr ""
+
 #: components/ImagesGrid/schema
 #: components/TeaserGrid/schema
 msgid "Open in a new tab"
@@ -215,6 +219,10 @@ msgstr ""
 
 #: components/Widgets/CheckboxWidget
 msgid "Short Name"
+msgstr ""
+
+#: components/Widgets/QueryStringSortOnWidget
+msgid "Sort on"
 msgstr ""
 
 #: components/BlockDataWidgets/MultiSourceWidget

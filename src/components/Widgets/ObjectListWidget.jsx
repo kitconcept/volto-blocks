@@ -33,7 +33,8 @@ const ObjectListInlineWidget = (props) => {
           <Button
             compact
             icon
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               onChange(id, [
                 ...value,
                 {
@@ -94,7 +95,7 @@ const ObjectListInlineWidget = (props) => {
                   <div className="accordion-title-wrapper">
                     {`${objectSchema.title} #${index + 1}`}
                   </div>
-                  <div>
+                  <div className="accordion-tools">
                     <button
                       onClick={() => {
                         onChange(
