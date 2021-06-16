@@ -10,10 +10,6 @@ import ImagesGridEditBlock from '@kitconcept/volto-blocks/components/ImagesGrid/
 import ImagesGridViewBlock from '@kitconcept/volto-blocks/components/ImagesGrid/View';
 import TeaserHeroEditBlock from '@kitconcept/volto-blocks/components/TeaserHero/Edit';
 import TeaserHeroViewBlock from '@kitconcept/volto-blocks/components/TeaserHero/View';
-import ListingGridEditBlock from '@kitconcept/volto-blocks/components/ListingGrid/Edit';
-import ListingGridViewBlock from '@kitconcept/volto-blocks/components/ListingGrid/View';
-import ListingGridBody from '@kitconcept/volto-blocks/components/ListingGrid/ListingGridBody';
-import ListingGridData from '@kitconcept/volto-blocks/components/ListingGrid/ListingGridData';
 import MultiSourceWidget from '@kitconcept/volto-blocks/components/BlockDataWidgets/MultiSourceWidget';
 import ConditionalLink from '@kitconcept/volto-blocks/components/ConditionalLink/ConditionalLink';
 import HighlightEditBlock from '@kitconcept/volto-blocks/components/Highlight/Edit';
@@ -80,10 +76,6 @@ export {
   ImagesGridViewBlock,
   TeaserHeroEditBlock,
   TeaserHeroViewBlock,
-  ListingGridEditBlock,
-  ListingGridViewBlock,
-  ListingGridBody,
-  ListingGridData,
   BlockRenderer,
   BlockModal,
   CheckboxWidget,

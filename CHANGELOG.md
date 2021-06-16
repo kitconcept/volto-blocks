@@ -6,12 +6,15 @@
 
 - Text Pill with Background color now is powered by Slate @sneridagh
 - All text blocks are assumed to be Slate from now on @sneridagh
+- Remove ListingGrid as now it's superseeded by volto-blocks-grid @sneridagh
 
 ### Feature
 
 ### Bugfix
 
 ### Internal
+
+- Changelog forced by default @sneridagh
 
 ## 7.0.0 (2021-06-15)
 
