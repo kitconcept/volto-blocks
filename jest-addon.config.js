@@ -4,6 +4,7 @@ module.exports = {
     'src/addons/**/src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
   ],
+  transformIgnorePatterns: ['node_modules/(?!(volto-slate|@plone/volto)/)'],
   moduleNameMapper: {
     '@plone/volto/cypress': '<rootDir>/node_modules/@plone/volto/cypress',
     '@plone/volto/babel': '<rootDir>/node_modules/@plone/volto/babel',
