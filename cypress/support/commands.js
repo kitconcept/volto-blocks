@@ -34,7 +34,9 @@ Cypress.Commands.add(
     allow_discussion = false,
   }) => {
     let api_url, auth;
-    api_url = 'http://localhost:55001/plone';
+    api_url = `http://${
+      Cypress.env('BACKEND_HOST') || 'localhost'
+    }:55001/plone`;
     auth = {
       user: 'admin',
       pass: 'secret',
