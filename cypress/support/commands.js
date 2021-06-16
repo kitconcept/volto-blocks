@@ -341,3 +341,22 @@ Cypress.Commands.add('store', () => {
 Cypress.Commands.add('settings', (key, value) => {
   return cy.window().its('settings');
 });
+
+Cypress.Commands.add('typeInSlate', { prevSubject: true }, (subject, text) => {
+  return (
+    cy
+      .wrap(subject)
+      .then((subject) => {
+        subject[0].dispatchEvent(
+          new InputEvent('beforeinput', {
+            inputType: 'insertText',
+            data: text,
+          }),
+        );
+        return subject;
+      })
+      // TODO: do this only for Electron-based browser which does not understand instantaneously
+      // that the user inserted some text in the block
+      .wait(1000)
+  );
+});
