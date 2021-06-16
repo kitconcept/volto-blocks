@@ -1,6 +1,7 @@
 /* eslint no-console: 0 */
 import express from 'express';
 import { run } from 'node-jq';
+import { isEmpty } from 'lodash';
 import { getContent } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
 
@@ -16,6 +17,17 @@ function jsonExporter(req, res, next) {
 
   store
     .dispatch(getContent(req.path.replace('/export', '')))
+    .then((content) => {
+      return new Promise(function (resolve, reject) {
+        if (content.blocks) {
+          resolve(content);
+        } else {
+          content.blocks = {};
+          content.blocks_layout = [];
+          resolve(content);
+        }
+      });
+    })
     .then((content) => {
       return run(
         `. | .blocks[].columns[]?.href[]?."@id"? |= sub("${config.settings.apiPath}";"")`,
@@ -87,12 +99,25 @@ function jsonExporter(req, res, next) {
       );
     })
     .then((content) => {
+      return new Promise(function (resolve, reject) {
+        if (isEmpty(content.blocks)) {
+          delete content.blocks;
+          delete content.blocks_layout;
+          resolve(content);
+        } else {
+          resolve(content);
+        }
+      });
+    })
+    .then((content) => {
       const {
         blocks,
         blocks_layout,
         title,
         description,
         review_state,
+        text,
+        subjects,
       } = content;
       res.send(
         JSON.stringify(
@@ -103,6 +128,8 @@ function jsonExporter(req, res, next) {
             title,
             description,
             review_state,
+            ...(text && { text }),
+            subjects,
           },
           null,
           '\t',
@@ -115,7 +142,7 @@ function jsonExporter(req, res, next) {
 function jsonExporterMiddleware() {
   const middleware = express.Router();
 
-  middleware.all(['**/export'], jsonExporter);
+  middleware.all(['**/export', '/export'], jsonExporter);
   middleware.id = 'jsonExport';
   return middleware;
 }

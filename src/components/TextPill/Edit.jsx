@@ -1,14 +1,14 @@
 import React from 'react';
-import TextPillBody from './Body';
 import { SidebarPortal } from '@plone/volto/components';
 import Sidebar from './Sidebar';
+import { DetachedTextBlockEditor } from 'volto-slate/blocks/Text/TextBlockEdit';
 
 const TextPillEdit = (props) => {
   const { data, onChangeBlock, block, selected } = props;
 
   return (
-    <>
-      <TextPillBody isEditMode dataName="text" {...props} />
+    <div className="block textPillWithStyle">
+      <DetachedTextBlockEditor {...props} />
       <SidebarPortal selected={selected}>
         <Sidebar
           {...props}
@@ -17,7 +17,7 @@ const TextPillEdit = (props) => {
           onChangeBlock={onChangeBlock}
         />
       </SidebarPortal>
-    </>
+    </div>
   );
 };
 

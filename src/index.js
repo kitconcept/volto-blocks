@@ -198,6 +198,7 @@ const customBlocks = {
     group: 'text',
     view: withStyleWrapper(TextPillViewBlock),
     edit: withStyleWrapper(TextPillEditBlock),
+    blockHasOwnFocusManagement: true,
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,
