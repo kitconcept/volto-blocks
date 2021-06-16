@@ -4,6 +4,9 @@
 
 ### Breaking
 
+- Text Pill with Background color now is powered by Slate @sneridagh
+- All text blocks are assumed to be Slate from now on @sneridagh
+
 ### Feature
 
 ### Bugfix

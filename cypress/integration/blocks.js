@@ -1,61 +1,55 @@
+import { createSlateBlock, getSelectedSlateEditor } from '../support/slate';
+
 context('Blocks Acceptance Tests', () => {
   describe('Text Block Tests', () => {
     beforeEach(() => {
       // given a logged in editor and a page in edit mode
-      cy.visit('/');
       cy.autologin();
       cy.createContent({
         contentType: 'Document',
-        contentId: 'my-page',
-        contentTitle: 'My Page',
+        contentId: 'document',
+        contentTitle: 'Document',
       });
-      cy.visit('/my-page');
-      cy.waitForResourceToLoad('@navigation');
-      cy.waitForResourceToLoad('@breadcrumbs');
-      cy.waitForResourceToLoad('@actions');
-      cy.waitForResourceToLoad('@types');
-      cy.waitForResourceToLoad('my-page');
-      cy.navigate('/my-page/edit');
-      cy.get(`.block.title [data-contents]`);
+      cy.visit('/');
     });
 
-    it('As editor I can add a text block', () => {
-      // when I add a text block
-      cy.get('.block.inner.text .public-DraftEditor-content')
-        .click()
-        .type('My text')
-        .get('span[data-text]')
-        .contains('My text');
-      cy.get('#toolbar-save').click();
-      cy.url().should('eq', Cypress.config().baseUrl + 'my-page');
-      cy.waitForResourceToLoad('@navigation');
-      cy.waitForResourceToLoad('@breadcrumbs');
-      cy.waitForResourceToLoad('@actions');
-      cy.waitForResourceToLoad('@types');
-      cy.waitForResourceToLoad('my-page');
+    it('As editor I can add a page with a text block', function () {
+      // when I add a page with a text block
+      cy.get('#toolbar-add').click();
+      cy.get('#toolbar-add-document').click();
+      cy.get('.documentFirstHeading > .public-DraftStyleDefault-block')
+        .type('My Page')
+        .get('.documentFirstHeading span[data-text]')
+        .contains('My Page');
+      cy.get('.slate-editor [contenteditable=true]').click();
 
-      // then the page view should contain the text block
-      cy.get('#page-document p').contains('My text');
+      let s1 = createSlateBlock();
+      s1.typeInSlate('This is the text');
+
+      getSelectedSlateEditor().contains('This is the text');
+      cy.get('#toolbar-save').click();
+      cy.url().should('eq', Cypress.config().baseUrl + '/my-page');
     });
 
     it('As editor I can add a link to a text block', function () {
-      cy.get('.documentFirstHeading > .public-DraftStyleDefault-block');
+      cy.navigate('/document/edit');
+      cy.get('.slate-editor [contenteditable=true]').click();
 
       // when I create a link
-      cy.get('.block.inner.text .public-DraftEditor-content')
-        .type('Colorless green ideas sleep furiously.')
-        .setSelection('furiously');
-      cy.get(
-        '#page-edit .draftJsToolbar__buttonWrapper__1Dmqh:nth-of-type(3)',
-      ).click();
+      let s1 = createSlateBlock();
+      s1.typeInSlate('Colorless green ideas sleep furiously.').setSelection(
+        'furiously',
+      );
+
+      cy.get('.slate-inline-toolbar .button-wrapper:nth-of-type(3)').click();
       cy.get('.link-form-container input').type('https://google.com{enter}');
       cy.get('#toolbar-save').click();
-      cy.url().should('eq', Cypress.config().baseUrl + 'my-page');
+      cy.url().should('eq', Cypress.config().baseUrl + '/document');
       cy.waitForResourceToLoad('@navigation');
       cy.waitForResourceToLoad('@breadcrumbs');
       cy.waitForResourceToLoad('@actions');
       cy.waitForResourceToLoad('@types');
-      cy.waitForResourceToLoad('my-page');
+      cy.waitForResourceToLoad('document');
 
       // then the page view should contain a link
       cy.get('.ui.container p').contains(

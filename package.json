@@ -2,14 +2,17 @@
   "name": "@kitconcept/volto-blocks",
   "version": "7.0.0",
   "description": "kitconcept Volto Blocks",
-  "main": "index.js",
+  "main": "src/index.js",
+  "addons": [
+    "volto-slate:minimalDefault,simpleLink"
+  ],
   "scripts": {
     "i18n": "rm -rf build/messages && NODE_ENV=production node src/i18n.js",
     "prettier": "make prettier",
     "lint": "make lint",
     "stylelint": "make stylelint",
     "test": "make test",
-    "cypress:open": "../../../node_modules/cypress/bin/cypress open",
+    "cypress:open": "NODE_ENV=production ../../../node_modules/cypress/bin/cypress open",
     "cypress:start-frontend": "cd ../../../ && RAZZLE_API_PATH=http://localhost:55001/plone yarn start",
     "ci:cypress:run": "make cypress",
     "ci:cypress": "start-test ci:test-acceptance-server http-get://localhost:55001/plone ci:cypress:run",
@@ -96,7 +99,8 @@
     "node-jq": "1.12.0",
     "react-color": "2.19.3",
     "react-slick": "0.25.2",
-    "slick-carousel": "1.8.1"
+    "slick-carousel": "1.8.1",
+    "volto-slate": "2.7.0"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "3.1.3",
