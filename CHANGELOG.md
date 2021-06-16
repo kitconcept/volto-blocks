@@ -10,6 +10,8 @@
 
 ### Feature
 
+- Add headline block @steffenri
+
 ### Bugfix
 
 ### Internal
