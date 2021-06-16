@@ -4,21 +4,13 @@ context('Blocks Acceptance Tests', () => {
   describe('Text Block Tests', () => {
     beforeEach(() => {
       // given a logged in editor and a page in edit mode
-      cy.visit('/');
       cy.autologin();
       cy.createContent({
         contentType: 'Document',
-        contentId: 'my-page',
-        contentTitle: 'My Page',
+        contentId: 'document',
+        contentTitle: 'Document',
       });
-      cy.visit('/my-page');
-      cy.waitForResourceToLoad('@navigation');
-      cy.waitForResourceToLoad('@breadcrumbs');
-      cy.waitForResourceToLoad('@actions');
-      cy.waitForResourceToLoad('@types');
-      cy.waitForResourceToLoad('my-page');
-      cy.navigate('/my-page/edit');
-      cy.get(`.block.title [data-contents]`);
+      cy.visit('/');
     });
 
     it('As editor I can add a page with a text block', function () {
@@ -40,7 +32,7 @@ context('Blocks Acceptance Tests', () => {
     });
 
     it('As editor I can add a link to a text block', function () {
-      cy.visit('/document/edit');
+      cy.navigate('/document/edit');
       cy.get('.slate-editor [contenteditable=true]').click();
 
       // when I create a link
