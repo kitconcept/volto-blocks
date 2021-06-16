@@ -11,6 +11,7 @@ module.exports = {
     '@package/(.*)$': '<rootDir>/src/$1',
     '@kitconcept/volto-blocks/(.*)$':
       '<rootDir>/src/addons/volto-blocks/src/$1',
+    'volto-slate/(.*)$': '<rootDir>/node_modules/volto-slate/src/$1',
     '~/(.*)$': '<rootDir>/src/$1',
     'load-volto-addons':
       '<rootDir>/node_modules/@plone/volto/jest-addons-loader.js',
