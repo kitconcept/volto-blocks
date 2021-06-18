@@ -17,6 +17,7 @@
 ### Internal
 
 - Changelog forced by default @sneridagh
+- Address Cypress tests for Slate using the new way @sneridagh
 
 ## 7.0.0 (2021-06-15)
 
