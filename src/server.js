@@ -113,6 +113,7 @@ function jsonExporter(req, res, next) {
       const {
         blocks,
         blocks_layout,
+        id,
         title,
         description,
         review_state,
@@ -125,6 +126,7 @@ function jsonExporter(req, res, next) {
             '@type': content['@type'],
             blocks,
             blocks_layout,
+            id,
             title,
             description,
             review_state,

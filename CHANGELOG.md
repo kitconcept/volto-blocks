@@ -10,6 +10,8 @@
 
 ### Feature
 
+- Add id to the default server export @sneridagh
+
 ### Bugfix
 
 ### Internal
