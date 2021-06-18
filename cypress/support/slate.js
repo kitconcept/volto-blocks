@@ -8,3 +8,7 @@ export const createSlateBlock = () => {
 export const getSelectedSlateEditor = () => {
   return cy.get('.slate-editor.selected [contenteditable=true]').click();
 };
+
+export const getSlateEditorAndType = (selector, type) => {
+  return cy.get(selector).focus().click().wait(1000).type(type);
+};

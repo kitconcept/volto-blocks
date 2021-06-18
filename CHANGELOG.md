@@ -11,12 +11,14 @@
 ### Feature
 
 - Add headline block @steffenri
+- Add `id` to the default server export @sneridagh
 
 ### Bugfix
 
 ### Internal
 
 - Changelog forced by default @sneridagh
+- Address Cypress tests for Slate using the new way @sneridagh
 
 ## 7.0.0 (2021-06-15)
 

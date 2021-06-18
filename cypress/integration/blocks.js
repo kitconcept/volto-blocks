@@ -1,4 +1,7 @@
-import { createSlateBlock, getSelectedSlateEditor } from '../support/slate';
+import {
+  getSlateEditorAndType,
+  getSelectedSlateEditor,
+} from '../support/slate';
 
 context('Blocks Acceptance Tests', () => {
   describe('Text Block Tests', () => {
@@ -21,10 +24,11 @@ context('Blocks Acceptance Tests', () => {
         .type('My Page')
         .get('.documentFirstHeading span[data-text]')
         .contains('My Page');
-      cy.get('.slate-editor [contenteditable=true]').click();
 
-      let s1 = createSlateBlock();
-      s1.typeInSlate('This is the text');
+      getSlateEditorAndType(
+        '.slate-editor [contenteditable=true]',
+        'This is the text',
+      );
 
       getSelectedSlateEditor().contains('This is the text');
       cy.get('#toolbar-save').click();
@@ -33,13 +37,12 @@ context('Blocks Acceptance Tests', () => {
 
     it('As editor I can add a link to a text block', function () {
       cy.navigate('/document/edit');
-      cy.get('.slate-editor [contenteditable=true]').click();
 
       // when I create a link
-      let s1 = createSlateBlock();
-      s1.typeInSlate('Colorless green ideas sleep furiously.').setSelection(
-        'furiously',
-      );
+      getSlateEditorAndType(
+        '.slate-editor [contenteditable=true]',
+        'Colorless green ideas sleep furiously.',
+      ).setSelection('furiously');
 
       cy.get('.slate-inline-toolbar .button-wrapper:nth-of-type(3)').click();
       cy.get('.link-form-container input').type('https://google.com{enter}');
