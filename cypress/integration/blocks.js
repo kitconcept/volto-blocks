@@ -24,7 +24,6 @@ context('Blocks Acceptance Tests', () => {
         .type('My Page')
         .get('.documentFirstHeading span[data-text]')
         .contains('My Page');
-      cy.get('.slate-editor [contenteditable=true]').click();
 
       getSlateEditorAndType(
         '.slate-editor [contenteditable=true]',
