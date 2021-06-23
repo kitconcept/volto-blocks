@@ -6,9 +6,7 @@ import { getContent } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
 
 function sortByArray(blocks, blocks_layout) {
-  return fromPairs(
-    map(blocks_layout.items, key => [key, blocks[key]])
-  )
+  return fromPairs(map(blocks_layout.items, (key) => [key, blocks[key]]));
 }
 
 function jsonExporter(req, res, next) {
