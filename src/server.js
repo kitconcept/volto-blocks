@@ -1,9 +1,15 @@
 /* eslint no-console: 0 */
 import express from 'express';
 import { run } from 'node-jq';
-import { isEmpty } from 'lodash';
+import { fromPairs, isEmpty, map } from 'lodash';
 import { getContent } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
+
+function sortByArray(blocks, blocks_layout) {
+  return fromPairs(
+    map(blocks_layout.items, key => [key, blocks[key]])
+  )
+}
 
 function jsonExporter(req, res, next) {
   const { store } = req.app.locals;
@@ -119,13 +125,13 @@ function jsonExporter(req, res, next) {
         review_state,
         text,
         subjects,
-        show_navigation_portlet
+        show_navigation_portlet,
       } = content;
       res.send(
         JSON.stringify(
           {
             '@type': content['@type'],
-            blocks,
+            blocks: sortByArray(blocks, blocks_layout),
             blocks_layout,
             id,
             title,

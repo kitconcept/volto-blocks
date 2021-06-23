@@ -12,6 +12,7 @@
 
 - Add id to the default server export @sneridagh
 - Export `show_navigation_portlet` field @sneridagh
+- Export with the keys ordered @sneridagh
 
 ### Bugfix
 
