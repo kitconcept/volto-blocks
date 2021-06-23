@@ -119,6 +119,7 @@ function jsonExporter(req, res, next) {
         review_state,
         text,
         subjects,
+        show_navigation_portlet
       } = content;
       res.send(
         JSON.stringify(
@@ -131,6 +132,7 @@ function jsonExporter(req, res, next) {
             description,
             review_state,
             ...(text && { text }),
+            ...(show_navigation_portlet && { show_navigation_portlet }),
             subjects,
           },
           null,

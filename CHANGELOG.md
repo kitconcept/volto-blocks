@@ -11,6 +11,7 @@
 ### Feature
 
 - Add id to the default server export @sneridagh
+- Export `show_navigation_portlet` field @sneridagh
 
 ### Bugfix
 
