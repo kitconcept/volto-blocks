@@ -4,3 +4,5 @@ results
 build
 project/
 .vscode/
+.eslintrc.js
+yarn-error.log

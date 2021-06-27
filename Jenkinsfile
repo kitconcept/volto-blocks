@@ -26,7 +26,7 @@ pipeline {
           steps {
             deleteDir()
             checkout scm
-            sh '''yarn bootstrap'''
+            sh '''make bootstrap'''
             sh '''yarn lint'''
           }
         }
@@ -34,7 +34,7 @@ pipeline {
           steps {
             deleteDir()
             checkout scm
-            sh '''yarn bootstrap'''
+            sh '''make bootstrap'''
             sh '''yarn stylelint'''
           }
         }
@@ -42,7 +42,7 @@ pipeline {
           steps {
             deleteDir()
             checkout scm
-            sh '''yarn bootstrap'''
+            sh '''make bootstrap'''
             sh '''yarn prettier'''
           }
         }
@@ -54,7 +54,7 @@ pipeline {
           steps {
             deleteDir()
             checkout scm
-            sh '''yarn bootstrap'''
+            sh '''make bootstrap'''
             sh '''CI=true yarn test'''
           }
           post {
@@ -70,7 +70,7 @@ pipeline {
           steps {
             deleteDir()
             checkout scm
-            sh 'yarn bootstrap'
+            sh 'make bootstrap'
             sh 'yarn ci:cypress'
           }
           post {
