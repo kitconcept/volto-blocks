@@ -4,8 +4,9 @@
   "reporter": "junit",
   "viewportWidth": 1280,
   "video": true,
+  "videoUploadOnPasses": false,
   "reporterOptions": {
     "mochaFile": "results/cypress-report-[hash].xml",
-    "toConsole": true
+    "toConsole": false
   }
 }

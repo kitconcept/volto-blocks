@@ -1,6 +1,7 @@
 SHELL := /bin/bash
 CURRENT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-
+DIR=$(shell basename $$(pwd))
+ADDON ?= @kitconcept/volto-blocks
 
 # We like colors
 # From: https://coderwall.com/p/izxssa/colored-makefile-for-golang-projects
@@ -21,6 +22,24 @@ all: build
 .PHONY: help
 help: ## This help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: bootstrap
+bootstrap: ## Wrap the add-on in a project
+	npm install -g yo
+	npm install -g @plone/generator-volto
+	npm install -g mrs-developer
+	yo @plone/volto project --addon ${ADDON} --workspace "src/addons/${DIR}" --no-interactive
+	ln -sf $$(pwd) project/src/addons/
+	rm -rf node_modules && ln -sf project/node_modules $$(pwd)/.
+	cp .project.eslintrc.js .eslintrc.js
+	cd project && yarn
+	@echo "-------------------"
+	@echo "Project is ready!"
+	@echo "Now run: cd project && yarn start"
+
+.PHONY: start
+start: ## Start the contained project with the addon
+	(cd project && yarn start)
 
 .PHONY: test
 test: ## Run unit test suite for the addon
@@ -49,4 +68,4 @@ stylelint: ## Run unit test suite for the addon
 
 .PHONY: test-acceptance-server
 test-acceptance-server: ## Run test acceptance server
-	docker run -i --rm --name=plone -e ZSERVER_HOST=0.0.0.0 -e ZSERVER_PORT=55001 -p 55001:55001 -e SITE=plone -e APPLY_PROFILES=plone.app.contenttypes:plone-content,plone.restapi:default,kitconcept.volto:default-homepage -e CONFIGURE_PACKAGES=plone.app.contenttypes,plone.restapi,kitconcept.volto,kitconcept.volto.cors -e ADDONS='plone.app.robotframework plone.app.contenttypes plone.restapi kitconcept.volto' plone ./bin/robot-server plone.app.robotframework.testing.PLONE_ROBOT_TESTING
+	docker run -i --rm --name=plone -e ZSERVER_HOST=0.0.0.0 -e ZSERVER_PORT=55001 -p 55001:55001 -e APPLY_PROFILES=plone.app.contenttypes:plone-content,plone.restapi:default,kitconcept.volto:default-homepage -e CONFIGURE_PACKAGES=plone.app.contenttypes,plone.restapi,kitconcept.volto,kitconcept.volto.cors -e ADDONS='plone.app.robotframework plone.app.contenttypes plone.restapi kitconcept.volto' plone ./bin/robot-server plone.app.robotframework.testing.PLONE_ROBOT_TESTING

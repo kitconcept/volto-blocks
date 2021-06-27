@@ -2,3 +2,5 @@ node_modules
 cypress/videos/
 results
 build
+project/
+.vscode/
