@@ -25,7 +25,7 @@ help: ## This help message
 
 .PHONY: bootstrap
 bootstrap: ## Wrap the add-on in a project
-	yarn add yo @plone/generator-volto mrs-developer -D
+	npm i yo @plone/generator-volto mrs-developer
 	./node_modules/.bin/yo @plone/volto project --addon ${ADDON} --workspace "src/addons/${DIR}" --no-interactive
 	ln -sf $$(pwd) project/src/addons/
 	rm -rf node_modules && ln -sf project/node_modules $$(pwd)/.
