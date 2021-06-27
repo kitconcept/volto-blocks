@@ -25,10 +25,8 @@ help: ## This help message
 
 .PHONY: bootstrap
 bootstrap: ## Wrap the add-on in a project
-	npm install -g yo
-	npm install -g @plone/generator-volto
-	npm install -g mrs-developer
-	yo @plone/volto project --addon ${ADDON} --workspace "src/addons/${DIR}" --no-interactive
+	yarn add yo @plone/generator-volto mrs-developer -D
+	./node_modules/.bin/yo @plone/volto project --addon ${ADDON} --workspace "src/addons/${DIR}" --no-interactive
 	ln -sf $$(pwd) project/src/addons/
 	rm -rf node_modules && ln -sf project/node_modules $$(pwd)/.
 	cp .project.eslintrc.js .eslintrc.js
