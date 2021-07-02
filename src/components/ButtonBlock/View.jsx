@@ -8,12 +8,15 @@ const View = ({ data, isEditMode }) => {
   const [hasLink, setHasLink] = React.useState(false);
 
   React.useEffect(() => {
-    if (data.href && data.href.length > 0) {
-      setHasLink(true);
+    if (data.href) {
+      if (data.href && data.href.length > 0) {
+        setHasLink(true);
+      }
+      if (data.href.length === 0) {
+        setHasLink(false);
+      }
     }
-    if (data.href.length === 0) {
-      setHasLink(false);
-    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.href]);
 

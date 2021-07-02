@@ -21,7 +21,7 @@ const messages = defineMessages({
 
 export const ButtonSchema = (props) => ({
   title: props.intl.formatMessage(messages.ButtonBlock),
-  block: 'buttonNew',
+  block: 'buttonBlock',
   fieldsets: [
     {
       id: 'default',

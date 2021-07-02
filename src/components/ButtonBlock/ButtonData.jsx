@@ -15,7 +15,7 @@ const ButtonData = (props) => {
   const intl = useIntl();
   const schema = schemaEnhancer
     ? schemaEnhancer(ButtonSchema({ ...props, intl }), props)
-    : null;
+    : ButtonSchema({ ...props, intl });
 
   return (
     <BlockDataForm
