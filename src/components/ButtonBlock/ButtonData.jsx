@@ -1,6 +1,6 @@
 import React from 'react';
-import { SchemaRenderer } from '@kitconcept/volto-blocks/components';
 import { ButtonSchema } from './schema';
+import { BlockDataForm } from '@plone/volto/components';
 import { useIntl, defineMessages } from 'react-intl';
 
 const messages = defineMessages({
@@ -18,7 +18,7 @@ const ButtonData = (props) => {
     : null;
 
   return (
-    <SchemaRenderer
+    <BlockDataForm
       schema={schema}
       title={intl.formatMessage(messages.ButtonBlock)}
       onChangeField={(id, value) => {

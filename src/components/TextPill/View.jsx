@@ -1,10 +1,10 @@
 import React from 'react';
-import TextPillBody from './Body';
+import { TextBlockView } from 'volto-slate/blocks/Text';
 
 const TextPillView = (props) => {
   return (
     <div className="block textPillWithStyle">
-      <TextPillBody dataName="text" {...props} />
+      <TextBlockView {...props} />
     </div>
   );
 };

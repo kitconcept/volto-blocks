@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { isArray, isEmpty } from 'lodash';
 import { SchemaRenderer } from '../../components';
 import { usePrevious } from '../../helpers';
 import { useIntl } from 'react-intl';

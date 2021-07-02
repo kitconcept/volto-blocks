@@ -3,11 +3,13 @@ import { Button, Message } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import teaserHeroTopTemplate from '@kitconcept/volto-blocks/components/TeaserHero/teaserhero-top-template.svg';
 import { defineMessages, useIntl } from 'react-intl';
+import { Icon } from '@plone/volto/components';
+
 import cx from 'classnames';
 
 import Body from './Body';
-import leftArrowSVG from './slider-previous.svg';
-import rightArrowSVG from './slider-next.svg';
+import rightArrowSVG from '@plone/volto/icons/right-key.svg';
+import leftArrowSVG from '@plone/volto/icons/left-key.svg';
 
 const messages = defineMessages({
   PleaseChooseContent: {
@@ -24,7 +26,7 @@ const PrevArrow = ({ className, style, onClick }) => (
     style={{ ...style, display: 'block' }}
     onClick={onClick}
   >
-    <img src={leftArrowSVG} width="24" height="24" alt="Previous" />
+    <Icon name={leftArrowSVG} size="48px" />
   </Button>
 );
 
@@ -35,13 +37,23 @@ const NextArrow = ({ className, style, onClick }) => (
     style={{ ...style, display: 'block' }}
     onClick={onClick}
   >
-    <img src={rightArrowSVG} width="24" height="24" alt="Previous" />
+    <Icon name={rightArrowSVG} size="48px" />
   </Button>
 );
 
 const CarouselView = (props) => {
   const { data, isEditMode } = props;
   const intl = useIntl();
+  let noOfSlide = 4;
+  if (data.items_to_show) {
+    if (data.items_to_show <= 0) {
+      noOfSlide = 1;
+    } else if (data.items_to_show > 5) {
+      noOfSlide = 5;
+    } else {
+      noOfSlide = data.items_to_show;
+    }
+  }
 
   return (
     <div
@@ -67,8 +79,8 @@ const CarouselView = (props) => {
             dots
             infinite={false}
             speed={500}
-            slidesToShow={data.items_to_show || 4}
-            slidesToScroll={data.items_to_show || 4}
+            slidesToShow={noOfSlide}
+            slidesToScroll={noOfSlide}
             nextArrow={<NextArrow />}
             prevArrow={<PrevArrow />}
           >

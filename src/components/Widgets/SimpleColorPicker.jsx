@@ -10,6 +10,11 @@ export default (props) => {
   const { id, value, onChange, availableColors } = props;
   const [showPicker, setShowPicker] = React.useState(false);
   const defaultColor = props.defaultColor || '#fff';
+
+  if (!value && props.defaultColor) {
+    onChange(id, props.defaultColor);
+  }
+
   return (
     <FormFieldWrapper
       {...props}
