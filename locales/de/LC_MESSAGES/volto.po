@@ -169,14 +169,6 @@ msgstr ""
 msgid "No image selected"
 msgstr "Kein Bild ausgewählt"
 
-#: components/ListingGrid/ListingGridBody
-msgid "No items found in this container."
-msgstr "Keine Elemente in diesem Behälter gefunden."
-
-#: components/ListingGrid/ListingGridBody
-msgid "No results found."
-msgstr "Keine Ergebnisse gefunden."
-
 #: components/Widgets/QueryStringSortOnWidget
 msgid "No selection"
 msgstr "Keine Auswahl"
@@ -265,7 +257,6 @@ msgid "Title"
 msgstr "Titel"
 
 #: components/SimpleBlocks/TextBody
-#: components/TextPill/Body
 #: Freezer/Card/Edit
 #: Freezer/TextTileWithAppendActions/Edit
 msgid "Type text…"
@@ -293,12 +284,10 @@ msgstr "Wird für den programmatischen Zugriff auf das Fieldset verwendet."
 msgid "Variation"
 msgstr "Variante"
 
-#: components/ListingGrid/templates
 #: components/TeaserGrid/templates
 msgid "column"
 msgstr "Spalte"
 
-#: components/ListingGrid/templates
 #: components/TeaserGrid/templates
 msgid "columns"
 msgstr "Spalten"

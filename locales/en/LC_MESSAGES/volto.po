@@ -164,14 +164,6 @@ msgstr ""
 msgid "No image selected"
 msgstr ""
 
-#: components/ListingGrid/ListingGridBody
-msgid "No items found in this container."
-msgstr ""
-
-#: components/ListingGrid/ListingGridBody
-msgid "No results found."
-msgstr ""
-
 #: components/Widgets/QueryStringSortOnWidget
 msgid "No selection"
 msgstr ""
@@ -260,7 +252,6 @@ msgid "Title"
 msgstr ""
 
 #: components/SimpleBlocks/TextBody
-#: components/TextPill/Body
 #: Freezer/Card/Edit
 #: Freezer/TextTileWithAppendActions/Edit
 msgid "Type text…"
@@ -288,12 +279,10 @@ msgstr ""
 msgid "Variation"
 msgstr ""
 
-#: components/ListingGrid/templates
 #: components/TeaserGrid/templates
 msgid "column"
 msgstr ""
 
-#: components/ListingGrid/templates
 #: components/TeaserGrid/templates
 msgid "columns"
 msgstr ""
