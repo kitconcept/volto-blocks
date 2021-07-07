@@ -62,5 +62,20 @@ context('Blocks Acceptance Tests', () => {
         .should('have.attr', 'href')
         .and('include', 'https://google.com');
     });
+    it('As editor I can add a button block', () => {
+      // When I create a button block
+      cy.navigate('/document/edit');
+
+      cy.get(`.block.title [data-contents]`);
+      cy.get('.slate-editor [contenteditable=true]').click();
+
+      cy.get('.button .block-add-button').click({ force: true });
+      cy.get('.blocks-chooser .mostUsed .buttonBlock').click();
+      cy.get(' #blockform-fieldset-default  #field-title').type('Button Block');
+      cy.get('#toolbar-save').click();
+
+      // then the page view should contain a link
+      cy.get('.block.button button').contains('Button Block');
+    });
   });
 });
