@@ -309,3 +309,7 @@ msgstr ""
 #: components/Widgets/QuerystringSidebarWidget
 msgid "querystring-widget-select"
 msgstr "Select Auswahlfeld"
+
+#: index
+msgid "textPillWithStyle"
+msgstr "Text mit Hintergrund"

@@ -9,6 +9,7 @@
 ### Bugfix
 
 ### Internal
+- Add transltion for TextWithPillStyle @iFlameing
 
 ## 8.0.0 (2021-07-06)
 

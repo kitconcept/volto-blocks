@@ -304,3 +304,7 @@ msgstr ""
 #: components/Widgets/QuerystringSidebarWidget
 msgid "querystring-widget-select"
 msgstr ""
+
+#: index
+msgid "textPillWithStyle"
+msgstr ""
