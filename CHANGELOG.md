@@ -4,7 +4,7 @@
 
 ### Breaking
 
-- Deprecate forked `ObjectListWidget`, `ObjectWidget`, `objectByType`, and custom pre-released new-style `QuerytringSidebarWidget` and `QueryStringSortOnWidget` in favor of the released in Volto ones.
+- Deprecate forked `ObjectListWidget`, `ObjectWidget`, `objectByType`, and custom pre-released new-style `QuerytringSidebarWidget` and `QueryStringSortOnWidget` in favor of the released in Volto ones. @sneridagh
 
 ### Feature
 
