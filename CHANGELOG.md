@@ -4,12 +4,15 @@
 
 ### Breaking
 
+- Deprecate forked `ObjectListWidget`, `ObjectWidget`, `objectByType`, and custom pre-released new-style `QuerytringSidebarWidget` and `QueryStringSortOnWidget` in favor of the released in Volto ones.
+
 ### Feature
 
 ### Bugfix
 
 ### Internal
-- Add transltion for TextWithPillStyle @iFlameing
+
+- Add translation for TextWithPillStyle @iFlameing
 
 ## 8.0.0 (2021-07-06)
 

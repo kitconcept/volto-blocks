@@ -18,7 +18,6 @@ import HighlightSliderEditBlock from '@kitconcept/volto-blocks/components/Highli
 import HighlightSliderViewBlock from '@kitconcept/volto-blocks/components/HighlightSlider/View';
 import CarouselEditBlock from './Carousel/Edit';
 import CarouselViewBlock from './Carousel/View';
-import ObjectListWidget from './Widgets/ObjectListWidget';
 import ObjectByType from './Widgets/objectByType';
 import DragDropList from './DragDropList/DragDropList';
 import TextPillEditBlock from './TextPill/Edit';
@@ -41,7 +40,6 @@ import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/Blo
 
 import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/SchemaRenderer';
 import QuerystringSidebarWidget from '@kitconcept/volto-blocks/components/Widgets/QuerystringSidebarWidget';
-import QueryStringSortOnWidget from '@kitconcept/volto-blocks/components/Widgets/QueryStringSortOnWidget';
 
 export {
   ImagesGridIconsVariation,
@@ -53,7 +51,6 @@ export {
   MaybeWrap,
   CarouselEditBlock,
   CarouselViewBlock,
-  ObjectListWidget,
   BlockWrapperEnhancer,
   VariationsWidget,
   HighlightEditBlock,
@@ -83,5 +80,4 @@ export {
   ButtonViewBlock,
   ButtonEditBlock,
   QuerystringSidebarWidget,
-  QueryStringSortOnWidget,
 };
