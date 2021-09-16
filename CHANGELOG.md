@@ -6,9 +6,12 @@
 
 ### Feature
 
+- Custom schema enhancer for accordion block and CSS enhancements @sneridagh
+
 ### Bugfix
 
 ### Internal
+
 - Add transltion for TextWithPillStyle @iFlameing
 
 ## 8.0.0 (2021-07-06)

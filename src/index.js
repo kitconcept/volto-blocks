@@ -37,6 +37,7 @@ import {
   QueryStringSortOnWidget,
 } from '@kitconcept/volto-blocks/components';
 import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
+import AccordionSchemaEnhancer from '@kitconcept/volto-blocks/components/Accordion/schemaEnhancer';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 import { defineMessages } from 'react-intl';
@@ -245,6 +246,8 @@ export default (config) => {
   config.widgets.widget.query_sort_on = QueryStringSortOnWidget;
   config.widgets.widget.query = QuerystringSidebarWidget;
   config.widgets.id.query = QuerystringSidebarWidget;
+
+  config.blocks.blocksConfig.accordion.schemaEnhancer = AccordionSchemaEnhancer;
 
   if (serverConfig) {
     config.settings.expressMiddleware = [
