@@ -247,7 +247,9 @@ export default (config) => {
   config.widgets.widget.query = QuerystringSidebarWidget;
   config.widgets.id.query = QuerystringSidebarWidget;
 
-  config.blocks.blocksConfig.accordion.schemaEnhancer = AccordionSchemaEnhancer;
+  if (config.blocks.blocksConfig.accordion) {
+    config.blocks.blocksConfig.accordion.schemaEnhancer = AccordionSchemaEnhancer;
+  }
 
   if (serverConfig) {
     config.settings.expressMiddleware = [
