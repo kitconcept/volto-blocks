@@ -300,5 +300,5 @@ msgid "querystring-widget-select"
 msgstr "Select Auswahlfeld"
 
 #: index
-msgid "textPillWithStyle"
+msgid "Text with background color"
 msgstr "Text mit Hintergrund"
