@@ -50,7 +50,7 @@ import CircleMenuSVG from '@plone/volto/icons/circle-menu.svg';
 
 defineMessages({
   textPillWithStyle: {
-    id: 'textPillWithStyle',
+    id: 'Text with background color',
     defaultMessage: 'Text with background color',
   },
 });
