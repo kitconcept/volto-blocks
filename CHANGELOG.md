@@ -8,11 +8,14 @@
 
 ### Feature
 
+- Custom schema enhancer for accordion block and CSS enhancements @sneridagh
+
 ### Bugfix
 
 ### Internal
 
-- Add translation for TextWithPillStyle @iFlameing
+- Add transltion for TextWithPillStyle @iFlameing
+- Translations for the Text with background color in Volto 14a9 @sneridagh
 
 ## 8.0.0 (2021-07-06)
 

@@ -33,6 +33,7 @@ import {
   ButtonEditBlock,
 } from '@kitconcept/volto-blocks/components';
 import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
+import AccordionSchemaEnhancer from '@kitconcept/volto-blocks/components/Accordion/schemaEnhancer';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
 import { defineMessages } from 'react-intl';
@@ -45,7 +46,7 @@ import CircleMenuSVG from '@plone/volto/icons/circle-menu.svg';
 
 defineMessages({
   textPillWithStyle: {
-    id: 'textPillWithStyle',
+    id: 'Text with background color',
     defaultMessage: 'Text with background color',
   },
 });
@@ -236,6 +237,10 @@ const customBlocks = {
 // };
 export default (config) => {
   config.widgets.widget.style_simple_color = SimpleColorPicker;
+
+  if (config.blocks.blocksConfig.accordion) {
+    config.blocks.blocksConfig.accordion.schemaEnhancer = AccordionSchemaEnhancer;
+  }
 
   if (serverConfig) {
     config.settings.expressMiddleware = [
