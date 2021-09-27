@@ -2,12 +2,6 @@
 
 ## 9.0.1 (unreleased)
 
-### Breaking
-
-### Feature
-
-### Bugfix
-
 ### Internal
 
 - Upgrade @plone/scripts 1.0.2 @sneridagh
