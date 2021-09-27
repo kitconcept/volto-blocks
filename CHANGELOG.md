@@ -7,6 +7,8 @@
 - Deprecate forked `ObjectListWidget`, `ObjectWidget`, `objectByType`, and custom pre-released new-style `QuerytringSidebarWidget` and `QueryStringSortOnWidget` in favor of the released in Volto ones. @sneridagh
 - This version is compatible with the new i18n architecture in Volto 14 @sneridagh
 
+## 8.1.0 (2021-09-27)
+
 ### Feature
 
 - Custom schema enhancer for accordion block and CSS enhancements @sneridagh
