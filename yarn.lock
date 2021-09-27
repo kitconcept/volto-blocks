@@ -1600,14 +1600,15 @@
   dependencies:
     "@octokit/openapi-types" "^7.3.2"
 
-"@plone/scripts@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@plone/scripts/-/scripts-1.0.0.tgz#ab723dd21883c19473dea1b95e4f47a98ef9c406"
-  integrity sha512-GeSIOOKYNS8u6SrpA1vf7Rqhh8RBEVPcFSzEd5WxiScq7dPfPaIkMicdpLAfDDj1r8NhNuxLMV1HsmHcv3gL1A==
+"@plone/scripts@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@plone/scripts/-/scripts-1.0.1.tgz#677c080b01a86df7e3c2df67493fc0d5801f9b6a"
+  integrity sha512-qSz3lKGeiuQO9k4/DaafrEUvuQgC4KIQdTtUJwTxBg77npqvJvWOs1iQGOIvT0wkjSFNyZD25LFsotocVYlXtg==
   dependencies:
     babel-plugin-react-intl "5.1.17"
     babel-preset-razzle "3.4.5"
     commander "8.2.0"
+    pofile "1.0.10"
     razzle "3.4.5"
 
 "@pmmmwh/react-refresh-webpack-plugin@0.3.0":
@@ -9234,6 +9235,11 @@ pnp-webpack-plugin@^1.6.4:
   integrity sha512-2Rb3vm+EXble/sMXNSu6eoBx8e79gKqhNq9F5ZWW6ERNCTE/Q0wQNne5541tE5vKjfM8hpNCYL+LGc1YTfI0dg==
   dependencies:
     ts-pnp "^1.1.6"
+
+pofile@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/pofile/-/pofile-1.0.10.tgz#503dda9499403984e83ff4489ba2d80af276172a"
+  integrity sha512-bkQlDA9YYNaZGLLrxBoQgydzjc2tasbUfxa94/kx2FO/FCiHAJG6B40Jr3fWQgDC7kr+a9q7q5x7449B91CF0A==
 
 portfinder@^1.0.25:
   version "1.0.28"
