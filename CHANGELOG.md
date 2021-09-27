@@ -10,6 +10,9 @@
 
 ### Internal
 
+- Upgrade @plone/scripts 1.0.2 @sneridagh
+- Use internal @plone/scripts changelogupdater @sneridagh
+
 ## 9.0.0 (2021-09-27)
 
 ### Breaking
