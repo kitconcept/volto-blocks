@@ -7,7 +7,7 @@
     "volto-slate:minimalDefault,simpleLink"
   ],
   "scripts": {
-    "i18n": "rm -rf build/messages && NODE_ENV=production node src/i18n.js",
+    "i18n": "rm -rf build/messages && NODE_ENV=production i18n",
     "prettier": "make prettier",
     "lint": "make lint",
     "stylelint": "make stylelint",
@@ -95,6 +95,7 @@
     }
   },
   "dependencies": {
+    "@plone/scripts": "1.0.0",
     "deep-freeze": "0.0.1",
     "node-jq": "1.12.0",
     "react-color": "2.19.3",
