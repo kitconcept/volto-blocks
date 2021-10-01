@@ -10,7 +10,7 @@
 
 ### Internal
 
-- Upgrade @plone/scripts 1.0.2 @sneridagh
+- Upgrade @plone/scripts 1.0.3 @sneridagh
 
 ## 9.0.1 (2021-09-27)
 
