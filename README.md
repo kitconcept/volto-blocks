@@ -13,6 +13,7 @@ A Volto Blocks which helps you creating beautiful website using Volto.
 - Highlight
 - Button
 - Headline (not in Volto blocks yet)
+- Parallax (not in Volto blocks yet)
 - TeaserGrid (grid block subblock)?
 
 ### Unclear
