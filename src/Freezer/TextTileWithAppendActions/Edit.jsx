@@ -15,10 +15,9 @@ import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import { defineMessages, injectIntl } from 'react-intl';
 import { includes, isEqual } from 'lodash';
 import cx from 'classnames';
-
-import { settings, blocks } from '~/config';
-
+import config from '@plone/volto/registry';
 import { Icon } from '@plone/volto/components';
+
 import addSVG from '@plone/volto/icons/circle-plus.svg';
 import cameraSVG from '@plone/volto/icons/camera.svg';
 import videoSVG from '@plone/volto/icons/videocamera.svg';
@@ -88,7 +87,7 @@ class Edit extends Component {
       }
 
       const inlineToolbarPlugin = createInlineToolbarPlugin({
-        structure: settings.richTextEditorInlineToolbarButtons,
+        structure: config.settings.richTextEditorInlineToolbarButtons,
       });
 
       this.state = {
@@ -163,9 +162,9 @@ class Edit extends Component {
   }
 
   toggleAddNewBlock = () =>
-    this.setState(state => ({ addNewBlockOpened: !state.addNewBlockOpened }));
+    this.setState((state) => ({ addNewBlockOpened: !state.addNewBlockOpened }));
 
-  handleClickOutside = e => {
+  handleClickOutside = (e) => {
     if (this.ref && doesNodeContainClick(this.ref, e)) return;
     this.setState(() => ({
       addNewBlockOpened: false,
@@ -185,6 +184,7 @@ class Edit extends Component {
     if (__SERVER__) {
       return <div />;
     }
+    const { settings, blocks } = config;
 
     const { InlineToolbar } = this.state.inlineToolbarPlugin;
 
@@ -193,7 +193,7 @@ class Edit extends Component {
         role="presentation"
         onClick={() => this.props.onSelectBlock(this.props.block)}
         className={cx('block text', { selected: this.props.selected })}
-        ref={node => (this.ref = node)}
+        ref={(node) => (this.ref = node)}
       >
         {this.props.selected &&
           (this.props.appendSecondaryActions || this.props.appendActions) && (
@@ -265,7 +265,7 @@ class Edit extends Component {
               this.props.onFocusNextBlock(this.props.block, this.node);
             }
           }}
-          ref={node => {
+          ref={(node) => {
             this.node = node;
           }}
         />
@@ -327,7 +327,7 @@ class Edit extends Component {
         )}
         {this.state.addNewBlockOpened && this.state.customBlocksOpened && (
           <div className="add-block toolbar">
-            {blocks.customBlocks.map(block => (
+            {blocks.customBlocks.map((block) => (
               <Button.Group key={block.title}>
                 <Button
                   icon

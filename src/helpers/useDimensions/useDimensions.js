@@ -23,7 +23,7 @@ function useDimensions() {
   const [dimensions, setDimensions] = useState({});
   const [node, setNode] = useState(null);
 
-  const ref = useCallback(node => {
+  const ref = useCallback((node) => {
     setNode(node);
   }, []);
 

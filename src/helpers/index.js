@@ -7,6 +7,7 @@
 
 import useDimensions from './useDimensions/useDimensions';
 import useTraceUpdate from './useTraceUpdate/useTraceUpdate';
+import usePrevious from './usePrevious/usePrevious';
 import {
   insertInArray,
   replaceItemOfArray,
@@ -21,4 +22,5 @@ export {
   reorderArray,
   useDimensions,
   useTraceUpdate,
+  usePrevious,
 };

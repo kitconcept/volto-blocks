@@ -1,20 +1,33 @@
 import React from 'react';
-import EditGrid from '../Grid/Edit';
-import TeaserBody from './TeaserBody';
-import TeaserData from './TeaserData';
+import {
+  GridEditBlock as EditGrid,
+  TeaserBody,
+  TeaserData,
+} from '@kitconcept/volto-blocks/components';
+
 import templates from './templates';
 
-const Edit = props => {
+const Edit = (props) => {
   return (
     <EditGrid
       {...props}
       gridType="teaser"
       templates={templates}
-      render={(item, index) => (
-        <TeaserBody data={item} isEditMode index={index} />
+      render={({ item, index, onChangeGridItem }) => (
+        <TeaserBody
+          data={item}
+          isEditMode
+          index={index}
+          dataBlock={props.data}
+          onChangeGridItem={onChangeGridItem}
+        />
       )}
       sidebarData={(props, column, index) => (
-        <TeaserData {...props} data={{ ...column, index }} />
+        <TeaserData
+          {...props}
+          data={{ ...column, index }}
+          dataGrid={props.data} // This allows to access the full data from the items
+        />
       )}
     />
   );

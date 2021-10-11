@@ -3,23 +3,42 @@ import EditGrid from '../Grid/Edit';
 import templates from './templates';
 import ImageBody from './ImageBody';
 import ImageData from './ImageData';
+import config from '@plone/volto/registry';
 
-const Edit = props => {
+const Edit = (props) => {
+  const { blocks } = config;
+  const variations = blocks?.blocksConfig?.[props.data['@type']]?.variations;
+  const maxItemsAllowed =
+    (variations && variations?.[props.data.variation]?.maxItemsAllowed) ||
+    blocks?.blocksConfig?.[props.data['@type']]?.maxItemsAllowed ||
+    4;
+  const itemFixedWidth =
+    (variations && variations?.[props.data.variation]?.itemFixedWidth) ||
+    blocks?.blocksConfig?.[props.data['@type']]?.itemFixedWidth ||
+    null;
+
   return (
     <EditGrid
       {...props}
       gridType="image"
       templates={templates}
-      render={(item, index, undefined, onChangeGridItem) => (
+      maxItemsAllowed={maxItemsAllowed}
+      itemFixedWidth={itemFixedWidth}
+      render={({ item, index, onChangeGridItem }) => (
         <ImageBody
           data={item}
           index={index}
           onChangeGridItem={onChangeGridItem}
           isEditMode
+          dataGrid={props.data} // This allows to access the full data from the items
         />
       )}
       sidebarData={(props, column, index) => (
-        <ImageData {...props} data={{ ...column, index }} />
+        <ImageData
+          {...props}
+          data={{ ...column, index }}
+          dataGrid={props.data} // This allows to access the full data from the items
+        />
       )}
     />
   );

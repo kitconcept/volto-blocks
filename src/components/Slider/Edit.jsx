@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { readAsDataURL } from 'promise-file-reader';
 import {
@@ -24,7 +25,7 @@ import { doesNodeContainClick } from 'semantic-ui-react/dist/commonjs/lib';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 import cx from 'classnames';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 import { Icon, EditTextBlock } from '@plone/volto/components';
 import { createContent } from '@plone/volto/actions';
@@ -60,20 +61,12 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-@injectIntl
-@connect(
-  state => ({
-    request: state.content.create,
-    content: state.content.data,
-  }),
-  dispatch => bindActionCreators({ createContent }, dispatch),
-)
 /**
  * Edit image block class.
  * @class Edit
  * @extends Component
  */
-export default class Edit extends Component {
+class Edit extends Component {
   /**
    * Property types.
    * @property {Object} propTypes Property types.
@@ -201,7 +194,7 @@ export default class Edit extends Component {
       uploadedImageCardIndex: index,
       // currentSelectedCard: null,
     });
-    readAsDataURL(file).then(data => {
+    readAsDataURL(file).then((data) => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
       this.props.createContent(getBaseUrl(this.props.pathname), {
         '@type': 'Image',
@@ -272,7 +265,7 @@ export default class Edit extends Component {
     });
   };
 
-  onDragEnd = result => {
+  onDragEnd = (result) => {
     const { source, destination } = result;
     // dropped outside the list
     if (!destination) {
@@ -329,7 +322,7 @@ export default class Edit extends Component {
     });
   }
 
-  addNewCard = e => {
+  addNewCard = (e) => {
     e.stopPropagation();
     const newCardsState = [
       ...this.props.data.cards,
@@ -373,7 +366,7 @@ export default class Edit extends Component {
     });
   };
 
-  handleClickOutside = e => {
+  handleClickOutside = (e) => {
     if (this.node && doesNodeContainClick(this.node, e)) return;
     this.setState(() => ({
       currentSelectedCard: null,
@@ -417,7 +410,7 @@ export default class Edit extends Component {
           selected: this.props.selected,
           'centered-text': this.props.data.centeredText,
         })}
-        onKeyDown={e => {
+        onKeyDown={(e) => {
           this.props.handleKeyDown(
             e,
             this.props.index,
@@ -425,7 +418,7 @@ export default class Edit extends Component {
             this.node,
           );
         }}
-        ref={node => {
+        ref={(node) => {
           this.node = node;
         }}
       >
@@ -477,7 +470,7 @@ export default class Edit extends Component {
         )}
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId={uuid()} direction="horizontal">
-            {provided => (
+            {(provided) => (
               <Ref innerRef={provided.innerRef}>
                 <Card.Group
                   centered
@@ -495,14 +488,14 @@ export default class Edit extends Component {
                         index={index}
                         key={item.id}
                       >
-                        {provided => (
+                        {(provided) => (
                           <Ref innerRef={provided.innerRef}>
                             <Card
                               className={cx({
                                 'no-borders': this.props.data.noBorders,
                               })}
                               key={item.id}
-                              onClick={e => this.selectCard(e, index)}
+                              onClick={(e) => this.selectCard(e, index)}
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
@@ -517,7 +510,7 @@ export default class Edit extends Component {
                                     // }
                                     >
                                       <Input
-                                        onChange={e =>
+                                        onChange={(e) =>
                                           this.onChangeUrl(e, index)
                                         }
                                         placeholder={this.props.intl.formatMessage(
@@ -530,7 +523,7 @@ export default class Edit extends Component {
                                         <Icon name={folderSVG} size="24px" />
                                         <input
                                           type="file"
-                                          onChange={e =>
+                                          onChange={(e) =>
                                             this.onUploadImage(e, index)
                                           }
                                           style={{ display: 'none' }}
@@ -542,7 +535,9 @@ export default class Edit extends Component {
                                       <Button
                                         icon
                                         basic
-                                        onClick={e => this.removeCard(e, index)}
+                                        onClick={(e) =>
+                                          this.removeCard(e, index)
+                                        }
                                       >
                                         <Icon
                                           name={trashSVG}
@@ -560,7 +555,9 @@ export default class Edit extends Component {
                                       <Button
                                         icon
                                         basic
-                                        onClick={e => this.clearCard(e, index)}
+                                        onClick={(e) =>
+                                          this.clearCard(e, index)
+                                        }
                                       >
                                         <Icon name={clearSVG} size="24px" />
                                       </Button>
@@ -570,7 +567,9 @@ export default class Edit extends Component {
                                       <Button
                                         icon
                                         basic
-                                        onClick={e => this.removeCard(e, index)}
+                                        onClick={(e) =>
+                                          this.removeCard(e, index)
+                                        }
                                       >
                                         <Icon
                                           name={trashSVG}
@@ -584,7 +583,7 @@ export default class Edit extends Component {
                               {item.url ? (
                                 <Image
                                   src={
-                                    item.url.includes(settings.apiPath)
+                                    item.url.includes(config.settings.apiPath)
                                       ? `${flattenToAppURL(
                                           item.url,
                                         )}/@@images/image`
@@ -617,7 +616,7 @@ export default class Edit extends Component {
                               {!this.props.data.hideText && (
                                 <Card.Content
                                   // This prevents propagation of ENTER
-                                  onKeyDown={e => e.stopPropagation()}
+                                  onKeyDown={(e) => e.stopPropagation()}
                                 >
                                   <EditTextBlock
                                     {...this.props}
@@ -686,3 +685,14 @@ export default class Edit extends Component {
     );
   }
 }
+
+export default compose(
+  injectIntl,
+  connect(
+    (state) => ({
+      request: state.content.create,
+      content: state.content.data,
+    }),
+    (dispatch) => bindActionCreators({ createContent }, dispatch),
+  ),
+)(Edit);

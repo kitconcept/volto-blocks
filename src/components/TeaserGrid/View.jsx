@@ -1,10 +1,15 @@
 import React from 'react';
-import ViewGrid from '../Grid/View';
-import TeaserBody from './TeaserBody';
+import {
+  GridViewBlock as ViewGrid,
+  TeaserBody,
+} from '@kitconcept/volto-blocks/components';
 
-const View = props => {
+const View = (props) => {
   return (
-    <ViewGrid {...props} render={column => <TeaserBody data={column} />} />
+    <ViewGrid
+      {...props}
+      render={(column) => <TeaserBody data={column} dataBlock={props.data} />}
+    />
   );
 };
 

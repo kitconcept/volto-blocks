@@ -1,0 +1,15 @@
+.block.textPillWithStyle {
+  [class^='custom-style-'] {
+    padding: 2em 0;
+  }
+
+  [class^='custom-style-']:not(.fullwidth) {
+    padding: 2em;
+  }
+
+  // If the header is the first line, then do not reserve vertical space
+  h2:first-child,
+  h3:first-child {
+    margin-top: 0;
+  }
+}

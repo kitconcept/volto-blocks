@@ -7,6 +7,14 @@ import GridSidebar from './GridSidebar';
 
 const mockStore = configureStore();
 
+// jest.mock('~/config', () => ({
+//   blocks: {
+//     blocksConfig: {
+//       teaserGrid
+//     }
+//   },
+// }));
+
 test('renders a Grid Block Sidebar component', () => {
   const store = mockStore({
     content: {
@@ -53,6 +61,8 @@ test('renders a Grid Block Sidebar component', () => {
         onChangeBlock={() => {}}
         openObjectBrowser={() => {}}
         sidebarData={() => <div />}
+        activeColumn={0}
+        onChangeSelectedColumnItem={() => {}}
       />
     </Provider>,
   );

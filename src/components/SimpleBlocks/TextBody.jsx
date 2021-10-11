@@ -13,8 +13,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import redraft from 'redraft';
 import { stateFromHTML } from 'draft-js-import-html';
-
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 const messages = defineMessages({
   text: {
@@ -23,7 +22,7 @@ const messages = defineMessages({
   },
 });
 
-const TextBody = props => {
+const TextBody = (props) => {
   const {
     data,
     block,
@@ -33,6 +32,8 @@ const TextBody = props => {
     noRichText,
     renderAs,
   } = props;
+
+  const { settings } = config;
 
   const ElementType = renderAs;
 
@@ -64,7 +65,7 @@ const TextBody = props => {
     }
 
     initialInlineToolbarPlugin = createInlineToolbarPlugin({
-      structure: settings.richTextEditorInlineToolbarButtons,
+      structure: config.settings.richTextEditorInlineToolbarButtons,
     });
   }
 
@@ -118,17 +119,17 @@ const TextBody = props => {
             blockStyleFn={settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
             customStyleMap={settings.customStyleMap}
-            onUpArrow={e => {
+            onUpArrow={(e) => {
               // We need to stop propagate the event for not creating a new block while
               // in the widget
               e.stopPropagation();
             }}
-            onDownArrow={e => {
+            onDownArrow={(e) => {
               // We need to stop propagate the event for not creating a new block while
               // in the widget
               e.stopPropagation();
             }}
-            handleReturn={e => {
+            handleReturn={(e) => {
               // We need to stop propagate the event for not creating a new block while
               // in the widget
               e.stopPropagation();

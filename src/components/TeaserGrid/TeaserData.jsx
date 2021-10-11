@@ -1,72 +1,81 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Segment } from 'semantic-ui-react';
-import { defineMessages, injectIntl } from 'react-intl';
-import { CheckboxWidget, TextWidget } from '@plone/volto/components';
-import { compose } from 'redux';
+import { useIntl } from 'react-intl';
+
 import withObjectBrowser from '@plone/volto/components/manage/Sidebar/ObjectBrowser';
+import { useDispatch } from 'react-redux';
+import { getContent } from '@plone/volto/actions';
 
-import clearSVG from '@plone/volto/icons/clear.svg';
-import navTreeSVG from '@plone/volto/icons/nav.svg';
+import { SchemaRenderer } from '@kitconcept/volto-blocks/components';
+import { TeaserGridSchema } from './schema';
+import config from '@plone/volto/registry';
 
-const messages = defineMessages({
-  Source: {
-    id: 'Source',
-    defaultMessage: 'Source',
-  },
-  openLinkInNewTab: {
-    id: 'Open in a new tab',
-    defaultMessage: 'Open in a new tab',
-  },
-});
+const TeaserData = (props) => {
+  const { block, data, dataGrid, onChangeBlock } = props;
 
-const TeaserData = ({
-  data,
-  block,
-  onChangeBlock,
-  openObjectBrowser,
-  required = false,
-  intl,
-}) => {
+  const intl = useIntl();
+  const dispatch = useDispatch();
+  const blockID = data.id || block;
+  const prevDataHref = React.useRef(data?.href);
+
+  React.useEffect(() => {
+    if (data.href && !data.title && !data.description && !data.preview_image) {
+      dispatch(getContent(data.href, null, blockID)).then((resp) => {
+        onChangeBlock(blockID, {
+          ...data,
+          migrated: true,
+          ...(!data.title && { title: resp.title }),
+          ...(!data.description && { description: resp.description }),
+          ...(!data.preview_image && { preview_image: resp.preview_image }),
+        });
+      });
+    }
+    // The data changes, since we are subscribed (its parent TeaserBody) to the store change,
+    // then on select it triggers a change anyways)
+    if (data.href && data.href !== prevDataHref.current && data?.migrated) {
+      dispatch(getContent(data.href, null, blockID)).then((resp) => {
+        onChangeBlock(blockID, {
+          ...data,
+          title: resp.title,
+          description: resp.description,
+          preview_image: resp.preview_image,
+        });
+      });
+    }
+    prevDataHref.current = data.href;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data.href]);
+
+  const schema = TeaserGridSchema({ ...props, intl });
+
+  const applySchemaEnhancer = (schema) => {
+    const variations =
+      config.blocks?.blocksConfig?.[dataGrid['@type']]?.variations;
+
+    const schemaExtender =
+      variations?.[dataGrid?.variation]?.['schemaExtenderItem'];
+
+    if (schemaExtender) {
+      return schemaExtender(schema, props, intl);
+    } else {
+      return schema;
+    }
+  };
+
   return (
-    <>
-      <Segment className="form sidebar-image-data">
-        <TextWidget
-          id="source"
-          title={intl.formatMessage(messages.Source)}
-          required={false}
-          value={data.href}
-          icon={data.href ? clearSVG : navTreeSVG}
-          iconAction={
-            data.href
-              ? () => {
-                  onChangeBlock(block, {
-                    ...data,
-                    href: '',
-                  });
-                }
-              : () => openObjectBrowser({ mode: 'link' })
-          }
-          onChange={(name, value) => {
-            onChangeBlock(block, {
-              ...data,
-              href: value,
-            });
-          }}
-        />
-        <CheckboxWidget
-          id="openLinkInNewTab"
-          title={intl.formatMessage(messages.openLinkInNewTab)}
-          value={data.openLinkInNewTab ? data.openLinkInNewTab : false}
-          onChange={(name, value) => {
-            onChangeBlock(block, {
-              ...data,
-              openLinkInNewTab: value,
-            });
-          }}
-        />
-      </Segment>
-    </>
+    <SchemaRenderer
+      schema={applySchemaEnhancer(schema)}
+      title={schema.title}
+      onChangeField={(id, value) => {
+        onChangeBlock(block, {
+          ...data,
+          [id]: value,
+        });
+      }}
+      formData={data}
+      fieldIndex={data.index}
+      unwrapped
+    />
   );
 };
 
@@ -77,4 +86,4 @@ TeaserData.propTypes = {
   openObjectBrowser: PropTypes.func.isRequired,
 };
 
-export default compose(withObjectBrowser, injectIntl)(TeaserData);
+export default withObjectBrowser(TeaserData);
