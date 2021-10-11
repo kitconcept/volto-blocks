@@ -45,6 +45,23 @@ A Volto Blocks which helps you creating beautiful website using Volto.
 - SchemaRenderer
 - MaybeWrap
 - TemplateChooser
+
+ImageGrid
+
+![ImageGrid GmbH](https://raw.githubusercontent.com/kitconcept/volto-blocks/master/ImageGrid.png)
+
+TeasrGrid
+
+![TeasrGrid](https://raw.githubusercontent.com/kitconcept/volto-blocks/master/TeaserGrid.png)
+
+TemplateChooser
+
+![TemplateChooser](https://raw.githubusercontent.com/kitconcept/volto-blocks/master/TemplateChooser.png)
+
+TeaserHero
+
+![TeaserHero](https://raw.githubusercontent.com/kitconcept/volto-blocks/master/TeaserHero.png)
+
 - DragDropList (from eea, improved, might need to contribute back)
 - Variations
   - BlockWrapperEnhancer
