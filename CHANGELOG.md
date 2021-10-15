@@ -4,6 +4,8 @@
 
 ### Breaking
 
+- Autoloading of CSS done by the package, this makes necessary action on the projects, to remove the loading of the CSS from the project theme @sneridagh
+
 ### Feature
 
 ### Bugfix

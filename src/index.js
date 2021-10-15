@@ -44,6 +44,8 @@ import imagesSVG from '@plone/volto/icons/images.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
 import CircleMenuSVG from '@plone/volto/icons/circle-menu.svg';
 
+import './theme/main.less';
+
 defineMessages({
   textPillWithStyle: {
     id: 'Text with background color',
