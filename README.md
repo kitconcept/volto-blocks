@@ -48,19 +48,19 @@ A Volto Blocks which helps you creating beautiful website using Volto.
 
 ImageGrid
 
-![ImageGrid GmbH](https://raw.githubusercontent.com/kitconcept/volto-blocks/master/ImageGrid.png)
+![ImageGrid GmbH](https://github.com/kitconcept/volto-blocks/raw/master/ImageGrid.png)
 
 TeasrGrid
 
-![TeasrGrid](https://raw.githubusercontent.com/kitconcept/volto-blocks/master/TeaserGrid.png)
+![TeasrGrid](https://github.com/kitconcept/volto-blocks/raw/master/TeaserGrid.png)
 
 TemplateChooser
 
-![TemplateChooser](https://raw.githubusercontent.com/kitconcept/volto-blocks/master/TemplateChooser.png)
+![TemplateChooser](https://github.com/kitconcept/volto-blocks/raw/master/TemplateChooser.png)
 
 TeaserHero
 
-![TeaserHero](https://raw.githubusercontent.com/kitconcept/volto-blocks/master/TeaserHero.png)
+![TeaserHero](https://github.com/kitconcept/volto-blocks/raw/master/TeaserHero.png)
 
 - DragDropList (from eea, improved, might need to contribute back)
 - Variations
