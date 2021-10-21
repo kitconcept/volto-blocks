@@ -13,9 +13,18 @@ const HeadingEdit = (props) => {
     onChangeBlock(block, { ...data, heading: event.target.value });
   };
 
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    if (ref.current && selected) {
+      ref.current.focus();
+    }
+  }, [selected]);
+
   return (
     <div className="block heading">
       <ContentEditable
+        innerRef={ref}
         style={show_alignment ? { textAlign: data.alignment } : {}}
         className="editable"
         tagName={data.tag || 'h2'}
