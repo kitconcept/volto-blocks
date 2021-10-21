@@ -6,6 +6,9 @@
 
 ### Feature
 
+- Heading block @sneridagh
+- Add a `packages` infrastructure @sneridagh
+
 ### Bugfix
 
 ### Internal
