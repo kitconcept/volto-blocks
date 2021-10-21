@@ -15,6 +15,9 @@ export default (config) => {
     mostUsed: true,
     sidebarTab: 1,
     blockHasOwnFocusManagement: true,
+    default_tag: 'h2',
+    allowed_headings: ['h2', 'h3'],
+    show_alignment: true,
     security: {
       addPermission: [],
       view: [],
