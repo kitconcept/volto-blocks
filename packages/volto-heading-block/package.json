@@ -1,7 +1,7 @@
 {
   "name": "@kitconcept/volto-heading-block",
-  "version": "1.0.0",
-  "description": "kitconcept Heading Block",
+  "version": "0.0.1",
+  "description": "A Volto Block for text headings by kitconcept",
   "main": "src/index.js",
   "scripts": {
     "i18n": "rm -rf build/messages && NODE_ENV=production i18n -a",
