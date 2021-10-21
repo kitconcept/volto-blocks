@@ -17,7 +17,7 @@ export default (config) => {
     blockHasOwnFocusManagement: true,
     default_tag: 'h2',
     allowed_headings: ['h2', 'h3'],
-    show_alignment: true,
+    show_alignment: false,
     security: {
       addPermission: [],
       view: [],
