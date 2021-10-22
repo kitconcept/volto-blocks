@@ -29,7 +29,11 @@
     "Volto",
     "Block",
     "ReactJS",
-    "Plone"
+    "Plone",
+    "volto-addon",
+    "volto-accordion",
+    "react"
+  ],
   ],
   "author": "kitconcept GmbH",
   "license": "MIT",
