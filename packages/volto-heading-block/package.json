@@ -92,9 +92,6 @@
       "release": true,
       "releaseName": "${version}",
       "releaseNotes": "changelogupdater excerpt"
-    },
-    "npm": {
-      "publish": false
     }
   },
   "dependencies": {
