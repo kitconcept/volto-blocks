@@ -6,6 +6,8 @@
 
 ### Feature
 
+- Always center by default the heading @sneridagh
+
 ### Bugfix
 
 - Fix bug in `View` because the default is not set @sneridagh
