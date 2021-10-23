@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.0.0 (unreleased)
+
+### Breaking
+
+### Feature
+
+### Bugfix
+
+### Internal
+
 ## 1.0.0-alpha.1 (2021-10-23)
 
 ### Feature
