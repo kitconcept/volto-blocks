@@ -1,6 +1,6 @@
 {
   "name": "@kitconcept/volto-heading-block",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "A Volto Block for text headings by kitconcept",
   "main": "src/index.js",
   "scripts": {
