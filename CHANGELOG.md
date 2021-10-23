@@ -6,10 +6,13 @@
 
 ### Feature
 
-- Heading block @sneridagh
+- Add Heading block @sneridagh
 - Add a `packages` infrastructure @sneridagh
+- [volto-heading-block] Always center by default the heading @sneridagh
 
 ### Bugfix
+
+- [volto-heading-block] Fix bug in `View` because the default is not set @sneridagh
 
 ### Internal
 

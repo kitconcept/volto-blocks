@@ -4,7 +4,7 @@ import config from '@plone/volto/registry';
 
 const HeadingView = (props) => {
   const { data } = props;
-  const Element = data.tag;
+  const Element = data.tag || 'h2';
   const show_alignment = config.blocks?.blocksConfig?.heading?.show_alignment;
 
   return (
