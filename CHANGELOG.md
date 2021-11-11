@@ -13,6 +13,7 @@
 ### Bugfix
 
 - [volto-heading-block] Fix bug in `View` because the default is not set @sneridagh
+- [volto-blocks] Remove creation date from Newslisting listing, don't show date if effective is not present @sneridagh
 
 ### Internal
 
