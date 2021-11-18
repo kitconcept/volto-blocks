@@ -129,8 +129,6 @@ function jsonExporter(req, res, next) {
         JSON.stringify(
           {
             '@type': content['@type'],
-            blocks: sortByArray(blocks, blocks_layout),
-            blocks_layout,
             id,
             title,
             description,
@@ -138,6 +136,8 @@ function jsonExporter(req, res, next) {
             ...(text && { text }),
             ...(show_navigation_portlet && { show_navigation_portlet }),
             subjects,
+            blocks: sortByArray(blocks, blocks_layout),
+            blocks_layout,
           },
           null,
           '\t',
