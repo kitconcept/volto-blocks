@@ -6,11 +6,20 @@
 
 ### Feature
 
+- Add Heading block @sneridagh
+- Add a `packages` infrastructure @sneridagh
+- [volto-heading-block] Always center by default the heading @sneridagh
+
 ### Bugfix
 
 - Fix carousel block slidetoscroll when clicking on right arrow or left arrow @iFlameing
+- [volto-heading-block] Fix bug in `View` because the default is not set @sneridagh
+- [volto-blocks] Remove creation date from Newslisting listing, don't show date if effective is not present @sneridagh
+- [volto-blocks] Reorder export, export blocks and blocks_layout last @tisto
 
 ### Internal
+
+- Upgrade @plone/scripts 1.0.3 @sneridagh
 
 ## 9.0.1 (2021-09-27)
 

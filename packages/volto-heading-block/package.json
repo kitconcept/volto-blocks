@@ -1,11 +1,8 @@
 {
-  "name": "@kitconcept/volto-blocks",
-  "version": "9.0.1",
-  "description": "kitconcept Volto Blocks",
+  "name": "@kitconcept/volto-heading-block",
+  "version": "1.0.0-alpha.1",
+  "description": "A Volto Block for text headings by kitconcept",
   "main": "src/index.js",
-  "addons": [
-    "volto-slate:minimalDefault,simpleLink"
-  ],
   "scripts": {
     "i18n": "rm -rf build/messages && NODE_ENV=production i18n -a",
     "prettier": "make prettier",
@@ -32,7 +29,10 @@
     "Volto",
     "Block",
     "ReactJS",
-    "Plone"
+    "Plone",
+    "volto-addon",
+    "volto-accordion",
+    "react"
   ],
   "author": "kitconcept GmbH",
   "license": "MIT",
@@ -40,6 +40,9 @@
     "url": "https://github.com/kitconcept/volto-blocks/issues"
   },
   "homepage": "https://github.com/kitconcept/volto-blocks#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "prettier": {
     "trailingComma": "all",
     "singleQuote": true,
@@ -89,19 +92,11 @@
       "release": true,
       "releaseName": "${version}",
       "releaseNotes": "changelogupdater excerpt"
-    },
-    "npm": {
-      "publish": false
     }
   },
   "dependencies": {
     "@plone/scripts": "1.0.3",
-    "deep-freeze": "0.0.1",
-    "node-jq": "1.12.0",
-    "react-color": "2.19.3",
-    "react-slick": "0.25.2",
-    "slick-carousel": "1.8.1",
-    "volto-slate": "2.7.0"
+    "react-contenteditable": "3.3.6"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "3.1.3",
