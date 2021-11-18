@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix carousel block slidetoscroll when clicking on right arrow or left arrow @iFlameing
+
 ### Internal
 
 ## 9.0.1 (2021-09-27)
