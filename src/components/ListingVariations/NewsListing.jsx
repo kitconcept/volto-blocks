@@ -50,26 +50,22 @@ const NewsListingTemplate = ({
                   >
                     <div className="listing-body">
                       <div className="dates">
-                        {item?.effective || item?.created ? (
+                        {item?.effective ? (
                           <span className="day">
                             {language === 'de'
                               ? format(
-                                  parse(item?.effective || item?.created),
+                                  parse(item?.effective),
                                   'DD. MMMM YYYY',
                                   {
                                     locale: deLocale,
                                   },
                                 )
-                              : format(
-                                  parse(item?.effective || item?.created),
-                                  'do MMMM YYYY',
-                                  {
-                                    locale: enLocale,
-                                  },
-                                )}
+                              : format(parse(item?.effective), 'do MMMM YYYY', {
+                                  locale: enLocale,
+                                })}
                           </span>
                         ) : (
-                          <span className="day">No date</span>
+                          <span className="day"></span>
                         )}
                       </div>
                       <h4>{item.title ? item.title : item.id}</h4>
