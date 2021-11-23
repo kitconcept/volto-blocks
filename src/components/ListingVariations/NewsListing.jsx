@@ -60,13 +60,9 @@ const NewsListingTemplate = ({
                                     locale: deLocale,
                                   },
                                 )
-                              : format(
-                                  parse(item?.effective),
-                                  'do MMMM YYYY',
-                                  {
-                                    locale: enLocale,
-                                  },
-                                )}
+                              : format(parse(item?.effective), 'do MMMM YYYY', {
+                                  locale: enLocale,
+                                })}
                           </span>
                         ) : (
                           <span className="day"></span>
