@@ -9,6 +9,7 @@
 - Add Heading block @sneridagh
 - Add a `packages` infrastructure @sneridagh
 - [volto-heading-block] Always center by default the heading @sneridagh
+- Add Separator Block @iFlameing
 
 ### Bugfix
 
