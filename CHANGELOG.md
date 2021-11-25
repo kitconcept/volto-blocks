@@ -9,6 +9,7 @@
 - Add Heading block @sneridagh
 - Add a `packages` infrastructure @sneridagh
 - [volto-heading-block] Always center by default the heading @sneridagh
+- Add stylelint 14 (Volto 14) compatibility @sneridagh
 
 ### Bugfix
 
