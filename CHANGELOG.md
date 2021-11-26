@@ -2,8 +2,6 @@
 
 ## 9.0.2 (unreleased)
 
-### Breaking
-
 ### Feature
 
 - Add Heading block @sneridagh
