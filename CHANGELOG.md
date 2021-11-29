@@ -1,8 +1,16 @@
 # Change Log
 
-## 9.0.2 (unreleased)
+## 9.1.1 (unreleased)
 
 ### Breaking
+
+### Feature
+
+### Bugfix
+
+### Internal
+
+## 9.1.0 (2021-11-26)
 
 ### Feature
 
@@ -10,9 +18,11 @@
 - Add a `packages` infrastructure @sneridagh
 - [volto-heading-block] Always center by default the heading @sneridagh
 - Add Separator Block @iFlameing
+- Add stylelint 14 (Volto 14) compatibility @sneridagh
 
 ### Bugfix
 
+- Fix carousel block slidetoscroll when clicking on right arrow or left arrow @iFlameing
 - [volto-heading-block] Fix bug in `View` because the default is not set @sneridagh
 - [volto-blocks] Remove creation date from Newslisting listing, don't show date if effective is not present @sneridagh
 - [volto-blocks] Reorder export, export blocks and blocks_layout last @tisto
