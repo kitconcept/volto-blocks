@@ -1,14 +1,10 @@
 # Change Log
 
-## 9.1.1 (unreleased)
-
-### Breaking
+## 9.2.0 (2021-11-29)
 
 ### Feature
 
 - New Dates components @sneridagh
-
-### Bugfix
 
 ### Internal
 
