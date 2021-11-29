@@ -6,9 +6,13 @@
 
 ### Feature
 
+- New Dates components @sneridagh
+
 ### Bugfix
 
 ### Internal
+
+- Use new Dates components in listings @sneridagh
 
 ## 9.1.0 (2021-11-26)
 

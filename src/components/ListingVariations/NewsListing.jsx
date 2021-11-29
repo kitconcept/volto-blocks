@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { ConditionalLink } from '@plone/volto/components';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { format, parse } from 'date-fns';
 
 import { isInternalURL } from '@plone/volto/helpers/Url/Url';
+import { EffectiveDate } from '@kitconcept/volto-blocks/components';
 
 const NewsListingTemplate = ({
   items,
@@ -16,11 +15,6 @@ const NewsListingTemplate = ({
 }) => {
   let link = null;
   let href = linkMore?.href || '';
-
-  const language = useSelector((state) => state.intl.locale);
-
-  var deLocale = require('date-fns/locale/de');
-  var enLocale = require('date-fns/locale/en');
 
   if (isInternalURL(href)) {
     link = (
@@ -50,23 +44,7 @@ const NewsListingTemplate = ({
                   >
                     <div className="listing-body">
                       <div className="dates">
-                        {item?.effective ? (
-                          <span className="day">
-                            {language === 'de'
-                              ? format(
-                                  parse(item?.effective),
-                                  'DD. MMMM YYYY',
-                                  {
-                                    locale: deLocale,
-                                  },
-                                )
-                              : format(parse(item?.effective), 'do MMMM YYYY', {
-                                  locale: enLocale,
-                                })}
-                          </span>
-                        ) : (
-                          <span className="day"></span>
-                        )}
+                        <EffectiveDate item={item} />
                       </div>
                       <h4>{item.title ? item.title : item.id}</h4>
                     </div>
