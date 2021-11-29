@@ -31,8 +31,6 @@ import {
   TextPillViewBlock,
   ButtonViewBlock,
   ButtonEditBlock,
-  SeparatorEdit,
-  SeparatorView,
 } from '@kitconcept/volto-blocks/components';
 import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
 import AccordionSchemaEnhancer from '@kitconcept/volto-blocks/components/Accordion/schemaEnhancer';
@@ -101,21 +99,6 @@ const customBlocks = {
     security: {
       addPermission: [],
       view: [],
-    },
-    separator: {
-      id: 'separator',
-      title: 'Seperator',
-      icon: imagesSVG,
-      group: 'teasers',
-      view: SeparatorView,
-      edit: SeparatorEdit,
-      restricted: false,
-      mostUsed: true,
-      sidebarTab: 0,
-      security: {
-        addPermission: [],
-        view: [],
-      },
     },
     // Maximum items allowed
     // maxItemsAllowed: 6,
