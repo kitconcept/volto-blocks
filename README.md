@@ -68,6 +68,21 @@ TeaserHero
   - BlockWrapperEnhancer
   - VariationsWidget
 
+## Locally developing the individual package.
+
+You just need to update your mrs.developer.json
+
+```
+  "kitconcept.volto-blocks": {
+    "packages": {
+      "@kitconcept/volto-blocks": "./src",
+      "@kitconcept/volto-separator-block": "packages/volto-separator-block"
+    },
+    "url": "git@github.com:kitconcept/volto-blocks.git",
+    "branch": "separator-block"
+  },
+```
+
 ### Deprecated
 
 - ConditionalLink (already in Volto since X?)
