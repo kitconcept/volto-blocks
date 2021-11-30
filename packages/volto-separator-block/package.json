@@ -1,7 +1,7 @@
 {
   "name": "@kitconcept/volto-separator-block",
   "version": "1.0.0-alpha.0",
-  "description": "A Volto Block for adding a HR by kitconcept",
+  "description": "A Volto Block that adds a visual separator to a page",
   "main": "src/index.js",
   "scripts": {
     "i18n": "rm -rf build/messages && NODE_ENV=production i18n -a",
