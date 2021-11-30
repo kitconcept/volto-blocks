@@ -38,6 +38,8 @@ import BlockRenderer from '@kitconcept/volto-blocks/components/BlockRenderer/Blo
 
 import SchemaRenderer from '@kitconcept/volto-blocks/components/SchemaRenderer/SchemaRenderer';
 import QuerystringSidebarWidget from '@kitconcept/volto-blocks/components/Widgets/QuerystringSidebarWidget';
+import EffectiveDate from '@kitconcept/volto-blocks/components/EffectiveDate/EffectiveDate';
+import DisplayI18nDate from '@kitconcept/volto-blocks/components/DisplayI18nDate/DisplayI18nDate';
 
 export {
   ImagesGridIconsVariation,
@@ -77,4 +79,6 @@ export {
   ButtonViewBlock,
   ButtonEditBlock,
   QuerystringSidebarWidget,
+  EffectiveDate,
+  DisplayI18nDate,
 };

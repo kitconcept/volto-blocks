@@ -1,6 +1,6 @@
 # Change Log
 
-## 9.1.1 (unreleased)
+## 9.2.1 (unreleased)
 
 ### Breaking
 
@@ -9,6 +9,16 @@
 ### Bugfix
 
 ### Internal
+
+## 9.2.0 (2021-11-29)
+
+### Feature
+
+- New Dates components @sneridagh
+
+### Internal
+
+- Use new Dates components in listings @sneridagh
 
 ## 9.1.0 (2021-11-26)
 
