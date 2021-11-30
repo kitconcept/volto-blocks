@@ -70,7 +70,7 @@ TeaserHero
 
 ## Locally developing the individual package.
 
-You just need to update your mrs.developer.json
+You just need to update your mrs.developer.json like this.
 
 ```
   "kitconcept.volto-blocks": {
