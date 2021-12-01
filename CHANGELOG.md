@@ -9,6 +9,7 @@
 ### Bugfix
 
 ### Internal
+- Changing the import file for the DetachedTextBlockEditor @iFlameing
 
 ## 9.2.0 (2021-11-29)
 
