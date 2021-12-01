@@ -1,6 +1,6 @@
 import imagesSVG from '@plone/volto/icons/images.svg';
 import SeparatorView from './components/Separator/View';
-import SeparatorEdit from './components//Separator/Edit';
+import SeparatorEdit from './components/Separator/Edit';
 import './styles/separator.less';
 
 export default (config) => {
