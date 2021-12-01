@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fixed drag-and-drop list placeholder issues @reebalazs
+
 ### Internal
 
 ## 9.2.0 (2021-11-29)
