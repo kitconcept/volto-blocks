@@ -3,3 +3,5 @@ cypress/videos/
 results
 build
 .vscode
+
+.DS_Store
