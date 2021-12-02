@@ -1,8 +1,8 @@
-# Volto Heading Block
-
 ![kitconcept GmbH](https://raw.githubusercontent.com/kitconcept/volto-form-builder/master/kitconcept.png)
 
-# Installation
+# Volto Heading Block
+
+## Installation
 
 If you already have a Volto project, just update package.json:
 
