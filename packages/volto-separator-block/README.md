@@ -1,8 +1,8 @@
-# Volto Separator Block
-
 ![kitconcept GmbH](https://raw.githubusercontent.com/kitconcept/volto-form-builder/master/kitconcept.png)
 
-# Installation
+# Volto Separator Block
+
+## Installation
 
 If you already have a Volto project, just update package.json:
 
