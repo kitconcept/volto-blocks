@@ -9,6 +9,7 @@
 ### Bugfix
 
 ### Internal
+- Change the icon of Separator block (#95) @iFlameing
 
 ## 9.2.0 (2021-11-29)
 

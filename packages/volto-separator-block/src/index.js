@@ -1,4 +1,4 @@
-import imagesSVG from '@plone/volto/icons/images.svg';
+import divideHorizontalSVG from '@plone/volto/icons/divide-horizontal.svg';
 import SeparatorView from './components/Separator/View';
 import SeparatorEdit from './components/Separator/Edit';
 import './styles/separator.less';
@@ -7,7 +7,7 @@ export default (config) => {
   config.blocks.blocksConfig.separator = {
     id: 'separator',
     title: 'Seperator',
-    icon: imagesSVG,
+    icon: divideHorizontalSVG,
     group: 'teasers',
     view: SeparatorView,
     edit: SeparatorEdit,
