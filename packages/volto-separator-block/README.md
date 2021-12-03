@@ -2,6 +2,14 @@
 
 # Volto Separator Block
 
+## Screenshot
+
+![TeaserHero](https://github.com/kitconcept/volto-blocks/raw/master/Separator.png)
+
+## Screencast
+
+![TeaserHero](https://github.com/kitconcept/volto-blocks/raw/master/Separator.mp4)
+
 ## Installation
 
 If you already have a Volto project, just update package.json:
