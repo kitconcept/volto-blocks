@@ -4,11 +4,11 @@
 
 ## Screenshot
 
-![TeaserHero](https://github.com/kitconcept/volto-blocks/raw/master/Separator.png)
+![Separator](https://github.com/kitconcept/volto-blocks/raw/master/Separator.png)
 
 ## Screencast
 
-![TeaserHero](https://github.com/kitconcept/volto-blocks/raw/master/Separator.mp4)
+![Separator](https://github.com/kitconcept/volto-blocks/raw/master/Separator.gif)
 
 ## Installation
 
