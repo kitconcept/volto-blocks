@@ -19,6 +19,7 @@
 ### Internal
 
 - Use new Dates components in listings @sneridagh
+- Add the screenshot and screencast for separator block @iFlameing
 
 ## 9.1.0 (2021-11-26)
 
