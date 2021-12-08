@@ -10,6 +10,7 @@
 
 ### Internal
 - Change the icon of Separator block (#95) @iFlameing
+- Updating volto-slate to latest @iFlameing
 
 ## 9.2.0 (2021-11-29)
 
