@@ -41,6 +41,8 @@ import QuerystringSidebarWidget from '@kitconcept/volto-blocks/components/Widget
 import EffectiveDate from '@kitconcept/volto-blocks/components/EffectiveDate/EffectiveDate';
 import DisplayI18nDate from '@kitconcept/volto-blocks/components/DisplayI18nDate/DisplayI18nDate';
 
+import { ImgLoader, ImageLoader } from './ImageLoader';
+
 export {
   ImagesGridIconsVariation,
   DragDropList,
@@ -81,4 +83,6 @@ export {
   QuerystringSidebarWidget,
   EffectiveDate,
   DisplayI18nDate,
+  ImgLoader,
+  ImageLoader,
 };

@@ -6,6 +6,8 @@
 
 ### Feature
 
+- Implement ImgLoader component @reebalazs
+
 ### Bugfix
 
 ### Internal
