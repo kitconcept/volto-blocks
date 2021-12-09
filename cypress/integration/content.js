@@ -10,9 +10,9 @@ context('Content Acceptance Tests', () => {
     // when
     cy.get('#toolbar-add').click();
     cy.get('#toolbar-add-document').click();
-    cy.get('.documentFirstHeading > .public-DraftStyleDefault-block')
+    cy.get('.documentFirstHeading')
       .type('This is a page')
-      .get('.documentFirstHeading span[data-text]')
+      .get('.documentFirstHeading')
       .contains('This is a page');
     cy.get('#toolbar-save').click();
 

@@ -20,15 +20,15 @@ context('Blocks Acceptance Tests', () => {
       // when I add a page with a text block
       cy.get('#toolbar-add').click();
       cy.get('#toolbar-add-document').click();
-      cy.get('.documentFirstHeading > .public-DraftStyleDefault-block')
+      cy.get('.documentFirstHeading')
         .type('My Page')
-        .get('.documentFirstHeading span[data-text]')
+        .get('.documentFirstHeading')
         .contains('My Page');
 
-      getSlateEditorAndType(
-        '.slate-editor [contenteditable=true]',
-        'This is the text',
-      );
+        getSlateEditorAndType(
+          '.block .slate-editor [contenteditable=true]',
+          'This is the text',
+        );
 
       getSelectedSlateEditor().contains('This is the text');
       cy.get('#toolbar-save').click();
@@ -65,10 +65,7 @@ context('Blocks Acceptance Tests', () => {
     it('As editor I can add a button block', () => {
       // When I create a button block
       cy.navigate('/document/edit');
-
-      cy.get(`.block.title [data-contents]`);
       cy.get('.slate-editor [contenteditable=true]').click();
-
       cy.get('.button .block-add-button').click({ force: true });
       cy.get('.blocks-chooser .mostUsed .buttonBlock').click();
       cy.get(' #blockform-fieldset-default  #field-title').type('Button Block');
