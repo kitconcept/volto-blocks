@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fixed drag-and-drop list placeholder issues @reebalazs
+
 ### Internal
 - Change the icon of Separator block (#95) @iFlameing
 - Updating volto-slate to latest @iFlameing
