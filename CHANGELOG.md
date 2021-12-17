@@ -7,6 +7,7 @@
 ### Feature
 
 ### Bugfix
+- Fix the a11y violation of carousel block @iRohitSingh
 
 ### Internal
 

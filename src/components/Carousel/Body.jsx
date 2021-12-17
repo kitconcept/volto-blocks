@@ -49,6 +49,7 @@ const CarouselBody = ({ data, dataBlock, isEditMode }) => {
             as={UniversalLink}
             href={href['@id']}
             target={data.openLinkInNewTab ? '_blank' : null}
+            tabindex="-1"
           >
             <>
               {(href.hasPreviewImage || image) && (
