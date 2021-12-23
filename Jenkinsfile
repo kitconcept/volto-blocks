@@ -7,7 +7,6 @@ pipeline {
   }
 
   environment {
-        NODE_ENV = "test"
         GIT_NAME = "volto-blocks"
         NAMESPACE = "@kitconcept"
         DEPENDENCIES = ""
@@ -22,68 +21,68 @@ pipeline {
 
   stages {
     // Static Code Analysis
-    stage('ESlint') {
-      steps {
-        deleteDir()
-        checkout scm
-        sh '''docker pull plone/volto-addon-ci'''
-        sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
-      }
-      post {
-        always {
-          recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
-        }
-      }
-    }
-    stage('stylelint') {
-      steps {
-        deleteDir()
-        checkout scm
-        sh '''docker pull plone/volto-addon-ci'''
-        sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
-      }
-    }
-    stage('Prettier') {
-      steps {
-        deleteDir()
-        checkout scm
-        sh '''docker pull plone/volto-addon-ci'''
-        sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
-      }
-    }
+    // stage('ESlint') {
+    //   steps {
+    //     deleteDir()
+    //     checkout scm
+    //     sh '''docker pull plone/volto-addon-ci'''
+    //     sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
+    //   }
+    //   post {
+    //     always {
+    //       recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
+    //     }
+    //   }
+    // }
+    // stage('stylelint') {
+    //   steps {
+    //     deleteDir()
+    //     checkout scm
+    //     sh '''docker pull plone/volto-addon-ci'''
+    //     sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
+    //   }
+    // }
+    // stage('Prettier') {
+    //   steps {
+    //     deleteDir()
+    //     checkout scm
+    //     sh '''docker pull plone/volto-addon-ci'''
+    //     sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
+    //   }
+    // }
 
-    stage('Unit tests') {
-      steps {
-        deleteDir()
-        checkout scm
-        sh '''docker pull plone/volto-addon-ci'''
-        sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci test'''
-      }
-      post {
-        always {
-          sh '''mkdir -p xunit-reports'''
-          sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/coverage xunit-reports/'''
-          sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
-          sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/unit_tests_log.txt xunit-reports/'''
-          sh '''docker rm -v $BUILD_TAG-volto'''
-          step([
-            $class: 'JUnitResultArchiver',
-            testResults: 'xunit-reports/junit.xml'
-          ])
-          archiveArtifacts artifacts: 'xunit-reports/unit_tests_log.txt', fingerprint: true
-          archiveArtifacts artifacts: 'xunit-reports/coverage/lcov.info', fingerprint: true
-          publishHTML (target : [
-            allowMissing: false,
-            alwaysLinkToLastBuild: true,
-            keepAll: true,
-            reportDir: 'xunit-reports/coverage/lcov-report',
-            reportFiles: 'index.html',
-            reportName: 'UTCoverage',
-            reportTitles: 'Unit Tests Code Coverage'
-          ])
-        }
-      }
-    }
+    // stage('Unit tests') {
+    //   steps {
+    //     deleteDir()
+    //     checkout scm
+    //     sh '''docker pull plone/volto-addon-ci'''
+    //     sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci test'''
+    //   }
+    //   post {
+    //     always {
+    //       sh '''mkdir -p xunit-reports'''
+    //       sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/coverage xunit-reports/'''
+    //       sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
+    //       sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/unit_tests_log.txt xunit-reports/'''
+    //       sh '''docker rm -v $BUILD_TAG-volto'''
+    //       step([
+    //         $class: 'JUnitResultArchiver',
+    //         testResults: 'xunit-reports/junit.xml'
+    //       ])
+    //       archiveArtifacts artifacts: 'xunit-reports/unit_tests_log.txt', fingerprint: true
+    //       archiveArtifacts artifacts: 'xunit-reports/coverage/lcov.info', fingerprint: true
+    //       publishHTML (target : [
+    //         allowMissing: false,
+    //         alwaysLinkToLastBuild: true,
+    //         keepAll: true,
+    //         reportDir: 'xunit-reports/coverage/lcov-report',
+    //         reportFiles: 'index.html',
+    //         reportName: 'UTCoverage',
+    //         reportTitles: 'Unit Tests Code Coverage'
+    //       ])
+    //     }
+    //   }
+    // }
 
     stage('Acceptance tests') {
       steps {
