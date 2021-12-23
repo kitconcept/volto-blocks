@@ -7,6 +7,7 @@ pipeline {
   }
 
   environment {
+        NODE_ENV = "test"
         GIT_NAME = "volto-blocks"
         NAMESPACE = "@kitconcept"
         DEPENDENCIES = ""
