@@ -25,10 +25,10 @@ context('Blocks Acceptance Tests', () => {
         .get('.documentFirstHeading')
         .contains('My Page');
 
-        getSlateEditorAndType(
-          '.block .slate-editor [contenteditable=true]',
-          'This is the text',
-        );
+      getSlateEditorAndType(
+        '.block .slate-editor [contenteditable=true]',
+        'This is the text',
+      );
 
       getSelectedSlateEditor().contains('This is the text');
       cy.get('#toolbar-save').click();
@@ -44,7 +44,10 @@ context('Blocks Acceptance Tests', () => {
         'Colorless green ideas sleep furiously.',
       ).setSelection('furiously');
 
-      cy.get('.slate-inline-toolbar .button-wrapper:nth-of-type(3)').click();
+      // TODO: there are two toolbars present :( The bad one has an .undefined CSS class :(
+      cy.get(
+        '.slate-inline-toolbar:not(.undefined) .button-wrapper:nth-of-type(3)',
+      ).click();
       cy.get('.link-form-container input').type('https://google.com{enter}');
       cy.get('#toolbar-save').click();
       cy.url().should('eq', Cypress.config().baseUrl + '/document');
