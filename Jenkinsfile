@@ -27,7 +27,6 @@ pipeline {
         deleteDir()
         checkout scm
         sh '''export GITHUB_TOKEN2=${GITHUB_TOKEN}'''
-        sh '''echo "the token: ${GITHUB_TOKEN2}"'''
         sh '''echo "the token: ${GITHUB_TOKEN}"'''
         sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/volto-blocks-grid.git --private --branch master'''
         sh '''cd addon-testing-project && yarn lint:ci'''
