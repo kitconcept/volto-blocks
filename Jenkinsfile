@@ -24,12 +24,11 @@ pipeline {
     stage('ESlint') {
       steps {
         withCredentials([
-          string(credentialsId: 'github-personal-access-token-for-hooks',
+          string(credentialsId: 'kitconcept_github_token_vault',
             variable: 'GITHUB_TOKEN')
           ]) {
             deleteDir()
             checkout scm
-            sh '''export GITHUB_TOKEN="${GITHUB_TOKEN}"'''
             sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/volto-blocks-grid.git --private --branch master'''
             sh '''cd addon-testing-project && yarn lint:ci'''
           }
