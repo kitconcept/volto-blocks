@@ -29,7 +29,8 @@ pipeline {
           ]) {
             deleteDir()
             checkout scm
-            sh '''npm -g i yo @plone/generator-volto'''
+            sh '''npm i yo @plone/generator-volto'''
+            sh 'export PATH=$(pwd)/node_modules/.bin:$PATH'
             sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/volto-blocks-grid.git --private --branch master'''
             sh '''cd addon-testing-project && yarn lint:ci'''
           }
