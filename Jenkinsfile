@@ -24,7 +24,7 @@ pipeline {
     stage('ESlint') {
       steps {
         withCredentials([
-          usernamePassword(credentialsId: 'github-personal-access-token-for-hooks',
+          string(credentialsId: 'github-personal-access-token-for-hooks',
             variable: 'GITHUB_TOKEN')
           ]) {
             deleteDir()
