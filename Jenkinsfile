@@ -25,7 +25,7 @@ pipeline {
       steps {
         withCredentials([
           usernamePassword(credentialsId: 'github-personal-access-token-for-hooks',
-            secretVariable: 'GITHUB_TOKEN')
+            variable: 'GITHUB_TOKEN')
           ]) {
             deleteDir()
             checkout scm
