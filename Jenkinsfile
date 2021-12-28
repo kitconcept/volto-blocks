@@ -21,19 +21,19 @@ pipeline {
 
   stages {
     // Static Code Analysis
-    // stage('ESlint') {
-    //   steps {
-    //     deleteDir()
-    //     checkout scm
-    //     sh '''docker pull plone/volto-addon-ci'''
-    //     sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
-    //   }
-    //   post {
-    //     always {
-    //       recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
-    //     }
-    //   }
-    // }
+    stage('ESlint') {
+      steps {
+        deleteDir()
+        checkout scm
+        sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/volto-blocks-grid.git --private --branch master'''
+        sh '''cd addon-testing-project && yarn lint:ci'''
+      }
+      post {
+        always {
+          recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
+        }
+      }
+    }
     // stage('stylelint') {
     //   steps {
     //     deleteDir()
