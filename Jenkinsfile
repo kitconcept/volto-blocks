@@ -10,7 +10,6 @@ pipeline {
         GIT_NAME = "volto-blocks"
         NAMESPACE = "@kitconcept"
         DEPENDENCIES = ""
-        GITHUB_TOKEN = credentials('github-personal-access-token-for-hooks')
   }
 
   options {
@@ -24,11 +23,17 @@ pipeline {
     // Static Code Analysis
     stage('ESlint') {
       steps {
-        deleteDir()
-        checkout scm
-        sh '''echo "the token: ${GITHUB_TOKEN}"'''
-        sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/volto-blocks-grid.git --private --branch master'''
-        sh '''cd addon-testing-project && yarn lint:ci'''
+        withCredentials([
+          usernamePassword(credentialsId: 'github-personal-access-token-for-hooks',
+            secretVariable: 'GITHUB_TOKEN')
+          ]) {
+            deleteDir()
+            checkout scm
+            sh '''echo "the token: ${GITHUB_TOKEN}"'''
+            sh '''export GITHUB_TOKEN=${GITHUB_TOKEN}"'''
+            sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/volto-blocks-grid.git --private --branch master'''
+            sh '''cd addon-testing-project && yarn lint:ci'''
+          }
       }
       post {
         always {
