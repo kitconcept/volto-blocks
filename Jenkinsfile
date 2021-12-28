@@ -20,8 +20,7 @@ pipeline {
   }
 
   stages {
-    // Static Code Analysis
-    stage('ESlint') {
+    stage('Build') {
       steps {
         withCredentials([
           string(credentialsId: 'kitconcept_github_token_vault',
@@ -32,8 +31,19 @@ pipeline {
             sh '''npm i yo @plone/generator-volto'''
             sh 'export PATH=$(pwd)/node_modules/.bin:$PATH'
             sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/${GIT_NAME}.git --private --branch master'''
-            sh '''cd addon-testing-project && yarn lint:ci'''
+            sh 'tar cfz build.tgz *'
+            stash includes: 'build.tgz', name: 'build.tgz'
           }
+      }
+    }
+
+    // Static Code Analysis
+    stage('ESlint') {
+      steps {
+        deleteDir()
+        unstash 'build.tgz'
+        sh 'tar xfz build.tgz'
+        sh 'cd addon-testing-project && yarn lint:ci'
       }
       post {
         always {
