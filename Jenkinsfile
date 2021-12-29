@@ -45,7 +45,7 @@ pipeline {
             deleteDir()
             unstash 'build.tgz'
             sh 'tar xfz build.tgz'
-            sh 'cd addon-testing-project && yarn lint:ci'
+            sh 'cd addon-testing-project && yarn && yarn lint:ci'
           }
           post {
             always {
@@ -58,7 +58,7 @@ pipeline {
             deleteDir()
             unstash 'build.tgz'
             sh 'tar xfz build.tgz'
-            sh 'cd addon-testing-project && yarn stylelint'
+            sh 'cd addon-testing-project && yarn && yarn stylelint'
           }
         }
         stage('Prettier') {
@@ -66,7 +66,7 @@ pipeline {
             deleteDir()
             unstash 'build.tgz'
             sh 'tar xfz build.tgz'
-            sh 'cd addon-testing-project && yarn prettier:ci'
+            sh 'cd addon-testing-project && yarn && yarn prettier:ci'
           }
         }
       }
@@ -79,7 +79,7 @@ pipeline {
             deleteDir()
             unstash 'build.tgz'
             sh 'tar xfz build.tgz'
-            sh 'cd addon-testing-project && CI=true yarn test'
+            sh 'cd addon-testing-project && yarn && CI=true yarn test'
           }
           post {
             always {
@@ -99,7 +99,7 @@ pipeline {
             deleteDir()
             unstash 'build.tgz'
             sh 'tar xfz build.tgz'
-            sh 'cd addon-testing-project && yarn ci:cypress:run'
+            sh 'cd addon-testing-project && yarn && yarn ci:cypress:run'
           }
           post {
             always {
