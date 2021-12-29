@@ -41,6 +41,9 @@ pipeline {
     stage('Static Code Analysis') {
       parallel {
         stage('ESlint') {
+          agent {
+            label 'node'
+          }
           steps {
             deleteDir()
             unstash 'build.tgz'
@@ -54,6 +57,9 @@ pipeline {
           }
         }
         stage('stylelint') {
+          agent {
+            label 'node'
+          }
           steps {
             deleteDir()
             unstash 'build.tgz'
@@ -62,6 +68,9 @@ pipeline {
           }
         }
         stage('Prettier') {
+          agent {
+            label 'node'
+          }
           steps {
             deleteDir()
             unstash 'build.tgz'
@@ -75,6 +84,9 @@ pipeline {
     stage('Tests') {
       parallel {
         stage('Unit tests') {
+          agent {
+            label 'node'
+          }
           steps {
             deleteDir()
             unstash 'build.tgz'
