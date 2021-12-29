@@ -85,7 +85,7 @@ pipeline {
             always {
               step([
                 $class: 'JUnitResultArchiver',
-                testResults: 'junit.xml'
+                testResults: 'addon-testing-project/junit.xml'
               ])
             }
           }
@@ -99,13 +99,13 @@ pipeline {
             deleteDir()
             unstash 'build.tgz'
             sh 'tar xfz build.tgz'
-            sh 'cd addon-testing-project && yarn && yarn ci:cypress:run'
+            sh 'cd addon-testing-project && yarn --force && yarn ci:cypress:run'
           }
           post {
             always {
-              archiveArtifacts artifacts: 'cypress/videos/**/*.mp4', fingerprint: true, allowEmptyArchive: true
-              archiveArtifacts artifacts: 'cypress/screenshots/**/*.png', fingerprint: true, allowEmptyArchive: true
-              junit 'results/cypress-report-*.xml'
+              archiveArtifacts artifacts: 'addon-testing-project/src/addons/volto-blocks/cypress/videos/**/*.mp4', fingerprint: true, allowEmptyArchive: true
+              archiveArtifacts artifacts: 'addon-testing-project/src/addons/volto-blocks/cypress/screenshots/**/*.png', fingerprint: true, allowEmptyArchive: true
+              junit 'addon-testing-project/src/addons/volto-blocks/results/cypress-report-*.xml'
             }
           }
         }
