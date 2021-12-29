@@ -31,7 +31,7 @@ pipeline {
             sh '''npm i yo @plone/generator-volto'''
             sh 'export PATH=$(pwd)/node_modules/.bin:$PATH'
             sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/${GIT_NAME}.git --private --branch master'''
-            sh 'tar cfz build.tgz *'
+            sh 'tar cfz build.tgz --exclude=node-jq addon-testing-project'
             stash includes: 'build.tgz', name: 'build.tgz'
           }
       }
