@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix build for Volto 14, refactoring using the new addon testing environment based approach @sneridagh
+
 ### Internal
 
 ## 9.3.0 (2021-12-10)
