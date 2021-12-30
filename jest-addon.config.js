@@ -4,6 +4,7 @@ module.exports = {
     'src/addons/**/src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
   ],
+  reporters: ['default', 'jest-junit'],
   transformIgnorePatterns: ['node_modules/(?!(volto-slate|@plone/volto)/)'],
   moduleNameMapper: {
     '@plone/volto/cypress': '<rootDir>/node_modules/@plone/volto/cypress',
