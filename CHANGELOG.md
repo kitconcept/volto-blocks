@@ -12,6 +12,8 @@
 
 ### Internal
 
+- Cleaning after refactor @sneridagh
+
 ## 9.3.0 (2021-12-10)
 
 ### Feature

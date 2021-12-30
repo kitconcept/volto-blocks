@@ -111,7 +111,7 @@ pipeline {
             deleteDir()
             unstash 'build.tgz'
             sh 'tar xfz build.tgz'
-            sh 'cd addon-testing-project && yarn --force && yarn ci:cypress:run'
+            sh 'cd addon-testing-project && yarn --force && yarn cypress:run'
           }
           post {
             always {
