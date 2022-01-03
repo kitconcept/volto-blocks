@@ -6,6 +6,8 @@
 
 ### Feature
 
+- Implement ImgLoader component @reebalazs
+
 ### Bugfix
 
 - Fix build for Volto 14, refactoring using the new addon testing environment based approach @sneridagh
