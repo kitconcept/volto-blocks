@@ -1,6 +1,6 @@
 # Change Log
 
-## 9.3.1 (unreleased)
+## 9.4.0 (2022-01-04)
 
 ### Feature
 
