@@ -2,8 +2,6 @@
 
 ## 9.3.1 (unreleased)
 
-### Breaking
-
 ### Feature
 
 - Implement ImgLoader component @reebalazs
