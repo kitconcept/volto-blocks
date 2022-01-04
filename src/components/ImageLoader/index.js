@@ -1,2 +1,4 @@
-export ImgLoader from './ImgLoader';
-export ImageLoader from './ImageLoader';
+import ImgLoader from './ImgLoader';
+import ImageLoader from './ImageLoader';
+
+export { ImgLoader, ImageLoader };
