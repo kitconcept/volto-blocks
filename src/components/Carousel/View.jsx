@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { Button, Message } from 'semantic-ui-react';
 import Slider from 'react-slick';
 import teaserHeroTopTemplate from '@kitconcept/volto-blocks/components/TeaserHero/teaserhero-top-template.svg';
@@ -43,6 +43,7 @@ const NextArrow = ({ className, style, onClick }) => (
 
 const CarouselView = (props) => {
   const { data, isEditMode } = props;
+  const [mobileSize, setmobileSize] = useState(false);
   const intl = useIntl();
   let noOfSlide = data.items_to_show ?? 4;
   if (data.items_to_show) {
@@ -54,6 +55,27 @@ const CarouselView = (props) => {
       noOfSlide = data.items_to_show;
     }
   }
+
+  if (__CLIENT__ && (window.innerWidth < 520 || mobileSize)) {
+    noOfSlide = 1;
+  }
+
+  const updateNoOfSlide = useCallback(() => {
+    if (window.innerWidth < 520) {
+      setmobileSize(true);
+    } else {
+      setmobileSize(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('resize', updateNoOfSlide);
+    return () => window.removeEventListener('resize', updateNoOfSlide);
+  }, [updateNoOfSlide]);
+
+  useEffect(() => {
+    updateNoOfSlide();
+  }, [updateNoOfSlide]);
 
   return (
     <div

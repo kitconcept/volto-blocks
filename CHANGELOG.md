@@ -7,6 +7,7 @@
 ### Feature
 
 ### Bugfix
+- Fix the responsive of carousel block @iFlameing
 
 ### Internal
 - Change the icon of Separator block (#95) @iFlameing
