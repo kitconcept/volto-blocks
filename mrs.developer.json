@@ -1,0 +1,11 @@
+{
+  "volto-blocks": {
+    "packages": {
+      "@kitconcept/volto-blocks": "./src",
+      "@kitconcept/volto-heading-block": "packages/volto-heading-block/src",
+      "@kitconcept/volto-separator-block": "packages/volto-separator-block/src"
+    },
+    "url": "git@github.com:kitconcept/volto-blocks.git",
+    "branch": "master"
+  }
+}

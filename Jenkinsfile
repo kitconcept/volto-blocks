@@ -31,6 +31,10 @@ pipeline {
             sh '''npm i yo @plone/generator-volto'''
             sh 'export PATH=$(pwd)/node_modules/.bin:$PATH'
             sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/${GIT_NAME}.git --private --branch $BRANCH_NAME'''
+            // copy special mrs.developer.json for handling inner packages
+            sh 'cp mrs.developer.json addon-testing-project/.'
+            // Run yarn again for changes to take effect
+            sh 'cd addon-testing-project && yarn'
             sh 'tar cfz build.tgz --exclude=node-jq addon-testing-project'
             stash includes: 'build.tgz', name: 'build.tgz'
           }
