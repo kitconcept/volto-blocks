@@ -20,13 +20,13 @@ context('Blocks Acceptance Tests', () => {
       // when I add a page with a text block
       cy.get('#toolbar-add').click();
       cy.get('#toolbar-add-document').click();
-      cy.get('.documentFirstHeading > .public-DraftStyleDefault-block')
+      cy.get('.documentFirstHeading')
         .type('My Page')
-        .get('.documentFirstHeading span[data-text]')
+        .get('.documentFirstHeading')
         .contains('My Page');
 
       getSlateEditorAndType(
-        '.slate-editor [contenteditable=true]',
+        '.block .slate-editor [contenteditable=true]',
         'This is the text',
       );
 
@@ -44,7 +44,10 @@ context('Blocks Acceptance Tests', () => {
         'Colorless green ideas sleep furiously.',
       ).setSelection('furiously');
 
-      cy.get('.slate-inline-toolbar .button-wrapper:nth-of-type(3)').click();
+      // TODO: there are two toolbars present :( The bad one has an .undefined CSS class :(
+      cy.get(
+        '.slate-inline-toolbar:not(.undefined) .button-wrapper:nth-of-type(3)',
+      ).click();
       cy.get('.link-form-container input').type('https://google.com{enter}');
       cy.get('#toolbar-save').click();
       cy.url().should('eq', Cypress.config().baseUrl + '/document');
@@ -65,10 +68,7 @@ context('Blocks Acceptance Tests', () => {
     it('As editor I can add a button block', () => {
       // When I create a button block
       cy.navigate('/document/edit');
-
-      cy.get(`.block.title [data-contents]`);
       cy.get('.slate-editor [contenteditable=true]').click();
-
       cy.get('.button .block-add-button').click({ force: true });
       cy.get('.blocks-chooser .mostUsed .buttonBlock').click();
       cy.get(' #blockform-fieldset-default  #field-title').type('Button Block');

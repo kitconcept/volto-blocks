@@ -1,15 +1,45 @@
 # Change Log
 
-## 9.2.1 (unreleased)
+## 9.4.1 (unreleased)
 
 ### Breaking
 
 ### Feature
 
 ### Bugfix
+
 - Fix the responsive of carousel block @iFlameing
+- Fix heading block @iRohitSingh
+- Fix the a11y violation of carousel block @iRohitSingh
 
 ### Internal
+
+## 9.4.0 (2022-01-04)
+
+### Feature
+
+- Implement ImgLoader component @reebalazs
+
+### Bugfix
+
+- Fix build for Volto 14, refactoring using the new addon testing environment based approach @sneridagh
+
+### Internal
+
+- Cleaning after refactor @sneridagh
+
+## 9.3.0 (2021-12-10)
+
+### Feature
+
+- Updating volto-slate to latest @iFlameing
+
+### Bugfix
+
+- Fixed drag-and-drop list placeholder issues @reebalazs
+
+### Internal
+
 - Change the icon of Separator block (#95) @iFlameing
 
 ## 9.2.0 (2021-11-29)
