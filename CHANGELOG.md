@@ -7,6 +7,8 @@
 ### Feature
 
 ### Bugfix
+- Fix heading block @iRohitSingh
+
 
 ### Internal
 
