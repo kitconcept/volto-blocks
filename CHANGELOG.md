@@ -7,6 +7,8 @@
 ### Feature
 
 ### Bugfix
+- Fix heading block @iRohitSingh
+
 
 - Fix the a11y violation of carousel block @iRohitSingh
 

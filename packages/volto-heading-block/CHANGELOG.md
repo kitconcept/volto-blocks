@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix heading block @iRohitSingh
+
 ### Internal
 
 ## 1.0.0-alpha.1 (2021-10-23)
