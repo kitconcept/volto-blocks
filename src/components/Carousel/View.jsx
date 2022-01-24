@@ -25,6 +25,7 @@ const PrevArrow = ({ className, style, onClick }) => (
     className={className}
     style={{ ...style, display: 'block' }}
     onClick={onClick}
+    aria-label="left arrow"
   >
     <Icon name={leftArrowSVG} size="48px" />
   </Button>
@@ -36,6 +37,7 @@ const NextArrow = ({ className, style, onClick }) => (
     className={className}
     style={{ ...style, display: 'block' }}
     onClick={onClick}
+    aria-label="right arrow"
   >
     <Icon name={rightArrowSVG} size="48px" />
   </Button>

@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix the a11y violation of carousel block @iRohitSingh
+
 ### Internal
 
 ## 9.4.0 (2022-01-04)
