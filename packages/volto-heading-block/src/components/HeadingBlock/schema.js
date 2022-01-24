@@ -53,7 +53,7 @@ export const headingSchema = (props) => {
       tag: {
         title: props.intl.formatMessage(messages.headingLevel),
         choices: filterDefaultLevels(),
-        default: [default_tag, default_tag],
+        default: default_tag,
         noValueOption: false,
       },
       alignment: {
@@ -63,7 +63,7 @@ export const headingSchema = (props) => {
           ['center', 'center'],
           ['right', 'right'],
         ],
-        default: ['left', 'left'],
+        default: 'left',
       },
     },
     required: [],

@@ -27,7 +27,7 @@ const HeadingEdit = (props) => {
         innerRef={ref}
         style={show_alignment ? { textAlign: data.alignment } : {}}
         className="editable"
-        tagName={data.tag || 'h2'}
+        tagName={data.tag ?? 'h2'}
         html={data.heading || ''} // innerHTML of the editable div
         onChange={handleChange} // handle innerHTML change
       />
