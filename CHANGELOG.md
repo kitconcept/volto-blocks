@@ -1,6 +1,6 @@
 # Change Log
 
-## 9.3.1 (unreleased)
+## 9.4.1 (unreleased)
 
 ### Breaking
 
@@ -11,6 +11,20 @@
 - Fix the a11y violation of carousel block @iRohitSingh
 
 ### Internal
+
+## 9.4.0 (2022-01-04)
+
+### Feature
+
+- Implement ImgLoader component @reebalazs
+
+### Bugfix
+
+- Fix build for Volto 14, refactoring using the new addon testing environment based approach @sneridagh
+
+### Internal
+
+- Cleaning after refactor @sneridagh
 
 ## 9.3.0 (2021-12-10)
 

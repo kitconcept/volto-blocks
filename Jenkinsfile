@@ -3,7 +3,7 @@
 pipeline {
 
   agent {
-    label 'docker'
+    label 'node'
   }
 
   environment {
@@ -20,95 +20,112 @@ pipeline {
   }
 
   stages {
+    stage('Build') {
+      steps {
+        withCredentials([
+          string(credentialsId: 'kitconcept_github_token_vault',
+            variable: 'GITHUB_TOKEN')
+          ]) {
+            deleteDir()
+            checkout scm
+            sh '''npm i yo @plone/generator-volto'''
+            sh 'export PATH=$(pwd)/node_modules/.bin:$PATH'
+            sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/${GIT_NAME}.git --private --branch $BRANCH_NAME'''
+            // copy special mrs.developer.json for handling inner packages
+            sh 'cp mrs.developer.json addon-testing-project/.'
+            // Run yarn again for changes to take effect
+            sh 'cd addon-testing-project && yarn'
+            sh 'tar cfz build.tgz --exclude=node-jq addon-testing-project'
+            stash includes: 'build.tgz', name: 'build.tgz'
+          }
+      }
+    }
+
     // Static Code Analysis
-    stage('ESlint') {
-      steps {
-        deleteDir()
-        checkout scm
-        sh '''docker pull plone/volto-addon-ci'''
-        sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci eslint'''
-      }
-      post {
-        always {
-          recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
+    stage('Static Code Analysis') {
+      parallel {
+        stage('ESlint') {
+          agent {
+            label 'node'
+          }
+          steps {
+            deleteDir()
+            unstash 'build.tgz'
+            sh 'tar xfz build.tgz'
+            sh 'cd addon-testing-project && yarn && yarn lint:ci'
+          }
+          post {
+            always {
+              recordIssues enabledForFailure: true, aggregatingResults: true, tool: esLint(pattern: 'eslint.xml')
+            }
+          }
         }
-      }
-    }
-    stage('stylelint') {
-      steps {
-        deleteDir()
-        checkout scm
-        sh '''docker pull plone/volto-addon-ci'''
-        sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci stylelint'''
-      }
-    }
-    stage('Prettier') {
-      steps {
-        deleteDir()
-        checkout scm
-        sh '''docker pull plone/volto-addon-ci'''
-        sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci prettier'''
-      }
-    }
-
-    stage('Unit tests') {
-      steps {
-        deleteDir()
-        checkout scm
-        sh '''docker pull plone/volto-addon-ci'''
-        sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci test'''
-      }
-      post {
-        always {
-          sh '''mkdir -p xunit-reports'''
-          sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/coverage xunit-reports/'''
-          sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
-          sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/unit_tests_log.txt xunit-reports/'''
-          sh '''docker rm -v $BUILD_TAG-volto'''
-          step([
-            $class: 'JUnitResultArchiver',
-            testResults: 'xunit-reports/junit.xml'
-          ])
-          archiveArtifacts artifacts: 'xunit-reports/unit_tests_log.txt', fingerprint: true
-          archiveArtifacts artifacts: 'xunit-reports/coverage/lcov.info', fingerprint: true
-          publishHTML (target : [
-            allowMissing: false,
-            alwaysLinkToLastBuild: true,
-            keepAll: true,
-            reportDir: 'xunit-reports/coverage/lcov-report',
-            reportFiles: 'index.html',
-            reportName: 'UTCoverage',
-            reportTitles: 'Unit Tests Code Coverage'
-          ])
+        stage('stylelint') {
+          agent {
+            label 'node'
+          }
+          steps {
+            deleteDir()
+            unstash 'build.tgz'
+            sh 'tar xfz build.tgz'
+            sh 'cd addon-testing-project && yarn && yarn stylelint'
+          }
+        }
+        stage('Prettier') {
+          agent {
+            label 'node'
+          }
+          steps {
+            deleteDir()
+            unstash 'build.tgz'
+            sh 'tar xfz build.tgz'
+            sh 'cd addon-testing-project && yarn && yarn prettier:ci'
+          }
         }
       }
     }
 
-    stage('Acceptance tests') {
-      steps {
-        deleteDir()
-        checkout scm
-        sh 'yarn'
-        sh 'yarn ci:cypress'
-        // sh '''docker pull plone; docker run -d --name="$BUILD_TAG-plone" -e SITE="Plone" -e PROFILES="profile-plone.restapi:blocks" plone fg'''
-        // sh '''docker pull plone/volto-addon-ci; docker run -i --name="$BUILD_TAG-cypress" --link $BUILD_TAG-plone:plone -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -v $(pwd):/opt/frontend/my-volto-project/src/addons/$GIT_NAME plone/volto-addon-ci cypress'''
-      }
-      post {
-        always {
-          archiveArtifacts artifacts: 'cypress/videos/**/*.mp4', fingerprint: true, allowEmptyArchive: true
-          archiveArtifacts artifacts: 'cypress/screenshots/**/*.png', fingerprint: true, allowEmptyArchive: true
-          junit 'results/cypress-report-*.xml'
+    stage('Tests') {
+      parallel {
+        stage('Unit tests') {
+          agent {
+            label 'node'
+          }
+          steps {
+            deleteDir()
+            unstash 'build.tgz'
+            sh 'tar xfz build.tgz'
+            sh 'cd addon-testing-project && yarn && CI=true yarn test'
+          }
+          post {
+            always {
+              step([
+                $class: 'JUnitResultArchiver',
+                testResults: 'addon-testing-project/junit.xml'
+              ])
+            }
+          }
+        }
+
+        stage('Acceptance tests') {
+          agent {
+            label 'docker'
+          }
+          steps {
+            deleteDir()
+            unstash 'build.tgz'
+            sh 'tar xfz build.tgz'
+            sh 'cd addon-testing-project && yarn --force && yarn ci:cypress:run'
+          }
+          post {
+            always {
+              archiveArtifacts artifacts: 'addon-testing-project/src/addons/volto-blocks/cypress/videos/**/*.mp4', fingerprint: true, allowEmptyArchive: true
+              archiveArtifacts artifacts: 'addon-testing-project/src/addons/volto-blocks/cypress/screenshots/**/*.png', fingerprint: true, allowEmptyArchive: true
+              junit 'addon-testing-project/src/addons/volto-blocks/results/cypress-report-*.xml'
+            }
+          }
         }
       }
-      // post {
-      //   always {
-      //     sh '''mkdir -p cypress-reports'''
-      //     sh '''docker cp $BUILD_TAG-cypress:/opt/frontend/my-volto-project/src/addons/$GIT_NAME/cypress/videos cypress-reports/'''
-      //     stash name: "cypress-reports", includes: "cypress-reports/**/*"
-      //     archiveArtifacts artifacts: 'cypress-reports/videos/*.mp4', fingerprint: true
-      //     sh '''echo "$(docker stop $BUILD_TAG-plone; docker rm -v $BUILD_TAG-plone; docker rm -v $BUILD_TAG-cypress)" '''
-      //   }
-      // }
     }
 
   }

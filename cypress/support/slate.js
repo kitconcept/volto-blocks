@@ -10,5 +10,5 @@ export const getSelectedSlateEditor = () => {
 };
 
 export const getSlateEditorAndType = (selector, type) => {
-  return cy.get(selector).focus().click().wait(1000).type(type);
+  return cy.get(selector).focus().click().wait(1000).type(type).wait(1000);
 };
