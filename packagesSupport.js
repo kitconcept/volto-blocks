@@ -5,12 +5,7 @@
  * @module packagesSupport
  */
 const { program } = require('commander');
-const { execSync } = require('child_process');
-const https = require('https');
-const GitUrlParse = require('git-url-parse');
 const fs = require('fs');
-const { develop } = require('mrs-developer');
-const chalk = require('chalk');
 
 function amendMRSDeveloperJSON({ addon, branch }) {
   const mrsDeveloperJSON = JSON.parse(
