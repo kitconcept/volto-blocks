@@ -4,7 +4,7 @@
  * fixes mrs.developer.json to work with the current branch
  * @module packagesSupport
  */
-const { program } = require('commander');
+const program = require('commander');
 const fs = require('fs');
 
 function amendMRSDeveloperJSON({ addon, branch }) {
