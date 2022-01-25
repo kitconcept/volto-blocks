@@ -4,8 +4,6 @@
 
 ### Breaking
 
-### Feature
-
 ### Bugfix
 
 - Fix the responsive of carousel block @iFlameing
