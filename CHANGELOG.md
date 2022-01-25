@@ -4,12 +4,10 @@
 
 ### Breaking
 
-### Feature
-
 ### Bugfix
+
+- Fix the responsive of carousel block @iFlameing
 - Fix heading block @iRohitSingh
-
-
 - Fix the a11y violation of carousel block @iRohitSingh
 
 ### Internal

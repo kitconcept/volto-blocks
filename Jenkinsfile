@@ -33,6 +33,8 @@ pipeline {
             sh '''npx -p @plone/scripts addon clone git@github.com:kitconcept/${GIT_NAME}.git --private --branch $BRANCH_NAME'''
             // copy special mrs.developer.json for handling inner packages
             sh 'cp mrs.developer.json addon-testing-project/.'
+            sh 'cp packagesSupport.js addon-testing-project/.'
+            sh '(cd addon-testing-project && node packagesSupport.js -a ${GIT_NAME} -b $BRANCH_NAME)'
             // Run yarn again for changes to take effect
             sh 'cd addon-testing-project && yarn'
             sh 'tar cfz build.tgz --exclude=node-jq addon-testing-project'
