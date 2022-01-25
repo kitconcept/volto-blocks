@@ -1,5 +1,15 @@
 # Change Log
 
+## 9.4.2 (unreleased)
+
+### Breaking
+
+### Feature
+
+### Bugfix
+
+### Internal
+
 ## 9.4.1 (2022-01-25)
 
 ### Bugfix
