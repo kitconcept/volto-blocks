@@ -2,15 +2,11 @@
 
 ## 9.4.1 (unreleased)
 
-### Breaking
-
 ### Bugfix
 
 - Fix the responsive of carousel block @iFlameing
 - Fix heading block @iRohitSingh
 - Fix the a11y violation of carousel block @iRohitSingh
-
-### Internal
 
 ## 9.4.0 (2022-01-04)
 
