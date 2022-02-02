@@ -70,7 +70,7 @@ const itemSchema = (props) => {
         title: intl.formatMessage(messages.Source),
         widget: 'object_browser',
         mode: 'link',
-        selectedItemAttrs: ['Title', 'Description', 'hasPreviewImage'],
+        selectedItemAttrs: ['Title', 'Description', 'image_field'],
         allowExternals: true,
       },
       title: {

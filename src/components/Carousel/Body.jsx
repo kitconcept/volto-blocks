@@ -30,6 +30,7 @@ defineMessages({
 const CarouselBody = ({ data, dataBlock, isEditMode }) => {
   const intl = useIntl();
   const href = data.href?.[0];
+  const imageType = href && href?.image_field && href.image_field;
   const image = data.preview_image?.[0];
 
   return (
@@ -49,13 +50,17 @@ const CarouselBody = ({ data, dataBlock, isEditMode }) => {
             as={UniversalLink}
             href={href['@id']}
             target={data.openLinkInNewTab ? '_blank' : null}
-            tabindex="-1"
+            tabIndex={-1}
           >
             <>
-              {(href.hasPreviewImage || image) && (
+              {(image ||
+                imageType === 'image' ||
+                imageType === 'preview_image') && (
                 <div className="grid-image-wrapper">
                   <img
-                    src={flattenToAppURL(getTeaserImageURL(href, image))}
+                    src={flattenToAppURL(
+                      getTeaserImageURL(href, image, imageType),
+                    )}
                     alt=""
                     loading="lazy"
                   />

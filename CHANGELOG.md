@@ -4,6 +4,8 @@
 
 ### Breaking
 
+- Make carousel block more generic to use either preview or normal image @steffenri
+
 ### Feature
 
 ### Bugfix
