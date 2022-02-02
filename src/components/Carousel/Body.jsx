@@ -53,7 +53,8 @@ const CarouselBody = ({ data, dataBlock, isEditMode }) => {
             tabIndex={-1}
           >
             <>
-              {(image ||
+              {(href.hasPreviewImage || //Although we do not get this attribute any longer from the schema, we still keep it to ensure old content with that attribute still works
+                image ||
                 imageType === 'image' ||
                 imageType === 'preview_image') && (
                 <div className="grid-image-wrapper">
