@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix `tabindex` typo @sneridagh
+
 ### Internal
 
 ## 9.4.1 (2022-01-25)
