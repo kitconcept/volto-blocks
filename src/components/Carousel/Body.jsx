@@ -30,6 +30,7 @@ defineMessages({
 const CarouselBody = ({ data, dataBlock, isEditMode }) => {
   const intl = useIntl();
   const href = data.href?.[0];
+  const imageType = href && href?.image_field && href.image_field;
   const image = data.preview_image?.[0];
 
   return (
@@ -49,13 +50,18 @@ const CarouselBody = ({ data, dataBlock, isEditMode }) => {
             as={UniversalLink}
             href={href['@id']}
             target={data.openLinkInNewTab ? '_blank' : null}
-            tabIndex="-1"
+            tabIndex={-1}
           >
             <>
-              {(href.hasPreviewImage || image) && (
+              {(href.hasPreviewImage || //Although we do not get this attribute any longer from the schema, we still keep it to ensure old content with that attribute still works
+                image ||
+                imageType === 'image' ||
+                imageType === 'preview_image') && (
                 <div className="grid-image-wrapper">
                   <img
-                    src={flattenToAppURL(getTeaserImageURL(href, image))}
+                    src={flattenToAppURL(
+                      getTeaserImageURL(href, image, imageType),
+                    )}
                     alt=""
                     loading="lazy"
                   />
