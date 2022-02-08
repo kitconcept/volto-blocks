@@ -2,17 +2,13 @@
 
 ## 9.4.2 (unreleased)
 
-### Breaking
+### Feature
 
 - Make carousel block more generic to use either preview or normal image @steffenri
-
-### Feature
 
 ### Bugfix
 
 - Fix `tabindex` typo @sneridagh
-
-### Internal
 
 ## 9.4.1 (2022-01-25)
 
