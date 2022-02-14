@@ -1,6 +1,10 @@
-![kitconcept GmbH](https://raw.githubusercontent.com/kitconcept/volto-form-builder/master/kitconcept.png)
+![kitconcept GmbH](https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png)
 
 # Volto Separator Block
+
+<img style="float: right;" src="https://raw.githubusercontent.com/plone/pastanaga-icons/master/Icons/divide-horizontal.svg">
+
+The Volto Separator Block allows editors to add visual separators between blocks.
 
 ## Screenshot
 
@@ -12,7 +16,15 @@
 
 ## Installation
 
-If you already have a Volto project, just update package.json:
+Create a new Volto project (you can skip this step if you already have one):
+
+```
+npm install -g yo @plone/generator-volto
+yo @plone/volto my-volto-project --addon @kitconcept/volto-separator-block
+cd my-volto-project
+```
+
+Add `@kitconcept-volto-separator-block`to your package.json:
 
 ```
 "addons": [
@@ -24,19 +36,16 @@ If you already have a Volto project, just update package.json:
 }
 ```
 
-If not, create one:
-
-```
-npm install -g yo @plone/generator-volto
-yo @plone/volto my-volto-project --addon @kitconcept/volto-separator-block
-cd my-volto-project
-```
-
-Install new add-on and restart Volto:
+Download and install the new add-on by running:
 
 ```
 yarn install
-yarn start
 ```
 
-Go to http://localhost:3000
+Start Volto with:
+
+````
+yarn start
+````
+
+Go to http://localhost:3000, login, create a new page. The separator block will show up in the Volto blocks chooser.

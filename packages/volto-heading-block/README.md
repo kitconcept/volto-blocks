@@ -1,4 +1,4 @@
-![kitconcept GmbH](https://raw.githubusercontent.com/kitconcept/volto-form-builder/master/kitconcept.png)
+![kitconcept GmbH](https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png)
 
 # Volto Heading Block
 
