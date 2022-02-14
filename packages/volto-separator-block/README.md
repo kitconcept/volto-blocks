@@ -49,3 +49,13 @@ yarn start
 ````
 
 Go to http://localhost:3000, login, create a new page. The separator block will show up in the Volto blocks chooser.
+
+# Credits
+
+![Forschungszentrum Jülich](https://github.com/kitconcept/volto-blocks/raw/master/fz-juelich.svg)
+
+The development of this plugin has been kindly sponsored by [Forschungszentrum Jülich](https://fz-juelich.de).
+
+# License
+
+The project is licensed under the MIT license.
