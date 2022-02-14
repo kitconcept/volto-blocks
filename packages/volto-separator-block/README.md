@@ -52,7 +52,7 @@ Go to http://localhost:3000, login, create a new page. The separator block will 
 
 # Credits
 
-![Forschungszentrum Jülich](https://github.com/kitconcept/volto-blocks/raw/master/fz-juelich.svg)
+<img alt="Forschungszentrum Jülich" src="https://github.com/kitconcept/volto-blocks/raw/master/fz-juelich.svg" width="200px" />
 
 The development of this plugin has been kindly sponsored by [Forschungszentrum Jülich](https://fz-juelich.de).
 
