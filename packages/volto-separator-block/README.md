@@ -1,6 +1,6 @@
 <img width="100px" src="https://raw.githubusercontent.com/plone/pastanaga-icons/master/Icons/divide-horizontal.svg">
 
-<img width="200px" style="float: right" src="https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png" alt="kitconcept GmbH">
+<img align="right" src="https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png" alt="kitconcept GmbH">
 
 # Volto Separator Block
 
