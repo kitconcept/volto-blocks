@@ -100,11 +100,14 @@
     "git": {
       "changelog": "changelogupdater excerpt",
       "requireUpstream": false,
-      "requireCleanWorkingDir": false
+      "requireCleanWorkingDir": false,
+      "commitMessage": "Release volto-separator-block ${version}",
+      "tagName": "volto-separator-block-${version}",
+      "tagAnnotation": "Release volto-separator-block ${version}"
     },
     "github": {
       "release": true,
-      "releaseName": "${version}",
+      "releaseName": "volto-separator-block ${version}",
       "releaseNotes": "changelogupdater excerpt"
     }
   },
