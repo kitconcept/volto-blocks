@@ -1,8 +1,6 @@
 ![kitconcept GmbH](https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png)
 
-# Volto Separator Block
-
-<img style="float: right;" src="https://raw.githubusercontent.com/plone/pastanaga-icons/master/Icons/divide-horizontal.svg">
+# <img style="float: right;" src="https://raw.githubusercontent.com/plone/pastanaga-icons/master/Icons/divide-horizontal.svg"> Volto Separator Block
 
 The Volto Separator Block allows editors to add visual separators between blocks.
 
