@@ -1,4 +1,4 @@
-<img width="100px" src="https://raw.githubusercontent.com/plone/pastanaga-icons/master/Icons/divide-horizontal.svg"> ![kitconcept GmbH](https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png)
+![kitconcept GmbH](https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png) <img width="100px" src="https://raw.githubusercontent.com/plone/pastanaga-icons/master/Icons/divide-horizontal.svg">
 
 # Volto Separator Block
 
