@@ -2,6 +2,8 @@
 
 <img align="right" src="https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png" alt="kitconcept GmbH">
 
+<br>
+
 # Volto Separator Block
 
 The Volto Separator Block allows editors to add visual separators between blocks.
