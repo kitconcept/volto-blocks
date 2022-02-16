@@ -2,10 +2,10 @@
 
 # Volto Separator Block
 
-[![NPM](https://img.shields.io/npm/v/@kitconcept/volto-separator-block.svg)](https://www.npmjs.com/package/@kitconcept/volto-blocks-grid)
-[![Build Status](https://github.com/kitconcept/volto-separator-block/actions/workflows/code.yml/badge.svg)](https://github.com/kitconcept/volto-blocks-grid/actions)
-[![Build Status](https://github.com/kitconcept/volto-separator-block/actions/workflows/unit.yml/badge.svg)](https://github.com/kitconcept/volto-blocks-grid/actions)
-[![Build Status](https://github.com/kitconcept/volto-separator-block/actions/workflows/acceptance.yml/badge.svg)](https://github.com/kitconcept/volto-blocks-grid/actions)
+[![NPM](https://img.shields.io/npm/v/@kitconcept/volto-separator-block.svg)](https://www.npmjs.com/package/@kitconcept/volto-separator-block)
+[![Build Status](https://github.com/kitconcept/volto-blocks-grid/actions/workflows/code.yml/badge.svg)](https://github.com/kitconcept/volto-blocks-grid/actions)
+[![Build Status](https://github.com/kitconcept/volto-blocks-grid/actions/workflows/unit.yml/badge.svg)](https://github.com/kitconcept/volto-blocks-grid/actions)
+[![Build Status](https://github.com/kitconcept/volto-blocks-grid/actions/workflows/acceptance.yml/badge.svg)](https://github.com/kitconcept/volto-blocks-grid/actions)
 
 ![kitconcept GmbH](https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png)
 
