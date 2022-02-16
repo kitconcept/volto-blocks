@@ -100,11 +100,14 @@
     "git": {
       "changelog": "changelogupdater excerpt",
       "requireUpstream": false,
-      "requireCleanWorkingDir": false
+      "requireCleanWorkingDir": false,
+      "commitMessage": "Release volto-heading-block ${version}",
+      "tagName": "volto-heading-block-${version}",
+      "tagAnnotation": "Release volto-heading-block ${version}"
     },
     "github": {
       "release": true,
-      "releaseName": "${version}",
+      "releaseName": "volto-heading-block ${version}",
       "releaseNotes": "changelogupdater excerpt"
     }
   },
