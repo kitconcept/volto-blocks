@@ -1,8 +1,13 @@
 <img width="100px" src="https://raw.githubusercontent.com/plone/pastanaga-icons/master/Icons/divide-horizontal.svg">
 
-<img src="https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png" alt="kitconcept GmbH">
-
 # Volto Separator Block
+
+[![NPM](https://img.shields.io/npm/v/@kitconcept/volto-separator-block.svg)](https://www.npmjs.com/package/@kitconcept/volto-blocks-grid)
+[![Build Status](https://github.com/kitconcept/volto-separator-block/actions/workflows/code.yml/badge.svg)](https://github.com/kitconcept/volto-blocks-grid/actions)
+[![Build Status](https://github.com/kitconcept/volto-separator-block/actions/workflows/unit.yml/badge.svg)](https://github.com/kitconcept/volto-blocks-grid/actions)
+[![Build Status](https://github.com/kitconcept/volto-separator-block/actions/workflows/acceptance.yml/badge.svg)](https://github.com/kitconcept/volto-blocks-grid/actions)
+
+![kitconcept GmbH](https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png)
 
 The Volto Separator Block allows editors to add visual separators between blocks.
 
