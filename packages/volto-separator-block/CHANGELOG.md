@@ -2,14 +2,7 @@
 
 ## 1.0.0 (unreleased)
 
-### Breaking
-
-### Feature
-
-### Bugfix
-
-### Internal
-
+- Re-release 1.0.0-alpha.0 as 1.0.0 @tisto
 ## 1.0.0-alpha.0 (2021-10-21)
 
 ### Feature
