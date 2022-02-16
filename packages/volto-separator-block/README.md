@@ -11,11 +11,11 @@ The Volto Separator Block allows editors to add visual separators between blocks
 
 ## Screenshot
 
-![Separator-Block](https://github.com/kitconcept/volto-blocks/blob/a9a95dc2d1004993fbbcce9a6e1d62632b054afc/packages/volto-separator-block/volto-separator-block.png)
+![Separator-Block](https://github.com/kitconcept/volto-blocks/blob/b13fbd5fff1bae0aa4df9577454dfd0796858133/packages/volto-separator-block/volto-separator-block.png)
 
 ## Screencast
 
-![Separator-Block](https://github.com/kitconcept/volto-blocks/raw/master/Separator.gif)
+![Separator-Block](https://github.com/kitconcept/volto-blocks/blob/b13fbd5fff1bae0aa4df9577454dfd0796858133/packages/volto-separator-block/volto-separator-block.gif)
 
 ## Installation
 
