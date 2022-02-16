@@ -1,4 +1,4 @@
-<img width="100px" src="https://raw.githubusercontent.com/plone/pastanaga-icons/master/Icons/divide-horizontal.svg">
+<img align="left" width="100px" src="https://raw.githubusercontent.com/plone/pastanaga-icons/master/Icons/divide-horizontal.svg">
 
 <img align="right" src="https://github.com/kitconcept/volto-blocks/raw/master/kitconcept.png" alt="kitconcept GmbH">
 
