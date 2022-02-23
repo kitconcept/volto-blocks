@@ -1,18 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Editor from 'draft-js-plugins-editor';
-import { Map } from 'immutable';
-import {
-  convertFromRaw,
-  convertToRaw,
-  DefaultDraftBlockRenderMap,
-  EditorState,
-} from 'draft-js';
-import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import { defineMessages, useIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import redraft from 'redraft';
-import { stateFromHTML } from 'draft-js-import-html';
+import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import config from '@plone/volto/registry';
 
 const messages = defineMessages({
@@ -22,7 +13,7 @@ const messages = defineMessages({
   },
 });
 
-const TextBody = (props) => {
+const TextBodyComponent = (props) => {
   const {
     data,
     block,
@@ -35,7 +26,20 @@ const TextBody = (props) => {
 
   const { settings } = config;
 
+  const draftConfig = settings.richtextEditorSettings(props);
+
   const ElementType = renderAs;
+
+  const {
+    Editor,
+    EditorState,
+    DefaultDraftBlockRenderMap,
+    convertFromRaw,
+    convertToRaw,
+  } = props.draftJs;
+  const createInlineToolbarPlugin = props.draftJsInlineToolbarPlugin.default;
+  const { Map } = props.immutableLib;
+  const stateFromHTML = props.draftJsImportHtml.stateFromHTML;
 
   const blockRenderMap = Map({
     unstyled: {
@@ -65,7 +69,7 @@ const TextBody = (props) => {
     }
 
     initialInlineToolbarPlugin = createInlineToolbarPlugin({
-      structure: config.settings.richTextEditorInlineToolbarButtons,
+      structure: draftConfig.richTextEditorInlineToolbarButtons,
     });
   }
 
@@ -109,7 +113,7 @@ const TextBody = (props) => {
             editorState={editorState}
             plugins={[
               inlineToolbarPlugin.current,
-              ...settings.richTextEditorPlugins,
+              ...draftConfig.richTextEditorPlugins,
             ]}
             blockRenderMap={
               renderAs
@@ -156,7 +160,7 @@ const TextBody = (props) => {
   }
 };
 
-TextBody.propTypes = {
+TextBodyComponent.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   dataName: PropTypes.string.isRequired,
   isEditMode: PropTypes.bool,
@@ -168,4 +172,19 @@ TextBody.propTypes = {
   renderAs: PropTypes.elementType,
 };
 
-export default TextBody;
+export const TextBody = injectLazyLibs([
+  'draftJs',
+  'draftJsImportHtml',
+  'draftJsInlineToolbarPlugin',
+  'immutableLib',
+])(TextBodyComponent);
+
+const Preloader = (props) => {
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    TextBody.load().then(() => setLoaded(true));
+  }, []);
+  return loaded ? <TextBody {...props} /> : null;
+};
+
+export default Preloader;

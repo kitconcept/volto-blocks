@@ -6,6 +6,8 @@
 
 ### Feature
 
+- Add lazy loading of draftjs @robgietema
+
 ### Bugfix
 
 ### Internal
