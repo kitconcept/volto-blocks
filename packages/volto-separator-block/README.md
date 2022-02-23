@@ -47,9 +47,9 @@ yarn install
 
 Start Volto with:
 
-````
+```
 yarn start
-````
+```
 
 Go to http://localhost:3000, login, create a new page. The separator block will show up in the Volto blocks chooser.
 
