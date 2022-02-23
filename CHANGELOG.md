@@ -1,6 +1,6 @@
 # Change Log
 
-## 9.5.1 (unreleased)
+## 10.0.0 (2022-02-23)
 
 ### Breaking
 
