@@ -4,13 +4,8 @@
 
 ### Breaking
 
-### Feature
-
 - Add lazy loading of draftjs @robgietema
-
-### Bugfix
-
-### Internal
+  This makes this version compatible only with Volto 15.0.0-alpha.5 and above.
 
 ## 9.5.0 (2022-02-08)
 

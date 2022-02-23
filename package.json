@@ -124,6 +124,6 @@
     "stylelint-prettier": "1.1.2"
   },
   "peerDependencies": {
-    "@plone/volto": ">=13.0.0"
+    "@plone/volto": ">=15.0.0-alpha.5"
   }
 }
