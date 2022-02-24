@@ -10,6 +10,8 @@
 
 ### Internal
 
+- Move to GHActions @sneridagh
+
 ## 10.0.0 (2022-02-23)
 
 ### Breaking
