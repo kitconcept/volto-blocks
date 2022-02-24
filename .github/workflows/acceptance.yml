@@ -58,11 +58,11 @@ jobs:
         if: failure()
         with:
           name: cypress-screenshots
-          path: addon-testing-project/src/addons/volto-blocks-grid/cypress/screenshots
+          path: addon-testing-project/src/addons/volto-blocks/cypress/screenshots
       # Upload Cypress videos
       - uses: actions/upload-artifact@v1
         name: Upload cypress result videos
         if: always()
         with:
           name: cypress-videos
-          path: addon-testing-project/src/addons/volto-blocks-grid/cypress/videos
+          path: addon-testing-project/src/addons/volto-blocks/cypress/videos
