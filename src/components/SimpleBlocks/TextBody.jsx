@@ -157,8 +157,8 @@ export class TextBodyComponent extends Component {
         } else {
           return redraft(
             this.props.data[this.props.dataName],
-            this.draftConfig.ToHTMLRenderers,
-            this.draftConfig.ToHTMLOptions,
+            config.settings.richtextViewSettings.ToHTMLRenderers,
+            config.settings.richtextViewSettings.ToHTMLOptions,
           );
         }
       } else {
