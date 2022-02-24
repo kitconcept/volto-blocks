@@ -2,13 +2,9 @@
 
 ## 10.0.1 (unreleased)
 
-### Breaking
-
 ### Feature
 
 - Convert TextBody from function to class to make draftsj work @robgietema
-
-### Bugfix
 
 ### Internal
 
