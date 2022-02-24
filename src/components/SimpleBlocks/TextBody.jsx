@@ -21,7 +21,6 @@ const messages = defineMessages({
 });
 
 export class TextBodyComponent extends Component {
-
   static propTypes = {
     data: PropTypes.objectOf(PropTypes.any).isRequired,
     dataName: PropTypes.string.isRequired,
@@ -32,7 +31,7 @@ export class TextBodyComponent extends Component {
     onChangeBlock: PropTypes.func,
     noRichText: PropTypes.bool,
     renderAs: PropTypes.elementType,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -74,7 +73,6 @@ export class TextBodyComponent extends Component {
 
     this.onChange = this.onChange.bind(this);
   }
-
 
   onChange(editorState) {
     const { convertToRaw } = this.props.draftJs;
@@ -153,7 +151,9 @@ export class TextBodyComponent extends Component {
     } else {
       if (this.props.data[this.props.dataName]) {
         if (ElementType) {
-          return <ElementType>{this.props.data[this.props.dataName]}</ElementType>;
+          return (
+            <ElementType>{this.props.data[this.props.dataName]}</ElementType>
+          );
         } else {
           return redraft(
             this.props.data[this.props.dataName],
