@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { defineMessages, useIntl } from 'react-intl';
-import { isEqual } from 'lodash';
+import { compose } from 'redux';
 import redraft from 'redraft';
-import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
+
+import { defineMessages, injectIntl } from 'react-intl';
+import { isEqual } from 'lodash';
 import config from '@plone/volto/registry';
+
+import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
+
+import loadable from '@loadable/component';
+
+const Editor = loadable(() => import('draft-js-plugins-editor'));
 
 const messages = defineMessages({
   text: {
@@ -13,144 +20,145 @@ const messages = defineMessages({
   },
 });
 
-const TextBodyComponent = (props) => {
-  const {
-    data,
-    block,
-    onChangeBlock,
-    dataName,
-    isEditMode,
-    noRichText,
-    renderAs,
-  } = props;
+export class TextBodyComponent extends Component {
 
-  const { settings } = config;
-
-  const draftConfig = settings.richtextEditorSettings(props);
-
-  const ElementType = renderAs;
-
-  const {
-    Editor,
-    EditorState,
-    DefaultDraftBlockRenderMap,
-    convertFromRaw,
-    convertToRaw,
-  } = props.draftJs;
-  const createInlineToolbarPlugin = props.draftJsInlineToolbarPlugin.default;
-  const { Map } = props.immutableLib;
-  const stateFromHTML = props.draftJsImportHtml.stateFromHTML;
-
-  const blockRenderMap = Map({
-    unstyled: {
-      element: renderAs,
-    },
-  });
-
-  const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(
-    blockRenderMap,
-  );
-
-  let initialEditorState, initialInlineToolbarPlugin;
-
-  if (!__SERVER__) {
-    if (props?.data?.[dataName]) {
-      if (ElementType) {
-        initialEditorState = EditorState.createWithContent(
-          stateFromHTML(props.data[dataName]),
-        );
-      } else {
-        initialEditorState = EditorState.createWithContent(
-          convertFromRaw(props.data[dataName]),
-        );
-      }
-    } else {
-      initialEditorState = EditorState.createEmpty();
-    }
-
-    initialInlineToolbarPlugin = createInlineToolbarPlugin({
-      structure: draftConfig.richTextEditorInlineToolbarButtons,
-    });
+  static propTypes = {
+    data: PropTypes.objectOf(PropTypes.any).isRequired,
+    dataName: PropTypes.string.isRequired,
+    isEditMode: PropTypes.bool,
+    selected: PropTypes.bool,
+    block: PropTypes.string,
+    onAddBlock: PropTypes.func,
+    onChangeBlock: PropTypes.func,
+    noRichText: PropTypes.bool,
+    renderAs: PropTypes.elementType,
   }
 
-  const [editorState, setEditorState] = React.useState(initialEditorState);
-  const inlineToolbarPlugin = React.useRef(initialInlineToolbarPlugin);
-  const editorRef = React.useRef(null);
-  const intl = useIntl();
+  constructor(props) {
+    super(props);
 
-  function onChange(currentEditorState) {
+    const { settings } = config;
+    const ElementType = props.renderAs;
+
+    this.draftConfig = settings.richtextEditorSettings(props);
+
+    const { EditorState, convertFromRaw } = props.draftJs;
+    const createInlineToolbarPlugin = props.draftJsInlineToolbarPlugin.default;
+    const { stateFromHTML } = props.draftJsImportHtml;
+
+    if (!__SERVER__) {
+      let editorState;
+      if (props?.data?.[this.props.dataName]) {
+        if (ElementType) {
+          editorState = EditorState.createWithContent(
+            stateFromHTML(props.data[this.props.dataName]),
+          );
+        } else {
+          editorState = EditorState.createWithContent(
+            convertFromRaw(props.data[this.props.dataName]),
+          );
+        }
+      } else {
+        editorState = EditorState.createEmpty();
+      }
+
+      const inlineToolbarPlugin = createInlineToolbarPlugin({
+        structure: config.settings.richTextEditorInlineToolbarButtons,
+      });
+
+      this.state = {
+        editorState,
+        inlineToolbarPlugin,
+      };
+    }
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+
+  onChange(editorState) {
+    const { convertToRaw } = this.props.draftJs;
+
     if (
       !isEqual(
-        convertToRaw(currentEditorState.getCurrentContent()),
         convertToRaw(editorState.getCurrentContent()),
+        convertToRaw(this.state.editorState.getCurrentContent()),
       )
     ) {
-      onChangeBlock(block, {
-        ...data,
-        [dataName]: (() => {
-          if (renderAs) {
-            return currentEditorState.getCurrentContent().getPlainText();
+      this.props.onChangeBlock(this.props.block, {
+        ...this.props.data,
+        [this.props.dataName]: (() => {
+          if (this.props.renderAs) {
+            return editorState.getCurrentContent().getPlainText();
           } else {
-            return convertToRaw(currentEditorState.getCurrentContent());
+            return convertToRaw(editorState.getCurrentContent());
           }
         })(),
       });
     }
-    setEditorState(currentEditorState);
+    this.setState({ editorState });
   }
 
-  if (__SERVER__) {
-    return <div />;
-  } else {
-    const { InlineToolbar } = inlineToolbarPlugin.current;
+  render() {
+    if (__SERVER__) {
+      return <div />;
+    }
 
-    if (isEditMode) {
+    const { DefaultDraftBlockRenderMap } = this.props.draftJs;
+    const { InlineToolbar } = this.state.inlineToolbarPlugin;
+    const ElementType = this.props.renderAs;
+    const { Map } = this.props.immutableLib;
+
+    const blockRenderMap = Map({
+      unstyled: {
+        element: this.props.renderAs,
+      },
+    });
+
+    const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(
+      blockRenderMap,
+    );
+
+    if (this.props.isEditMode) {
       return (
         <>
           <Editor
-            ref={editorRef}
-            onChange={onChange}
-            editorState={editorState}
+            onChange={this.onChange}
+            editorState={this.state.editorState}
             plugins={[
-              inlineToolbarPlugin.current,
-              ...draftConfig.richTextEditorPlugins,
+              this.state.inlineToolbarPlugin,
+              ...this.draftConfig.richTextEditorPlugins,
             ]}
             blockRenderMap={
-              renderAs
+              this.props.renderAs
                 ? extendedBlockRenderMap
-                : settings.extendedBlockRenderMap
+                : this.draftConfig.extendedBlockRenderMap
             }
-            blockStyleFn={settings.blockStyleFn}
-            placeholder={intl.formatMessage(messages.text)}
-            customStyleMap={settings.customStyleMap}
+            blockStyleFn={this.draftConfig.blockStyleFn}
+            placeholder={this.props.intl.formatMessage(messages.text)}
+            customStyleMap={this.draftConfig.customStyleMap}
             onUpArrow={(e) => {
-              // We need to stop propagate the event for not creating a new block while
-              // in the widget
               e.stopPropagation();
             }}
             onDownArrow={(e) => {
-              // We need to stop propagate the event for not creating a new block while
-              // in the widget
               e.stopPropagation();
             }}
             handleReturn={(e) => {
-              // We need to stop propagate the event for not creating a new block while
-              // in the widget
               e.stopPropagation();
             }}
           />
-          {!noRichText && <InlineToolbar />}
+          {!this.props.noRichText && <InlineToolbar />}
         </>
       );
     } else {
-      if (data[dataName]) {
+      if (this.props.data[this.props.dataName]) {
         if (ElementType) {
-          return <ElementType>{data[dataName]}</ElementType>;
+          return <ElementType>{this.props.data[this.props.dataName]}</ElementType>;
         } else {
           return redraft(
-            data[dataName],
-            settings.ToHTMLRenderers,
-            settings.ToHTMLOptions,
+            this.props.data[this.props.dataName],
+            this.draftConfig.ToHTMLRenderers,
+            this.draftConfig.ToHTMLOptions,
           );
         }
       } else {
@@ -158,31 +166,27 @@ const TextBodyComponent = (props) => {
       }
     }
   }
-};
+}
 
-TextBodyComponent.propTypes = {
-  data: PropTypes.objectOf(PropTypes.any).isRequired,
-  dataName: PropTypes.string.isRequired,
-  isEditMode: PropTypes.bool,
-  selected: PropTypes.bool,
-  block: PropTypes.string,
-  onAddBlock: PropTypes.func,
-  onChangeBlock: PropTypes.func,
-  noRichText: PropTypes.bool,
-  renderAs: PropTypes.elementType,
-};
-
-export const TextBody = injectLazyLibs([
-  'draftJs',
-  'draftJsImportHtml',
-  'draftJsInlineToolbarPlugin',
-  'immutableLib',
-])(TextBodyComponent);
+export const TextBody = compose(
+  injectIntl,
+  injectLazyLibs([
+    'draftJs',
+    'draftJsLibIsSoftNewlineEvent',
+    'draftJsFilters',
+    'draftJsImportHtml',
+    'draftJsInlineToolbarPlugin',
+    'draftJsBlockBreakoutPlugin',
+    'draftJsCreateInlineStyleButton',
+    'draftJsCreateBlockStyleButton',
+    'immutableLib',
+  ]),
+)(TextBodyComponent);
 
 const Preloader = (props) => {
   const [loaded, setLoaded] = React.useState(false);
   React.useEffect(() => {
-    TextBody.load().then(() => setLoaded(true));
+    Editor.load().then(() => setLoaded(true));
   }, []);
   return loaded ? <TextBody {...props} /> : null;
 };
