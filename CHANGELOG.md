@@ -1,6 +1,6 @@
 # Change Log
 
-## 10.0.1 (unreleased)
+## 10.1.0 (2022-02-24)
 
 ### Feature
 
