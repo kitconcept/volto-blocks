@@ -6,7 +6,7 @@
 
 ### Feature
 
-- Add lazy loading of draftjs @robgietema
+- Convert TextBody from function to class to make draftsj work @robgietema
 
 ### Bugfix
 
