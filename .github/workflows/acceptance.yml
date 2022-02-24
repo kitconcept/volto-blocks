@@ -45,7 +45,6 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
 
-      - run: echo "npx -p @plone/scripts addon clone https://github.com/${{env.GIT_USER}}/${{env.GIT_NAME}}.git --branch ${{ steps.extract_branch.outputs.branch }}"
       - name: Setup addon testing environment
         run: npx -p @plone/scripts addon clone https://github.com/${{env.GIT_USER}}/${{env.GIT_NAME}}.git --branch ${{ steps.extract_branch.outputs.branch }}
 
