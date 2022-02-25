@@ -1,6 +1,6 @@
 # Change Log
 
-## 10.1.1 (unreleased)
+## 10.1.1 (2022-02-25)
 
 ### Bugfix
 
