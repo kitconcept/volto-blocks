@@ -2,15 +2,9 @@
 
 ## 10.1.1 (unreleased)
 
-### Breaking
-
-### Feature
-
 ### Bugfix
 
 - Fix TextBody view @robgietema
-
-### Internal
 
 ## 10.1.0 (2022-02-24)
 
