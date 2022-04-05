@@ -10,7 +10,7 @@ function sortByArray(blocks, blocks_layout) {
 }
 
 function jsonExporter(req, res, next) {
-  const { store } = req.app.locals;
+  const { store } = res.locals;
   res.set(
     'Content-Disposition',
     `attachment;filename="${req.path

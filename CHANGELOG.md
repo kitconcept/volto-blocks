@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix server middleware to match `res.locals` change in 15.3.0 @sneridagh
+
 ### Internal
 
 ## 10.1.1 (2022-02-25)
