@@ -1,6 +1,6 @@
 {
   "name": "@kitconcept/volto-blocks",
-  "version": "10.1.1",
+  "version": "10.1.2",
   "description": "kitconcept Volto Blocks",
   "main": "src/index.js",
   "addons": [
