@@ -4,6 +4,8 @@
 
 ### Breaking
 
+- Remove Button block in favor of `volto-button-block` @sneridagh
+
 ### Feature
 
 ### Bugfix
