@@ -29,8 +29,6 @@ import {
   HighlightSliderEditBlock,
   TextPillEditBlock,
   TextPillViewBlock,
-  ButtonViewBlock,
-  ButtonEditBlock,
 } from '@kitconcept/volto-blocks/components';
 import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
 import AccordionSchemaEnhancer from '@kitconcept/volto-blocks/components/Accordion/schemaEnhancer';

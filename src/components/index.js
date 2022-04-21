@@ -76,8 +76,6 @@ export {
   BlockRenderer,
   BlockModal,
   CheckboxWidget,
-  ButtonViewBlock,
-  ButtonEditBlock,
   QuerystringSidebarWidget,
   EffectiveDate,
   DisplayI18nDate,
