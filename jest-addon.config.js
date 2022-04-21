@@ -4,13 +4,14 @@ module.exports = {
     'src/addons/**/src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
   ],
-  reporters: ['default', 'jest-junit'],
+  reporters: ['default'],
   transformIgnorePatterns: ['node_modules/(?!(volto-slate|@plone/volto)/)'],
   moduleNameMapper: {
     '@plone/volto/cypress': '<rootDir>/node_modules/@plone/volto/cypress',
     '@plone/volto/babel': '<rootDir>/node_modules/@plone/volto/babel',
     '@plone/volto/(.*)$': '<rootDir>/node_modules/@plone/volto/src/$1',
     '@package/(.*)$': '<rootDir>/src/$1',
+    '@root/(.*)$': '<rootDir>/src/$1',
     '@kitconcept/volto-blocks/(.*)$':
       '<rootDir>/src/addons/volto-blocks/src/$1',
     'volto-slate/(.*)$': '<rootDir>/node_modules/volto-slate/src/$1',
