@@ -2,15 +2,9 @@
 
 ## 10.1.3 (unreleased)
 
-### Breaking
-
 ### Feature
 
 - Compatible with Volto 16, include `date-fns` as dependency @sneridagh
-
-### Bugfix
-
-### Internal
 
 ## 10.1.2 (2022-04-05)
 
