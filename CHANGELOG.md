@@ -6,6 +6,8 @@
 
 ### Feature
 
+- Compatible with Volto 16, include `date-fns` as dependency @sneridagh
+
 ### Bugfix
 
 ### Internal
