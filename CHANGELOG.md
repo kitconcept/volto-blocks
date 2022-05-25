@@ -1,5 +1,15 @@
 # Change Log
 
+## 10.2.2 (unreleased)
+
+### Breaking
+
+### Feature
+
+### Bugfix
+
+### Internal
+
 ## 10.2.1 (2022-05-25)
 
 ### Bugfix
