@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Change `export` feature to stringify to 4 spaces instead of tabs @sneridagh
+
 ### Internal
 
 ## 10.2.0 (2022-05-23)
