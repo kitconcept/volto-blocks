@@ -1,5 +1,10 @@
 # Change Log
 
+
+### Bugfix
+
+- Renaming Button Block to button @iFlameing
+
 ## 10.2.1 (2022-05-25)
 
 ### Bugfix

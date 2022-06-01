@@ -212,9 +212,9 @@ const customBlocks = {
       view: [],
     },
   },
-  buttonBlock: {
+  button: {
     availableColors: ['#ebebeb', '#023d6b', '#ddeeff', '#eb5f73', '#b9d25f'],
-    id: 'buttonBlock',
+    id: 'button',
     title: 'Button',
     icon: CircleMenuSVG,
     group: 'common',
