@@ -6,6 +6,7 @@
 
 - Remove Button block in favor of `volto-button-block` @sneridagh
 - Remove Separator block in favor of `volto-separator-block` @sneridagh
+- Remove Heading block in favor of `volto-heading-block` @sneridagh
 
 ### Feature
 

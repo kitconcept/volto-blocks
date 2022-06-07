@@ -40,7 +40,6 @@ import textSVG from '@plone/volto/icons/subtext.svg';
 import sliderSVG from '@plone/volto/icons/slider.svg';
 import imagesSVG from '@plone/volto/icons/images.svg';
 import heroSVG from '@plone/volto/icons/hero.svg';
-import CircleMenuSVG from '@plone/volto/icons/circle-menu.svg';
 
 defineMessages({
   textPillWithStyle: {

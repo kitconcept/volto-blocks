@@ -1,9 +1,0 @@
-{
-  "volto-blocks": {
-    "packages": {
-      "@kitconcept/volto-blocks": "./src",
-      "@kitconcept/volto-heading-block": "packages/volto-heading-block/src"
-    },
-    "url": "git@github.com:kitconcept/volto-blocks.git"
-  }
-}
