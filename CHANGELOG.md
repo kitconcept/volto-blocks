@@ -8,12 +8,6 @@
 - Remove Separator block in favor of `volto-separator-block` @sneridagh
 - Remove Heading block in favor of `volto-heading-block` @sneridagh
 
-### Feature
-
-### Bugfix
-
-### Internal
-
 ## 10.2.1 (2022-05-25)
 
 ### Bugfix
