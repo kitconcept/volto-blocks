@@ -29,8 +29,6 @@ import {
   HighlightSliderEditBlock,
   TextPillEditBlock,
   TextPillViewBlock,
-  ButtonViewBlock,
-  ButtonEditBlock,
 } from '@kitconcept/volto-blocks/components';
 import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
 import AccordionSchemaEnhancer from '@kitconcept/volto-blocks/components/Accordion/schemaEnhancer';
@@ -204,22 +202,6 @@ const customBlocks = {
     view: withStyleWrapper(TextPillViewBlock),
     edit: withStyleWrapper(TextPillEditBlock),
     blockHasOwnFocusManagement: true,
-    restricted: false,
-    mostUsed: true,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-  },
-  buttonBlock: {
-    availableColors: ['#ebebeb', '#023d6b', '#ddeeff', '#eb5f73', '#b9d25f'],
-    id: 'buttonBlock',
-    title: 'Button',
-    icon: CircleMenuSVG,
-    group: 'common',
-    view: withStyleWrapper(ButtonViewBlock),
-    edit: withStyleWrapper(ButtonEditBlock),
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,

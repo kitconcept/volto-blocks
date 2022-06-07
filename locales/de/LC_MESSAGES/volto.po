@@ -31,11 +31,6 @@ msgstr "Element hinzufügen"
 msgid "Aktuelles"
 msgstr ""
 
-#: components/ButtonBlock/schema
-# defaultMessage: Button Alignment
-msgid "Align Button"
-msgstr ""
-
 #: components/ImagesGrid/schema
 # defaultMessage: Alignment
 msgid "Alignment"
@@ -55,22 +50,6 @@ msgstr "Hintergrundfarbe"
 # defaultMessage: Browse or type URL
 msgid "Browse or type URL"
 msgstr "Durchsuchen oder URL eintippen"
-
-#: components/ButtonBlock/schema
-# defaultMessage: Button Link
-msgid "Button Link"
-msgstr ""
-
-#: components/ButtonBlock/schema
-# defaultMessage: Button Title
-msgid "Button Title"
-msgstr ""
-
-#: components/ButtonBlock/ButtonData
-#: components/ButtonBlock/schema
-# defaultMessage: Button Block
-msgid "ButtonBlock"
-msgstr ""
 
 #: components/BlockModal/BlockModal
 # defaultMessage: Cancel

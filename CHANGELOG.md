@@ -4,6 +4,9 @@
 
 ### Breaking
 
+- Remove Button block in favor of `volto-button-block` @sneridagh
+- Remove Separator block in favor of `volto-separator-block` @sneridagh
+
 ### Feature
 
 ### Bugfix
