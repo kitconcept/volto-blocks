@@ -1,6 +1,6 @@
 # Change Log
 
-## 11.0.1 (unreleased)
+## 11.0.1 (2022-06-13)
 
 ### Internal
 
