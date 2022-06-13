@@ -2,12 +2,6 @@
 
 ## 11.0.1 (unreleased)
 
-### Breaking
-
-### Feature
-
-### Bugfix
-
 ### Internal
 
 - Unlink CSS related to other "modules" in `main.less` @sneridagh
