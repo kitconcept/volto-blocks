@@ -10,6 +10,8 @@
 
 ### Internal
 
+- Unlink CSS related to other "modules" in `main.less` @sneridagh
+
 ## 11.0.0 (2022-06-07)
 
 ### Breaking
@@ -17,6 +19,7 @@
 - Remove Button block in favor of `volto-button-block` @sneridagh
 - Remove Separator block in favor of `volto-separator-block` @sneridagh
 - Remove Heading block in favor of `volto-heading-block` @sneridagh
+- Unlink CSS related to other "modules" in `main.less` @sneridagh
 
 ## 10.2.1 (2022-05-25)
 
