@@ -45,5 +45,11 @@ export default (props) =>
   AnyLoader({
     ...props,
     createComponent: (props, children) =>
-      React.createElement(Image, props, children),
+      React.createElement(
+        React.forwardRef((props, ref) =>
+          React.createElement(Image, props, children),
+        ),
+        props,
+        children,
+      ),
   });

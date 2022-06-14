@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix ImgLoader loading with SSR @reebalazs
+
 ### Internal
 
 ## 12.0.0 (2022-07-28)
