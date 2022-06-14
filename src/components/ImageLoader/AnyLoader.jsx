@@ -40,9 +40,7 @@ export default (props) => {
     setPlaceholderChildren(children);
   }, [imgProps, children]);
   useEffect(() => {
-    console.log('XXX', ref.current, ref.current?.complete);
     if (ref.current?.complete) {
-      console.log('THIS ONLOAD');
       onLoad();
     }
     if (isLoaded && imgProps.src !== placeholderProps.src) {

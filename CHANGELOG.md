@@ -6,6 +6,8 @@
 
 ### Feature
 
+- Implement image loading with srcset #277 @reebalazs
+
 ### Bugfix
 
 - Fix ImgLoader loading with SSR @reebalazs
