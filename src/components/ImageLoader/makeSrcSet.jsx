@@ -1,12 +1,17 @@
-import { getCachedDefaultOptions, setCachedDefaultOptions } from './makeSrcSetCache'
+import {
+  getCachedDefaultOptions,
+  setCachedDefaultOptions,
+} from './cachedDefaultOptions';
 const config = require('@plone/volto/registry').default;
+
+const OPTIONS_CACHE_KEY = 'srcset';
 
 const makeSrcSet = (options) => {
   let processedOptions;
   let isDefaultObject = options === undefined;
   if (isDefaultObject) {
     // Optimizing 1. If this is the default object - use cached value
-    const cachedDefaultOptions = getCachedDefaultOptions();
+    const cachedDefaultOptions = getCachedDefaultOptions(OPTIONS_CACHE_KEY);
     if (cachedDefaultOptions) {
       processedOptions = cachedDefaultOptions;
     }
@@ -46,7 +51,7 @@ const makeSrcSet = (options) => {
     );
     processedOptions = options;
     if (isDefaultObject) {
-      setCachedDefaultOptions(options);
+      setCachedDefaultOptions(OPTIONS_CACHE_KEY, options);
     }
   }
   return {
@@ -68,9 +73,12 @@ const makeSrcSet = (options) => {
         result.srcSet = srcSet;
         if (defaultScale) {
           result.src = createScaleUrl(src, defaultScale);
-          result.defaultScale = undefined;
         }
       }
+      if (defaultScale) {
+        result.defaultScale = undefined;
+      }
+
       return result;
     },
   };

@@ -5,13 +5,13 @@ import { describeAnyLoader } from './AnyLoader.test';
 import config from '@plone/volto/registry';
 import makeSrcSet from './makeSrcSet';
 
-let mockCachedDefaultOptions;
-jest.mock('./makeSrcSetCache', () => {
+let mockCachedDefaultOptions = {};
+jest.mock('./cachedDefaultOptions', () => {
   return {
     __esModule: true,
-    getCachedDefaultOptions: () => mockCachedDefaultOptions,
-    setCachedDefaultOptions: (options) => {
-      mockCachedDefaultOptions = options;
+    getCachedDefaultOptions: (key) => mockCachedDefaultOptions[key],
+    setCachedDefaultOptions: (key, options) => {
+      mockCachedDefaultOptions[key] = options;
     },
   };
 });
@@ -25,7 +25,7 @@ describe('Img', () => {
     options = {};
     origMakeSrcSet = config.settings.makeSrcSet;
     config.settings.makeSrcSet = options;
-    mockCachedDefaultOptions = undefined;
+    mockCachedDefaultOptions = {};
   });
 
   afterEach(() => {

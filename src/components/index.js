@@ -6,7 +6,13 @@ import QuerystringSidebarWidget from '@kitconcept/volto-blocks/components/Widget
 import EffectiveDate from '@kitconcept/volto-blocks/components/EffectiveDate/EffectiveDate';
 import DisplayI18nDate from '@kitconcept/volto-blocks/components/DisplayI18nDate/DisplayI18nDate';
 
-import { ImgLoader, ImageLoader, Img } from './ImageLoader';
+import {
+  ImgLoader,
+  ImageLoader,
+  Img,
+  makeSrcSet,
+  makeBlurhash,
+} from './ImageLoader';
 
 export {
   withStyleWrapper,
@@ -19,4 +25,6 @@ export {
   ImgLoader,
   ImageLoader,
   Img,
+  makeSrcSet,
+  makeBlurhash,
 };

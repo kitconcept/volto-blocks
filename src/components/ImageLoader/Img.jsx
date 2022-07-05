@@ -1,6 +1,7 @@
 import React from 'react';
 import AnyLoader from './AnyLoader';
 import makeSrcSet from './makeSrcSet';
+import makeBlurhash from './makeBlurhash';
 import extendProps from './extendProps';
 
 /*
@@ -156,21 +157,20 @@ Example for Volto icon:
 />
 ```
 
-#Future improvement
-
-Add blurHash as placeholder. Blurhash is a separate development effort. The blurhash can be added as placeholder. This will involve creating a new content type (or an adapter). _Not in the current scope._
+# `blurhash` property
 
  */
 
-export default (props) =>
-  AnyLoader({
+export default ({ blurhashOptions, ...props }) => {
+  props = extendProps(props, makeBlurhash(blurhashOptions).fromProps(props));
+  return AnyLoader({
     ...props,
     createComponent: ({ srcSetHints, ...props }, children) => {
+      props = extendProps(props, makeSrcSet(srcSetHints).fromProps(props));
       if (children !== undefined) {
         throw new Error('Children are not allowed in <Img>');
       }
-      const extraProps = makeSrcSet(srcSetHints).fromProps(props);
-      props = extendProps(props, extraProps);
       return React.createElement('img', props);
     },
   });
+};

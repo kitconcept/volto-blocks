@@ -1,13 +1,13 @@
 import makeSrcSet from './makeSrcSet';
 import config from '@plone/volto/registry';
 
-let mockCachedDefaultOptions;
-jest.mock('./makeSrcSetCache', () => {
+let mockCachedDefaultOptions = {};
+jest.mock('./cachedDefaultOptions', () => {
   return {
     __esModule: true,
-    getCachedDefaultOptions: () => mockCachedDefaultOptions,
-    setCachedDefaultOptions: (options) => {
-      mockCachedDefaultOptions = options;
+    getCachedDefaultOptions: (key) => mockCachedDefaultOptions[key],
+    setCachedDefaultOptions: (key, options) => {
+      mockCachedDefaultOptions[key] = options;
     },
   };
 });
@@ -21,7 +21,7 @@ describe('makeSrcSet', () => {
     options = {};
     origMakeSrcSet = config.settings.makeSrcSet;
     config.settings.makeSrcSet = options;
-    mockCachedDefaultOptions = undefined;
+    mockCachedDefaultOptions = {};
   });
 
   afterEach(() => {
@@ -85,6 +85,22 @@ describe('makeSrcSet', () => {
           defaultScale: 'SCALE',
         }).src,
       ).toEqual(result);
+    });
+    test('defaultScale removed even if enabled=false', () => {
+      expect(
+        makeSrcSet({ enabled: false }).fromProps({
+          src: '/foo/bar.jpg/@@images/image/anyscale',
+          defaultScale: 'SCALE',
+        }).defaultScale,
+      ).toBe(undefined);
+    });
+    test('defaultScale removed even if not isLocal', () => {
+      expect(
+        makeSrcSet({ isLocal: () => false }).fromProps({
+          src: '/foo/bar.jpg/@@images/image/anyscale',
+          defaultScale: 'SCALE',
+        }).defaultScale,
+      ).toBe(undefined);
     });
   });
 
