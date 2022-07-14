@@ -10,6 +10,8 @@
 
 ### Internal
 
+- Add `common.less` meant to be common CSS used as across projects @sneridagh
+
 ## 11.0.1 (2022-06-13)
 
 ### Internal
