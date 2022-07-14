@@ -1,0 +1,87 @@
+// This file contains CSS that is meant to be reused across projects
+
+.teaser-item,
+.grid-teaser-item {
+  display: flex;
+
+  .grid-image-wrapper {
+    display: flex;
+    // This one is because Safari has a bug with flexed items, the default is
+    // align-items `stretched`, so it's required to reset it.
+    align-items: flex-start;
+  }
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  a {
+    display: flex;
+    color: @textColor;
+  }
+
+  p {
+    // Defaults are always standard, on theme with customizations
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  &.default {
+    display: flex;
+    align-items: center;
+
+    img {
+      max-width: 300px;
+      align-self: center;
+    }
+  }
+
+  &.top .grid-image-wrapper {
+    margin-bottom: 25px;
+  }
+
+  &.top a {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Adjustments to the segments in the sidebar
+// Determine if port them to Volto core
+.ui.accordion .ui.segment {
+  top: 0;
+  bottom: 0;
+  width: auto;
+  border: none;
+  border-top: none;
+  border-bottom: 1px solid #b8c6c8;
+  margin: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ui.segments .ui.segments {
+  border-width: 0;
+}
+
+#sidebar-properties .ui.segment.form {
+  padding-bottom: 1em;
+}
+
+.ui.accordion .segment {
+  padding: 0;
+}
+
+[id^='blockform-fieldset-'] .content {
+  .ui.segment.attached .field:last-child {
+    margin-bottom: 10px;
+  }
+
+  .ui.segment.form.sidebar-listing-data {
+    padding-bottom: 0 !important;
+    border-bottom: none;
+  }
+}
