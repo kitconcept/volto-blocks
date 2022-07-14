@@ -2,12 +2,6 @@
 
 ## 11.0.2 (unreleased)
 
-### Breaking
-
-### Feature
-
-### Bugfix
-
 ### Internal
 
 - Add `common.less` meant to be common CSS used as across projects @sneridagh
