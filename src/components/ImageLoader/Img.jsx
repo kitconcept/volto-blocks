@@ -8,9 +8,54 @@ import extendProps from './extendProps';
 
 A React component Img.
 
+It supports
+
+- image loading with a placeholder
+- blurhash as a placeholder
+- srcset property generation
+
+Using with a placeholder:
+
 ```jsx
 <Img {...}
   placeholder={[placeholder image or svg]}
+  alt=""
+/>
+```
+Using with blurhash:
+
+```jsx
+<Img {...}
+  blurhash="1.3333:LGE{8{%1Rk0LNH4:s.aeD*IV%L-:"
+  alt=""
+/>
+```
+
+Using with srcset:
+
+```jsx
+<Img
+  src={http://127.0.0.1:3000/de/test-page/fancy-image.jpg"
+  defaultScale="great"
+  alt=""
+/>
+```
+
+Combine srcset and blurhash with additional properties
+in a Volto usage example:
+
+```jsx
+<Img
+  blurhash={data.blurhash}
+  blurhashOptions={{ style: { width: '100%' } }}
+  style={{ height: data.height }}
+  className={cx({
+    'full-viewport-width': viewPortWidth,
+  })}
+  src={data.url}
+  defaultScale={viewPortWidth ? 'huge' : 'great'}
+  scales={data.image_scales?.image?.[0]?.scales}
+  alt=""
 />
 ```
 
@@ -22,46 +67,68 @@ The image will also generate an `srcSet` with the specified (or default) image
 scales, and if a defaultScale is specified, it changes
 the `src` property to point to the url of the scale specified.
 
-# 'srcSetHint' property
+The blurhash will also be generated if specified.
+
+# srcset properties
+
+## 'srcSetOptions' property
 
 Optional property, if missing then the defaults are used.
 
-The defaults can also be specified in Volto's config.js file, example:
+The defaults can also be specified in Volto's config.js file, full example with
+all options (but only the ones you indend to change have to be provided):
 
 ```js
-  config.settings.makeSrcSet = {
+  config.settings.scrSetOptions = {
     enabled: true,
-    isLocal: isInternalURL,
-    createScaleUrl: (src, scaleName) =>
-      `${flattenToAppURL(src)}/@@images/image/${scaleName}`,
+    isLocal: (src) => true,
+    preprocessSrc: (src) =>
+      src.replace(/\/@@images\/image\/.*$/, '').replace(/\/$/, ''),
+    createScaledSrc: (src, scaleName, scaleData) => ({
+      url: `${src}/@@images/image/${scaleName}`,
+      width: scaleData,
+    }),
     minWidth: 0,
     maxWidth: Infinity,
-    scales: [
-      ['icon', 32],
-      ['tile', 64],
-      ['thumb', 128],
-      ['mini', 200],
-      ['preview', 400],
-      ['teaser', 600],
-      ['large', 800],
-      ['great', 1200],
-      ['huge', 1600],
-    ],
-  };
+    scales: {
+      // These are meaningful default however an application should provide
+      // a custom createScaleUrl which can accept a scale info object instead of the width
+      // we use here.
+      icon: 32,
+      tile: 64,
+      thumb: 128,
+      mini: 200,
+      preview: 400,
+      teaser: 600,
+      large: 800,
+      great: 1200,
+      huge: 1600,
+    },
+  }}
+
 ```
 
 The above example equals the actual default (that is, without even specifying them) lest the
-`createScaleUrl` and `isLocal` functions fo avoid the dependencies.
+`createScaledUrl` and `isLocal` functions fo avoid the dependencies.
 So providing at least these two in config is desired.
 
 ```js
-  config.settings.makeSrcSet = {
+  import { isInternalURL, flattenToAppURL } from '@plone/volto/helpers';
+
+  config.settings.scrSetOptions = {
     isLocal: isInternalURL,
-    createScaleUrl: (src, scaleName) =>
-      `${flattenToAppURL(src)}/@@images/image/${scaleName}`,
+    preprocessSrc: (src) =>
+      flattenToAppURL(
+        src.replace(/\/@@images\/image\/.*$/, '').replace(/\/$/, ''),
+      ),
+    createScaledSrc: (src, scaleName, scaleData) => {
+      return {
+        url: `${src}/${scaleData.download}`,
+        width: scaleData.width,
+      };
+    },
   };
 ```
-
 
 Explanations for the options:
 
@@ -71,41 +138,85 @@ Explanations for the options:
 the `srcset` and `src` props will not be amended, same as `enabled` false but selectively for some
 urls only.
 
-`createScaleUrl`: a sunction that specifies the scale url from a base image `src` and a `scaleName`.
+`preprocessSrc` is used to initially process the `src` property passed into the component. It can be
+used, for example, to remove `/@@images/image` segments from the url to always arrive to a root url,
+and remove a trailing slash, or anything that needs to be done as preprocessing.
 
-`scales`: specifies the list of scales to be used, elements of the list are a tuple of `scaleName` and `width`. This **must** match the image scales actually provided by the back-end!
+`createScaledSrc`: a function that specifies the scale url and width from a base image `src`, a`scaleName`,
+and the `scaleData`. The `scaleData` is an object whose keys are the scaleName-s, and its values
+are anything that the application wants to use.
+
+`scales`: specifies the list of scales to be used, it equals the `scaleData` described above, with a key
+of `scaleName` and value of anything.
 
 `minWidth`, `maxWidth` filter the list of scales and only the scales with a matching width will be
 added to `srcSet`.
 
-## Specifying no `srcSetHints`
+## Specifying no `srcSetOptions`
 
-In most cases everything should "just work" without an `srcSetHints` attribute and in this case the
+In most cases everything should "just work" without an `srcSetOptions` attribute and in this case the
 defaults (specified in 'config.js`, or in the lack of this, the global defaults) will be applied
 
-## Using a compiled `srcSetHints`
+## `defaultScales`
 
-For performance reasons, the `srcSetHints` can be created from code and then injected as a prop.
+This is a mandatory property. It must specify a `scaleName` avaliable in the `scale` definition.
+This will be the image to be used as the `src` property of the image. The reason is the
+component will never refer to the full sized image, always use an image that is already processed
+and scaled down to a given size.
+
+## `scales`
+
+There are two modes of operations: static and dynamic scales.
+
+With static scales, the `scales` property is not specified. Instead the scales are defined in the
+option or in the Volto configuration. Then they are applied for all images. This might work for
+Plone versions < 6. It's important that the scales must be kept in sync with the actual scales
+from the back-end.
+
+In Plone 6, the scales are provided by Volto for each image in the serialized data. So they can
+be passed directly to the component. Besides other, this makes proper cache control for the images
+possible.
+
+To use dynamic scales, it's important that the default scales must be removed from the Volto
+configuration:
+
+```js
+  config.settings.srcSetOptions = {
+    // enabled: true,
+    isLocal: isInternalURL,
+    preprocessSrc: (src) =>
+      flattenToAppURL(
+        src.replace(/\/@@images\/image\/.*$/, '').replace(/\/$/, ''),
+      ),
+    createScaledSrc: (src, scaleName, scaleData) => {
+      return {
+        url: `${src}/${scaleData.download}`,
+        width: scaleData.width,
+      };
+    },
+    scales: {},
+  }
+```
+
+Following this, the scales can be set directly as a property on the Img component:
 
 ```jsx
-import { makeSrcSet } from `kitconcept.volto-blocks`;
-
-// ...
-
-const srcSetHints = makeSrcSet({ ...options });
-
-// ...
-
 <Img
-  srcSetHints={srcSetHints}
-  src={src}
-  />
+  src={data.url}
+  defaultScale={viewPortWidth ? 'huge' : 'great'}
+  scales={data.image_scales?.image?.[0]?.scales}
+  alt=""
+/>
 ```
 
 # `placeholder` property
 
 The placeholder property can be a single element or a list of
 elements defined with <>...</>.
+
+It can be used with or without srcsets. However it cannot be used
+together with blurhash, as when blurhash is specified, it will become
+the placeholder.
 
 If the src component is empty, the image is not loaded and
 the placeholder will be permanently shown. This makes it possible
@@ -157,7 +268,75 @@ Example for Volto icon:
 />
 ```
 
-# `blurhash` property
+# `blurhash` properties
+
+## `blurhashOptions`
+
+It is an object containing the options to control the blurhash generation.
+
+`resolutionX`: the canvas width resolution, by default 32. Increasing this value will
+create larger blurhash. Used for decoding the blurhash.
+
+`resolutionY`: the canvas height resolution, by default 32. Increasing this value will
+create larger blurhash. The width and the height does not have to refer to the actual
+image ratio that can be anything and the canvas will be stretched as needed.
+Used for decoding the blurhash.
+
+`punch`: the blurhash punch parameter as specified by the blurhash library documentarion,
+by default 1. A larger value will result in a larger blurhash and a more detailed blurred
+image. Used for decoding the blurhash.
+
+`style`: The property to be passed to the blurhash canvas. This can be used to set the width
+of the canvas to fill its container. The height of the canvas then will be automatically
+set according to the image ratio passed in as the first segment of the blurhash string in
+the properties of the Img component.
+
+Example for setting the default options in config:
+
+```js
+  config.settings.blurhashOptions = {
+    resolutionX: 32,
+    resolutionY: 32,
+    punch: 1,
+    style: { width: '100%' },
+  };
+```
+
+## `blurhash`
+
+The blurhash property is optional. A blurhash will only be generated if it's present. In this
+case it will be used as a placeholder. Because of this it cannot be used together with the
+`placeholder` property.
+
+The blurhash has to be created on the back-end, by concatenating
+the image ratio number (width / height) and the blurhash provided by the python server side utility.
+Example for blurhash property: `1.3333:LGE{8{%1Rk0LNH4:s.aeD*IV%L-:`
+
+The blurhash, when rendered, will need to be the same size as the image loaded later.
+To achieve this, the blurhash canvas has to be styled in the same way as the image (depending on the
+application). Once the size of the canvas is correct, the height of the canvas will be set according
+to the image ratio from the first tag of the property. For example, the following usage will pass the
+style property to the canvas to make it fill its container width:
+
+```jsx
+<Img {...}
+  blurhash="1.3333:LGE{8{%1Rk0LNH4:s.aeD*IV%L-:"
+  blurhashOptions={{ style: { width: '100%' } }}
+/>
+```
+
+Note that the style in the `blurhashOptions` is a different style from the one that is specified
+directly on the Img component. The former one will be passed to the blurhash canvas, while the
+latter one will be passed to the html image directly. Example:
+
+```jsx
+<Img
+  blurhash={data.blurhash}
+  blurhashOptions={{ style: { width: '100%' } }}     // passed to the blurhash canvas
+  style={{ height: data.height }}                    // passed to the html image
+/>
+'''
+
 
  */
 
@@ -165,8 +344,8 @@ export default ({ blurhashOptions, ...props }) => {
   props = extendProps(props, makeBlurhash(blurhashOptions).fromProps(props));
   return AnyLoader({
     ...props,
-    createComponent: ({ srcSetHints, ...props }, children) => {
-      props = extendProps(props, makeSrcSet(srcSetHints).fromProps(props));
+    createComponent: ({ srcSetOptions, ...props }, children) => {
+      props = extendProps(props, makeSrcSet(srcSetOptions).fromProps(props));
       if (children !== undefined) {
         throw new Error('Children are not allowed in <Img>');
       }

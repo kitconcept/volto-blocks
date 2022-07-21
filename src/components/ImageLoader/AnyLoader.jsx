@@ -39,20 +39,15 @@ export default (props) => {
     setPlaceholderProps(imgProps);
     setPlaceholderChildren(children);
   }, [imgProps, children]);
+  const isComplete = ref.current?.complete;
   useEffect(() => {
-    if (ref.current?.complete) {
+    if (isComplete) {
       onLoad();
     }
     if (isLoaded && imgProps.src !== placeholderProps.src) {
       setIsLoaded(false);
     }
-  }, [
-    isLoaded,
-    imgProps.src,
-    placeholderProps.src,
-    ref.current?.complete,
-    onLoad,
-  ]);
+  }, [isLoaded, imgProps.src, placeholderProps.src, isComplete, onLoad]);
   return (
     <>
       {isLoaded ? (

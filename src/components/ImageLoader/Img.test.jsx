@@ -5,31 +5,19 @@ import { describeAnyLoader } from './AnyLoader.test';
 import config from '@plone/volto/registry';
 import makeSrcSet from './makeSrcSet';
 
-let mockCachedDefaultOptions = {};
-jest.mock('./cachedDefaultOptions', () => {
-  return {
-    __esModule: true,
-    getCachedDefaultOptions: (key) => mockCachedDefaultOptions[key],
-    setCachedDefaultOptions: (key, options) => {
-      mockCachedDefaultOptions[key] = options;
-    },
-  };
-});
-
 describe('Img', () => {
   let options;
-  let origMakeSrcSet;
+  let origSrcSetOptions;
 
   beforeEach(() => {
     jest.clearAllMocks();
     options = {};
-    origMakeSrcSet = config.settings.makeSrcSet;
-    config.settings.makeSrcSet = options;
-    mockCachedDefaultOptions = {};
+    origSrcSetOptions = config.settings.srcSetOptions;
+    config.settings.srcSetOptions = options;
   });
 
   afterEach(() => {
-    config.settings.makeSrcSet = origMakeSrcSet;
+    config.settings.srcSetOptions = origSrcSetOptions;
   });
 
   const expectComponent = (img, props) => {
@@ -76,7 +64,7 @@ describe('Img', () => {
               <div foo2="bar2" />
             </>
           }
-          srcSetHints={{
+          srcSetOptions={{
             minWidth: 600,
             maxWidth: 800,
           }}
@@ -108,7 +96,7 @@ describe('Img', () => {
     });
 
     test('from object', () => {
-      const srcSetHints = makeSrcSet({
+      const srcSetOptions = makeSrcSet({
         minWidth: 600,
         maxWidth: 800,
       });
@@ -122,7 +110,7 @@ describe('Img', () => {
               <div foo2="bar2" />
             </>
           }
-          srcSetHints={srcSetHints}
+          srcSetOptions={srcSetOptions}
         ></Img>,
       );
       const loading = component.toJSON();

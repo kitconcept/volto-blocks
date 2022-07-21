@@ -1,84 +1,81 @@
-import {
-  getCachedDefaultOptions,
-  setCachedDefaultOptions,
-} from './cachedDefaultOptions';
 const config = require('@plone/volto/registry').default;
 
-const OPTIONS_CACHE_KEY = 'srcset';
-
 const makeSrcSet = (options) => {
-  let processedOptions;
-  let isDefaultObject = options === undefined;
-  if (isDefaultObject) {
-    // Optimizing 1. If this is the default object - use cached value
-    const cachedDefaultOptions = getCachedDefaultOptions(OPTIONS_CACHE_KEY);
-    if (cachedDefaultOptions) {
-      processedOptions = cachedDefaultOptions;
-    }
-  } else if (options.hasOwnProperty('fromProps')) {
-    // Optimizing 2. If already a cooked object - just use it.
-    processedOptions = options.processedOptions;
-  }
-  if (!processedOptions) {
+  if (options && options.hasOwnProperty('fromProps')) {
+    // If already a cooked object - just use it.
+    options = options.options;
+  } else {
     // Calculating
     options = Object.assign(
       {
         enabled: true,
         isLocal: (src) => true,
-        createScaleUrl: (src, scaleName) =>
-          `${src}/@@images/image/${scaleName}`,
+        preprocessSrc: (src) =>
+          src.replace(/\/@@images\/image\/.*$/, '').replace(/\/$/, ''),
+        createScaledSrc: (src, scaleName, scaleData) => ({
+          url: `${src}/@@images/image/${scaleName}`,
+          width: scaleData,
+        }),
         minWidth: 0,
         maxWidth: Infinity,
-        scales: [
-          ['icon', 32],
-          ['tile', 64],
-          ['thumb', 128],
-          ['mini', 200],
-          ['preview', 400],
-          ['teaser', 600],
-          ['large', 800],
-          ['great', 1200],
-          ['huge', 1600],
-        ],
+        scales: {
+          // These are meaningful default however an application should provide
+          // a custom createScaleUrl which can accept a scale info object instead of the width
+          // we use here.
+          icon: 32,
+          tile: 64,
+          thumb: 128,
+          mini: 200,
+          preview: 400,
+          teaser: 600,
+          large: 800,
+          great: 1200,
+          huge: 1600,
+        },
       },
-      config.settings.makeSrcSet,
+      config.settings.srcSetOptions,
       options,
     );
-    const sortedScales = [].concat(options.scales);
-    sortedScales.sort(([_a, widthA], [_b, widthB]) => widthA - widthB);
-    options.scales = sortedScales.filter(
-      ([_, width]) => options.minWidth <= width && width <= options.maxWidth,
-    );
-    processedOptions = options;
-    if (isDefaultObject) {
-      setCachedDefaultOptions(OPTIONS_CACHE_KEY, options);
-    }
   }
   return {
-    processedOptions,
-    fromProps({ src, defaultScale }) {
-      const {
-        enabled,
-        isLocal,
-        createScaleUrl,
-        scales,
-      } = this.processedOptions;
+    options,
+    fromProps({ src, defaultScale, scales }) {
+      const { enabled, isLocal, preprocessSrc, createScaledSrc } = this.options;
       const result = {};
       if (enabled && isLocal(src)) {
-        src = src.replace(/\/@@images\/image\/.*$/, '');
-        src = src.replace(/\/$/, '');
-        const srcSet = scales.map(
-          ([scaleName, width]) => `${createScaleUrl(src, scaleName)} ${width}w`,
+        src = preprocessSrc(src);
+        if (scales) {
+          result.scales = undefined;
+        } else {
+          scales = this.options.scales;
+        }
+        if (typeof scales !== 'object') {
+          throw new Error('The scales option and property must be an object');
+        }
+        let scaledSrcList = Object.keys(scales).map((scaleName) =>
+          createScaledSrc(src, scaleName, scales[scaleName]),
         );
-        result.srcSet = srcSet;
+        scaledSrcList.sort(
+          ({ width: widthA }, { width: widthB }) => widthA - widthB,
+        );
+        scaledSrcList = scaledSrcList.filter(
+          ({ width }) => options.minWidth <= width && width <= options.maxWidth,
+        );
+        result.srcSet = scaledSrcList.map(
+          ({ url, width }) => `${url} ${width}w`,
+        );
         if (defaultScale) {
-          result.src = createScaleUrl(src, defaultScale);
+          // If no scale available, silently ignore creating a source.
+          if (scales.hasOwnProperty(defaultScale)) {
+            result.src = createScaledSrc(
+              src,
+              defaultScale,
+              scales[defaultScale],
+            ).url;
+          }
+          result.defaultScale = undefined;
         }
       }
-      if (defaultScale) {
-        result.defaultScale = undefined;
-      }
-
       return result;
     },
   };

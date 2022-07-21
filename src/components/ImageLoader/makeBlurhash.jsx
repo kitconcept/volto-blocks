@@ -1,26 +1,11 @@
-import {
-  getCachedDefaultOptions,
-  setCachedDefaultOptions,
-} from './cachedDefaultOptions';
 import BlurhashCanvas from './BlurhashCanvas';
 const config = require('@plone/volto/registry').default;
 
-const OPTIONS_CACHE_KEY = 'blurhash';
-
 const makeBlurhash = (options) => {
-  let processedOptions;
-  let isDefaultObject = options === undefined;
-  if (isDefaultObject) {
-    // Optimizing 1. If this is the default object - use cached value
-    const cachedDefaultOptions = getCachedDefaultOptions(OPTIONS_CACHE_KEY);
-    if (cachedDefaultOptions) {
-      processedOptions = cachedDefaultOptions;
-    }
-  } else if (options.hasOwnProperty('fromProps')) {
-    // Optimizing 2. If already a cooked object - just use it.
-    processedOptions = options.processedOptions;
-  }
-  if (!processedOptions) {
+  if (options && options.hasOwnProperty('fromProps')) {
+    // If already a cooked object - just use it.
+    options = options.options;
+  } else {
     // Calculating
     options = Object.assign(
       {
@@ -29,18 +14,14 @@ const makeBlurhash = (options) => {
         punch: 1,
         style: {},
       },
-      config.settings.blurhash,
+      config.settings.blurhashOptions,
       options,
     );
-    processedOptions = options;
-    if (isDefaultObject) {
-      setCachedDefaultOptions(OPTIONS_CACHE_KEY, options);
-    }
   }
   return {
-    processedOptions,
+    options,
     fromProps({ placeholder, blurhash }) {
-      const { resolutionX, resolutionY, style } = this.processedOptions;
+      const { resolutionX, resolutionY, punch, style } = this.options;
       const result = {};
       if (blurhash) {
         if (placeholder) {
@@ -48,18 +29,20 @@ const makeBlurhash = (options) => {
             'blurhash and placeholder properties cannot both be specified',
           );
         }
-        const [ratioStr, hash] = blurhash.split(':');
-        const ratio = parseFloat(ratioStr);
+        // Note the hash itself may contain the delimiter
+        const delimiter = blurhash.indexOf(':');
+        const ratio = parseFloat(blurhash.substring(0, delimiter));
+        const hash = blurhash.substring(delimiter + 1);
         result.placeholder = (
           <BlurhashCanvas
             style={style}
             hash={hash}
             ratio={ratio}
+            punch={punch}
             width={resolutionX}
             height={resolutionY}
           />
         );
-
         result.blurhash = undefined;
       }
       return result;

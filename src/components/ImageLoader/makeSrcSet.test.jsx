@@ -1,31 +1,19 @@
 import makeSrcSet from './makeSrcSet';
 import config from '@plone/volto/registry';
 
-let mockCachedDefaultOptions = {};
-jest.mock('./cachedDefaultOptions', () => {
-  return {
-    __esModule: true,
-    getCachedDefaultOptions: (key) => mockCachedDefaultOptions[key],
-    setCachedDefaultOptions: (key, options) => {
-      mockCachedDefaultOptions[key] = options;
-    },
-  };
-});
-
 describe('makeSrcSet', () => {
   let options;
-  let origMakeSrcSet;
+  let origSrcSetOptions;
 
   beforeEach(() => {
     jest.clearAllMocks();
     options = {};
-    origMakeSrcSet = config.settings.makeSrcSet;
-    config.settings.makeSrcSet = options;
-    mockCachedDefaultOptions = {};
+    origSrcSetOptions = config.settings.srcSetOptions;
+    config.settings.srcSetOptions = options;
   });
 
   afterEach(() => {
-    config.settings.makeSrcSet = origMakeSrcSet;
+    config.settings.srcSetOptions = origSrcSetOptions;
   });
 
   describe('fromProps generates scrSet', () => {
@@ -56,25 +44,44 @@ describe('makeSrcSet', () => {
           .srcSet,
       ).toEqual(result);
     });
+    test('with scales in fromProps', () => {
+      expect(
+        makeSrcSet().fromProps({
+          src: '/foo/bar.jpg',
+          scales: {
+            large: 800,
+            great: 1200,
+          },
+        }).srcSet,
+      ).toEqual([
+        '/foo/bar.jpg/@@images/image/large 800w',
+        '/foo/bar.jpg/@@images/image/great 1200w',
+      ]);
+    });
   });
 
-  describe('fromProps generates scr', () => {
-    const result = '/foo/bar.jpg/@@images/image/SCALE';
+  describe('fromProps generates src', () => {
+    const result = '/foo/bar.jpg/@@images/image/huge';
     test('without defaultScale', () => {
       expect(makeSrcSet().fromProps({ src: '/foo/bar.jpg' }).src).toEqual(
         undefined,
       );
     });
-
+    test('scale not found', () => {
+      expect(
+        makeSrcSet().fromProps({ src: '/foo/bar.jpg', defaultScale: 'NOSUCH' })
+          .src,
+      ).toEqual(undefined);
+    });
     test('regular', () => {
       expect(
-        makeSrcSet().fromProps({ src: '/foo/bar.jpg', defaultScale: 'SCALE' })
+        makeSrcSet().fromProps({ src: '/foo/bar.jpg', defaultScale: 'huge' })
           .src,
       ).toEqual(result);
     });
     test('trailing slash', () => {
       expect(
-        makeSrcSet().fromProps({ src: '/foo/bar.jpg/', defaultScale: 'SCALE' })
+        makeSrcSet().fromProps({ src: '/foo/bar.jpg/', defaultScale: 'huge' })
           .src,
       ).toEqual(result);
     });
@@ -82,7 +89,7 @@ describe('makeSrcSet', () => {
       expect(
         makeSrcSet().fromProps({
           src: '/foo/bar.jpg/@@images/image/anyscale',
-          defaultScale: 'SCALE',
+          defaultScale: 'huge',
         }).src,
       ).toEqual(result);
     });
@@ -90,7 +97,7 @@ describe('makeSrcSet', () => {
       expect(
         makeSrcSet({ enabled: false }).fromProps({
           src: '/foo/bar.jpg/@@images/image/anyscale',
-          defaultScale: 'SCALE',
+          defaultScale: 'huge',
         }).defaultScale,
       ).toBe(undefined);
     });
@@ -98,78 +105,80 @@ describe('makeSrcSet', () => {
       expect(
         makeSrcSet({ isLocal: () => false }).fromProps({
           src: '/foo/bar.jpg/@@images/image/anyscale',
-          defaultScale: 'SCALE',
+          defaultScale: 'huge',
         }).defaultScale,
       ).toBe(undefined);
     });
   });
 
-  test('scales', () => {
-    expect(
-      makeSrcSet({
-        scales: [
-          ['large', 800],
-          ['great', 1200],
-        ],
-      }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
-    ).toEqual([
-      '/foo/bar.jpg/@@images/image/large 800w',
-      '/foo/bar.jpg/@@images/image/great 1200w',
-    ]);
-  });
-  test('maxWidth', () => {
-    expect(
-      makeSrcSet({
-        maxWidth: 600,
-      }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
-    ).toEqual([
-      '/foo/bar.jpg/@@images/image/icon 32w',
-      '/foo/bar.jpg/@@images/image/tile 64w',
-      '/foo/bar.jpg/@@images/image/thumb 128w',
-      '/foo/bar.jpg/@@images/image/mini 200w',
-      '/foo/bar.jpg/@@images/image/preview 400w',
-      '/foo/bar.jpg/@@images/image/teaser 600w',
-    ]);
-  });
-  test('minWidth', () => {
-    expect(
-      makeSrcSet({
-        minWidth: 400,
-      }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
-    ).toEqual([
-      '/foo/bar.jpg/@@images/image/preview 400w',
-      '/foo/bar.jpg/@@images/image/teaser 600w',
-      '/foo/bar.jpg/@@images/image/large 800w',
-      '/foo/bar.jpg/@@images/image/great 1200w',
-      '/foo/bar.jpg/@@images/image/huge 1600w',
-    ]);
-  });
-  test('minWidth and maxWidth', () => {
-    expect(
-      makeSrcSet({
-        minWidth: 400,
-        maxWidth: 600,
-      }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
-    ).toEqual([
-      '/foo/bar.jpg/@@images/image/preview 400w',
-      '/foo/bar.jpg/@@images/image/teaser 600w',
-    ]);
-  });
-  test('enabled', () => {
-    expect(
-      makeSrcSet({
-        enabled: false,
-      }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
-    ).toBe(undefined);
+  describe('options', () => {
+    test('scales', () => {
+      expect(
+        makeSrcSet({
+          scales: {
+            large: 800,
+            great: 1200,
+          },
+        }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
+      ).toEqual([
+        '/foo/bar.jpg/@@images/image/large 800w',
+        '/foo/bar.jpg/@@images/image/great 1200w',
+      ]);
+    });
+    test('maxWidth', () => {
+      expect(
+        makeSrcSet({
+          maxWidth: 600,
+        }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
+      ).toEqual([
+        '/foo/bar.jpg/@@images/image/icon 32w',
+        '/foo/bar.jpg/@@images/image/tile 64w',
+        '/foo/bar.jpg/@@images/image/thumb 128w',
+        '/foo/bar.jpg/@@images/image/mini 200w',
+        '/foo/bar.jpg/@@images/image/preview 400w',
+        '/foo/bar.jpg/@@images/image/teaser 600w',
+      ]);
+    });
+    test('minWidth', () => {
+      expect(
+        makeSrcSet({
+          minWidth: 400,
+        }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
+      ).toEqual([
+        '/foo/bar.jpg/@@images/image/preview 400w',
+        '/foo/bar.jpg/@@images/image/teaser 600w',
+        '/foo/bar.jpg/@@images/image/large 800w',
+        '/foo/bar.jpg/@@images/image/great 1200w',
+        '/foo/bar.jpg/@@images/image/huge 1600w',
+      ]);
+    });
+    test('minWidth and maxWidth', () => {
+      expect(
+        makeSrcSet({
+          minWidth: 400,
+          maxWidth: 600,
+        }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
+      ).toEqual([
+        '/foo/bar.jpg/@@images/image/preview 400w',
+        '/foo/bar.jpg/@@images/image/teaser 600w',
+      ]);
+    });
+    test('enabled', () => {
+      expect(
+        makeSrcSet({
+          enabled: false,
+        }).fromProps({ src: '/foo/bar.jpg' }).srcSet,
+      ).toBe(undefined);
+    });
   });
 
   describe('@plone/volto/registry config', () => {
     test('scales', () => {
       Object.assign(options, {
-        scales: [
-          ['large', 800],
-          ['great', 1200],
-        ],
+        scales: {
+          large: 800,
+          great: 1200,
+        },
       });
       expect(makeSrcSet().fromProps({ src: '/foo/bar.jpg' }).srcSet).toEqual([
         '/foo/bar.jpg/@@images/image/large 800w',
@@ -260,14 +269,14 @@ describe('makeSrcSet', () => {
   });
 
   describe('isLocal wrt src', () => {
-    const result = '/foo/bar.jpg/@@images/image/SCALE';
+    const result = '/foo/bar.jpg/@@images/image/huge';
     let isLocalResult;
     let isLocal = jest.fn(() => isLocalResult);
     test('true', () => {
       isLocalResult = true;
       const src = '/foo/bar.jpg';
       expect(
-        makeSrcSet({ isLocal }).fromProps({ src, defaultScale: 'SCALE' }).src,
+        makeSrcSet({ isLocal }).fromProps({ src, defaultScale: 'huge' }).src,
       ).toEqual(result);
       expect(isLocal).toHaveBeenCalledWith(src);
     });
@@ -276,7 +285,7 @@ describe('makeSrcSet', () => {
       isLocalResult = false;
       const src = '/foo/bar.jpg';
       expect(
-        makeSrcSet({ isLocal }).fromProps({ src, defaultScale: 'SCALE' }).src,
+        makeSrcSet({ isLocal }).fromProps({ src, defaultScale: 'huge' }).src,
       ).toEqual(undefined);
       expect(isLocal).toHaveBeenCalledWith(src);
     });
@@ -290,52 +299,73 @@ describe('makeSrcSet', () => {
     });
   });
 
-  describe('createScaleUrl', () => {
+  describe('preprocessSrc', () => {
     const result = [
-      '[/foo/bar.jpg-icon] 32w',
-      '[/foo/bar.jpg-tile] 64w',
-      '[/foo/bar.jpg-thumb] 128w',
-      '[/foo/bar.jpg-mini] 200w',
-      '[/foo/bar.jpg-preview] 400w',
-      '[/foo/bar.jpg-teaser] 600w',
-      '[/foo/bar.jpg-large] 800w',
-      '[/foo/bar.jpg-great] 1200w',
-      '[/foo/bar.jpg-huge] 1600w',
+      '/foo/bar.jpg/@@images/image/icon 32w',
+      '/foo/bar.jpg/@@images/image/tile 64w',
+      '/foo/bar.jpg/@@images/image/thumb 128w',
+      '/foo/bar.jpg/@@images/image/mini 200w',
+      '/foo/bar.jpg/@@images/image/preview 400w',
+      '/foo/bar.jpg/@@images/image/teaser 600w',
+      '/foo/bar.jpg/@@images/image/large 800w',
+      '/foo/bar.jpg/@@images/image/great 1200w',
+      '/foo/bar.jpg/@@images/image/huge 1600w',
     ];
-    let createScaleUrl = jest.fn((url, scaleName) => `[${url}-${scaleName}]`);
+    test('works', () => {
+      const preprocessSrc = jest.fn((src) =>
+        src.replace(/\/REMOVEME/, '').replace(/\/$/, ''),
+      );
+      expect(
+        makeSrcSet({ preprocessSrc }).fromProps({
+          src: '/foo/REMOVEME/bar.jpg',
+        }).srcSet,
+      ).toEqual(result);
+      expect(preprocessSrc).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('createScaledSrc', () => {
+    const result = [
+      '[/foo/bar.jpg-icon] 1032w',
+      '[/foo/bar.jpg-tile] 1064w',
+      '[/foo/bar.jpg-thumb] 1128w',
+      '[/foo/bar.jpg-mini] 1200w',
+      '[/foo/bar.jpg-preview] 1400w',
+      '[/foo/bar.jpg-teaser] 1600w',
+      '[/foo/bar.jpg-large] 1800w',
+      '[/foo/bar.jpg-great] 2200w',
+      '[/foo/bar.jpg-huge] 2600w',
+    ];
+    let createScaledSrc = jest.fn((src, scaleName, scaleData) => ({
+      url: `[${src}-${scaleName}]`,
+      width: scaleData + 1000,
+    }));
     test('works for scrSet', () => {
       const src = '/foo/bar.jpg';
-      expect(makeSrcSet({ createScaleUrl }).fromProps({ src }).srcSet).toEqual(
+      expect(makeSrcSet({ createScaledSrc }).fromProps({ src }).srcSet).toEqual(
         result,
       );
-      expect(createScaleUrl).toHaveBeenCalledTimes(result.length);
+      expect(createScaledSrc).toHaveBeenCalledTimes(result.length);
     });
     test('works for src', () => {
       const src = '/foo/bar.jpg';
       expect(
-        makeSrcSet({ createScaleUrl }).fromProps({ src, defaultScale: 'SCALE' })
+        makeSrcSet({ createScaledSrc }).fromProps({ src, defaultScale: 'huge' })
           .src,
-      ).toEqual('[/foo/bar.jpg-SCALE]');
-      expect(createScaleUrl).toHaveBeenCalledTimes(result.length + 1);
+      ).toEqual('[/foo/bar.jpg-huge]');
+      expect(createScaledSrc).toHaveBeenCalledTimes(result.length + 1);
     });
   });
 
-  describe('optimizing', () => {
-    test('caching default', () => {
+  describe('using full hint object', () => {
+    test('works', () => {
       const src = '/foo/bar.jpg';
-      const props = makeSrcSet().fromProps({ src });
-      const props2 = makeSrcSet().fromProps({ src });
-      expect(props2).toEqual(props);
-      expect(props2.processedOptions).toBe(props.processedOptions);
-    });
-    test('full hint object', () => {
-      const src = '/foo/bar.jpg';
-      const srcSetHints = makeSrcSet();
-      const srcSetHints2 = makeSrcSet(srcSetHints);
-      expect(srcSetHints.fromProps({ src })).toEqual(
-        srcSetHints2.fromProps({ src }),
+      const srcSetOptions = makeSrcSet({ minWidth: 1200 });
+      const srcSetOptions2 = makeSrcSet(srcSetOptions);
+      expect(srcSetOptions.fromProps({ src })).toEqual(
+        srcSetOptions2.fromProps({ src }),
       );
-      expect(srcSetHints.processedOptions).toBe(srcSetHints2.processedOptions);
+      expect(srcSetOptions.options).toBe(srcSetOptions2.options);
     });
   });
 });
