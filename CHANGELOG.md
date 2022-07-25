@@ -10,6 +10,8 @@
 
 ### Internal
 
+- Change from 4 to 2 spaces for export feature formatting @sneridagh
+
 ## 11.0.2 (2022-07-14)
 
 ### Internal

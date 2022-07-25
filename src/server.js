@@ -140,7 +140,7 @@ function jsonExporter(req, res, next) {
             blocks_layout,
           },
           null,
-          4,
+          2,
         ),
       );
     })
