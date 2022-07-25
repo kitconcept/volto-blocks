@@ -2,12 +2,6 @@
 
 ## 11.0.3 (unreleased)
 
-### Breaking
-
-### Feature
-
-### Bugfix
-
 ### Internal
 
 - Change from 4 to 2 spaces for export feature formatting @sneridagh
