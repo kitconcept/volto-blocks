@@ -24,6 +24,7 @@
 - Removed `TextPill` @sneridagh
 - Removed `Variations` @sneridagh
 - Removed `Freezer` @sneridagh
+- Deprecate (and move) CSS from this package @sneridagh
 
 ### Feature
 
