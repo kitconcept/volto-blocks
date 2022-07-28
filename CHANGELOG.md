@@ -4,6 +4,26 @@
 
 ### Breaking
 
+- Compatible with versions of Volto >= 16.0.0-alpha.15 (slate by default) @sneridagh
+- No longer depends on `volto-slate` @sneridagh
+- Removed `BlockRenderer` @sneridagh
+- Removed `Carousel` @sneridagh
+- Removed `ConditionalLink` @sneridagh
+- Removed `DragDropList` @sneridagh
+- Removed `Grid` @sneridagh
+- Removed `Highlight` @sneridagh
+- Removed `HighlightSlider` @sneridagh
+- Removed `ImagesGrid` @sneridagh
+- Removed `MaybeWrap` @sneridagh
+- Removed `MultiSourceWidget` @sneridagh
+- Removed `TeaserGrid` @sneridagh
+- Removed `TeaserHero` @sneridagh
+- Removed `SchemaRenderer` @sneridagh
+- Removed `Slider` @sneridagh
+- Removed `TemplateChooser` @sneridagh
+- Removed `TextPill` @sneridagh
+- Removed `Variations` @sneridagh
+
 ### Feature
 
 ### Bugfix
