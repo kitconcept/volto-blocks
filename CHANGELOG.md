@@ -1,6 +1,6 @@
 # Change Log
 
-## 11.0.4 (unreleased)
+## 12.0.0 (2022-07-28)
 
 ### Breaking
 

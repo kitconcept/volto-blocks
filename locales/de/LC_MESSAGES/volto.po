@@ -21,45 +21,15 @@ msgstr ""
 msgid "Add criteria"
 msgstr "Kriterien hinzufügen"
 
-#: components/Carousel/schema
-# defaultMessage: Add item
-msgid "Add item"
-msgstr "Element hinzufügen"
-
-#: components/HighlightSlider/SliderSidebar
-# defaultMessage: Aktuelles
-msgid "Aktuelles"
-msgstr ""
-
-#: components/ImagesGrid/schema
-# defaultMessage: Alignment
-msgid "Alignment"
-msgstr "Ausrichtung"
-
-#: components/ImagesGrid/schema
-# defaultMessage: Alt text
-msgid "Alt text"
-msgstr "Alternativer Text"
-
 #: components/withStyleWrapper/schema
 # defaultMessage: Background color
 msgid "Background color"
 msgstr "Hintergrundfarbe"
 
-#: components/Slider/Edit
-# defaultMessage: Browse or type URL
-msgid "Browse or type URL"
-msgstr "Durchsuchen oder URL eintippen"
-
 #: components/BlockModal/BlockModal
 # defaultMessage: Cancel
 msgid "Cancel"
 msgstr "Abbrechen"
-
-#: components/Carousel/schema
-# defaultMessage: Carousel
-msgid "Carousel"
-msgstr "Karoussel"
 
 #: components/Widgets/QuerystringSidebarWidget
 # defaultMessage: Criteria
@@ -71,139 +41,20 @@ msgstr "Kriterium"
 msgid "Default"
 msgstr "Standard"
 
-#: components/Carousel/schema
-#: components/TeaserGrid/schema
 #: components/Widgets/CheckboxWidget
 # defaultMessage: Description
 msgid "Description"
 msgstr "Beschreibung"
 
-#: components/ImagesGrid/DefaultItemBody
-#: components/ImagesGrid/IconsVariation
-# defaultMessage: Drop a file, click for upload or browse the site
-msgid "Drop a file, click for upload or browse the site"
-msgstr "Datei ablegen, zum Hochladen klicken oder die Seite durchsuchen"
-
-#: components/SchemaRenderer/SchemaRenderer
-# defaultMessage: Error
-msgid "Error"
-msgstr "Fehler"
-
-#: components/ImagesGrid/schema
-# defaultMessage: External URL
-msgid "External URL"
-msgstr "Externe URL"
-
-#: components/Grid/GridSidebar
-# defaultMessage: Grid
-msgid "Grid"
-msgstr "Grid"
-
-#: components/Grid/GridSidebar
-# defaultMessage: Grid Element {index}
-msgid "Grid Element"
-msgstr "Grid Element {index}"
-
-#: components/Grid/GridSidebar
-# defaultMessage: Grid Image {index}
-msgid "Grid Image"
-msgstr "Grid Bild {index}"
-
 #: components/Accordion/schemaEnhancer
-#: components/Carousel/schema
-#: components/TeaserGrid/schema
 # defaultMessage: Headline
 msgid "Headline"
 msgstr "Überschrift"
 
-#: components/Carousel/schema
-# defaultMessage: Hide description
-msgid "Hide description"
-msgstr "Beschreibung ausblenden"
-
-#: components/Highlight/HighlightSidebar
-# defaultMessage: Highlight
-msgid "Highlight"
-msgstr ""
-
-#: components/ImagesGrid/schema
-# defaultMessage: Image
-msgid "Image"
-msgstr "Bild"
-
-#: components/Carousel/schema
-# defaultMessage: Image override
-msgid "Image override"
-msgstr "Bild überschreiben"
-
-#: components/Grid/GridSidebar
-# defaultMessage: Images Grid
-msgid "Images Grid"
-msgstr "Bilder Grid"
-
-#: components/Carousel/schema
-# defaultMessage: Item
-msgid "Item"
-msgstr "Element"
-
-#: components/Carousel/schema
-# defaultMessage: Items
-msgid "Items"
-msgstr "Elemente"
-
-#: components/Carousel/schema
-# defaultMessage: Items to show
-msgid "Items to show"
-msgstr "Anzuzeigende Elemente"
-
-#: components/ImagesGrid/schema
-# defaultMessage: Link to
-msgid "Link to"
-msgstr "Verlinkung zu"
-
-#: components/Grid/GridSidebar
-# defaultMessage: Listing Grid
-msgid "Listing Grid"
-msgstr "Listing Grid {index}"
-
-#: components/Grid/GridSidebar
-# defaultMessage: Listing Grid {index}
-msgid "ListingGrid"
-msgstr ""
-
-#: components/ImagesGrid/schema
-# defaultMessage: No image selected
-msgid "No image selected"
-msgstr "Kein Bild ausgewählt"
-
-#: components/ImagesGrid/schema
-#: components/TeaserGrid/schema
-# defaultMessage: Open in a new tab
-msgid "Open in a new tab"
-msgstr "In neuem Tab öffnen"
-
 #: components/BlockModal/BlockModal
-#: components/Slider/Edit
-#: Freezer/Cards/Edit
 # defaultMessage: Options
 msgid "Options"
 msgstr "Optionen"
-
-#: components/ImagesGrid/schema
-# defaultMessage: Origin
-msgid "Origin"
-msgstr "Quelle"
-
-#: components/Carousel/Body
-#: components/Carousel/View
-#: components/Highlight/HighlightBody
-#: components/HighlightSlider/SliderBody
-#: components/HighlightSlider/View
-#: components/TeaserGrid/TeaserDefaultTemplate
-#: components/TeaserHero/TeaserHeroBody
-# defaultMessage: Please choose an existing content as source for this element
-msgid "Please choose an existing content as source for this element"
-msgstr "Bitte wählen sie einen existierenden Inhalt als Quelle für dieses Element aus"
 
 #: components/Widgets/CheckboxWidget
 # defaultMessage: Required
@@ -215,74 +66,20 @@ msgstr "Benötigt"
 msgid "Save"
 msgstr "Speichern"
 
-#: components/Carousel/schema
-# defaultMessage: Settings
-msgid "Settings"
-msgstr "Einstellungen"
-
 #: components/Widgets/CheckboxWidget
 # defaultMessage: Short Name
 msgid "Short Name"
 msgstr "Kurzname"
 
-#: components/BlockDataWidgets/MultiSourceWidget
-#: components/Carousel/schema
-#: components/ImagesGrid/schema
-#: components/TeaserGrid/schema
-# defaultMessage: Source
-msgid "Source"
-msgstr "Quelle"
-
-#: components/TeaserGrid/schema
-# defaultMessage: Source image
-msgid "Source image"
-msgstr "Bild-Quelle"
-
-#: components/Grid/GridSidebar
-# defaultMessage: Teaser Grid
-msgid "Teaser Grid"
-msgstr ""
-
-#: components/TeaserHero/TeaserHeroSidebar
-# defaultMessage: Teaser Hero
-msgid "Teaser Hero"
-msgstr ""
-
-#: components/TextPill/schema
-# defaultMessage: Text block with background color
-msgid "Text block with background color"
-msgstr "Text-Block mit Hintergrundfarbe"
-
-#: index
-# defaultMessage: Text with background color
-msgid "Text with background color"
-msgstr "Text mit Hintergrund"
-
-#: components/SchemaRenderer/SchemaRenderer
-# defaultMessage: There were some errors
-msgid "There were some errors"
-msgstr "Es gab einige Fehler"
-
-#: components/Carousel/schema
-#: components/ImagesGrid/schema
-#: components/TeaserGrid/schema
 #: components/Widgets/CheckboxWidget
 # defaultMessage: Title
 msgid "Title"
 msgstr "Titel"
 
 #: components/SimpleBlocks/TextBody
-#: Freezer/Card/Edit
-#: Freezer/TextTileWithAppendActions/Edit
 # defaultMessage: Type text…
 msgid "Type text…"
 msgstr "Text eingeben..."
-
-#: components/ImagesGrid/DefaultItemBody
-#: components/ImagesGrid/IconsVariation
-# defaultMessage: Uploading image
-msgid "Uploading image"
-msgstr ""
 
 #: components/withStyleWrapper/schema
 # defaultMessage: Use full width colored background
@@ -298,39 +95,6 @@ msgstr ""
 # defaultMessage: Used for programmatic access to the fieldset.
 msgid "Used for programmatic access to the fieldset."
 msgstr "Wird für den programmatischen Zugriff auf das Fieldset verwendet."
-
-#: components/TeaserHero/TeaserHeroData
-#: components/Variations/VariationsWidget
-# defaultMessage: Variation
-msgid "Variation"
-msgstr "Variante"
-
-#: components/TeaserGrid/templates
-# defaultMessage: column
-msgid "column"
-msgstr "Spalte"
-
-#: components/TeaserGrid/templates
-# defaultMessage: columns
-msgid "columns"
-msgstr "Spalten"
-
-#: components/ImagesGrid/templates
-# defaultMessage: image
-msgid "image"
-msgstr "Bild"
-
-#: components/ImagesGrid/templates
-# defaultMessage: images
-msgid "images"
-msgstr "Bilder"
-
-#: components/Carousel/Body
-#: components/Highlight/HighlightBody
-#: components/HighlightSlider/SliderBody
-# defaultMessage: More info
-msgid "moreInfo"
-msgstr ""
 
 #: components/Widgets/QuerystringSidebarWidget
 # defaultMessage: Select…
