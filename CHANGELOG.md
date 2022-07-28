@@ -26,12 +26,6 @@
 - Removed `Freezer` @sneridagh
 - Deprecate (and move) CSS from this package @sneridagh
 
-### Feature
-
-### Bugfix
-
-### Internal
-
 ## 11.0.3 (2022-07-25)
 
 ### Internal
