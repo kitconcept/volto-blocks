@@ -23,6 +23,7 @@
 - Removed `TemplateChooser` @sneridagh
 - Removed `TextPill` @sneridagh
 - Removed `Variations` @sneridagh
+- Removed `Freezer` @sneridagh
 
 ### Feature
 
