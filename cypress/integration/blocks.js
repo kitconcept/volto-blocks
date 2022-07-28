@@ -36,6 +36,10 @@ context('Blocks Acceptance Tests', () => {
     });
 
     it('As editor I can add a link to a text block', function () {
+      cy.intercept('GET', '/**/document').as('content');
+      cy.visit('/document');
+      cy.wait('@content');
+
       cy.navigate('/document/edit');
 
       // when I create a link
@@ -44,10 +48,8 @@ context('Blocks Acceptance Tests', () => {
         'Colorless green ideas sleep furiously.',
       ).setSelection('furiously');
 
-      // TODO: there are two toolbars present :( The bad one has an .undefined CSS class :(
-      cy.get(
-        '.slate-inline-toolbar:not(.undefined) .button-wrapper:nth-of-type(3)',
-      ).click();
+      cy.clickSlateButton('Add link');
+
       cy.get('.link-form-container input').type('https://google.com{enter}');
       cy.get('#toolbar-save').click();
       cy.url().should('eq', Cypress.config().baseUrl + '/document');
