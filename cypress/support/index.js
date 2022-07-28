@@ -1,6 +1,7 @@
 import 'cypress-file-upload';
 import './commands';
 import 'cypress-axe';
+import '@plone/volto/cypress/support/commands';
 
 beforeEach(function () {
   cy.log('Setting up API fixture');

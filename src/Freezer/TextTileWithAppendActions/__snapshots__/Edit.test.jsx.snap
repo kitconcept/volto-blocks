@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Text block renders an edit text block component 1`] = `<div />`;
-
-exports[`Text block renders an edit text block component in detached mode 1`] = `<div />`;

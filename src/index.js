@@ -11,42 +11,10 @@
  *   }
  * }
  */
-import {
-  ImagesGridIconsVariation,
-  withStyleWrapper,
-  SimpleColorPicker,
-  CarouselEditBlock,
-  CarouselViewBlock,
-  SliderEditBlock,
-  SliderViewBlock,
-  TeaserGridEditBlock,
-  TeaserGridViewBlock,
-  ImagesGridEditBlock,
-  ImagesGridViewBlock,
-  TeaserHeroViewBlock,
-  TeaserHeroEditBlock,
-  HighlightSliderViewBlock,
-  HighlightSliderEditBlock,
-  TextPillEditBlock,
-  TextPillViewBlock,
-} from '@kitconcept/volto-blocks/components';
-import { ImagesGridIconsVariationSchemaExtender } from '@kitconcept/volto-blocks/components/ImagesGrid/schema';
+import { SimpleColorPicker } from '@kitconcept/volto-blocks/components';
 import AccordionSchemaEnhancer from '@kitconcept/volto-blocks/components/Accordion/schemaEnhancer';
 
 import { insertInArray } from '@kitconcept/volto-blocks/helpers';
-import { defineMessages } from 'react-intl';
-
-import textSVG from '@plone/volto/icons/subtext.svg';
-import sliderSVG from '@plone/volto/icons/slider.svg';
-import imagesSVG from '@plone/volto/icons/images.svg';
-import heroSVG from '@plone/volto/icons/hero.svg';
-
-defineMessages({
-  textPillWithStyle: {
-    id: 'Text with background color',
-    defaultMessage: 'Text with background color',
-  },
-});
 
 const serverConfig =
   typeof __SERVER__ !== 'undefined' && __SERVER__
@@ -67,155 +35,6 @@ const customGroupBlocksOrder = (defaultGroups) =>
 //   return schema;
 // };
 
-const customBlocks = {
-  carousel: {
-    id: 'carousel',
-    title: 'Carousel',
-    icon: imagesSVG,
-    group: 'common',
-    view: withStyleWrapper(CarouselViewBlock),
-    edit: withStyleWrapper(CarouselEditBlock),
-    restricted: false,
-    mostUsed: true,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-  },
-  teaserGrid: {
-    id: 'teaserGrid',
-    title: 'Teaser grid',
-    icon: imagesSVG,
-    group: 'teasers',
-    view: TeaserGridViewBlock,
-    edit: TeaserGridEditBlock,
-    restricted: false,
-    mostUsed: true,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-    // Maximum items allowed
-    // maxItemsAllowed: 6,
-    //
-    // Variations example
-    // variations: {
-    //   default: { label: 'Default', template: TeaserDefaultTemplate },
-    //   custom: {
-    //     label: 'Custom',
-    //     components: {
-    //       view: TeaserDefaultTemplate,
-    //       wrapper: (props) => (
-    //         <>
-    //           hey! {props.data.description2} asdasd {props.children} bottoms
-    //           thinggy
-    //         </>
-    //       ),
-    //     },
-    //     schemaExtender: schemaExtender,
-    //     schemaExtenderItem: schemaExtender,
-    //   },
-    // },
-  },
-  imagesGrid: {
-    id: 'imagesGrid',
-    title: 'Images grid',
-    icon: imagesSVG,
-    group: 'common',
-    view: withStyleWrapper(ImagesGridViewBlock),
-    edit: withStyleWrapper(ImagesGridEditBlock),
-    restricted: false,
-    mostUsed: true,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-    // Maximum items allowed
-    // maxItemsAllowed: 6,
-    variations: {
-      default: { label: 'Default' },
-      icons: {
-        label: 'Icons',
-        maxItemsAllowed: 6,
-        itemFixedWidth: 6,
-        components: {
-          view: ImagesGridIconsVariation,
-        },
-        schemaExtenderItem: ImagesGridIconsVariationSchemaExtender,
-      },
-    },
-  },
-  slider: {
-    id: 'slider',
-    title: 'Slider',
-    icon: sliderSVG,
-    group: 'common',
-    view: SliderViewBlock,
-    edit: SliderEditBlock,
-    restricted: true,
-    mostUsed: false,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-  },
-  teaserHero: {
-    id: 'teaserHero',
-    title: 'Teaser Hero',
-    icon: heroSVG,
-    group: 'teasers',
-    view: TeaserHeroViewBlock,
-    edit: TeaserHeroEditBlock,
-    restricted: false,
-    mostUsed: true,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-  },
-  highlightSlider: {
-    id: 'highlightSlider',
-    title: 'Highlight Slider',
-    icon: sliderSVG,
-    group: 'teasers',
-    view: HighlightSliderViewBlock,
-    edit: HighlightSliderEditBlock,
-    restricted: false,
-    mostUsed: true,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-  },
-  textPillWithStyle: {
-    id: 'textPillWithStyle',
-    title: 'Text with background color',
-    icon: textSVG,
-    group: 'text',
-    view: withStyleWrapper(TextPillViewBlock),
-    edit: withStyleWrapper(TextPillEditBlock),
-    blockHasOwnFocusManagement: true,
-    restricted: false,
-    mostUsed: true,
-    sidebarTab: 1,
-    security: {
-      addPermission: [],
-      view: [],
-    },
-  },
-};
-
-// export const blocks = {
-//   ...defaultBlocks,
-//   blocksConfig: { ...defaultBlocks.blocksConfig, ...customBlocks },
-//   groupBlocksOrder: customGroupBlocksOrder,
-// };
 export default (config) => {
   config.widgets.widget.style_simple_color = SimpleColorPicker;
 
@@ -230,15 +49,9 @@ export default (config) => {
     ];
   }
 
-  return {
-    ...config,
-    blocks: {
-      ...config.blocks,
-      blocksConfig: {
-        ...config.blocks.blocksConfig,
-        ...customBlocks,
-      },
-      groupBlocksOrder: customGroupBlocksOrder(config.blocks.groupBlocksOrder),
-    },
-  };
+  config.blocks.groupBlocksOrder = customGroupBlocksOrder(
+    config.blocks.groupBlocksOrder,
+  );
+
+  return config;
 };
