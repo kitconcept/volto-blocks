@@ -2,8 +2,6 @@
 
 ## 12.0.1 (unreleased)
 
-### Breaking
-
 ### Feature
 
 - Implement image loading with srcset #277 @reebalazs
@@ -12,8 +10,6 @@
 ### Bugfix
 
 - Fix ImgLoader loading with SSR @reebalazs
-
-### Internal
 
 ## 12.0.0 (2022-07-28)
 
