@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 /*
 
@@ -31,16 +31,23 @@ provided are:
 export default (props) => {
   const { children, createComponent, placeholder, ...imgProps } = props;
   const [isLoaded, setIsLoaded] = useState(false);
+  const ref = useRef();
   const [placeholderProps, setPlaceholderProps] = useState({});
   const [placeholderChildren, setPlaceholderChildren] = useState(undefined);
-  if (isLoaded && imgProps.src !== placeholderProps.src) {
-    setIsLoaded(false);
-  }
-  const onLoad = () => {
+  const onLoad = useCallback(() => {
     setIsLoaded(true);
     setPlaceholderProps(imgProps);
     setPlaceholderChildren(children);
-  };
+  }, [imgProps, children]);
+  const isComplete = ref.current?.complete;
+  useEffect(() => {
+    if (isComplete) {
+      onLoad();
+    }
+    if (isLoaded && imgProps.src !== placeholderProps.src) {
+      setIsLoaded(false);
+    }
+  }, [isLoaded, imgProps.src, placeholderProps.src, isComplete, onLoad]);
   return (
     <>
       {isLoaded ? (
@@ -48,7 +55,7 @@ export default (props) => {
       ) : (
         <div style={{ display: 'none' }}>
           {imgProps.src
-            ? createComponent({ ...imgProps, onLoad }, children)
+            ? createComponent({ ...imgProps, onLoad, ref }, children)
             : null}
         </div>
       )}

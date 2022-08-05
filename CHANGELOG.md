@@ -6,7 +6,12 @@
 
 ### Feature
 
+- Implement image loading with srcset #277 @reebalazs
+- Implement progressive image loading with blurhash #276 @reebalazs
+
 ### Bugfix
+
+- Fix ImgLoader loading with SSR @reebalazs
 
 ### Internal
 
