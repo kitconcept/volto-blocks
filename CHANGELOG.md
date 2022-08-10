@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix blurhash canvas scaling when image has a css aspect-ratio set #276 @reebalazs
+
 ### Internal
 
 ## 12.1.0 (2022-08-05)

@@ -48,6 +48,17 @@ export default (props) => {
       setIsLoaded(false);
     }
   }, [isLoaded, imgProps.src, placeholderProps.src, isComplete, onLoad]);
+  useEffect(() => {
+    const placeholderCurrent = placeholder.props.blurhashRef?.current;
+    if (placeholderCurrent) {
+      const computedStyle = getComputedStyle(ref.current);
+      const { aspectRatio, objectFit } = computedStyle;
+      if (aspectRatio !== 'auto' && !placeholderCurrent.style.aspectRatio) {
+        placeholderCurrent.style.aspectRatio = aspectRatio;
+        placeholderCurrent.style.objectFit = objectFit;
+      }
+    }
+  });
   return (
     <>
       {isLoaded ? (

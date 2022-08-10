@@ -126,6 +126,27 @@ describe('makeBlurhash', () => {
     });
   });
 
+  describe('blurhashRef', () => {
+    test('passed to component', () => {
+      const mockBlurhashRef = { current: null };
+      const result = makeBlurhash({}, mockBlurhashRef).fromProps({
+        blurhash: '1:BLURHASH',
+      });
+      expectProps(result.placeholder, 'div', {
+        hash: 'BLURHASH',
+        ratio: 1,
+        punch: 1,
+        width: 32,
+        height: 32,
+        style: {},
+        blurhashRef: mockBlurhashRef,
+      });
+      expect(result.placeholder.props.blurhashRef).toBe(mockBlurhashRef);
+      expect(result.hasOwnProperty('blurhash')).toBe(true);
+      expect(result.blurhash).toBe(undefined);
+    });
+  });
+
   describe('hash and ratio', () => {
     test('regular', () => {
       const result = makeBlurhash().fromProps({ blurhash: '2:BLURHASH' });

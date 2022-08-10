@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import AnyLoader from './AnyLoader';
 import makeSrcSet from './makeSrcSet';
 import makeBlurhash from './makeBlurhash';
@@ -337,11 +337,27 @@ latter one will be passed to the html image directly. Example:
 />
 '''
 
+There are two resize modes supported for the blurhash canvas:
+
+- If the image has no direct or inherited `aspect-ratio` css style, the canvas height is set according to the
+  canvas width and the intrinsic image ratio. This is maintaned continually as the canvas resizes.
+  (If the width is set to 100%, this will always result in the canvas filling the parent element's width.)
+
+- If the image has a direct or inherited `aspect-ratio` css style, the same `aspect-ratio` will be set on the
+  canvas, together with the `objectFit` style.
+
+Further generalization on the resizing strategy would be possible, once the need emerges.
+
+
 
  */
 
 export default ({ blurhashOptions, ...props }) => {
-  props = extendProps(props, makeBlurhash(blurhashOptions).fromProps(props));
+  const blurhashRef = useRef();
+  props = extendProps(
+    props,
+    makeBlurhash(blurhashOptions, blurhashRef).fromProps(props),
+  );
   return AnyLoader({
     ...props,
     createComponent: ({ srcSetOptions, ...props }, children) => {
