@@ -16,6 +16,8 @@ const makeSrcSet = (options) => {
           url: `${src}/@@images/image/${scaleName}`,
           width: scaleData,
         }),
+        createMissingScaleSrc: (src, scaleName) =>
+          `${src}/@@images/image/${scaleName}`,
         minWidth: 0,
         maxWidth: Infinity,
         scales: {
@@ -40,7 +42,13 @@ const makeSrcSet = (options) => {
   return {
     options,
     fromProps({ src, defaultScale, scales }) {
-      const { enabled, isLocal, preprocessSrc, createScaledSrc } = this.options;
+      const {
+        enabled,
+        isLocal,
+        preprocessSrc,
+        createScaledSrc,
+        createMissingScaleSrc,
+      } = this.options;
       const result = {};
       if (enabled && isLocal(src)) {
         src = preprocessSrc(src);
@@ -65,13 +73,16 @@ const makeSrcSet = (options) => {
           ({ url, width }) => `${url} ${width}w`,
         );
         if (defaultScale) {
-          // If no scale available, silently ignore creating a source.
           if (scales.hasOwnProperty(defaultScale)) {
             result.src = createScaledSrc(
               src,
               defaultScale,
               scales[defaultScale],
             ).url;
+          } else {
+            console.log(createMissingScaleSrc);
+            // If no scale is available, use createDefaultSrc instead.
+            result.src = createMissingScaleSrc(src, defaultScale);
           }
           result.defaultScale = undefined;
         }

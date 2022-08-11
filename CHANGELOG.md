@@ -10,6 +10,7 @@
 
 - Fix blurhash canvas scaling when image has a css aspect-ratio set #276 @reebalazs
 - Always clean extra properties, even if not generating a srcset #277 @reebalazs
+- Add createMissingScaleSrc option as fallback until scales defined #277 @reebalazs
 
 ### Internal
 

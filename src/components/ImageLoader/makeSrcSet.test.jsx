@@ -67,11 +67,28 @@ describe('makeSrcSet', () => {
         undefined,
       );
     });
-    test('scale not found', () => {
-      expect(
-        makeSrcSet().fromProps({ src: '/foo/bar.jpg', defaultScale: 'NOSUCH' })
-          .src,
-      ).toEqual(undefined);
+    describe('scale not found', () => {
+      test('default', () => {
+        // createMissingScaleSrc is used, by the default fixture this gives the
+        // url back
+        expect(
+          makeSrcSet().fromProps({
+            src: '/foo/bar.jpg',
+            defaultScale: 'NOSUCH',
+          }).src,
+        ).toEqual('/foo/bar.jpg/@@images/image/NOSUCH');
+      });
+      test('with custom createMissingScaleSrc', () => {
+        expect(
+          makeSrcSet({
+            createMissingScaleSrc: (url, defaultScale) =>
+              `${url}/+++/${defaultScale}`,
+          }).fromProps({
+            src: '/foo/bar.jpg',
+            defaultScale: 'NOSUCH',
+          }).src,
+        ).toEqual('/foo/bar.jpg/+++/NOSUCH');
+      });
     });
     test('regular', () => {
       expect(
@@ -227,6 +244,18 @@ describe('makeSrcSet', () => {
       expect(makeSrcSet().fromProps({ src: '/foo/bar.jpg' }).srcSet).toEqual(
         undefined,
       );
+    });
+    test('createMissingScaleSrc', () => {
+      Object.assign(options, {
+        createMissingScaleSrc: (url, defaultScale) =>
+          `${url}/+++/${defaultScale}`,
+      });
+      expect(
+        makeSrcSet().fromProps({
+          src: '/foo/bar.jpg',
+          defaultScale: 'NOSUCH',
+        }).src,
+      ).toEqual('/foo/bar.jpg/+++/NOSUCH');
     });
   });
 
