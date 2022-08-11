@@ -18,6 +18,7 @@ export default ({ style, hash, punch, ratio, width, height, blurhashRef }) => {
     }
   }, [hash, width, height, punch, blurhashRef]);
 
+  const aspectRatio = blurhashRef.current?.style.aspectRatio;
   useEffect(() => {
     const canvas = blurhashRef.current;
     if (canvas) {
@@ -31,7 +32,7 @@ export default ({ style, hash, punch, ratio, width, height, blurhashRef }) => {
         return () => observer.unobserve(canvas);
       }
     }
-  }, [ratio, blurhashRef, blurhashRef.current?.style.aspectRatio]);
+  }, [ratio, blurhashRef, aspectRatio]);
 
   return (
     <canvas
