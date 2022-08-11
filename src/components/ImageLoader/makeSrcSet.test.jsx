@@ -368,4 +368,28 @@ describe('makeSrcSet', () => {
       expect(srcSetOptions.options).toBe(srcSetOptions2.options);
     });
   });
+
+  describe('always cleans extra properties', () => {
+    let isLocal = jest.fn(() => false);
+    test('not local', () => {
+      const src = '/foo/bar.jpg';
+      const result = makeSrcSet({ isLocal }).fromProps({ src });
+      expect(result).toEqual({});
+      expect('scales' in result);
+      expect('defaultScale' in result);
+    });
+    test('not enabled', () => {
+      const src = '/foo/bar.jpg';
+      const result = makeSrcSet({ enabled: false }).fromProps({ src });
+      expect(result).toEqual({});
+      expect('scales' in result);
+      expect('defaultScale' in result);
+    });
+    test('effective', () => {
+      const src = '/foo/bar.jpg';
+      const result = makeSrcSet({}).fromProps({ src });
+      expect('scales' in result);
+      expect('defaultScale' in result);
+    });
+  });
 });

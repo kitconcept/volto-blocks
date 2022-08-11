@@ -75,6 +75,14 @@ const makeSrcSet = (options) => {
           }
           result.defaultScale = undefined;
         }
+      } else {
+        // remove special properties in all cases
+        if (scales) {
+          result.scales = undefined;
+        }
+        if (defaultScale) {
+          result.defaultScale = undefined;
+        }
       }
       return result;
     },
