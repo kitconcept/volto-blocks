@@ -104,6 +104,28 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
     });
   });
 
+  test('no placeholder', () => {
+    const component = create(
+      <Component src="http://foo.bar/image" alt="DESCRIPTION"></Component>,
+    );
+    const loading = component.toJSON();
+    expect(loading.props.style.display).toBe('none');
+    expect(loading.children.length).toBe(1);
+    const img = loading.children[0];
+    expectComponent(img, {
+      src: 'http://foo.bar/image',
+      alt: 'DESCRIPTION',
+    });
+    act(() => {
+      img.props.onLoad();
+    });
+    const loaded = component.toJSON();
+    expectComponent(loaded, {
+      src: 'http://foo.bar/image',
+      alt: 'DESCRIPTION',
+    });
+  });
+
   describe('can update src', () => {
     test('from placeholder', () => {
       const component = create(
