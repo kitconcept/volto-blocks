@@ -3,6 +3,13 @@ import { create, act } from 'react-test-renderer';
 import AnyLoader from './AnyLoader';
 
 export const describeAnyLoader = ({ Component, expectComponent }) => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   test('shows placeholder, then shows loaded image', () => {
     const component = create(
       <Component
@@ -587,7 +594,7 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       });
       // Note we don't check what element mockGetComputedStyle was called
       // with, because the disability of react-test-lib to properly simulate refs.
-      expect(mockGetComputedStyle).toBeCalledTimes(4);
+      expect(mockGetComputedStyle).toBeCalledTimes(2);
       expect(mockBlurhashRef.current.style).toEqual({
         aspectRatio: '1.333 / 1',
       });
