@@ -81,7 +81,7 @@ const makeSrcSet = (options) => {
             ).url;
           } else {
             console.log(createMissingScaleSrc);
-            // If no scale is available, use createDefaultSrc instead.
+            // If no scale is available, use createMissingScaleSrc instead.
             result.src = createMissingScaleSrc(src, defaultScale);
           }
           result.defaultScale = undefined;
