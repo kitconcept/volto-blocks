@@ -1,7 +1,7 @@
 import BlurhashCanvas from './BlurhashCanvas';
 const config = require('@plone/volto/registry').default;
 
-const makeBlurhash = (options) => {
+const makeBlurhash = (options, blurhashRef) => {
   if (options && options.hasOwnProperty('fromProps')) {
     // If already a cooked object - just use it.
     options = options.options;
@@ -36,6 +36,7 @@ const makeBlurhash = (options) => {
         result.placeholder = (
           <BlurhashCanvas
             style={style}
+            blurhashRef={blurhashRef}
             hash={hash}
             ratio={ratio}
             punch={punch}

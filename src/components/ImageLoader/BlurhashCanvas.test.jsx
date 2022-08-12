@@ -18,6 +18,7 @@ let mockContext = {
 };
 let mockCanvas = {
   getContext: jest.fn(() => mockContext),
+  style: {},
 };
 
 let mockResizeHandler;
@@ -125,6 +126,34 @@ describe('BlurhashCanvas', () => {
       expect(mockImageData.data.set).toBeCalledWith('NEWPIXELS');
       expect(mockContext.putImageData).toBeCalledWith(mockImageData, 0, 0);
     });
+
+    test('accepts blurhashRef', () => {
+      let component;
+      mockDecodeResult = 'PIXELS';
+      const mockBlurhashRef = { current: null };
+      act(() => {
+        component = create(
+          <BlurhashCanvas
+            hash="HASH"
+            ratio={2}
+            punch={1}
+            width={32}
+            height={24}
+            blurhashRef={mockBlurhashRef}
+          />,
+          {
+            createNodeMock: (el) => mockCanvas,
+          },
+        );
+      });
+      const canvas = component.toJSON();
+      expect(canvas.type).toBe('canvas');
+      expect(canvas.children).toBe(null);
+      const props = canvas.props;
+      expect(props.height).toBe(24);
+      expect(props.width).toBe(32);
+      expect(mockBlurhashRef.current).toBe(mockCanvas);
+    });
   });
 
   describe('sets height', () => {
@@ -172,6 +201,56 @@ describe('BlurhashCanvas', () => {
       expect(canvas.type).toBe('canvas');
       expect(canvas.children).toBe(null);
       expect(canvas.props.style.height).toBe(100);
+    });
+  });
+
+  describe('ignores height with aspectRatio', () => {
+    test('initially', () => {
+      let component;
+      mockCanvas.offsetWidth = 100;
+      mockCanvas.style.aspectRatio = '2 / 1';
+      act(() => {
+        component = create(
+          <BlurhashCanvas
+            hash="HASH"
+            ratio={2}
+            punch={1}
+            width={32}
+            height={24}
+          />,
+          { createNodeMock: () => mockCanvas },
+        );
+      });
+      const canvas = component.toJSON();
+      expect(canvas.type).toBe('canvas');
+      expect(canvas.children).toBe(null);
+      expect(canvas.props.style.height).toBe('auto');
+    });
+
+    test('updates', () => {
+      let component;
+      mockCanvas.offsetWidth = 100;
+      act(() => {
+        component = create(
+          <BlurhashCanvas
+            hash="HASH"
+            ratio={2}
+            punch={1}
+            width={32}
+            height={24}
+          />,
+          { createNodeMock: () => mockCanvas },
+        );
+      });
+      mockCanvas.offsetWidth = 200;
+      mockCanvas.style.aspectRatio = '2 / 1';
+      act(() => {
+        mockResizeHandler();
+      });
+      const canvas = component.toJSON();
+      expect(canvas.type).toBe('canvas');
+      expect(canvas.children).toBe(null);
+      expect(canvas.props.style.height).toBe('auto');
     });
   });
 });
