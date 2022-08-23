@@ -124,6 +124,7 @@ function jsonExporter(req, res, next) {
         text,
         subjects,
         show_navigation_portlet,
+        preview_image_link,
       } = content;
       res.send(
         JSON.stringify(
@@ -132,6 +133,12 @@ function jsonExporter(req, res, next) {
             id,
             title,
             description,
+            ...(preview_image_link && {
+              preview_image_link: preview_image_link['@id'].replace(
+                'http://localhost:3000',
+                '',
+              ),
+            }),
             review_state,
             ...(text && { text }),
             ...(show_navigation_portlet && { show_navigation_portlet }),
