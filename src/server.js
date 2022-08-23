@@ -23,9 +23,6 @@ function jsonExporter(req, res, next) {
     .dispatch(getContent(req.path.replace('/export', '')))
     .then((content) => {
       return new Promise(function (resolve, reject) {
-        if (!content.preview_image_link) {
-          content.preview_image_link = { '@id': '' };
-        }
         if (content.blocks) {
           resolve(content);
         } else {
@@ -107,7 +104,7 @@ function jsonExporter(req, res, next) {
     })
     .then((content) => {
       return run(
-        `(. | .preview_image_link."@id") |= sub("${config.settings.apiPath}";"")`,
+        `(. | .preview_image_link? | ."@id" | strings) |= sub("${config.settings.apiPath}";"")`,
         content,
         {
           input: 'json',
@@ -140,6 +137,8 @@ function jsonExporter(req, res, next) {
         preview_image_link,
       } = content;
 
+      console.log(preview_image_link);
+
       res.send(
         JSON.stringify(
           {
@@ -148,7 +147,7 @@ function jsonExporter(req, res, next) {
             title,
             description,
             review_state,
-            ...(preview_image_link['@id'] !== '' && {
+            ...(preview_image_link && {
               preview_image_link: preview_image_link['@id'],
             }),
             ...(text && { text }),
