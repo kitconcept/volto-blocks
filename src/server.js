@@ -23,6 +23,9 @@ function jsonExporter(req, res, next) {
     .dispatch(getContent(req.path.replace('/export', '')))
     .then((content) => {
       return new Promise(function (resolve, reject) {
+        if (!content.preview_image_link) {
+          content.preview_image_link = { '@id': '' };
+        }
         if (content.blocks) {
           resolve(content);
         } else {
@@ -103,6 +106,16 @@ function jsonExporter(req, res, next) {
       );
     })
     .then((content) => {
+      return run(
+        `(. | .preview_image_link."@id") |= sub("${config.settings.apiPath}";"")`,
+        content,
+        {
+          input: 'json',
+          output: 'json',
+        },
+      );
+    })
+    .then((content) => {
       return new Promise(function (resolve, reject) {
         if (isEmpty(content.blocks)) {
           delete content.blocks;
@@ -126,6 +139,7 @@ function jsonExporter(req, res, next) {
         show_navigation_portlet,
         preview_image_link,
       } = content;
+
       res.send(
         JSON.stringify(
           {
@@ -133,13 +147,10 @@ function jsonExporter(req, res, next) {
             id,
             title,
             description,
-            ...(preview_image_link && {
-              preview_image_link: preview_image_link['@id'].replace(
-                'http://localhost:3000',
-                '',
-              ),
-            }),
             review_state,
+            ...(preview_image_link['@id'] !== '' && {
+              preview_image_link: preview_image_link['@id'],
+            }),
             ...(text && { text }),
             ...(show_navigation_portlet && { show_navigation_portlet }),
             subjects,
