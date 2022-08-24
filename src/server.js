@@ -137,8 +137,6 @@ function jsonExporter(req, res, next) {
         preview_image_link,
       } = content;
 
-      console.log(preview_image_link);
-
       res.send(
         JSON.stringify(
           {
