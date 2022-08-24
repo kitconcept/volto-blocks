@@ -2,15 +2,9 @@
 
 ## 12.1.2 (unreleased)
 
-### Breaking
-
 ### Feature
 
-- add preview_image_link to export json @ThomasKindermann
-
-### Bugfix
-
-### Internal
+- Add preview_image_link to export json @ThomasKindermann
 
 ## 12.1.1 (2022-08-19)
 
