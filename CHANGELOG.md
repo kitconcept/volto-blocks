@@ -1,5 +1,15 @@
 # Change Log
 
+## 12.2.1 (unreleased)
+
+### Breaking
+
+### Feature
+
+### Bugfix
+
+### Internal
+
 ## 12.2.0 (2022-08-24)
 
 ### Feature
