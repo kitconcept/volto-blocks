@@ -6,6 +6,8 @@
 
 ### Feature
 
+- add preview_image_link to export json @ThomasKindermann
+
 ### Bugfix
 
 ### Internal

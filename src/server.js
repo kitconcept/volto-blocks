@@ -103,6 +103,16 @@ function jsonExporter(req, res, next) {
       );
     })
     .then((content) => {
+      return run(
+        `(. | .preview_image_link? | ."@id" | strings) |= sub("${config.settings.apiPath}";"")`,
+        content,
+        {
+          input: 'json',
+          output: 'json',
+        },
+      );
+    })
+    .then((content) => {
       return new Promise(function (resolve, reject) {
         if (isEmpty(content.blocks)) {
           delete content.blocks;
@@ -124,7 +134,9 @@ function jsonExporter(req, res, next) {
         text,
         subjects,
         show_navigation_portlet,
+        preview_image_link,
       } = content;
+
       res.send(
         JSON.stringify(
           {
@@ -133,6 +145,9 @@ function jsonExporter(req, res, next) {
             title,
             description,
             review_state,
+            ...(preview_image_link && {
+              preview_image_link: preview_image_link['@id'],
+            }),
             ...(text && { text }),
             ...(show_navigation_portlet && { show_navigation_portlet }),
             subjects,
