@@ -113,6 +113,12 @@ function jsonExporter(req, res, next) {
       );
     })
     .then((content) => {
+      return run(`del(.. | .image_scales?)`, content, {
+        input: 'json',
+        output: 'json',
+      });
+    })
+    .then((content) => {
       return new Promise(function (resolve, reject) {
         if (isEmpty(content.blocks)) {
           delete content.blocks;
@@ -136,6 +142,8 @@ function jsonExporter(req, res, next) {
         show_navigation_portlet,
         preview_image_link,
       } = content;
+
+      console.log(blocks);
 
       res.send(
         JSON.stringify(

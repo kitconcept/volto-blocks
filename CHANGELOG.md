@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Remove image scales from export json @ThomasKindermann
+
 ### Internal
 
 ## 12.2.0 (2022-08-24)
