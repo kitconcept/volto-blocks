@@ -9,6 +9,7 @@
 ### Bugfix
 
 - Support lazy loading in the imageloader #277 @reebalazs
+- Allow blurhash prop to override placeholder prop in the imageloader #276 @reebalazs
 
 ### Internal
 
