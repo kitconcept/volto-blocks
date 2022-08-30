@@ -1,7 +1,7 @@
 import React from 'react';
 import { create, act } from 'react-test-renderer';
 import ImageLoader from './ImageLoader';
-import { describeAnyLoader } from './AnyLoader.test';
+import { describeAnyLoader, expectWrapper } from './AnyLoader.test';
 
 describe('ImageLoader', () => {
   describeAnyLoader({
@@ -42,11 +42,9 @@ describe('ImageLoader', () => {
     );
     const loading = component.toJSON();
     expect(loading.length).toBe(3);
-    expect(loading[0].props.style.display).toBe('none');
+    const img = expectWrapper(loading[0]);
     expect(loading[1].props.foo1).toBe('bar1');
     expect(loading[2].props.foo2).toBe('bar2');
-    expect(loading[0].children.length).toBe(1);
-    const img = loading[0].children[0];
     expectComponent(img, {
       src: 'http://foo.bar/image',
       alt: 'DESCRIPTION',
@@ -87,11 +85,9 @@ describe('ImageLoader', () => {
     );
     const loading = component.toJSON();
     expect(loading.length).toBe(3);
-    expect(loading[0].props.style.display).toBe('none');
+    const img = expectWrapper(loading[0]);
     expect(loading[1].props.foo1).toBe('bar1');
     expect(loading[2].props.foo2).toBe('bar2');
-    expect(loading[0].children.length).toBe(1);
-    const img = loading[0].children[0];
     expectComponent(img, {
       src: 'http://foo.bar/image1',
       alt: 'DESCRIPTION1',
@@ -127,7 +123,7 @@ describe('ImageLoader', () => {
     });
     const updating = component.toJSON();
     expect(updating.length).toBe(2);
-    expect(updating[0].props.style.display).toBe('none');
+    const img2 = expectWrapper(updating[0]);
     const placeholderImg = updating[1];
     expectComponent(placeholderImg, {
       src: 'http://foo.bar/image1',
@@ -137,7 +133,6 @@ describe('ImageLoader', () => {
     expect(childrenP.length).toBe(2);
     expect(childrenP[0].props.foo3).toBe('bar3');
     expect(childrenP[1].props.foo4).toBe('bar4');
-    const img2 = updating[0].children[0];
     expectComponent(img2, {
       src: 'http://foo.bar/image2',
       alt: 'DESCRIPTION2',

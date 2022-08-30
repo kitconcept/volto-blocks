@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Support lazy loading in the imageloader #277 @reebalazs
+
 ### Internal
 
 ## 12.2.0 (2022-08-24)

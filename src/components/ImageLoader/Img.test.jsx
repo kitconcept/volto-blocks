@@ -1,7 +1,7 @@
 import React from 'react';
 import { create, act } from 'react-test-renderer';
 import Img from './Img';
-import { describeAnyLoader } from './AnyLoader.test';
+import { describeAnyLoader, expectWrapper } from './AnyLoader.test';
 import config from '@plone/volto/registry';
 import makeSrcSet from './makeSrcSet';
 
@@ -72,11 +72,9 @@ describe('Img', () => {
       );
       const loading = component.toJSON();
       expect(loading.length).toBe(3);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].props.foo1).toBe('bar1');
       expect(loading[2].props.foo2).toBe('bar2');
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expectComponent(img, {
         src: 'http://foo.bar/image',
         alt: 'DESCRIPTION',
@@ -115,11 +113,9 @@ describe('Img', () => {
       );
       const loading = component.toJSON();
       expect(loading.length).toBe(3);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].props.foo1).toBe('bar1');
       expect(loading[2].props.foo2).toBe('bar2');
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expectComponent(img, {
         src: 'http://foo.bar/image',
         alt: 'DESCRIPTION',
@@ -153,11 +149,9 @@ describe('Img', () => {
       );
       const loading = component.toJSON();
       expect(loading.length).toBe(3);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].props.foo1).toBe('bar1');
       expect(loading[2].props.foo2).toBe('bar2');
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expectComponent(img, {
         src: 'http://foo.bar/image',
         alt: 'DESCRIPTION',
