@@ -2,16 +2,10 @@
 
 ## 12.2.1 (unreleased)
 
-### Breaking
-
-### Feature
-
 ### Bugfix
 
 - Support lazy loading in the imageloader #277 @reebalazs
 - Allow blurhash prop to override placeholder prop in the imageloader #276 @reebalazs
-
-### Internal
 
 ## 12.2.0 (2022-08-24)
 
