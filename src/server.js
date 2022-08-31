@@ -143,7 +143,6 @@ function jsonExporter(req, res, next) {
         preview_image_link,
       } = content;
 
-      console.log(blocks);
 
       res.send(
         JSON.stringify(
