@@ -24,11 +24,6 @@ const makeBlurhash = (options, blurhashRef) => {
       const { resolutionX, resolutionY, punch, style } = this.options;
       const result = {};
       if (blurhash) {
-        if (placeholder) {
-          throw new Error(
-            'blurhash and placeholder properties cannot both be specified',
-          );
-        }
         // Note the hash itself may contain the delimiter
         const delimiter = blurhash.indexOf(':');
         const ratio = parseFloat(blurhash.substring(0, delimiter));

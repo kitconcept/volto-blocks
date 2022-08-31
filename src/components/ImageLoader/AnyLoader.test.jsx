@@ -2,6 +2,18 @@ import React from 'react';
 import { create, act } from 'react-test-renderer';
 import AnyLoader from './AnyLoader';
 
+export const expectWrapper = (wrapper) => {
+  expect(wrapper.props.style).toEqual({ position: 'relative' });
+  expect(wrapper.children.length).toBe(1);
+  expect(wrapper.children[0].props.style).toEqual({
+    position: 'absolute',
+    visibility: 'hidden',
+  });
+  const children = wrapper.children[0].children;
+  expect(!children || children.length === 1).toBe(true);
+  return children?.[0];
+};
+
 export const describeAnyLoader = ({ Component, expectComponent }) => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -25,11 +37,9 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
     );
     const loading = component.toJSON();
     expect(loading.length).toBe(3);
-    expect(loading[0].props.style.display).toBe('none');
+    const img = expectWrapper(loading[0]);
     expect(loading[1].props.foo1).toBe('bar1');
     expect(loading[2].props.foo2).toBe('bar2');
-    expect(loading[0].children.length).toBe(1);
-    const img = loading[0].children[0];
     expectComponent(img, {
       src: 'http://foo.bar/image',
       alt: 'DESCRIPTION',
@@ -54,10 +64,8 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
     );
     const loading = component.toJSON();
     expect(loading.length).toBe(2);
-    expect(loading[0].props.style.display).toBe('none');
+    const img = expectWrapper(loading[0]);
     expect(loading[1].props.foo1).toBe('bar1');
-    expect(loading[0].children.length).toBe(1);
-    const img = loading[0].children[0];
     expectComponent(img, {
       src: 'http://foo.bar/image',
       alt: 'DESCRIPTION',
@@ -88,10 +96,10 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const placeholder = component.toJSON();
       expect(placeholder.length).toBe(3);
-      expect(placeholder[0].props.style.display).toBe('none');
+      const img = expectWrapper(placeholder[0]);
       expect(placeholder[1].props.foo1).toBe('bar1');
       expect(placeholder[2].props.foo2).toBe('bar2');
-      expect(placeholder[0].children).toBe(null);
+      expect(img).toBe(undefined);
     };
 
     test('null string', () => {
@@ -116,9 +124,8 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       <Component src="http://foo.bar/image" alt="DESCRIPTION"></Component>,
     );
     const loading = component.toJSON();
-    expect(loading.props.style.display).toBe('none');
+    const img = expectWrapper(loading);
     expect(loading.children.length).toBe(1);
-    const img = loading.children[0];
     expectComponent(img, {
       src: 'http://foo.bar/image',
       alt: 'DESCRIPTION',
@@ -149,10 +156,10 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const placeholder = component.toJSON();
       expect(placeholder.length).toBe(3);
-      expect(placeholder[0].props.style.display).toBe('none');
+      const img0 = expectWrapper(placeholder[0]);
       expect(placeholder[1].props.foo1).toBe('bar1');
       expect(placeholder[2].props.foo2).toBe('bar2');
-      expect(placeholder[0].children).toBe(null);
+      expect(img0).toBe(undefined);
       act(() => {
         component.update(
           <Component
@@ -169,11 +176,9 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       });
       const loading = component.toJSON();
       expect(loading.length).toBe(3);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].props.foo1).toBe('bar1');
       expect(loading[2].props.foo2).toBe('bar2');
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expect(img.props.src).toBe('http://foo.bar/image');
       expect(img.props.alt).toBe('DESCRIPTION');
       expect('children' in img.props).toBe(false);
@@ -203,11 +208,9 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const loading = component.toJSON();
       expect(loading.length).toBe(3);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].props.foo1).toBe('bar1');
       expect(loading[2].props.foo2).toBe('bar2');
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expect(img.type).toBe('img');
       expect(img.props.src).toBe('http://foo.bar/image1');
       expect(img.props.alt).toBe('DESCRIPTION1');
@@ -237,12 +240,10 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       });
       const updating = component.toJSON();
       expect(updating.length).toBe(2);
-      expect(updating[0].props.style.display).toBe('none');
+      const img2 = expectWrapper(updating[0]);
       expect(updating[1].type).toBe('img');
       expect(updating[1].props.src).toBe('http://foo.bar/image1');
       expect(updating[1].props.alt).toBe('DESCRIPTION1');
-      expect(updating[0].children.length).toBe(1);
-      const img2 = updating[0].children[0];
       expect(img2.props.src).toBe('http://foo.bar/image2');
       expect(img2.props.alt).toBe('DESCRIPTION2');
       expect('children' in img2.props).toBe(false);
@@ -274,10 +275,10 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const placeholder = component.toJSON();
       expect(placeholder.length).toBe(3);
-      expect(placeholder[0].props.style.display).toBe('none');
+      const img = expectWrapper(placeholder[0]);
       expect(placeholder[1].props.foo1).toBe('bar1');
       expect(placeholder[2].props.foo2).toBe('bar2');
-      expect(placeholder[0].children).toBe(null);
+      expect(img).toBe(undefined);
       act(() => {
         component.update(
           <Component
@@ -294,10 +295,10 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       });
       const placeholder2 = component.toJSON();
       expect(placeholder2.length).toBe(3);
-      expect(placeholder2[0].props.style.display).toBe('none');
+      const img2 = expectWrapper(placeholder2[0]);
       expect(placeholder2[1].props.foo1).toBe('bar1');
       expect(placeholder2[2].props.foo2).toBe('bar2');
-      expect(placeholder2[0].children).toBe(null);
+      expect(img2).toBe(undefined);
     });
 
     test('from other src', () => {
@@ -315,11 +316,9 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const loading = component.toJSON();
       expect(loading.length).toBe(3);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].props.foo1).toBe('bar1');
       expect(loading[2].props.foo2).toBe('bar2');
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expect(img.type).toBe('img');
       expect(img.props.src).toBe('http://foo.bar/image1');
       expect(img.props.alt).toBe('DESCRIPTION1');
@@ -371,10 +370,10 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const placeholder = component.toJSON();
       expect(placeholder.length).toBe(3);
-      expect(placeholder[0].props.style.display).toBe('none');
+      const img = expectWrapper(placeholder[0]);
       expect(placeholder[1].props.foo1).toBe('bar1');
       expect(placeholder[2].props.foo2).toBe('bar2');
-      expect(placeholder[0].children).toBe(null);
+      expect(img).toBe(undefined);
       act(() => {
         component.update(
           <Component
@@ -391,10 +390,10 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       });
       const placeholder2 = component.toJSON();
       expect(placeholder2.length).toBe(3);
-      expect(placeholder2[0].props.style.display).toBe('none');
+      const img2 = expectWrapper(placeholder2[0]);
       expect(placeholder2[1].props.foo3).toBe('bar3');
       expect(placeholder2[2].props.foo4).toBe('bar4');
-      expect(placeholder2[0].children).toBe(null);
+      expect(img2).toBe(undefined);
     });
 
     test('from other src, no change', () => {
@@ -412,11 +411,9 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const loading = component.toJSON();
       expect(loading.length).toBe(3);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].props.foo1).toBe('bar1');
       expect(loading[2].props.foo2).toBe('bar2');
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expect(img.type).toBe('img');
       expect(img.props.src).toBe('http://foo.bar/image');
       expect(img.props.alt).toBe('DESCRIPTION');
@@ -484,11 +481,9 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const loading = component.toJSON();
       expect(loading.length).toBe(2);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].type).toBe('div');
       expect(loading[1].props.blurhashRef).toBe(mockBlurhashRef);
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expectComponent(img, {
         src: 'http://foo.bar/image',
         alt: 'DESCRIPTION',
@@ -533,11 +528,9 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const loading = component.toJSON();
       expect(loading.length).toBe(2);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].type).toBe('div');
       expect(loading[1].props.blurhashRef).toBe(mockBlurhashRef);
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expectComponent(img, {
         src: 'http://foo.bar/image',
         alt: 'DESCRIPTION',
@@ -574,11 +567,9 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
       );
       const loading = component.toJSON();
       expect(loading.length).toBe(2);
-      expect(loading[0].props.style.display).toBe('none');
+      const img = expectWrapper(loading[0]);
       expect(loading[1].type).toBe('div');
       expect(loading[1].props.blurhashRef).toBe(mockBlurhashRef);
-      expect(loading[0].children.length).toBe(1);
-      const img = loading[0].children[0];
       expectComponent(img, {
         src: 'http://foo.bar/image',
         alt: 'DESCRIPTION',

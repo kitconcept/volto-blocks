@@ -64,10 +64,12 @@ export default (props) => {
       {isLoaded ? (
         createComponent(imgProps, children)
       ) : (
-        <div style={{ display: 'none' }}>
-          {imgProps.src
-            ? createComponent({ ...imgProps, onLoad, ref }, children)
-            : null}
+        <div style={{ position: 'relative' }}>
+          <div style={{ position: 'absolute', visibility: 'hidden' }}>
+            {imgProps.src
+              ? createComponent({ ...imgProps, onLoad, ref }, children)
+              : null}
+          </div>
         </div>
       )}
       {isLoaded

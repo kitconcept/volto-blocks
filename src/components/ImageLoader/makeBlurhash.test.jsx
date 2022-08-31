@@ -50,14 +50,21 @@ describe('makeBlurhash', () => {
       expect(result.hasOwnProperty('blurhash')).toBe(false);
       expect(result.hasOwnProperty('placeholder')).toBe(false);
     });
-    test('placeholder override throws error', () => {
-      const o = makeBlurhash();
-      expect(() =>
-        o.fromProps({
-          blurhash: '1:BLURHASH',
-          placeholder: <img alt="ALT" />,
-        }),
-      ).toThrow('blurhash and placeholder properties cannot both be specified');
+    test('blurhash overrides placeholder', () => {
+      const result = makeBlurhash().fromProps({
+        blurhash: '1:BLURHASH',
+        placeholder: <img alt="ALT" />,
+      });
+      expect(result.hasOwnProperty('blurhash')).toBe(true);
+      expect(result.blurhash).toBe(undefined);
+      expectProps(result.placeholder, 'div', {
+        hash: 'BLURHASH',
+        ratio: 1,
+        punch: 1,
+        width: 32,
+        height: 32,
+        style: {},
+      });
     });
   });
 
