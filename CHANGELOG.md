@@ -2,15 +2,9 @@
 
 ## 12.2.2 (unreleased)
 
-### Breaking
-
-### Feature
-
 ### Bugfix
 
 - Remove image scales from export json @ThomasKindermann
-
-### Internal
 
 ## 12.2.1 (2022-08-31)
 
