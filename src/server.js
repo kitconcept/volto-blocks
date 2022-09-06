@@ -44,16 +44,6 @@ function jsonExporter(req, res, next) {
     })
     .then((content) => {
       return run(
-        `. | .blocks[].hrefList[]?.href |= sub("${config.settings.apiPath}";"")`,
-        content,
-        {
-          input: 'json',
-          output: 'json',
-        },
-      );
-    })
-    .then((content) => {
-      return run(
         `(.. | .href? | strings) |= sub("${config.settings.apiPath}";"")`,
         content,
         {
