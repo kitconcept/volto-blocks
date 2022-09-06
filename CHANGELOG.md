@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix export of hrefList with href that is not a string @davisagli
+
 ### Internal
 
 ## 12.2.2 (2022-09-01)
