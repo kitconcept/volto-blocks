@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Blurhash loading fixes, fix aspect ratio #276 @reebalazs
+
 ### Internal
 
 ## 12.2.3 (2022-09-06)

@@ -20,8 +20,13 @@ const makeBlurhash = (options, blurhashRef) => {
   }
   return {
     options,
-    fromProps({ placeholder, blurhash }) {
-      const { resolutionX, resolutionY, punch, style } = this.options;
+    fromProps({ placeholder, blurhash, className, style }) {
+      const {
+        resolutionX,
+        resolutionY,
+        punch,
+        style: canvasStyle,
+      } = this.options;
       const result = {};
       if (blurhash) {
         // Note the hash itself may contain the delimiter
@@ -30,7 +35,9 @@ const makeBlurhash = (options, blurhashRef) => {
         const hash = blurhash.substring(delimiter + 1);
         result.placeholder = (
           <BlurhashCanvas
-            style={style}
+            imgClass={className}
+            imgStyle={style}
+            style={canvasStyle}
             blurhashRef={blurhashRef}
             hash={hash}
             ratio={ratio}

@@ -4872,6 +4872,11 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
+fast-blurhash@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/fast-blurhash/-/fast-blurhash-1.0.1.tgz#1f93c8e4b79010722089a7fb14f360424ce27da4"
+  integrity sha512-j+2urGVaM8wg5MBy+KBsi40hzxsUurJB0M89cMKkG/4rB3eG1o1uQPjOmVE+95et/ZmvGczejePFTUzMwdPH3w==
+
 fast-deep-equal@^3.1.1:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
@@ -10047,11 +10052,6 @@ rc@^1.2.8:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
-
-react-blurhash@0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/react-blurhash/-/react-blurhash-0.1.3.tgz#735f28f8f07fb358d7efe7e7e6dc65a7272bf89e"
-  integrity sha512-Q9lqbXg92NU6/2DoIl/cBM8YWL+Z4X66OiG4aT9ozOgjBwx104LHFCH5stf6aF+s0Q9Wf310Ul+dG+VXJltmPg==
 
 react-color@2.19.3:
   version "2.19.3"
