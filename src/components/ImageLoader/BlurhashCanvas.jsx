@@ -32,8 +32,6 @@ export default ({
 
   const aspectRatio = blurhashRef.current?.style.aspectRatio;
   useEffect(() => {
-    // require('./fast-blurhash');
-    // return;
     const canvas = blurhashRef.current;
     if (canvas) {
       if (canvas?.style.aspectRatio) {

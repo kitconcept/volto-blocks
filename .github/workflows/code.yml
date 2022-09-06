@@ -48,6 +48,9 @@ jobs:
       - name: Setup addon testing environment
         run: npx -p @plone/scripts addon clone https://github.com/${{env.GIT_USER}}/${{env.GIT_NAME}}.git --branch ${{ steps.extract_branch.outputs.branch }} --canary
 
+      - name: Provide ignores for eslint and prettier
+        run: cd addon-testing-project && echo fast-blurhash.min.js > .eslintignore && echo fast-blurhash.min.js > .prettierignore
+
       # ESlint
       - name: ESlint
         run: cd addon-testing-project && yarn && yarn lint:ci

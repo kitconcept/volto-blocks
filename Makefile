@@ -50,3 +50,7 @@ stylelint: ## Run unit test suite for the addon
 .PHONY: test-acceptance-server
 test-acceptance-server: ## Run test acceptance server
 	docker run -i --rm --name=plone -e ZSERVER_HOST=0.0.0.0 -e ZSERVER_PORT=55001 -p 55001:55001 -e SITE=plone -e APPLY_PROFILES=plone.app.contenttypes:plone-content,plone.restapi:default,kitconcept.volto:default-homepage -e CONFIGURE_PACKAGES=plone.app.contenttypes,plone.restapi,kitconcept.volto,kitconcept.volto.cors -e ADDONS='plone.app.robotframework plone.app.contenttypes plone.restapi kitconcept.volto' plone ./bin/robot-server plone.app.robotframework.testing.PLONE_ROBOT_TESTING
+
+.PHONY: build-fast-blurhash
+build-fast-blurhash: ## Build the code to be embedded into the html
+	NODE_ENV=production yarn webpack --config ./src/components/ImageLoader/webpack.fast-blurhash.config.js
