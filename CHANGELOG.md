@@ -10,6 +10,8 @@
 
 ### Internal
 
+- Fix tests after blurhash loading fixes #276 @reebalazs
+
 ## 12.3.0 (2022-09-08)
 
 ### Feature

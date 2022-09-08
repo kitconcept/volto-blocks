@@ -30,7 +30,7 @@ let mockResizeObserver = jest.fn((handler) => {
   };
 });
 
-xdescribe('BlurhashCanvas', () => {
+describe('BlurhashCanvas', () => {
   let origResizeObserver;
   beforeEach(() => {
     jest.clearAllMocks();
@@ -206,7 +206,7 @@ xdescribe('BlurhashCanvas', () => {
         );
       });
       const canvas = component.toJSON();
-      expect(canvas.type).toBe('img');
+      expect(canvas.type).toBe('canvas');
       expect(canvas.children).toBe(null);
       expect(decode).toBeCalledWith('HASH', 32, 24, 1);
       expect(mockImageData.data.set).toBeCalledWith('PIXELS');
@@ -241,7 +241,7 @@ xdescribe('BlurhashCanvas', () => {
         );
       });
       const canvas = component.toJSON();
-      expect(canvas.type).toBe('img');
+      expect(canvas.type).toBe('canvas');
       expect(canvas.children).toBe(null);
       const props = canvas.props;
       expect(props.height).toBe(24);
@@ -271,7 +271,7 @@ xdescribe('BlurhashCanvas', () => {
         );
       });
       const canvas = component.toJSON();
-      expect(canvas.type).toBe('img');
+      expect(canvas.type).toBe('canvas');
       expect(canvas.children).toBe(null);
       const props = canvas.props;
       expect(props.height).toBe(24);
