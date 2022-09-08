@@ -66,6 +66,28 @@ describe('makeBlurhash', () => {
         style: {},
       });
     });
+
+    test('with props className, style', () => {
+      const result = makeBlurhash().fromProps({
+        blurhash: '1:BLURHASH',
+        className: 'CLASSNAME',
+        style: { width: '100%' },
+      });
+      expectProps(result.placeholder, 'div', {
+        hash: 'BLURHASH',
+        ratio: 1,
+        punch: 1,
+        width: 32,
+        height: 32,
+        style: {},
+        imgClass: 'CLASSNAME',
+        imgStyle: {
+          width: '100%',
+        },
+      });
+      expect(result.hasOwnProperty('blurhash')).toBe(true);
+      expect(result.blurhash).toBe(undefined);
+    });
   });
 
   describe('options', () => {

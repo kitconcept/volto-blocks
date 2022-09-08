@@ -89,53 +89,59 @@ Cypress.Commands.add(
     if (
       ['Document', 'Folder', 'News Item', 'CMSFolder'].includes(contentType)
     ) {
-      return cy
-        .request({
-          method: 'POST',
-          url: `${api_url}/${path}`,
-          headers: {
-            Accept: 'application/json',
-          },
-          auth: auth,
-          body: {
-            '@type': contentType,
-            id: contentId,
-            title: contentTitle,
-            blocks: {
-              'd3f1c443-583f-4e8e-a682-3bf25752a300': { '@type': 'title' },
-              '7624cf59-05d0-4055-8f55-5fd6597d84b0': { '@type': 'slate' },
+      return (
+        cy
+          .request({
+            method: 'POST',
+            url: `${api_url}/${path}`,
+            headers: {
+              Accept: 'application/json',
             },
-            blocks_layout: {
-              items: [
-                'd3f1c443-583f-4e8e-a682-3bf25752a300',
-                '7624cf59-05d0-4055-8f55-5fd6597d84b0',
-              ],
+            auth: auth,
+            body: {
+              '@type': contentType,
+              id: contentId,
+              title: contentTitle,
+              blocks: {
+                'd3f1c443-583f-4e8e-a682-3bf25752a300': { '@type': 'title' },
+                '7624cf59-05d0-4055-8f55-5fd6597d84b0': { '@type': 'slate' },
+              },
+              blocks_layout: {
+                items: [
+                  'd3f1c443-583f-4e8e-a682-3bf25752a300',
+                  '7624cf59-05d0-4055-8f55-5fd6597d84b0',
+                ],
+              },
+              allow_discussion: allow_discussion,
             },
-            allow_discussion: allow_discussion,
-          },
-        })
-        .then(() => console.log(`${contentType} created`));
+          })
+          // eslint-disable-next-line no-console
+          .then(() => console.log(`${contentType} created`))
+      );
       // .catch(() => {
       //   cy.exec('yarn cy:test:fixture:teardown');
       //   cy.exec('yarn cy:test:fixture:setup');
       // });
     } else {
-      return cy
-        .request({
-          method: 'POST',
-          url: `${api_url}/${path}`,
-          headers: {
-            Accept: 'application/json',
-          },
-          auth: auth,
-          body: {
-            '@type': contentType,
-            id: contentId,
-            title: contentTitle,
-            allow_discussion: allow_discussion,
-          },
-        })
-        .then(() => console.log(`${contentType} created`));
+      return (
+        cy
+          .request({
+            method: 'POST',
+            url: `${api_url}/${path}`,
+            headers: {
+              Accept: 'application/json',
+            },
+            auth: auth,
+            body: {
+              '@type': contentType,
+              id: contentId,
+              title: contentTitle,
+              allow_discussion: allow_discussion,
+            },
+          })
+          // eslint-disable-next-line no-console
+          .then(() => console.log(`${contentType} created`))
+      );
     }
   },
 );
@@ -314,7 +320,6 @@ function getTextNode(el, match) {
     return walk.nextNode();
   }
 
-  const nodes = [];
   let node;
   while ((node = walk.nextNode())) {
     if (node.wholeText.includes(match)) {
