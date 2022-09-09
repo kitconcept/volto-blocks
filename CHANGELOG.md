@@ -2,12 +2,6 @@
 
 ## 12.3.1 (unreleased)
 
-### Breaking
-
-### Feature
-
-### Bugfix
-
 ### Internal
 
 - Fix tests after blurhash loading fixes #276 @reebalazs
