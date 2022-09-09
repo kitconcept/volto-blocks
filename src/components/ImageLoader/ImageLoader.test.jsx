@@ -14,6 +14,9 @@ describe('ImageLoader', () => {
       expect('children' in img.props).toBe(false);
       expect(img.children).toBe(null);
     },
+    // Skip tests that only make sense with a component
+    // that reacts on the extra placeholder styles
+    runPlaceholderExtraStyleTests: false,
   });
 
   const expectComponent = (img, props) => {

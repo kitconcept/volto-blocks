@@ -12,15 +12,15 @@ export default ({
   height,
   imgClass,
   imgStyle,
-  blurhashRef,
+  imgWidth,
+  imgHeight,
+  placeholderExtraStyleRef,
 }) => {
-  if (!blurhashRef) {
-    blurhashRef = useRef();
-  }
+  const ref = useRef();
   const [styleHeight, setStyleHeight] = useState();
 
   useEffect(() => {
-    const canvas = blurhashRef.current;
+    const canvas = ref.current;
     if (canvas && styleHeight) {
       const pixels = decode(hash, width, height, punch);
       const ctx = canvas.getContext('2d');
@@ -28,13 +28,14 @@ export default ({
       imageData.data.set(pixels);
       ctx.putImageData(imageData, 0, 0);
     }
-  }, [hash, width, height, punch, blurhashRef, styleHeight]);
+  }, [hash, width, height, punch, styleHeight]);
 
-  const aspectRatio = blurhashRef.current?.style.aspectRatio;
+  //  const aspectRatio = blurhashRef.current?.style.aspectRatio;
+  const aspectRatio = placeholderExtraStyleRef?.current?.aspectRatio;
   useEffect(() => {
-    const canvas = blurhashRef.current;
+    const canvas = ref.current;
     if (canvas) {
-      if (canvas?.style.aspectRatio) {
+      if (placeholderExtraStyleRef?.current?.aspectRatio) {
         setStyleHeight('auto');
       } else {
         const adjustHeight = () => setStyleHeight(canvas.offsetWidth / ratio);
@@ -44,7 +45,7 @@ export default ({
         return () => observer.unobserve(canvas);
       }
     }
-  }, [ratio, blurhashRef, aspectRatio]);
+  }, [ratio, aspectRatio, placeholderExtraStyleRef]);
 
   // We only create a canvas after we have processed the original image's
   // computed style. Until then, we render a blank image to make sure
@@ -52,17 +53,23 @@ export default ({
   // image lets us mimic the original image's computed css style.
   return styleHeight ? (
     <canvas
-      style={{ ...style, height: styleHeight }}
+      style={{
+        ...style,
+        ...placeholderExtraStyleRef?.current,
+        height: styleHeight,
+      }}
       height={height}
       width={width}
-      ref={blurhashRef}
+      ref={ref}
     />
   ) : (
     <img
       src={BLANK}
       alt=""
       className={imgClass ? imgClass + ' blurhash' : 'blurhash'}
-      style={imgStyle}
+      style={{ ...imgStyle, ...placeholderExtraStyleRef?.current }}
+      width={imgWidth}
+      height={imgHeight}
       data={JSON.stringify({
         hash,
         punch,
@@ -71,7 +78,7 @@ export default ({
         height,
         canvasStyle: style,
       })}
-      ref={blurhashRef}
+      ref={ref}
     />
   );
 };

@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix image loading without placeholder or blurhash, fixes jump #276 @reebalazs
+
 ### Internal
 
 - Fix tests after blurhash loading fixes #276 @reebalazs

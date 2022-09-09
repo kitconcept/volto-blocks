@@ -14,7 +14,11 @@ export const expectWrapper = (wrapper) => {
   return children?.[0];
 };
 
-export const describeAnyLoader = ({ Component, expectComponent }) => {
+export const describeAnyLoader = ({
+  Component,
+  expectComponent,
+  runPlaceholderExtraStyleTests = true,
+}) => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -119,24 +123,24 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
     });
   });
 
-  test('no placeholder', () => {
-    const component = create(
-      <Component src="http://foo.bar/image" alt="DESCRIPTION"></Component>,
-    );
-    const loading = component.toJSON();
-    const img = expectWrapper(loading);
-    expect(loading.children.length).toBe(1);
-    expectComponent(img, {
-      src: 'http://foo.bar/image',
-      alt: 'DESCRIPTION',
+  describe('no placeholder', () => {
+    test('normal', () => {
+      const component = create(
+        <Component src="http://foo.bar/image" alt="DESCRIPTION"></Component>,
+      );
+      const img = component.toJSON();
+      expectComponent(img, {
+        src: 'http://foo.bar/image',
+        alt: 'DESCRIPTION',
+      });
     });
-    act(() => {
-      img.props.onLoad();
-    });
-    const loaded = component.toJSON();
-    expectComponent(loaded, {
-      src: 'http://foo.bar/image',
-      alt: 'DESCRIPTION',
+
+    test('without src renders null ', () => {
+      const component = create(
+        <Component src="" alt="DESCRIPTION"></Component>,
+      );
+      const img = component.toJSON();
+      expect(img).toBe(null);
     });
   });
 
@@ -449,148 +453,163 @@ export const describeAnyLoader = ({ Component, expectComponent }) => {
     });
   });
 
-  describe('placeholder has blurhashRef', () => {
-    let origGetComputedStyle;
-    const mockGetComputedStyle = jest.fn(() => ({
-      aspectRatio: '2 / 1',
-      objectFit: 'cover',
-      FOO: 'BAR',
-    }));
-    beforeEach(() => {
-      origGetComputedStyle = window.getComputedStyle;
-      window.getComputedStyle = mockGetComputedStyle;
-    });
-    afterEach(() => {
-      window.getComputedStyle = origGetComputedStyle;
-    });
-
-    test('updates aspectRatio and objectFit from styles', () => {
-      const mockBlurhashRef = { current: null };
-      const component = create(
-        <Component
-          src="http://foo.bar/image"
-          alt="DESCRIPTION"
-          // Note style should be here or on the parent of this element,
-          // but we mock it via getComputedStyle.
-          // style={{
-          //   aspectRatio: '2 / 1',
-          //   objectFit: 'cover',
-          // }}
-          placeholder={<div blurhashRef={mockBlurhashRef} />}
-        ></Component>,
-      );
-      const loading = component.toJSON();
-      expect(loading.length).toBe(2);
-      const img = expectWrapper(loading[0]);
-      expect(loading[1].type).toBe('div');
-      expect(loading[1].props.blurhashRef).toBe(mockBlurhashRef);
-      expectComponent(img, {
-        src: 'http://foo.bar/image',
-        alt: 'DESCRIPTION',
-      });
-      act(() => {
-        mockBlurhashRef.current = { style: {} };
-        img.props.onLoad();
-      });
-      const loaded = component.toJSON();
-      expectComponent(loaded, {
-        src: 'http://foo.bar/image',
-        alt: 'DESCRIPTION',
-      });
-      // Note we don't check what element mockGetComputedStyle was called
-      // with, because the disability of react-test-lib to properly simulate refs.
-      expect(mockGetComputedStyle).toBeCalledTimes(2);
-      expect(mockBlurhashRef.current.style).toEqual({
-        aspectRatio: '2 / 1',
-        objectFit: 'cover',
-      });
-    });
-    test('skips update if aspectRatio is auto', () => {
+  runPlaceholderExtraStyleTests &&
+    describe('placeholder has placeholderExtraStyleRef', () => {
+      let origGetComputedStyle;
       const mockGetComputedStyle = jest.fn(() => ({
-        aspectRatio: 'auto',
+        aspectRatio: '2 / 1',
         objectFit: 'cover',
         FOO: 'BAR',
       }));
-      window.getComputedStyle = mockGetComputedStyle;
-      const mockBlurhashRef = { current: null };
-      const component = create(
-        <Component
-          src="http://foo.bar/image"
-          alt="DESCRIPTION"
-          // Note style should be here or on the parent of this element,
-          // but we mock it via getComputedStyle.
-          // style={{
-          //   aspectRatio: 'auto',
-          //   objectFit: 'cover',
-          // }}
-          placeholder={<div blurhashRef={mockBlurhashRef} />}
-        ></Component>,
-      );
-      const loading = component.toJSON();
-      expect(loading.length).toBe(2);
-      const img = expectWrapper(loading[0]);
-      expect(loading[1].type).toBe('div');
-      expect(loading[1].props.blurhashRef).toBe(mockBlurhashRef);
-      expectComponent(img, {
-        src: 'http://foo.bar/image',
-        alt: 'DESCRIPTION',
+      beforeEach(() => {
+        origGetComputedStyle = window.getComputedStyle;
+        window.getComputedStyle = mockGetComputedStyle;
       });
-      act(() => {
-        mockBlurhashRef.current = { style: {} };
-        img.props.onLoad();
+      afterEach(() => {
+        window.getComputedStyle = origGetComputedStyle;
       });
-      const loaded = component.toJSON();
-      expectComponent(loaded, {
-        src: 'http://foo.bar/image',
-        alt: 'DESCRIPTION',
-      });
-      // Note we don't check what element mockGetComputedStyle was called
-      // with, because the disability of react-test-lib to properly simulate refs.
-      expect(mockGetComputedStyle).toBeCalledTimes(2);
-      expect(mockBlurhashRef.current.style).toEqual({});
-    });
 
-    test('skips update if placeholder already has aspectRatio', () => {
-      const mockBlurhashRef = { current: null };
-      const component = create(
-        <Component
-          src="http://foo.bar/image"
-          alt="DESCRIPTION"
-          // Note style should be here or on the parent of this element,
-          // but we mock it via getComputedStyle.
-          // style={{
-          //   aspectRatio: '2 / 1',
-          //   objectFit: 'cover',
-          // }}
-          placeholder={<div blurhashRef={mockBlurhashRef} />}
-        ></Component>,
-      );
-      const loading = component.toJSON();
-      expect(loading.length).toBe(2);
-      const img = expectWrapper(loading[0]);
-      expect(loading[1].type).toBe('div');
-      expect(loading[1].props.blurhashRef).toBe(mockBlurhashRef);
-      expectComponent(img, {
-        src: 'http://foo.bar/image',
-        alt: 'DESCRIPTION',
+      test('updates aspectRatio and objectFit from styles', () => {
+        const mockPlaceholderExtraStyleRef = { current: {} };
+        const component = create(
+          <Component
+            src="http://foo.bar/image"
+            alt="DESCRIPTION"
+            // Note style should be here or on the parent of this element,
+            // but we mock it via getComputedStyle.
+            // style={{
+            //   aspectRatio: '2 / 1',
+            //   objectFit: 'cover',
+            // }}
+            placeholder={
+              <div placeholderExtraStyleRef={mockPlaceholderExtraStyleRef} />
+            }
+          ></Component>,
+          {
+            createNodeMock: (el) => el,
+          },
+        );
+        const loading = component.toJSON();
+        expect(loading.length).toBe(2);
+        const img = expectWrapper(loading[0]);
+        expect(loading[1].type).toBe('div');
+        expect(loading[1].props.placeholderExtraStyleRef).toBe(
+          mockPlaceholderExtraStyleRef,
+        );
+        expectComponent(img, {
+          src: 'http://foo.bar/image',
+          alt: 'DESCRIPTION',
+        });
+        act(() => {
+          img.props.onLoad();
+        });
+        const loaded = component.toJSON();
+        expectComponent(loaded, {
+          src: 'http://foo.bar/image',
+          alt: 'DESCRIPTION',
+        });
+        // Note we don't check what element mockGetComputedStyle was called
+        // with, because the disability of react-test-lib to properly simulate refs.
+        expect(mockGetComputedStyle).toBeCalledTimes(1);
+        expect(mockPlaceholderExtraStyleRef.current).toEqual({
+          aspectRatio: '2 / 1',
+          objectFit: 'cover',
+        });
       });
-      act(() => {
-        mockBlurhashRef.current = { style: { aspectRatio: '1.333 / 1' } };
-        img.props.onLoad();
+
+      test('skips update if aspectRatio is auto', () => {
+        const mockGetComputedStyle = jest.fn(() => ({
+          aspectRatio: 'auto',
+          objectFit: 'cover',
+          FOO: 'BAR',
+        }));
+        window.getComputedStyle = mockGetComputedStyle;
+        const mockPlaceholderExtraStyleRef = { current: {} };
+        const component = create(
+          <Component
+            src="http://foo.bar/image"
+            alt="DESCRIPTION"
+            // Note style should be here or on the parent of this element,
+            // but we mock it via getComputedStyle.
+            // style={{
+            //   aspectRatio: 'auto',
+            //   objectFit: 'cover',
+            // }}
+            placeholder={
+              <div placeholderExtraStyleRef={mockPlaceholderExtraStyleRef} />
+            }
+          ></Component>,
+        );
+        const loading = component.toJSON();
+        expect(loading.length).toBe(2);
+        const img = expectWrapper(loading[0]);
+        expect(loading[1].type).toBe('div');
+        expect(loading[1].props.placeholderExtraStyleRef).toBe(
+          mockPlaceholderExtraStyleRef,
+        );
+        expectComponent(img, {
+          src: 'http://foo.bar/image',
+          alt: 'DESCRIPTION',
+        });
+        act(() => {
+          img.props.onLoad();
+        });
+        const loaded = component.toJSON();
+        expectComponent(loaded, {
+          src: 'http://foo.bar/image',
+          alt: 'DESCRIPTION',
+        });
+        // Note we don't check what element mockGetComputedStyle was called
+        // with, because the disability of react-test-lib to properly simulate refs.
+        expect(mockGetComputedStyle).toBeCalledTimes(0);
+        expect(mockPlaceholderExtraStyleRef.current).toEqual({});
       });
-      const loaded = component.toJSON();
-      expectComponent(loaded, {
-        src: 'http://foo.bar/image',
-        alt: 'DESCRIPTION',
-      });
-      // Note we don't check what element mockGetComputedStyle was called
-      // with, because the disability of react-test-lib to properly simulate refs.
-      expect(mockGetComputedStyle).toBeCalledTimes(2);
-      expect(mockBlurhashRef.current.style).toEqual({
-        aspectRatio: '1.333 / 1',
+
+      test('skips update if placeholder already has aspectRatio', () => {
+        const mockPlaceholderExtraStyleRef = { current: {} };
+        const component = create(
+          <Component
+            src="http://foo.bar/image"
+            alt="DESCRIPTION"
+            // Note style should be here or on the parent of this element,
+            // but we mock it via getComputedStyle.
+            // style={{
+            //   aspectRatio: '2 / 1',
+            //   objectFit: 'cover',
+            // }}
+            placeholder={
+              <div placeholderExtraStyleRef={mockPlaceholderExtraStyleRef} />
+            }
+          ></Component>,
+        );
+        const loading = component.toJSON();
+        expect(loading.length).toBe(2);
+        const img = expectWrapper(loading[0]);
+        expect(loading[1].type).toBe('div');
+        expect(loading[1].props.placeholderExtraStyleRef).toBe(
+          mockPlaceholderExtraStyleRef,
+        );
+        expectComponent(img, {
+          src: 'http://foo.bar/image',
+          alt: 'DESCRIPTION',
+        });
+        act(() => {
+          mockPlaceholderExtraStyleRef.current = { aspectRatio: '1.333 / 1' };
+          img.props.onLoad();
+        });
+        const loaded = component.toJSON();
+        expectComponent(loaded, {
+          src: 'http://foo.bar/image',
+          alt: 'DESCRIPTION',
+        });
+        // Note we don't check what element mockGetComputedStyle was called
+        // with, because the disability of react-test-lib to properly simulate refs.
+        expect(mockGetComputedStyle).toBeCalledTimes(0);
+        expect(mockPlaceholderExtraStyleRef.current).toEqual({
+          aspectRatio: '1.333 / 1',
+        });
       });
     });
-  });
 };
 
 describe('AnyLoader', () => {

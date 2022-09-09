@@ -1,7 +1,7 @@
 import BlurhashCanvas from './BlurhashCanvas';
 const config = require('@plone/volto/registry').default;
 
-const makeBlurhash = (options, blurhashRef) => {
+const makeBlurhash = (options, placeholderExtraStyleRef) => {
   if (options && options.hasOwnProperty('fromProps')) {
     // If already a cooked object - just use it.
     options = options.options;
@@ -20,7 +20,7 @@ const makeBlurhash = (options, blurhashRef) => {
   }
   return {
     options,
-    fromProps({ placeholder, blurhash, className, style }) {
+    fromProps({ placeholder, blurhash, className, style, width, height }) {
       const {
         resolutionX,
         resolutionY,
@@ -37,8 +37,10 @@ const makeBlurhash = (options, blurhashRef) => {
           <BlurhashCanvas
             imgClass={className}
             imgStyle={style}
+            imgWidth={width}
+            imgHeight={height}
             style={canvasStyle}
-            blurhashRef={blurhashRef}
+            placeholderExtraStyleRef={placeholderExtraStyleRef}
             hash={hash}
             ratio={ratio}
             punch={punch}
