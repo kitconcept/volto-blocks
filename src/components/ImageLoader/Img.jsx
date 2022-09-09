@@ -353,10 +353,10 @@ Further generalization on the resizing strategy would be possible, once the need
  */
 
 export default ({ blurhashOptions, ...props }) => {
-  const blurhashRef = useRef();
+  const placeholderExtraStyleRef = useRef({});
   props = extendProps(
     props,
-    makeBlurhash(blurhashOptions, blurhashRef).fromProps(props),
+    makeBlurhash(blurhashOptions, placeholderExtraStyleRef).fromProps(props),
   );
   return AnyLoader({
     ...props,

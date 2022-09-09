@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix image loading without placeholder or blurhash, fixes jump #276 @reebalazs
+
 ### Internal
 
 ## 12.3.1 (2022-09-09)

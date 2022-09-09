@@ -90,6 +90,26 @@ describe('makeBlurhash', () => {
     });
   });
 
+  test('with props width, height', () => {
+    const result = makeBlurhash().fromProps({
+      blurhash: '1:BLURHASH',
+      width: '1440',
+      height: '810',
+    });
+    expectProps(result.placeholder, 'div', {
+      hash: 'BLURHASH',
+      ratio: 1,
+      punch: 1,
+      width: 32,
+      height: 32,
+      style: {},
+      imgWidth: '1440',
+      imgHeight: '810',
+    });
+    expect(result.hasOwnProperty('blurhash')).toBe(true);
+    expect(result.blurhash).toBe(undefined);
+  });
+
   describe('options', () => {
     test('resolutionX', () => {
       const result = makeBlurhash({ resolutionX: 64 }).fromProps({
@@ -155,10 +175,10 @@ describe('makeBlurhash', () => {
     });
   });
 
-  describe('blurhashRef', () => {
+  describe('placeholderExtraStyleRef', () => {
     test('passed to component', () => {
-      const mockBlurhashRef = { current: null };
-      const result = makeBlurhash({}, mockBlurhashRef).fromProps({
+      const mockPlaceholderExtraStyleRef = { current: null };
+      const result = makeBlurhash({}, mockPlaceholderExtraStyleRef).fromProps({
         blurhash: '1:BLURHASH',
       });
       expectProps(result.placeholder, 'div', {
@@ -168,9 +188,11 @@ describe('makeBlurhash', () => {
         width: 32,
         height: 32,
         style: {},
-        blurhashRef: mockBlurhashRef,
+        placeholderExtraStyleRef: mockPlaceholderExtraStyleRef,
       });
-      expect(result.placeholder.props.blurhashRef).toBe(mockBlurhashRef);
+      expect(result.placeholder.props.placeholderExtraStyleRef).toBe(
+        mockPlaceholderExtraStyleRef,
+      );
       expect(result.hasOwnProperty('blurhash')).toBe(true);
       expect(result.blurhash).toBe(undefined);
     });

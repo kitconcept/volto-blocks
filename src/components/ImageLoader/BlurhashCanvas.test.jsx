@@ -70,7 +70,7 @@ describe('BlurhashCanvas', () => {
         expect(props.data).toEqual(
           '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":24}',
         );
-        expect(props.style).toBe(undefined);
+        expect(props.style).toEqual({});
       });
 
       test('with imgClass, imgStyle', () => {
@@ -103,6 +103,36 @@ describe('BlurhashCanvas', () => {
           '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":24}',
         );
       });
+    });
+
+    test('with imgWidth, imgHeight', () => {
+      let component;
+      mockDecodeResult = 'PIXELS';
+      act(() => {
+        component = create(
+          <BlurhashCanvas
+            hash="HASH"
+            ratio={2}
+            punch={1}
+            width={32}
+            height={24}
+            imgWidth="1440"
+            imgHeight="810"
+          />,
+          // There is no ref on the server.
+        );
+      });
+      const img = component.toJSON();
+      expect(img.type).toBe('img');
+      expect(img.children).toBe(null);
+      const props = img.props;
+      expect(typeof props.src).toBe('string');
+      expect(props.alt).toBe('');
+      expect(props.width).toBe('1440');
+      expect(props.height).toBe('810');
+      expect(props.data).toEqual(
+        '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":24}',
+      );
     });
 
     describe('renders as canvas', () => {
@@ -251,10 +281,10 @@ describe('BlurhashCanvas', () => {
       expect(mockContext.putImageData).toBeCalledWith(mockImageData, 0, 0);
     });
 
-    test('accepts blurhashRef', () => {
+    test('accepts placeholderExtraStyleRef', () => {
       let component;
       mockDecodeResult = 'PIXELS';
-      const mockBlurhashRef = { current: null };
+      const mockPlaceholderExtraStyleRef = { current: {} };
       act(() => {
         component = create(
           <BlurhashCanvas
@@ -263,7 +293,7 @@ describe('BlurhashCanvas', () => {
             punch={1}
             width={32}
             height={24}
-            blurhashRef={mockBlurhashRef}
+            placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           {
             createNodeMock: (el) => mockCanvas,
@@ -276,7 +306,8 @@ describe('BlurhashCanvas', () => {
       const props = canvas.props;
       expect(props.height).toBe(24);
       expect(props.width).toBe(32);
-      expect(mockBlurhashRef.current).toBe(mockCanvas);
+      // Nothing to check here.
+      expect(mockPlaceholderExtraStyleRef.current).toEqual({});
     });
   });
 
@@ -284,6 +315,7 @@ describe('BlurhashCanvas', () => {
     test('initially', () => {
       let component;
       mockCanvas.offsetWidth = 100;
+      const mockPlaceholderExtraStyleRef = { current: {} };
       act(() => {
         component = create(
           <BlurhashCanvas
@@ -292,6 +324,7 @@ describe('BlurhashCanvas', () => {
             punch={1}
             width={32}
             height={24}
+            placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           { createNodeMock: () => mockCanvas },
         );
@@ -305,6 +338,7 @@ describe('BlurhashCanvas', () => {
     test('updates', () => {
       let component;
       mockCanvas.offsetWidth = 100;
+      const mockPlaceholderExtraStyleRef = { current: {} };
       act(() => {
         component = create(
           <BlurhashCanvas
@@ -313,6 +347,7 @@ describe('BlurhashCanvas', () => {
             punch={1}
             width={32}
             height={24}
+            placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           { createNodeMock: () => mockCanvas },
         );
@@ -332,7 +367,9 @@ describe('BlurhashCanvas', () => {
     test('initially', () => {
       let component;
       mockCanvas.offsetWidth = 100;
-      mockCanvas.style.aspectRatio = '2 / 1';
+      const mockPlaceholderExtraStyleRef = {
+        current: { aspectRatio: '2 / 1' },
+      };
       act(() => {
         component = create(
           <BlurhashCanvas
@@ -341,6 +378,7 @@ describe('BlurhashCanvas', () => {
             punch={1}
             width={32}
             height={24}
+            placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           { createNodeMock: () => mockCanvas },
         );
@@ -354,6 +392,9 @@ describe('BlurhashCanvas', () => {
     test('updates', () => {
       let component;
       mockCanvas.offsetWidth = 100;
+      const mockPlaceholderExtraStyleRef = {
+        current: { aspectRatio: '2 / 1' },
+      };
       act(() => {
         component = create(
           <BlurhashCanvas
@@ -362,6 +403,7 @@ describe('BlurhashCanvas', () => {
             punch={1}
             width={32}
             height={24}
+            placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           { createNodeMock: () => mockCanvas },
         );

@@ -49,17 +49,26 @@ export default (props) => {
     }
   }, [isLoaded, imgProps.src, placeholderProps.src, isComplete, onLoad]);
   useEffect(() => {
-    const placeholderCurrent = placeholder?.props.blurhashRef?.current;
-    if (placeholderCurrent) {
+    // copy the aspect ratio, if we have it, to the extra style reference
+    // to allow the BlurhashCanvas to check if there is a fixed aspect ratio
+    const placeholderExtraStyleRefCurrent =
+      placeholder?.props.placeholderExtraStyleRef?.current;
+    if (ref.current && placeholderExtraStyleRefCurrent) {
       const computedStyle = getComputedStyle(ref.current);
       const { aspectRatio, objectFit } = computedStyle;
-      if (aspectRatio !== 'auto' && !placeholderCurrent.style.aspectRatio) {
-        placeholderCurrent.style.aspectRatio = aspectRatio;
-        placeholderCurrent.style.objectFit = objectFit;
+      if (
+        aspectRatio !== 'auto' &&
+        !placeholderExtraStyleRefCurrent.aspectRatio
+      ) {
+        placeholderExtraStyleRefCurrent.aspectRatio = aspectRatio;
+        placeholderExtraStyleRefCurrent.objectFit = objectFit;
       }
     }
   });
-  return (
+  // If there is no placeholder (or any transformer generating it, such as blurhash)
+  // then shortcut to show the image without loading.
+  // Else set up the loader.
+  return placeholder ? (
     <>
       {isLoaded ? (
         createComponent(imgProps, children)
@@ -78,5 +87,7 @@ export default (props) => {
         ? createComponent(placeholderProps, placeholderChildren)
         : placeholder}
     </>
-  );
+  ) : imgProps.src ? (
+    createComponent(imgProps, children)
+  ) : null;
 };
