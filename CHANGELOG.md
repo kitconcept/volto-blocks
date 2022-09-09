@@ -1,6 +1,6 @@
 # Change Log
 
-## 12.3.2 (unreleased)
+## 12.3.2 (2022-09-09)
 
 ### Bugfix
 
