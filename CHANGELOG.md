@@ -2,15 +2,9 @@
 
 ## 12.3.3 (unreleased)
 
-### Breaking
-
-### Feature
-
 ### Bugfix
 
 - Image loader: fix setting height ignored in some cases, fixes jump #276 @reebalazs
-
-### Internal
 
 ## 12.3.2 (2022-09-09)
 
