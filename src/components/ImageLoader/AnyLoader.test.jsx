@@ -565,6 +565,54 @@ export const describeAnyLoader = ({
         expect(mockPlaceholderExtraStyleRef.current).toEqual({});
       });
 
+      test('skips update if aspectRatio starts with auto', () => {
+        const mockGetComputedStyle = jest.fn(() => ({
+          aspectRatio: 'auto 1440 / 960',
+          objectFit: 'cover',
+          FOO: 'BAR',
+        }));
+        window.getComputedStyle = mockGetComputedStyle;
+        const mockPlaceholderExtraStyleRef = { current: {} };
+        const component = create(
+          <Component
+            src="http://foo.bar/image"
+            alt="DESCRIPTION"
+            // Note style should be here or on the parent of this element,
+            // but we mock it via getComputedStyle.
+            // style={{
+            //   aspectRatio: 'auto 1440 / 960',
+            //   objectFit: 'cover',
+            // }}
+            placeholder={
+              <div placeholderExtraStyleRef={mockPlaceholderExtraStyleRef} />
+            }
+          ></Component>,
+        );
+        const loading = component.toJSON();
+        expect(loading.length).toBe(2);
+        const img = expectWrapper(loading[0]);
+        expect(loading[1].type).toBe('div');
+        expect(loading[1].props.placeholderExtraStyleRef).toBe(
+          mockPlaceholderExtraStyleRef,
+        );
+        expectComponent(img, {
+          src: 'http://foo.bar/image',
+          alt: 'DESCRIPTION',
+        });
+        act(() => {
+          img.props.onLoad();
+        });
+        const loaded = component.toJSON();
+        expectComponent(loaded, {
+          src: 'http://foo.bar/image',
+          alt: 'DESCRIPTION',
+        });
+        // Note we don't check what element mockGetComputedStyle was called
+        // with, because the disability of react-test-lib to properly simulate refs.
+        expect(mockGetComputedStyle).toBeCalledTimes(0);
+        expect(mockPlaceholderExtraStyleRef.current).toEqual({});
+      });
+
       test('skips update if placeholder already has aspectRatio', () => {
         const mockPlaceholderExtraStyleRef = { current: {} };
         const component = create(
