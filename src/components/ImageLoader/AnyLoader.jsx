@@ -56,8 +56,10 @@ export default (props) => {
     if (ref.current && placeholderExtraStyleRefCurrent) {
       const computedStyle = getComputedStyle(ref.current);
       const { aspectRatio, objectFit } = computedStyle;
+      // Important: ignore auto aspect ratios from the image,
+      // ie. "auto 1440 / 980"
       if (
-        aspectRatio !== 'auto' &&
+        !aspectRatio?.startsWith('auto') &&
         !placeholderExtraStyleRefCurrent.aspectRatio
       ) {
         placeholderExtraStyleRefCurrent.aspectRatio = aspectRatio;
