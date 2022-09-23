@@ -7,7 +7,7 @@ let mockDecodeResult;
 jest.mock('blurhash', () => {
   return {
     __esModule: true,
-    decode: jest.fn((hash, width, height, punch) => mockDecodeResult),
+    decode: jest.fn((hash, width, punch) => mockDecodeResult),
   };
 });
 
@@ -49,13 +49,7 @@ describe('BlurhashCanvas', () => {
         mockDecodeResult = 'PIXELS';
         act(() => {
           component = create(
-            <BlurhashCanvas
-              hash="HASH"
-              ratio={2}
-              punch={1}
-              width={32}
-              height={24}
-            />,
+            <BlurhashCanvas hash="HASH" ratio={2} punch={1} width={32} />,
             // There is no ref on the server.
           );
         });
@@ -68,7 +62,7 @@ describe('BlurhashCanvas', () => {
         // important marker used by fast-blurhash.js
         expect(props.className).toBe('blurhash');
         expect(props.data).toEqual(
-          '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":24}',
+          '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":16}',
         );
         expect(props.style).toEqual({});
       });
@@ -83,7 +77,6 @@ describe('BlurhashCanvas', () => {
               ratio={2}
               punch={1}
               width={32}
-              height={24}
               imgClass="IMG-CLASS"
               imgStyle={{ width: '100%' }}
             />,
@@ -100,7 +93,7 @@ describe('BlurhashCanvas', () => {
         expect(props.className).toBe('IMG-CLASS blurhash');
         expect(props.style).toEqual({ width: '100%' });
         expect(props.data).toEqual(
-          '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":24}',
+          '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":16}',
         );
       });
     });
@@ -115,7 +108,6 @@ describe('BlurhashCanvas', () => {
             ratio={2}
             punch={1}
             width={32}
-            height={24}
             imgWidth="1440"
             imgHeight="810"
           />,
@@ -131,7 +123,7 @@ describe('BlurhashCanvas', () => {
       expect(props.width).toBe('1440');
       expect(props.height).toBe('810');
       expect(props.data).toEqual(
-        '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":24}',
+        '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":16}',
       );
     });
 
@@ -142,13 +134,7 @@ describe('BlurhashCanvas', () => {
         mockCanvas.offsetWidth = 100;
         act(() => {
           component = create(
-            <BlurhashCanvas
-              hash="HASH"
-              ratio={2}
-              punch={1}
-              width={32}
-              height={24}
-            />,
+            <BlurhashCanvas hash="HASH" ratio={2} punch={1} width={32} />,
             // The appearance of the ref turns it into a real canvas.
             { createNodeMock: () => mockCanvas },
           );
@@ -157,7 +143,7 @@ describe('BlurhashCanvas', () => {
         expect(canvas.type).toBe('canvas');
         expect(canvas.children).toBe(null);
         const props = canvas.props;
-        expect(props.height).toBe(24);
+        expect(props.height).toBe(16);
         expect(props.width).toBe(32);
         expect(props.style).toEqual({ height: 50 });
       });
@@ -174,7 +160,6 @@ describe('BlurhashCanvas', () => {
             ratio={2}
             punch={1}
             width={32}
-            height={24}
             imgClass="IMG-CLASS"
             imgStyle={{ width: '100%' }}
           />,
@@ -186,7 +171,7 @@ describe('BlurhashCanvas', () => {
       expect(canvas.type).toBe('canvas');
       expect(canvas.children).toBe(null);
       const props = canvas.props;
-      expect(props.height).toBe(24);
+      expect(props.height).toBe(16);
       expect(props.width).toBe(32);
       expect(props.style).toEqual({ height: 50 });
       expect(props.className).toBe(undefined);
@@ -198,13 +183,7 @@ describe('BlurhashCanvas', () => {
     mockDecodeResult = 'PIXELS';
     act(() => {
       component = create(
-        <BlurhashCanvas
-          hash="HASH"
-          ratio={2}
-          punch={1}
-          width={32}
-          height={24}
-        />,
+        <BlurhashCanvas hash="HASH" ratio={2} punch={1} width={32} />,
       );
     });
     const canvas = component.toJSON();
@@ -225,20 +204,14 @@ describe('BlurhashCanvas', () => {
       mockDecodeResult = 'PIXELS';
       act(() => {
         component = create(
-          <BlurhashCanvas
-            hash="HASH"
-            ratio={2}
-            punch={1}
-            width={32}
-            height={24}
-          />,
+          <BlurhashCanvas hash="HASH" ratio={2} punch={1} width={32} />,
           { createNodeMock: () => mockCanvas },
         );
       });
       const canvas = component.toJSON();
       expect(canvas.type).toBe('canvas');
       expect(canvas.children).toBe(null);
-      expect(decode).toBeCalledWith('HASH', 32, 24, 1);
+      expect(decode).toBeCalledWith('HASH', 32, 16, 1);
       expect(mockImageData.data.set).toBeCalledWith('PIXELS');
       expect(mockContext.putImageData).toBeCalledWith(mockImageData, 0, 0);
     });
@@ -248,35 +221,23 @@ describe('BlurhashCanvas', () => {
       mockDecodeResult = 'PIXELS';
       act(() => {
         component = create(
-          <BlurhashCanvas
-            hash="HASH"
-            ratio={2}
-            punch={1}
-            width={32}
-            height={24}
-          />,
+          <BlurhashCanvas hash="HASH" ratio={2} punch={1} width={32} />,
           { createNodeMock: () => mockCanvas },
         );
       });
       mockDecodeResult = 'NEWPIXELS';
       act(() => {
         component.update(
-          <BlurhashCanvas
-            hash="NEWHASH"
-            ratio={2}
-            punch={1}
-            width={32}
-            height={24}
-          />,
+          <BlurhashCanvas hash="NEWHASH" ratio={2} punch={1} width={32} />,
         );
       });
       const canvas = component.toJSON();
       expect(canvas.type).toBe('canvas');
       expect(canvas.children).toBe(null);
       const props = canvas.props;
-      expect(props.height).toBe(24);
+      expect(props.height).toBe(16);
       expect(props.width).toBe(32);
-      expect(decode).toBeCalledWith('NEWHASH', 32, 24, 1);
+      expect(decode).toBeCalledWith('NEWHASH', 32, 16, 1);
       expect(mockImageData.data.set).toBeCalledWith('NEWPIXELS');
       expect(mockContext.putImageData).toBeCalledWith(mockImageData, 0, 0);
     });
@@ -292,7 +253,6 @@ describe('BlurhashCanvas', () => {
             ratio={2}
             punch={1}
             width={32}
-            height={24}
             placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           {
@@ -304,7 +264,7 @@ describe('BlurhashCanvas', () => {
       expect(canvas.type).toBe('canvas');
       expect(canvas.children).toBe(null);
       const props = canvas.props;
-      expect(props.height).toBe(24);
+      expect(props.height).toBe(16);
       expect(props.width).toBe(32);
       // Nothing to check here.
       expect(mockPlaceholderExtraStyleRef.current).toEqual({});
@@ -323,7 +283,6 @@ describe('BlurhashCanvas', () => {
             ratio={2}
             punch={1}
             width={32}
-            height={24}
             placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           { createNodeMock: () => mockCanvas },
@@ -346,7 +305,6 @@ describe('BlurhashCanvas', () => {
             ratio={2}
             punch={1}
             width={32}
-            height={24}
             placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           { createNodeMock: () => mockCanvas },
@@ -377,7 +335,6 @@ describe('BlurhashCanvas', () => {
             ratio={2}
             punch={1}
             width={32}
-            height={24}
             placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           { createNodeMock: () => mockCanvas },
@@ -402,7 +359,6 @@ describe('BlurhashCanvas', () => {
             ratio={2}
             punch={1}
             width={32}
-            height={24}
             placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
           />,
           { createNodeMock: () => mockCanvas },
@@ -417,6 +373,54 @@ describe('BlurhashCanvas', () => {
       expect(canvas.type).toBe('canvas');
       expect(canvas.children).toBe(null);
       expect(canvas.props.style.height).toBe('auto');
+    });
+  });
+
+  describe('sets canvas height from aspect ratio', () => {
+    test('with some ratio', () => {
+      let component;
+      mockCanvas.offsetWidth = 100;
+      const mockPlaceholderExtraStyleRef = { current: {} };
+      act(() => {
+        component = create(
+          <BlurhashCanvas
+            hash="HASH"
+            ratio={0.5}
+            punch={1}
+            width={32}
+            placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
+          />,
+          { createNodeMock: () => mockCanvas },
+        );
+      });
+      const canvas = component.toJSON();
+      expect(canvas.type).toBe('canvas');
+      expect(canvas.children).toBe(null);
+      expect(canvas.props.height).toBe(64);
+      expect(canvas.props.width).toBe(32);
+    });
+
+    test('with some other ratio', () => {
+      let component;
+      mockCanvas.offsetWidth = 100;
+      const mockPlaceholderExtraStyleRef = { current: {} };
+      act(() => {
+        component = create(
+          <BlurhashCanvas
+            hash="HASH"
+            ratio={4}
+            punch={1}
+            width={32}
+            placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
+          />,
+          { createNodeMock: () => mockCanvas },
+        );
+      });
+      const canvas = component.toJSON();
+      expect(canvas.type).toBe('canvas');
+      expect(canvas.children).toBe(null);
+      expect(canvas.props.height).toBe(8);
+      expect(canvas.props.width).toBe(32);
     });
   });
 });

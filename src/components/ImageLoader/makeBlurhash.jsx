@@ -10,7 +10,6 @@ const makeBlurhash = (options, placeholderExtraStyleRef) => {
     options = Object.assign(
       {
         resolutionX: 32,
-        resolutionY: 32,
         punch: 1,
         style: {},
       },
@@ -21,12 +20,7 @@ const makeBlurhash = (options, placeholderExtraStyleRef) => {
   return {
     options,
     fromProps({ placeholder, blurhash, className, style, width, height }) {
-      const {
-        resolutionX,
-        resolutionY,
-        punch,
-        style: canvasStyle,
-      } = this.options;
+      const { resolutionX, punch, style: canvasStyle } = this.options;
       const result = {};
       if (blurhash) {
         // Note the hash itself may contain the delimiter
@@ -45,7 +39,6 @@ const makeBlurhash = (options, placeholderExtraStyleRef) => {
             ratio={ratio}
             punch={punch}
             width={resolutionX}
-            height={resolutionY}
           />
         );
         result.blurhash = undefined;

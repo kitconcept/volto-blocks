@@ -37,7 +37,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 1,
         width: 32,
-        height: 32,
         style: {},
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
@@ -62,7 +61,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 1,
         width: 32,
-        height: 32,
         style: {},
       });
     });
@@ -78,7 +76,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 1,
         width: 32,
-        height: 32,
         style: {},
         imgClass: 'CLASSNAME',
         imgStyle: {
@@ -101,7 +98,6 @@ describe('makeBlurhash', () => {
       ratio: 1,
       punch: 1,
       width: 32,
-      height: 32,
       style: {},
       imgWidth: '1440',
       imgHeight: '810',
@@ -120,22 +116,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 1,
         width: 64,
-        height: 32,
-        style: {},
-      });
-      expect(result.hasOwnProperty('blurhash')).toBe(true);
-      expect(result.blurhash).toBe(undefined);
-    });
-    test('resolutionY', () => {
-      const result = makeBlurhash({ resolutionY: 64 }).fromProps({
-        blurhash: '1:BLURHASH',
-      });
-      expectProps(result.placeholder, 'div', {
-        hash: 'BLURHASH',
-        ratio: 1,
-        punch: 1,
-        width: 32,
-        height: 64,
         style: {},
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
@@ -150,7 +130,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 4,
         width: 32,
-        height: 32,
         style: {},
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
@@ -167,7 +146,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 1,
         width: 32,
-        height: 32,
         style: { width: '100%', color: 'blue' },
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
@@ -186,7 +164,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 1,
         width: 32,
-        height: 32,
         style: {},
         placeholderExtraStyleRef: mockPlaceholderExtraStyleRef,
       });
@@ -206,7 +183,6 @@ describe('makeBlurhash', () => {
         ratio: 2,
         punch: 1,
         width: 32,
-        height: 32,
         style: {},
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
@@ -219,7 +195,6 @@ describe('makeBlurhash', () => {
         ratio: 0.5,
         punch: 1,
         width: 32,
-        height: 32,
         style: {},
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
@@ -232,7 +207,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 1,
         width: 32,
-        height: 32,
         style: {},
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
@@ -251,23 +225,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 1,
         width: 64,
-        height: 32,
-        style: {},
-      });
-      expect(result.hasOwnProperty('blurhash')).toBe(true);
-      expect(result.blurhash).toBe(undefined);
-    });
-    test('resolutionY', () => {
-      Object.assign(options, { resolutionY: 64 });
-      const result = makeBlurhash().fromProps({
-        blurhash: '1:BLURHASH',
-      });
-      expectProps(result.placeholder, 'div', {
-        hash: 'BLURHASH',
-        ratio: 1,
-        punch: 1,
-        width: 32,
-        height: 64,
         style: {},
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
@@ -283,7 +240,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 4,
         width: 32,
-        height: 32,
         style: {},
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
@@ -299,7 +255,6 @@ describe('makeBlurhash', () => {
         ratio: 1,
         punch: 1,
         width: 32,
-        height: 32,
         style: { width: '100%', color: 'blue' },
       });
       expect(result.hasOwnProperty('blurhash')).toBe(true);
