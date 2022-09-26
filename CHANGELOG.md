@@ -2,15 +2,9 @@
 
 ## 12.3.4 (unreleased)
 
-### Breaking
-
-### Feature
-
 ### Bugfix
 
 - Image loader: fix blurhash canvas aspect ratio #276 @reebalazs
-
-### Internal
 
 ## 12.3.3 (2022-09-14)
 
