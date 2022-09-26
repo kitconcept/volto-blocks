@@ -275,12 +275,7 @@ Example for Volto icon:
 It is an object containing the options to control the blurhash generation.
 
 `resolutionX`: the canvas width resolution, by default 32. Increasing this value will
-create larger blurhash. Used for decoding the blurhash.
-
-`resolutionY`: the canvas height resolution, by default 32. Increasing this value will
-create larger blurhash. The width and the height does not have to refer to the actual
-image ratio that can be anything and the canvas will be stretched as needed.
-Used for decoding the blurhash.
+create larger blurhash. Used for decoding the blurhash. This value should not correspond to the actual blurhash resolution but it should be a large enough value to accomodate it. Since the maximum blurhash resolution is 9, there is no point in creating a canvas larger than the default. The vertical resolution cannot be specified as it is calculated from the aspect ratio of the actual image.
 
 `punch`: the blurhash punch parameter as specified by the blurhash library documentarion,
 by default 1. A larger value will result in a larger blurhash and a more detailed blurred
@@ -296,7 +291,6 @@ Example for setting the default options in config:
 ```js
   config.settings.blurhashOptions = {
     resolutionX: 32,
-    resolutionY: 32,
     punch: 1,
     style: { width: '100%' },
   };

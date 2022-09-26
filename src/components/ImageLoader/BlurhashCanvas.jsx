@@ -9,7 +9,6 @@ export default ({
   punch,
   ratio,
   width,
-  height,
   imgClass,
   imgStyle,
   imgWidth,
@@ -18,6 +17,8 @@ export default ({
 }) => {
   const ref = useRef();
   const [styleHeight, setStyleHeight] = useState();
+  // Canvas height is determined from the width (resolutionX) and ratio
+  const height = Math.ceil(width / ratio);
 
   useEffect(() => {
     const canvas = ref.current;
