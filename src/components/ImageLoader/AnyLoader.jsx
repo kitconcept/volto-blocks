@@ -39,15 +39,23 @@ export default (props) => {
     setPlaceholderProps(imgProps);
     setPlaceholderChildren(children);
   }, [imgProps, children]);
-  const isComplete = ref.current?.complete;
+  const complete = ref.current?.complete;
+  const naturalWidth = ref.current?.naturalWidth;
   useEffect(() => {
-    if (isComplete) {
+    if (ref.current?.complete && ref.current?.naturalWidth !== 0) {
       onLoad();
     }
     if (isLoaded && imgProps.src !== placeholderProps.src) {
       setIsLoaded(false);
     }
-  }, [isLoaded, imgProps.src, placeholderProps.src, isComplete, onLoad]);
+  }, [
+    isLoaded,
+    imgProps.src,
+    placeholderProps.src,
+    complete,
+    naturalWidth,
+    onLoad,
+  ]);
   useEffect(() => {
     // copy the aspect ratio, if we have it, to the extra style reference
     // to allow the BlurhashCanvas to check if there is a fixed aspect ratio

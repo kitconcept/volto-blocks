@@ -84,6 +84,73 @@ export const describeAnyLoader = ({
     });
   });
 
+  runPlaceholderExtraStyleTests &&
+    test('shows loaded image if completed', () => {
+      const component = create(
+        <Component
+          src="http://foo.bar/image"
+          alt="DESCRIPTION"
+          placeholder={
+            <>
+              <div foo1="bar1" />
+              <div foo2="bar2" />
+            </>
+          }
+        ></Component>,
+        {
+          createNodeMock: () => ({
+            complete: true,
+            naturalWidth: 800,
+          }),
+        },
+      );
+      act(() => {});
+      const loaded = component.toJSON();
+      expectComponent(loaded, {
+        src: 'http://foo.bar/image',
+        alt: 'DESCRIPTION',
+      });
+    });
+
+  test('shows placeholder if image is completed with error', () => {
+    const component = create(
+      <Component
+        src="http://foo.bar/image"
+        alt="DESCRIPTION"
+        placeholder={
+          <>
+            <div foo1="bar1" />
+            <div foo2="bar2" />
+          </>
+        }
+      ></Component>,
+      {
+        createNodeMock: () => ({
+          complete: true,
+          // naturalWidth will be 0 if the image is not loaded
+          naturalWidth: 0,
+        }),
+      },
+    );
+    const loading = component.toJSON();
+    expect(loading.length).toBe(3);
+    const img = expectWrapper(loading[0]);
+    expect(loading[1].props.foo1).toBe('bar1');
+    expect(loading[2].props.foo2).toBe('bar2');
+    expectComponent(img, {
+      src: 'http://foo.bar/image',
+      alt: 'DESCRIPTION',
+    });
+    act(() => {
+      img.props.onLoad();
+    });
+    const loaded = component.toJSON();
+    expectComponent(loaded, {
+      src: 'http://foo.bar/image',
+      alt: 'DESCRIPTION',
+    });
+  });
+
   describe('shows placeholder if src is missing', () => {
     const testWithSrc = (src) => {
       const component = create(
