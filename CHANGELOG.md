@@ -10,6 +10,8 @@
 
 ### Internal
 
+- Update to use latest `@plone/scripts` @sneridagh
+
 ## 12.3.4 (2022-09-26)
 
 ### Bugfix
