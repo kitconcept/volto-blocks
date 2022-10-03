@@ -2,10 +2,6 @@
 
 ## 12.3.5 (unreleased)
 
-### Breaking
-
-### Feature
-
 ### Bugfix
 
 - Fix image loading error if the error is already completed (#825) @reebalazs
