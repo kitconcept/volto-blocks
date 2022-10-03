@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix image loading error if the error is already completed (#825) @reebalazs
+
 ### Internal
 
 - Update to use latest `@plone/scripts` @sneridagh
