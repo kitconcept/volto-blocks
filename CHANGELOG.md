@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix blurhash width for image content type @reebalazs
+
 ### Internal
 
 ## 12.3.5 (2022-10-03)
