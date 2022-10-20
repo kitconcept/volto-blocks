@@ -55,6 +55,7 @@ export default ({
   return styleHeight ? (
     <canvas
       style={{
+        width: imgWidth,
         ...style,
         ...placeholderExtraStyleRef?.current,
         height: styleHeight,
