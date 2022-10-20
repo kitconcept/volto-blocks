@@ -1,16 +1,10 @@
 # Change Log
 
-## 12.3.6 (unreleased)
-
-### Breaking
-
-### Feature
+## 12.3.6 (2022-10-20)
 
 ### Bugfix
 
 - Fix blurhash width for image content type @reebalazs
-
-### Internal
 
 ## 12.3.5 (2022-10-03)
 
