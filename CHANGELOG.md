@@ -1,5 +1,11 @@
 # Change Log
 
+# 6.0.1 (unreleased)
+
+## Internal
+
+- Make 6.0.0 tag to work in Volto 16a48 @sneridagh
+
 # 5.0.0 (unreleased)
 
 ## Breaking
