@@ -255,15 +255,14 @@ export default (config) => {
     ];
   }
 
-  return {
-    ...config,
-    blocks: {
-      ...config.blocks,
-      blocksConfig: {
-        ...config.blocks.blocksConfig,
-        ...customBlocks,
-      },
-      groupBlocksOrder: customGroupBlocksOrder(config.blocks.groupBlocksOrder),
-    },
+  config.blocks.blocksConfig = {
+    ...config.blocks.blocksConfig,
+    ...customBlocks,
   };
+
+  config.blocks.blocksConfig.groupBlocksOrder = customGroupBlocksOrder(
+    config.blocks.groupBlocksOrder,
+  );
+
+  return config;
 };
