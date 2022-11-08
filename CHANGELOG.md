@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix blurhash zero width resizing bug @reebalazs
+
 ### Internal
 
 ## 12.3.6 (2022-10-20)

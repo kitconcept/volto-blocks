@@ -31,7 +31,6 @@ export default ({
     }
   }, [hash, width, height, punch, styleHeight]);
 
-  //  const aspectRatio = blurhashRef.current?.style.aspectRatio;
   const aspectRatio = placeholderExtraStyleRef?.current?.aspectRatio;
   useEffect(() => {
     const canvas = ref.current;
@@ -39,7 +38,15 @@ export default ({
       if (placeholderExtraStyleRef?.current?.aspectRatio) {
         setStyleHeight('auto');
       } else {
-        const adjustHeight = () => setStyleHeight(canvas.offsetWidth / ratio);
+        const adjustHeight = () => {
+          // Only update if the width is not zero
+          // (zero width might be a bug in ResizeObserver,
+          // and it would cause blurhash
+          // to revert to the blank image, which we never want)
+          if (canvas.offsetWidth > 0) {
+            setStyleHeight(canvas.offsetWidth / ratio);
+          }
+        };
         adjustHeight();
         const observer = new ResizeObserver(adjustHeight);
         observer.observe(canvas);

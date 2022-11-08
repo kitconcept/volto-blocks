@@ -368,6 +368,38 @@ describe('BlurhashCanvas', () => {
       expect(canvas.children).toBe(null);
       expect(canvas.props.style.height).toBe(100);
     });
+
+    test('does not update with zero offset width', () => {
+      let component;
+      mockCanvas.offsetWidth = 100;
+      const mockPlaceholderExtraStyleRef = { current: {} };
+      act(() => {
+        component = create(
+          <BlurhashCanvas
+            hash="HASH"
+            ratio={0.5}
+            punch={1}
+            width={32}
+            placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
+          />,
+          { createNodeMock: () => mockCanvas },
+        );
+      });
+      const canvas = component.toJSON();
+      expect(canvas.type).toBe('canvas');
+      expect(canvas.children).toBe(null);
+      expect(canvas.props.height).toBe(64);
+      expect(canvas.props.width).toBe(32);
+      // change offset to 0 should not update
+      mockCanvas.offsetWidth = 0;
+      act(() => {
+        mockResizeHandler();
+      });
+      const canvas2 = component.toJSON();
+      expect(canvas2.type).toBe('canvas');
+      expect(canvas2.children).toBe(null);
+      expect(canvas2.props.style.height).toBe(200);
+    });
   });
 
   describe('ignores height with aspectRatio', () => {
