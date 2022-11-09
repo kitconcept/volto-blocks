@@ -3,6 +3,11 @@ import { decode } from 'blurhash';
 
 const BLANK = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
+// Make sure it's a string it has 'px' in the end
+// Passing a string without px will ignore the style and break!
+const cssify = (n) =>
+  typeof n === 'string' ? (n.match(/[0-9]$/) ? n + 'px' : n) : n;
+
 export default ({
   style,
   hash,
@@ -62,7 +67,7 @@ export default ({
   return styleHeight ? (
     <canvas
       style={{
-        width: imgWidth,
+        width: cssify(imgWidth),
         ...style,
         ...placeholderExtraStyleRef?.current,
         height: styleHeight,

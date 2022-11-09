@@ -341,6 +341,52 @@ describe('BlurhashCanvas', () => {
         expect(canvas.children).toBe(null);
         expect(canvas.props.style.width).toBe('100%');
       });
+
+      test('accepts string as imgWidth', () => {
+        let component;
+        mockCanvas.offsetWidth = 100;
+        const mockPlaceholderExtraStyleRef = { current: {} };
+        act(() => {
+          component = create(
+            <BlurhashCanvas
+              hash="HASH"
+              ratio={2}
+              punch={1}
+              width={32}
+              imgWidth={'140'}
+              placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
+            />,
+            { createNodeMock: () => mockCanvas },
+          );
+        });
+        const canvas = component.toJSON();
+        expect(canvas.type).toBe('canvas');
+        expect(canvas.children).toBe(null);
+        expect(canvas.props.style.width).toBe('140px');
+      });
+
+      test('accepts pixels as imgWidth', () => {
+        let component;
+        mockCanvas.offsetWidth = 100;
+        const mockPlaceholderExtraStyleRef = { current: {} };
+        act(() => {
+          component = create(
+            <BlurhashCanvas
+              hash="HASH"
+              ratio={2}
+              punch={1}
+              width={32}
+              imgWidth={'140px'}
+              placeholderExtraStyleRef={mockPlaceholderExtraStyleRef}
+            />,
+            { createNodeMock: () => mockCanvas },
+          );
+        });
+        const canvas = component.toJSON();
+        expect(canvas.type).toBe('canvas');
+        expect(canvas.children).toBe(null);
+        expect(canvas.props.style.width).toBe('140px');
+      });
     });
 
     test('updates', () => {

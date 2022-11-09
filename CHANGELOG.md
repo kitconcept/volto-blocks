@@ -9,6 +9,7 @@
 ### Bugfix
 
 - Fix blurhash zero width resizing bug @reebalazs
+- Fix ignoring blurhash width if width (or size) was a string @reebalazs
 
 ### Internal
 
