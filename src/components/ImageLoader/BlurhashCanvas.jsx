@@ -64,10 +64,11 @@ export default ({
   // computed style. Until then, we render a blank image to make sure
   // that it gets the same dimensions as the original image. Making it an
   // image lets us mimic the original image's computed css style.
+  const cssImgWidth = cssify(imgWidth);
   return styleHeight ? (
     <canvas
       style={{
-        width: cssify(imgWidth),
+        width: cssImgWidth,
         ...style,
         ...placeholderExtraStyleRef?.current,
         height: styleHeight,
@@ -91,6 +92,7 @@ export default ({
         width,
         height,
         canvasStyle: style,
+        imgWidth: cssImgWidth,
       })}
       ref={ref}
     />

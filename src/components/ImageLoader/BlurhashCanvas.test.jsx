@@ -123,7 +123,7 @@ describe('BlurhashCanvas', () => {
       expect(props.width).toBe('1440');
       expect(props.height).toBe('810');
       expect(props.data).toEqual(
-        '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":16}',
+        '{"hash":"HASH","punch":1,"ratio":2,"width":32,"height":16,"imgWidth":"1440px"}',
       );
     });
 

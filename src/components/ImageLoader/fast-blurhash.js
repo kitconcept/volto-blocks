@@ -6,7 +6,7 @@ import { decodeBlurHash } from 'fast-blurhash';
 document.querySelectorAll('img.blurhash').forEach((img) => {
   const dataRaw = img.getAttribute('data');
   const data = JSON.parse(dataRaw);
-  const { width, height, hash, canvasStyle } = data;
+  const { width, height, hash, canvasStyle, imgWidth, ratio } = data;
   // Take the original aspect ratio from the img
   const image = img.previousSibling.firstChild.firstChild;
   const computedStyle = getComputedStyle(image);
@@ -18,11 +18,21 @@ document.querySelectorAll('img.blurhash').forEach((img) => {
   for (const cssProp in canvasStyle) {
     canvas.style[cssProp] = canvasStyle[cssProp];
   }
+  canvas.style.width = parseFloat(imgWidth) + 'px';
   canvas.height = height;
   canvas.width = width;
-  if (aspectRatio !== 'auto' && !canvas.style.aspectRatio) {
+  // Important: ignore auto aspect ratios from the image,
+  // ie. "auto 1440 / 980"
+  if (
+    aspectRatio &&
+    !aspectRatio.startsWith('auto') &&
+    !canvas.style.aspectRatio
+  ) {
     canvas.style.aspectRatio = aspectRatio;
     canvas.style.objectFit = objectFit;
+    canvas.style.height = 'auto';
+  } else if (imgWidth) {
+    canvas.style.height = parseFloat(imgWidth) / ratio + 'px';
   }
   // Paint the blurhash on the canvas
   const pixels = decodeBlurHash(hash, width, height);
