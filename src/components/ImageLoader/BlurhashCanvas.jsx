@@ -3,6 +3,11 @@ import { decode } from 'blurhash';
 
 const BLANK = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
+// Make sure it's a string it has 'px' in the end
+// Passing a string without px will ignore the style and break!
+const cssify = (n) =>
+  typeof n === 'string' ? (n.match(/[0-9]$/) ? n + 'px' : n) : n;
+
 export default ({
   style,
   hash,
@@ -31,7 +36,6 @@ export default ({
     }
   }, [hash, width, height, punch, styleHeight]);
 
-  //  const aspectRatio = blurhashRef.current?.style.aspectRatio;
   const aspectRatio = placeholderExtraStyleRef?.current?.aspectRatio;
   useEffect(() => {
     const canvas = ref.current;
@@ -39,7 +43,15 @@ export default ({
       if (placeholderExtraStyleRef?.current?.aspectRatio) {
         setStyleHeight('auto');
       } else {
-        const adjustHeight = () => setStyleHeight(canvas.offsetWidth / ratio);
+        const adjustHeight = () => {
+          // Only update if the width is not zero
+          // (zero width might be a bug in ResizeObserver,
+          // and it would cause blurhash
+          // to revert to the blank image, which we never want)
+          if (canvas.offsetWidth > 0) {
+            setStyleHeight(canvas.offsetWidth / ratio);
+          }
+        };
         adjustHeight();
         const observer = new ResizeObserver(adjustHeight);
         observer.observe(canvas);
@@ -52,10 +64,11 @@ export default ({
   // computed style. Until then, we render a blank image to make sure
   // that it gets the same dimensions as the original image. Making it an
   // image lets us mimic the original image's computed css style.
+  const cssImgWidth = cssify(imgWidth);
   return styleHeight ? (
     <canvas
       style={{
-        width: imgWidth,
+        width: cssImgWidth,
         ...style,
         ...placeholderExtraStyleRef?.current,
         height: styleHeight,
@@ -79,6 +92,7 @@ export default ({
         width,
         height,
         canvasStyle: style,
+        imgWidth: cssImgWidth,
       })}
       ref={ref}
     />
