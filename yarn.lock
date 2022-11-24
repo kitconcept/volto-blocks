@@ -2034,7 +2034,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@kitconcept/volto-blocks@workspace:."
   dependencies:
-    "@plone/scripts": ^2.1.1
+    "@plone/scripts": ^2.2.1
     blurhash: 1.1.5
     date-fns: 1.30.1
     deep-freeze: 0.0.1
@@ -2231,12 +2231,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@plone/scripts@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "@plone/scripts@npm:2.1.1"
+"@plone/scripts@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "@plone/scripts@npm:2.2.1"
   dependencies:
     babel-plugin-react-intl: 5.1.17
     babel-preset-razzle: 4.2.17
+    chalk: 4
     commander: 8.2.0
     fs-extra: 10.1.0
     git-url-parse: ^11.6.0
@@ -2247,7 +2248,7 @@ __metadata:
     addon: addon/index.js
     changelogupdater: changelogupdater.cjs
     i18n: i18n.cjs
-  checksum: 7e639051710c915ecc885d3c9b117548cadcc4da40458d0d7c5f9db537b14a9ba7700a07bdd71231407171ad786f29f2f329df5d25952c974ffa5288fdd46938
+  checksum: f630c724137a07457203a73d954e46bddd4dea8cd16bb96e0358f6b99270dfcda5aca5352a93b07565c5a86dd5752b980d899fcc9a9ec233a40c50f1b46b04a8
   languageName: node
   linkType: hard
 
@@ -3164,6 +3165,16 @@ __metadata:
     tunnel-agent: ^0.6.0
     url-to-options: ^1.0.1
   checksum: 8be9811b9b21289f49062905771e664c05221fa406b57a1b5debc41e90fc4318b73dc42fc3f3719c7fce882d9cd76a22e8183d0632a6f1772777e01caea62107
+  languageName: node
+  linkType: hard
+
+"chalk@npm:4":
+  version: 4.1.2
+  resolution: "chalk@npm:4.1.2"
+  dependencies:
+    ansi-styles: ^4.1.0
+    supports-color: ^7.1.0
+  checksum: fe75c9d5c76a7a98d45495b91b2172fa3b7a09e0cc9370e5c8feb1c567b85c4288e2b3fded7cfdd7359ac28d6b3844feb8b82b8686842e93d23c827c417e83fc
   languageName: node
   linkType: hard
 
