@@ -10,6 +10,8 @@
 
 ### Internal
 
+- Update to latest Volto 16 best practices, yarn 3 @sneridagh
+
 ## 12.3.7 (2022-11-21)
 
 ### Bugfix
