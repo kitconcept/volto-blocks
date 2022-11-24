@@ -20,18 +20,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
-      # node cache
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          cache: 'yarn'
 
       # node install
       - name: Install dependencies
@@ -41,24 +30,23 @@ jobs:
         run: npm i -g yo @plone/generator-volto
 
       - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
         id: extract_branch
 
       - name: Setup addon testing environment
-        run: npx -p @plone/scripts addon clone https://github.com/${{env.GIT_USER}}/${{env.GIT_NAME}}.git --branch ${{ steps.extract_branch.outputs.branch }} --canary
+        run: npx -p @plone/scripts addon clone https://github.com/${{env.GIT_USER}}/${{env.GIT_NAME}}.git --branch ${{ steps.extract_branch.outputs.branch }}
 
       - name: Provide ignores for eslint and prettier
         run: cd addon-testing-project && echo -e '\nfast-blurhash.min.js' >> .eslintignore && echo -e '\nfast-blurhash.min.js' >> .prettierignore
 
       # ESlint
       - name: ESlint
-        run: cd addon-testing-project && yarn && yarn lint:ci
+        run: cd addon-testing-project && yarn lint
 
       # Stylelint
       - name: Stylelint
-        run: cd addon-testing-project && yarn && yarn stylelint
+        run: cd addon-testing-project && yarn stylelint
 
       # Prettier
       - name: Prettier
-        run: cd addon-testing-project && yarn && yarn prettier:ci
+        run: cd addon-testing-project && yarn prettier
