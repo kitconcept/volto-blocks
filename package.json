@@ -112,7 +112,6 @@
     "jest-junit": "8.0.0",
     "prettier": "2.0.5",
     "release-it": "14.7.0",
-    "start-server-and-test": "1.10.6",
     "stylelint": "14.0.1",
     "stylelint-config-idiomatic-order": "8.1.0",
     "stylelint-config-prettier": "8.0.1",
