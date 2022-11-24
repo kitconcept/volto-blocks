@@ -9,8 +9,6 @@
     "cypress:run": "NODE_ENV=test ../../../node_modules/cypress/bin/cypress run",
     "cypress:start-frontend": "cd ../../../ && RAZZLE_API_PATH=http://localhost:55001/plone yarn start",
     "ci:test-acceptance-server": "make test-acceptance-server",
-    "cy:test:fixture:setup": "node cypress/support/reset-fixture.js",
-    "cy:test:fixture:teardown": "node cypress/support/reset-fixture.js teardown",
     "dry-release": "release-it --dry-run",
     "release": "release-it",
     "release-major-alpha": "release-it major --preRelease=alpha",
@@ -123,6 +121,6 @@
     "webpack-cli": "^4.10.0"
   },
   "peerDependencies": {
-    "@plone/volto": ">=16.0.0-alpha.15"
+    "@plone/volto": ">=16.0.0"
   }
 }
