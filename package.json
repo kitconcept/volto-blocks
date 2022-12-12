@@ -67,6 +67,7 @@
     }
   },
   "dependencies": {
+    "date-fns": "<2.0.0",
     "deep-freeze": "0.0.1",
     "react-color": "2.19.3",
     "react-slick": "0.25.2",

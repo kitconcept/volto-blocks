@@ -19,6 +19,7 @@ Might be that the teaser grid is not 100% backwards compatible, so double check.
 
 - Testing, testing, testing
 - Linting and Prettier as well in place
+- Upgrade to Volto 16
 
 ## 3.0.0 (2020-10-07)
 
