@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { Card, Image } from 'semantic-ui-react';
 import redraft from 'redraft';
 import cx from 'classnames';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 import { flattenToAppURL } from '@plone/volto/helpers';
 
 const getCardsLenght = (cards) =>
@@ -26,12 +26,15 @@ const View = ({ data }) => {
       const isReallyExternal =
         (data.external.startsWith('http') ||
           data.external.startsWith('https')) &&
-        !data.external.includes(settings.apiPath);
+        !data.external.includes(config.settings.apiPath);
 
       if (isReallyExternal) {
         return { href: data.external };
       } else {
-        return { to: data.external.replace(settings.apiPath, ''), as: Link };
+        return {
+          to: data.external.replace(config.settings.apiPath, ''),
+          as: Link,
+        };
       }
     } else if (data.href) {
       return { to: data.href, as: Link };
@@ -68,7 +71,7 @@ const View = ({ data }) => {
           >
             <Image
               src={
-                card.url.startsWith(settings.apiPath)
+                card.url.startsWith(config.settings.apiPath)
                   ? `${flattenToAppURL(card.url)}/@@images/image`
                   : card.url
               }
@@ -78,8 +81,8 @@ const View = ({ data }) => {
                 {card.text &&
                   redraft(
                     card.text,
-                    settings.ToHTMLRenderers,
-                    settings.ToHTMLOptions,
+                    config.settings.ToHTMLRenderers,
+                    config.settings.ToHTMLOptions,
                   )}
               </Card.Content>
             )}

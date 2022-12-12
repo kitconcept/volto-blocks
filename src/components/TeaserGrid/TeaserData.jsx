@@ -8,7 +8,7 @@ import { getContent } from '@plone/volto/actions';
 
 import { SchemaRenderer } from '@kitconcept/volto-blocks/components';
 import { TeaserGridSchema } from './schema';
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 
 const TeaserData = (props) => {
   const { block, data, dataGrid, onChangeBlock } = props;
@@ -49,7 +49,8 @@ const TeaserData = (props) => {
   const schema = TeaserGridSchema({ ...props, intl });
 
   const applySchemaEnhancer = (schema) => {
-    const variations = blocks?.blocksConfig?.[dataGrid['@type']]?.variations;
+    const variations =
+      config.blocks?.blocksConfig?.[dataGrid['@type']]?.variations;
 
     const schemaExtender =
       variations?.[dataGrid?.variation]?.['schemaExtenderItem'];

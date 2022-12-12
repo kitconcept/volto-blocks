@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TeaserDefaultTemplate from '@kitconcept/volto-blocks/components/TeaserGrid/TeaserDefaultTemplate';
-import { blocks } from '~/config';
+import config from '@plone/volto/registry';
 
 const TeaserBody = (props) => {
-  const variationsConfig = blocks.blocksConfig.teaserGrid.variations;
+  const variationsConfig = config.blocks.blocksConfig.teaserGrid.variations;
   const { dataBlock } = props;
 
   const variation =

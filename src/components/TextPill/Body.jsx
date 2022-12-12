@@ -14,7 +14,7 @@ import { isEqual } from 'lodash';
 import redraft from 'redraft';
 import { stateFromHTML } from 'draft-js-import-html';
 
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 const messages = defineMessages({
   text: {
@@ -64,7 +64,7 @@ const TextBody = (props) => {
     }
 
     initialInlineToolbarPlugin = createInlineToolbarPlugin({
-      structure: settings.richTextEditorInlineToolbarButtons,
+      structure: config.settings.richTextEditorInlineToolbarButtons,
     });
   }
 
@@ -117,16 +117,16 @@ const TextBody = (props) => {
             editorState={editorState}
             plugins={[
               inlineToolbarPlugin.current,
-              ...settings.richTextEditorPlugins,
+              ...config.settings.richTextEditorPlugins,
             ]}
             blockRenderMap={
               renderAs
                 ? extendedBlockRenderMap
-                : settings.extendedBlockRenderMap
+                : config.settings.extendedBlockRenderMap
             }
-            blockStyleFn={settings.blockStyleFn}
+            blockStyleFn={config.settings.blockStyleFn}
             placeholder={intl.formatMessage(messages.text)}
-            customStyleMap={settings.customStyleMap}
+            customStyleMap={config.settings.customStyleMap}
             onUpArrow={(e) => {
               // We need to stop propagate the event for not creating a new block while
               // in the widget
@@ -153,8 +153,8 @@ const TextBody = (props) => {
         } else {
           return redraft(
             data[dataName],
-            settings.ToHTMLRenderers,
-            settings.ToHTMLOptions,
+            config.settings.ToHTMLRenderers,
+            config.settings.ToHTMLOptions,
           );
         }
       } else {

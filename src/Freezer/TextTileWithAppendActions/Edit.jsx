@@ -16,7 +16,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { includes, isEqual } from 'lodash';
 import cx from 'classnames';
 
-import { settings, blocks } from '~/config';
+import config from '@plone/volto/registry';
 
 import { Icon } from '@plone/volto/components';
 import addSVG from '@plone/volto/icons/circle-plus.svg';
@@ -88,7 +88,7 @@ class Edit extends Component {
       }
 
       const inlineToolbarPlugin = createInlineToolbarPlugin({
-        structure: settings.richTextEditorInlineToolbarButtons,
+        structure: config.settings.richTextEditorInlineToolbarButtons,
       });
 
       this.state = {
@@ -212,10 +212,10 @@ class Edit extends Component {
           editorState={this.state.editorState}
           plugins={[
             this.state.inlineToolbarPlugin,
-            ...settings.richTextEditorPlugins,
+            ...config.settings.richTextEditorPlugins,
           ]}
-          blockRenderMap={settings.extendedBlockRenderMap}
-          blockStyleFn={settings.blockStyleFn}
+          blockRenderMap={config.settings.extendedBlockRenderMap}
+          blockStyleFn={config.settings.blockStyleFn}
           placeholder={this.props.intl.formatMessage(messages.text)}
           handleReturn={() => {
             if (!this.props.detached) {
@@ -226,7 +226,7 @@ class Edit extends Component {
                 anchorKey,
               );
               const blockType = currentContentBlock.getType();
-              if (!includes(settings.listBlockTypes, blockType)) {
+              if (!includes(config.settings.listBlockTypes, blockType)) {
                 this.props.onSelectBlock(
                   this.props.onAddBlock('text', this.props.index + 1),
                 );
@@ -313,7 +313,7 @@ class Edit extends Component {
                 <Icon name={videoSVG} size="24px" />
               </Button>
             </Button.Group>
-            {blocks.customBlocks.length !== 0 && (
+            {config.blocks.customBlocks.length !== 0 && (
               <React.Fragment>
                 <div className="separator" />
                 <Button.Group>
@@ -327,7 +327,7 @@ class Edit extends Component {
         )}
         {this.state.addNewBlockOpened && this.state.customBlocksOpened && (
           <div className="add-block toolbar">
-            {blocks.customBlocks.map((block) => (
+            {config.blocks.customBlocks.map((block) => (
               <Button.Group key={block.title}>
                 <Button
                   icon

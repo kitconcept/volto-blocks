@@ -12,7 +12,7 @@ import { includes, isEqual } from 'lodash';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
 import { compose } from 'redux';
 
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers';
 import { createContent } from '@plone/volto/actions';
@@ -77,7 +77,7 @@ class EditCardBlock extends Component {
       }
 
       const inlineToolbarPlugin = createInlineToolbarPlugin({
-        structure: settings.richTextEditorInlineToolbarButtons,
+        structure: config.settings.richTextEditorInlineToolbarButtons,
       });
 
       this.state = {
@@ -276,7 +276,7 @@ class EditCardBlock extends Component {
             <img
               className="card-image"
               src={
-                this.props.data.url.includes(settings.apiPath)
+                this.props.data.url.includes(config.settings.apiPath)
                   ? `${flattenToAppURL(this.props.data.url)}/@@images/image`
                   : this.props.data.url
               }
@@ -305,10 +305,10 @@ class EditCardBlock extends Component {
           editorState={this.state.editorState}
           plugins={[
             this.state.inlineToolbarPlugin,
-            ...settings.richTextEditorPlugins,
+            ...config.settings.richTextEditorPlugins,
           ]}
-          blockRenderMap={settings.extendedBlockRenderMap}
-          blockStyleFn={settings.blockStyleFn}
+          blockRenderMap={config.settings.extendedBlockRenderMap}
+          blockStyleFn={config.settings.blockStyleFn}
           placeholder={this.props.intl.formatMessage(messages.text)}
           handleReturn={() => {
             if (!this.props.detached) {
@@ -319,7 +319,7 @@ class EditCardBlock extends Component {
                 anchorKey,
               );
               const blockType = currentContentBlock.getType();
-              if (!includes(settings.listBlockTypes, blockType)) {
+              if (!includes(config.settings.listBlockTypes, blockType)) {
                 this.props.onSelectBlock(
                   this.props.onAddBlock('text', this.props.index + 1),
                 );

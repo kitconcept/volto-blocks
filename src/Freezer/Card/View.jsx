@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import cx from 'classnames';
 import redraft from 'redraft';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 /**
  * View image block class.
@@ -31,8 +31,8 @@ const View = ({ data, detached }) => (
             {data.text &&
               redraft(
                 data.text,
-                settings.ToHTMLRenderers,
-                settings.ToHTMLOptions,
+                config.settings.ToHTMLRenderers,
+                config.settings.ToHTMLOptions,
               )}
           </div>
         </>
@@ -41,13 +41,15 @@ const View = ({ data, detached }) => (
         const isReallyExternal =
           (data.external.startsWith('http') ||
             data.external.startsWith('https')) &&
-          !data.external.includes(settings.apiPath);
+          !data.external.includes(config.settings.apiPath);
 
         if (isReallyExternal) {
           return <a href={data.external}>{card}</a>;
         } else {
           return (
-            <Link to={data.external.replace(settings.apiPath, '')}>{card}</Link>
+            <Link to={data.external.replace(config.settings.apiPath, '')}>
+              {card}
+            </Link>
           );
         }
       } else if (data.href) {
