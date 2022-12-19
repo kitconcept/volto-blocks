@@ -54,7 +54,7 @@ function jsonExporter(req, res, next) {
     })
     .then((content) => {
       return run(
-        `(.. | .href? | arrays | .[]."@id") |= sub("${config.settings.apiPath}";"")`,
+        `(.. | .href? | arrays | .[]."@id" | strings) |= sub("${config.settings.apiPath}";"")`,
         content,
         {
           input: 'json',
@@ -64,7 +64,7 @@ function jsonExporter(req, res, next) {
     })
     .then((content) => {
       return run(
-        `(.. | .preview_image? | arrays | .[]."@id") |= sub("${config.settings.apiPath}";"")`,
+        `(.. | .preview_image? | arrays | .[]."@id" | strings) |= sub("${config.settings.apiPath}";"")`,
         content,
         {
           input: 'json',
@@ -74,7 +74,7 @@ function jsonExporter(req, res, next) {
     })
     .then((content) => {
       return run(
-        `(.. | .url? | arrays | .[]."@id") |= sub("${config.settings.apiPath}";"")`,
+        `(.. | .url? | arrays | .[]."@id" | strings) |= sub("${config.settings.apiPath}";"")`,
         content,
         {
           input: 'json',
