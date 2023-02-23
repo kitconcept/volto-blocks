@@ -34,6 +34,8 @@ const TextBody = (props) => {
     renderAs,
   } = props;
 
+  const draftConfig = config.settings.richtextEditorSettings(props);
+
   const ElementType = renderAs;
 
   const blockRenderMap = Map({
@@ -108,7 +110,7 @@ const TextBody = (props) => {
             editorState={editorState}
             plugins={[
               inlineToolbarPlugin.current,
-              ...config.settings.richTextEditorPlugins,
+              ...draftConfig.richTextEditorPlugins,
             ]}
             blockRenderMap={
               renderAs
