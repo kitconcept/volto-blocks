@@ -124,10 +124,11 @@ const customBlocks = {
     },
     // Maximum items allowed
     // maxItemsAllowed: 6,
-    variations: {
-      default: { label: 'Default' },
-      icons: {
-        label: 'Icons',
+    variations: [
+      { id: 'default', title: 'Default' },
+      {
+        id: 'icons',
+        title: 'Icons',
         maxItemsAllowed: 6,
         itemFixedWidth: 6,
         components: {
@@ -135,7 +136,7 @@ const customBlocks = {
         },
         schemaExtenderItem: ImagesGridIconsVariationSchemaExtender,
       },
-    },
+    ],
   },
   listingGrid: {
     id: 'listingGrid',
