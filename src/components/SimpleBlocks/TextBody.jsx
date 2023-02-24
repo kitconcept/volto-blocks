@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Editor from 'draft-js-plugins-editor';
+import { compose } from 'redux';
 import { Map } from 'immutable';
 import {
   convertFromRaw,
@@ -8,13 +8,18 @@ import {
   DefaultDraftBlockRenderMap,
   EditorState,
 } from 'draft-js';
+import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import createInlineToolbarPlugin from 'draft-js-inline-toolbar-plugin';
-import { defineMessages, useIntl } from 'react-intl';
+import { defineMessages, useIntl, injectIntl } from 'react-intl';
 import { isEqual } from 'lodash';
 import redraft from 'redraft';
 import { stateFromHTML } from 'draft-js-import-html';
 
 import config from '@plone/volto/registry';
+
+import loadable from '@loadable/component';
+
+const Editor = loadable(() => import('draft-js-plugins-editor'));
 
 const messages = defineMessages({
   text: {
@@ -23,7 +28,7 @@ const messages = defineMessages({
   },
 });
 
-const TextBody = (props) => {
+const TextBodyComponent = (props) => {
   const {
     data,
     block,
@@ -157,7 +162,7 @@ const TextBody = (props) => {
   }
 };
 
-TextBody.propTypes = {
+TextBodyComponent.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   dataName: PropTypes.string.isRequired,
   isEditMode: PropTypes.bool,
@@ -169,4 +174,27 @@ TextBody.propTypes = {
   renderAs: PropTypes.elementType,
 };
 
-export default TextBody;
+export const TextBody = compose(
+  injectIntl,
+  injectLazyLibs([
+    'draftJs',
+    'draftJsLibIsSoftNewlineEvent',
+    'draftJsFilters',
+    'draftJsInlineToolbarPlugin',
+    'draftJsBlockBreakoutPlugin',
+    'draftJsCreateInlineStyleButton',
+    'draftJsCreateBlockStyleButton',
+    'immutableLib',
+    // TODO: add all plugin dependencies, also in Wysiwyg and Cell
+  ]),
+)(TextBodyComponent);
+
+const Preloader = (props) => {
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    Editor.load().then(() => setLoaded(true));
+  }, []);
+  return loaded ? <TextBody {...props} /> : null;
+};
+
+export default Preloader;
