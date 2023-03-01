@@ -151,8 +151,8 @@ const TextBodyComponent = (props) => {
         } else {
           return redraft(
             data[dataName],
-            config.settings.ToHTMLRenderers,
-            config.settings.ToHTMLOptions,
+            config.settings.richtextViewSettings.ToHTMLRenderers,
+            config.settings.richtextViewSettings.ToHTMLOptions,
           );
         }
       } else {
