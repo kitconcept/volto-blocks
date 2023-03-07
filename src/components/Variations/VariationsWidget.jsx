@@ -4,6 +4,7 @@ import { Grid, Form } from 'semantic-ui-react';
 import { defineMessages, useIntl } from 'react-intl';
 import loadable from '@loadable/component';
 import config from '@plone/volto/registry';
+import { find } from 'lodash';
 
 import {
   Option,
@@ -25,6 +26,7 @@ const VariationsWidget = ({ data, block, onChangeBlock }) => {
   const intl = useIntl();
   const variations = config.blocks?.blocksConfig?.[data['@type']]?.variations;
   let value = data.variation || 'default';
+  value = find(variations, { id: value });
 
   if (variations && Object.keys(variations).length > 1) {
     return (
@@ -44,12 +46,12 @@ const VariationsWidget = ({ data, block, onChangeBlock }) => {
                 name="select-listingblock-template"
                 className="react-select-container"
                 classNamePrefix="react-select"
-                options={Object.keys(variations).map((key) => {
+                options={variations.map((item) => {
                   return {
-                    value: key,
+                    value: item.id,
                     label: intl.formatMessage({
-                      id: variations[key].label,
-                      defaultMessage: variations[key].label,
+                      id: item.title,
+                      defaultMessage: item.title,
                     }),
                   };
                 })}
@@ -57,10 +59,10 @@ const VariationsWidget = ({ data, block, onChangeBlock }) => {
                 theme={selectTheme}
                 components={{ DropdownIndicator, Option }}
                 value={{
-                  value: value,
+                  value: value.id,
                   label: intl.formatMessage({
-                    id: variations[value].label,
-                    defaultMessage: variations[value].label,
+                    id: value.title,
+                    defaultMessage: value.title,
                   }),
                 }}
                 onChange={(field) => {
