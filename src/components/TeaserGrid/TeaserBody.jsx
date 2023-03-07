@@ -4,7 +4,6 @@ import { find } from 'lodash';
 
 import TeaserDefaultTemplate from '@kitconcept/volto-blocks/components/TeaserGrid/TeaserDefaultTemplate';
 import config from '@plone/volto/registry';
-import { convertValueToVocabQuery } from '../../../../../../omelette/src/components/manage/Widgets/SelectUtils';
 
 const TeaserBody = (props) => {
   const variationsConfig = config.blocks.blocksConfig.teaserGrid.variations;
@@ -19,17 +18,7 @@ const TeaserBody = (props) => {
   const BlockTemplate =
     variation?.components?.view || variation?.template || TeaserDefaultTemplate;
 
-  const Wrapper = variation?.components?.wrapper;
-
-  if (Wrapper) {
-    return (
-      <Wrapper {...props}>
-        <BlockTemplate {...props} />
-      </Wrapper>
-    );
-  } else {
-    return <BlockTemplate {...props} />;
-  }
+  return <BlockTemplate {...props} />;
 };
 
 TeaserBody.propTypes = {
