@@ -1,6 +1,6 @@
 # Change Log
 
-## 12.3.8 (unreleased)
+## 12.4.0 (2023-12-15)
 
 ### Breaking
 
