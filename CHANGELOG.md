@@ -1,5 +1,15 @@
 # Change Log
 
+## 12.4.1 (unreleased)
+
+### Breaking
+
+### Feature
+
+### Bugfix
+
+### Internal
+
 ## 12.4.0 (2023-12-15)
 
 ### Breaking
