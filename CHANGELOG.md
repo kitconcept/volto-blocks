@@ -11,6 +11,7 @@
 ### Internal
 
 - Update to latest Volto 16 best practices, yarn 3 @sneridagh
+- Update imageloader for newest version @reebalazs
 
 ## 12.3.7 (2022-11-21)
 
