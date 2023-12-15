@@ -8,6 +8,8 @@
 
 ### Bugfix
 
+- Fix JSON export in some cases with null values. @davisagli
+
 ### Internal
 
 - Update to latest Volto 16 best practices, yarn 3 @sneridagh
